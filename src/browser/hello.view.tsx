@@ -3,6 +3,8 @@ import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached'
 import { WelcomeServer ***REMOVED*** from '../common/welcome-protocol';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 
+import "./styles/index.less"
+
 interface Prop {***REMOVED***
 interface State {
     response: string
@@ -26,6 +28,6 @@ export class Hello extends React.Component<Prop, State> {
   ***REMOVED***
 
     render() {
-        return <div>{this.state.response***REMOVED***</div>
+        return <div className="app">{this.state.response***REMOVED***</div>
   ***REMOVED***
 ***REMOVED***
