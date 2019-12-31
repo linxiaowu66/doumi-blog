@@ -12,16 +12,22 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/rpc": "next",
     "@malagu/fc-adapter": "next",
-    "@malagu/react": "next"
+    "@malagu/react": "next",
+    "@malagu/rpc": "next",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0"
   },
   "devDependencies": {
     "@malagu/cli": "next",
     "@types/react-dom": "^16.8.5",
     "rimraf": "^2.6.3"
   },
-  "licenses": ["MIT"],
+  "licenses": [
+    {
+      "license": "MIT"
+    }
+  ],
   "repository": {
     "url": "https://github.com/linxiaowu66/doumi-blog"
   },

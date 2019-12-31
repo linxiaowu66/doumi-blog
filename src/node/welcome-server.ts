@@ -4,6 +4,6 @@ import { Rpc } from '@malagu/rpc';
 @Rpc(WelcomeServer)
 export class WelcomeServerImpl implements WelcomeServer {
     say(): Promise<string> {
-        return Promise.resolve('Welcome to Malagu');
+        return Promise.resolve('Welcome to Malagu!');
     }
 }
