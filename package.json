@@ -1,9 +1,11 @@
 {
-  "name": "sample-app",
+  "name": "doumi-blog",
   "keywords": [
-    "malagu-component"
+    "malagu-component",
+    "blog",
+    "doumi"
   ],
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "files": [
     "lib",
@@ -18,6 +20,10 @@
     "@malagu/cli": "next",
     "@types/react-dom": "^16.8.5",
     "rimraf": "^2.6.3"
+  },
+  "licenses": ["MIT"],
+  "repository": {
+    "url": "https://github.com/linxiaowu66/doumi-blog"
   },
   "scripts": {
     "clean": "rimraf lib dist",
