@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
+import Button from '@material-ui/core/Button'
 import { WelcomeServer } from '../common/welcome-protocol';
 import { View } from '@malagu/react/lib/browser';
 
@@ -28,6 +29,8 @@ export class Hello extends React.Component<Prop, State> {
     }
 
     render() {
-        return <div className="app">{this.state.response}</div>
+        return <div className="app">
+          <Button variant="contained" color="primary">按钮实例</Button>
+        </div>
     }
 }
