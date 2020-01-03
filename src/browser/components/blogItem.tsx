@@ -17,7 +17,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BlogItem() {
+interface BlogItemProps {
+  mediaUrl: string,
+  digest: string,
+  title: string,
+  archiveTime: string
+}
+
+export default function BlogItem(props: BlogItemProps) {
   const classes = useStyles();
 
   return (
@@ -25,25 +32,24 @@ export default function BlogItem() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={props.mediaUrl}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            { props.title }
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {props.digest}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          分享
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          阅读更多
         </Button>
       </CardActions>
     </Card>
