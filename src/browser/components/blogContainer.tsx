@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle ***REMOVED*** from '@material-ui/icons'
+import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud ***REMOVED*** from '@material-ui/icons'
 import IconButton from '@material-ui/core/IconButton';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Divider from '@material-ui/core/Divider';
@@ -19,6 +19,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { makeStyles, useTheme, Theme, createStyles, fade, ***REMOVED*** from '@material-ui/core/styles';
+import FootPrint from './footPrint';
 
 const drawerWidth = 240;
 
@@ -124,6 +125,9 @@ const navigatorList = [{
 ***REMOVED***, {
   name: '关于本站',
   icon: <Web />
+***REMOVED***, {
+  name: '网站数据',
+  icon: <Cloud />
 ***REMOVED***, {
   name: 'Github',
   icon: <GitHub />
@@ -263,6 +267,7 @@ export default function BlogContainer(props: ContainerProps) {
         {
           props.children
       ***REMOVED***
+        <FootPrint />
       </main>
       <ScrollTop {...props***REMOVED***>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
