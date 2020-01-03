@@ -1,0 +1,25 @@
+.triangle(@direction: down, @size: 5px, @color: #F96001) {
+  width: 0;
+  height: 0;
+
+  & when (@direction = left) {
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-right: @size solid @color;
+  }
+  & when (@direction = right) {
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-left: @size solid @color;
+  }
+  & when (@direction = up) {
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-bottom: @size solid @color;
+  }
+  & when (@direction = down) {
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-top: @size solid @color;
+  }
+}

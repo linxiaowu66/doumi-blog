@@ -1,0 +1,14 @@
+.background-gradient(@start-color, @end-color, @orientation) {
+  background: @start-color;
+
+  & when (@orientation = vertical) {
+    background: linear-gradient(to bottom, @start-color, @end-color);
+  }
+  & when (@orientation = horizontal) {
+    background: linear-gradient(to right, @start-color, @end-color);
+  }
+
+  & when (@orientation = radius) {
+    background: radial-gradient(ellipse at center, @start-color, @end-color);
+  }
+}

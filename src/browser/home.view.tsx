@@ -1,17 +1,23 @@
 import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
-import Button from '@material-ui/core/Button'
+import { Container } from '@material-ui/core'
 import { WelcomeServer } from '../common/welcome-protocol';
 import { View } from '@malagu/react/lib/browser';
+import { DouMiIntroduction } from './components/doumiIntroduction';
+import DouMiLinks from './components/doumiLinks';
+import HottestArticles from './components/hottestArticles';
 
-import "./styles/index.less"
+import "./styles/index.less";
+import FootPrint from './components/footPrint';
+
 
 interface Prop {}
 interface State {
     response: string
 }
+
 @View()
-export class Hello extends React.Component<Prop, State> {
+export class Home extends React.Component<Prop, State> {
 
     @Autorpc(WelcomeServer)
     protected welcomeServer!: WelcomeServer;
@@ -29,8 +35,13 @@ export class Hello extends React.Component<Prop, State> {
     }
 
     render() {
-        return <div className="app">
-          <Button variant="contained" color="primary">按钮实例</Button>
-        </div>
+        return (
+        <Container maxWidth="md" className="home-container">
+          <DouMiIntroduction avatarSize={120} fontSize={16} />
+          <DouMiLinks />
+          <HottestArticles />
+          <FootPrint />
+        </Container>
+      )
     }
 }
