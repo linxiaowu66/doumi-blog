@@ -1,0 +1,97 @@
+._onepxElement() {
+  content: '';
+  position: absolute;
+***REMOVED***
+
+._onepxTopBottom() {
+  ._onepxElement();
+  left: 0;
+  right: 0;
+***REMOVED***
+
+._onepxLeftRight() {
+  ._onepxElement();
+  top: 0;
+  bottom: 0;
+***REMOVED***
+.generate(@n, @i: 1) when (@i < @n) {
+  @media screen and (-webkit-min-device-pixel-ratio: @i) {
+    & when (@direction = tb) {
+      transform: scaleY(1 / @i);
+  ***REMOVED***
+    & when (@direction = lr) {
+      transform: scaleX(1 / @i);
+  ***REMOVED***
+    & when (@direction = full) {
+      transform: scale(1 / @i);
+  ***REMOVED***
+***REMOVED***
+  .generate(@n, (@i + 1))
+***REMOVED***
+.setDprBorder(@direction: tb) {
+  .generate(4)
+***REMOVED***
+
+/*
+ * 一像素边框
+ * $direction: 边框方向，默认底边框
+ * $style: 线条样式，默认solid
+ * $color: 边框颜色
+ */
+.one-px-border(@direction: bottom, @style: solid, @color: #e5e5e5) {
+  position: relative;
+  @border: 1px @style @color;
+
+  & when (@direction = bottom) {
+    &:after {
+      ._onepxTopBottom();
+      .setDprBorder(tb);
+      border-top: @border;
+      bottom: 0;
+  ***REMOVED***
+***REMOVED***
+  & when (@direction = top) {
+    &:before {
+      ._onepxTopBottom();
+      .setDprBorder(tb);
+      border-top: @border;
+      top: 0;
+  ***REMOVED***
+***REMOVED***
+  & when (@direction = left) {
+    &:before {
+      ._onepxLeftRight();
+      .setDprBorder(lr);
+      border-left: @border;
+      left: 0;
+  ***REMOVED***
+***REMOVED***
+  & when (@direction = right) {
+    &:after {
+      ._onepxLeftRight();
+      .setDprBorder(lr);
+      border-left: @border;
+      right: 0;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+// 四边一像素边框
+.full-px-border(@color: #e5e5e5, @radius: 0, @zIndex: -1){
+  position: relative;
+  z-index: 1;
+  &:before{
+    content: '';
+    position: absolute;
+    z-index: @zIndex;
+    border: 1px solid @color;
+    width: 200%;
+    height: 200%;
+    border-radius: inherit;
+    transform: scale(.5);
+    transform-origin: top left;
+    border-radius: @radius * 2;
+    left: 0;
+    top: 0
+***REMOVED***
+***REMOVED***
