@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ContainerProps {
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
 }
 
 const navigatorList = [{
