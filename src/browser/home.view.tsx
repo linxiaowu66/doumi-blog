@@ -7,14 +7,14 @@ import { View } from '@malagu/react/lib/browser';
 import { DouMiIntroduction } from './components/doumiIntroduction';
 import DouMiLinks from './components/doumiLinks';
 import HottestArticles from './components/hottestArticles';
-
+import { DouMiBlog } from '../interface';
 import "./styles/index.less";
 import FootPrint from './components/footPrint';
 
 
 interface Prop {}
 interface State {
-    response: string
+    response: DouMiBlog.HottestArticlItem[]
 }
 
 @View()
@@ -25,11 +25,11 @@ export class Home extends React.Component<Prop, State> {
 
     constructor(prop: Prop) {
         super(prop);
-        this.state = { response: 'Loading' };
+        this.state = { response: [] };
     }
 
     async componentDidMount() {
-        const response = await this.BlogServer.say();
+        const response = await this.BlogServer.fetchHottestArticles();
         this.setState({
             response
         });
