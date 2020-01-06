@@ -4,7 +4,7 @@ import { View } from '@malagu/react/lib/browser';
 import {Email, Facebook} from '@material-ui/icons';
 import BlogContainer from './components/blogContainer';
 import { DouMiIntroduction } from './components/doumiIntroduction';
-import DouMiDetailItem from './components/DouMiDetailItem';
+import DouMiDetailItem from './components/douMiDetailItem';
 
 
 import './styles/doumi.less'

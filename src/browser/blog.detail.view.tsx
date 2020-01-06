@@ -19,6 +19,7 @@ export default class BlogDetail extends React.Component<Prop, State> {
         <ReactMarkdown
           source={content}
           renderers={{ code: CodeBlock }}
+          className="blog-detail"
         />
       </BlogContainer>
     )
