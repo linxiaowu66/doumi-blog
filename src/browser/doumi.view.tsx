@@ -1,21 +1,60 @@
 import * as React from 'react';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
-import { Tooltip, Fab ***REMOVED*** from '@material-ui/core';
+// import { Tooltip, Fab ***REMOVED*** from '@material-ui/core';
+import {Email, Facebook***REMOVED*** from '@material-ui/icons';
 import BlogContainer from './components/blogContainer';
 import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
 import DouMiDetailItem from './components/DouMiDetailItem';
 
+
 import './styles/doumi.less'
+import ClickTooltip from './components/clickTooltip';
 
 interface Prop {***REMOVED***
 interface State {
-  response: string
+  // isShowReward: boolean
 ***REMOVED***
 
-// 加个“谢谢赞助”的模块
-// 履历模块
-// 我的标签
-// 联系豆米
+function copyTextToClipboard(text: string) {
+  var textArea = document.createElement("textarea");
+
+  // Place in top-left corner of screen regardless of scroll position.
+  textArea.style.position = 'fixed';
+  textArea.style.top = '0px';
+  textArea.style.left = '0px';
+
+  // Ensure it has a small width and height. Setting to 1px / 1em
+  // doesn't work as this gives a negative w/h on some browsers.
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+
+  // We don't need padding, reducing the size if it does flash render.
+  textArea.style.padding = '0px';
+
+  // Clean up any borders.
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+
+  // Avoid flash of white box if rendered for any reason.
+  textArea.style.background = 'transparent';
+
+  textArea.value = text;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+***REMOVED***
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('信息复制结果：' + msg);
+***REMOVED*** catch (err) {
+    console.log('浏览器不支持复制！！');
+***REMOVED***
+
+  document.body.removeChild(textArea);
+***REMOVED***
 
 @View('/about/doumi')
 export default class AboutDouMi extends React.Component<Prop, State> {
@@ -44,13 +83,23 @@ export default class AboutDouMi extends React.Component<Prop, State> {
           </div>
         </DouMiDetailItem>
         <DouMiDetailItem title="联系豆米">
-
+          <p className="contact-me-tip">您可以通过以下方式找到豆米，欢迎交朋友，一起探讨人生、美食、带娃，哦~也可以交流前端知识~我在杭州等你(<em>点击即复制，由于material-ui没有微信图标，懒得再重新引入新的图标库，所以以facebook的图标代表微信</em>)</p>
+          <div className="contact-me-channels">
+            <ClickTooltip title="linguang66990@126.com" extraAction={copyTextToClipboard***REMOVED***>
+              <Email />
+            </ClickTooltip>
+            <ClickTooltip title="lg997312609" extraAction={copyTextToClipboard***REMOVED***>
+              <Facebook />
+            </ClickTooltip>
+          </div>
         </DouMiDetailItem>
-        <Tooltip title="Add" aria-label="add">
-          <Fab color="secondary">
-            赏
-          </Fab>
-        </Tooltip>
+        <DouMiDetailItem title="赞赏豆米">
+          <p className="doumi-reward-tip">如果觉得博客还不错，可以请作者喝杯咖啡哦~</p>
+          <div className="doumi-reward">
+            <img src="https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/WechatIMG2.jpeg?x-oss-process=image/resize,l_600/crop,x_40,y_190,w_320,h_320/resize,l_160" />
+            <img src="http://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/WechatIMG3.jpeg?x-oss-process=image/resize,l_600/crop,x_60,y_120,w_320,h_320/resize,l_160" />
+          </div>
+        </DouMiDetailItem>
       </BlogContainer>
     )
 ***REMOVED***
