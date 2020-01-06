@@ -2,6 +2,7 @@ import * as React from 'react';
 import { withStyles, Theme ***REMOVED*** from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Container from '@material-ui/core/Container';
+// import Link from '@material-ui/core/Link';
 import Typography from './Typography';
 
 const styles = (theme: Theme) => ({
@@ -91,42 +92,42 @@ function DouMiLinks(props: LinksProp) {
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E6%96%AD%E6%A1%A5%E6%AE%8B%E9%9B%AA.jpeg?x-oss-process=image/resize,h_300',
       title: '断桥残雪',
       width: '33.3%',
-      link: ''
+      link: '#/blog'
   ***REMOVED***,
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E8%A5%BF%E6%BA%AA%E6%B9%BF%E5%9C%B0.jpg?x-oss-process=image/resize,h_300',
       title: '西溪湿地',
       width: '33.3%',
-      link: ''
+      link: '#/blog/category'
   ***REMOVED***,
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E4%B9%9D%E6%BA%AA%E7%83%9F%E6%A0%91.jpg?x-oss-process=image/resize,h_300',
       title: '九溪烟树',
       width: '33.3%',
-      link: ''
+      link: '#/blog/archive'
   ***REMOVED***,
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E8%8B%8F%E5%A0%A4.jpeg?x-oss-process=image/resize,h_300',
       title: '苏堤春晓',
       width: '33.3%',
-      link: ''
+      link: '#/blog/tags'
   ***REMOVED***,
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E6%B9%98%E6%B9%96.jpg?x-oss-process=image/resize,h_300',
       title: '湘湖',
       width: '33.3%',
-      link: ''
+      link: '#/about/blog'
   ***REMOVED***,
     {
       url:
         'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80',
       title: '豆米',
       width: '33.3%',
-      link: ''
+      link: '#/about/doumi'
   ***REMOVED***,
   ];
 
@@ -143,6 +144,7 @@ function DouMiLinks(props: LinksProp) {
             style={{
               width: image.width,
           ***REMOVED******REMOVED***
+            onClick={() => location.href = image.link ***REMOVED***
           >
             <div
               className={classes.imageSrc***REMOVED***

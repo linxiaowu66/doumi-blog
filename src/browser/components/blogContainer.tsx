@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Link from '@material-ui/core/Link';
 import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud ***REMOVED*** from '@material-ui/icons'
 import IconButton from '@material-ui/core/IconButton';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -109,28 +110,36 @@ interface ContainerProps {
 
 const navigatorList = [{
   name: '首页',
-  icon: <Home />
+  icon: <Home />,
+  link: ''
 ***REMOVED***, {
   name: '分类',
-  icon: <Category />
+  icon: <Category />,
+  link: '#/blog/category'
 ***REMOVED***, {
   name: '归档',
-  icon: <Archive />
+  icon: <Archive />,
+  link: '#/blog/archive'
 ***REMOVED***, {
   name: '标签',
-  icon: <Bookmark />
+  icon: <Bookmark />,
+  link: '#/blog/tags'
 ***REMOVED***, {
   name: '关于豆米',
-  icon: <PersonPin />
+  icon: <PersonPin />,
+  link: '#/about/doumi'
 ***REMOVED***, {
   name: '关于本站',
-  icon: <Web />
+  icon: <Web />,
+  link: '#/about/blog'
 ***REMOVED***, {
   name: '网站数据',
-  icon: <Cloud />
+  icon: <Cloud />,
+  link: '/'
 ***REMOVED***, {
   name: 'Github',
-  icon: <GitHub />
+  icon: <GitHub />,
+  link: 'https://github.com/linxiaowu66/doumi-blog'
 ***REMOVED***]
 interface ScrollProps {
   children: React.ReactElement;
@@ -179,11 +188,13 @@ export default function BlogContainer(props: ContainerProps) {
       <div className={classes.toolbar***REMOVED*** />
       <Divider />
       <List>
-        {navigatorList.map((item, index) => (
-          <ListItem button key={item.name***REMOVED***>
-            <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
-            <ListItemText primary={item.name***REMOVED*** />
-          </ListItem>
+        {navigatorList.map((item) => (
+          <Link color="inherit" href={item.link***REMOVED*** key={item.name***REMOVED***>
+            <ListItem button>
+              <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
+              <ListItemText primary={item.name***REMOVED*** />
+            </ListItem>
+          </Link>
         ))***REMOVED***
       </List>
     </div>

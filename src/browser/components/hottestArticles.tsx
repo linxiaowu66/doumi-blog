@@ -102,7 +102,7 @@ function HottestArticles() {
         {
           hotterArticles.map(item => (
             <li key={item.slug***REMOVED***>
-              <a href='/blog/{{post.slug***REMOVED******REMOVED***'><span>{item.title***REMOVED***</span><time>{item.archiveTime***REMOVED***</time></a>
+              <a href='#/blog/{{post.slug***REMOVED******REMOVED***'><span>{item.title***REMOVED***</span><time>{item.archiveTime***REMOVED***</time></a>
             </li>
           ))
       ***REMOVED***

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { Container ***REMOVED*** from '@material-ui/core'
-import { WelcomeServer ***REMOVED*** from '../common/welcome-protocol';
+import { BlogServer ***REMOVED*** from '../common/blog-protocol';
+// import Link from '@material-ui/core/Link';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
 import DouMiLinks from './components/doumiLinks';
@@ -19,8 +20,8 @@ interface State {
 @View()
 export class Home extends React.Component<Prop, State> {
 
-    @Autorpc(WelcomeServer)
-    protected welcomeServer!: WelcomeServer;
+    @Autorpc(BlogServer)
+    protected BlogServer!: BlogServer;
 
     constructor(prop: Prop) {
         super(prop);
@@ -28,7 +29,7 @@ export class Home extends React.Component<Prop, State> {
   ***REMOVED***
 
     async componentDidMount() {
-        const response = await this.welcomeServer.say();
+        const response = await this.BlogServer.say();
         this.setState({
             response
         ***REMOVED***
