@@ -1,3 +1,3 @@
-import './welcome-server';
+import './blog-server';
 import { autoBind } from '@malagu/core';
 export default autoBind();
