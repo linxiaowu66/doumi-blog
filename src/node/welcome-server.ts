@@ -1,9 +1,9 @@
-import { WelcomeServer } from '../common/welcome-protocol';
+import { BlogServer } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
 
-@Rpc(WelcomeServer)
-export class WelcomeServerImpl implements WelcomeServer {
+@Rpc(BlogServer)
+export class BlogServerImpl implements BlogServer {
     say(): Promise<string> {
-        return Promise.resolve('Welcome to Malagu!');
+        return Promise.resolve('Blog to Malagu!');
     }
 }
