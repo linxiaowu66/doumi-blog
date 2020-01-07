@@ -106,6 +106,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ContainerProps {
   children: React.ReactElement | React.ReactElement[];
+  contentClass?: string;
 }
 
 const navigatorList = [{
@@ -273,7 +274,7 @@ export default function BlogContainer(props: ContainerProps) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
+      <main className={`${classes.content} ${props.contentClass}`}>
         <div className={classes.toolbar} />
         {
           props.children
