@@ -60,7 +60,7 @@ function copyTextToClipboard(text: string) {
 export default class AboutDouMi extends React.Component<Prop, State> {
   render() {
     return (
-      <BlogContainer>
+      <BlogContainer contentClass="doumi-info">
         <DouMiIntroduction avatarSize={120***REMOVED*** fontSize={16***REMOVED*** />
         <DouMiDetailItem title="关于豆米">
           <p className="detail-intro"><span>大洋芋</span>：2012年毕业的豆，从一开始就投入到前端开发的行业中，一去不回头。工作地点曾经在深圳待过两年，之后辗转到杭州，公司也从吉祥腾达科技切换到阿里巴巴，目前在家暂时带娃。回望7年工作以往，经历了前端行业剧变的年代，写过JQuery，处理过一大堆的浏览器兼容性。最后在所谓的互联网大厂中继续磨练，深谙React之道，经过鉴定，是个纯正的前端er。希望今年(2020年)可以找到自己热爱的一个新团体和新公司~</p>

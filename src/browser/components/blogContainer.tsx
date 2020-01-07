@@ -106,6 +106,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ContainerProps {
   children: React.ReactElement | React.ReactElement[];
+  contentClass?: string;
 ***REMOVED***
 
 const navigatorList = [{
@@ -273,7 +274,7 @@ export default function BlogContainer(props: ContainerProps) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content***REMOVED***>
+      <main className={`${classes.content***REMOVED*** ${props.contentClass***REMOVED***`***REMOVED***>
         <div className={classes.toolbar***REMOVED*** />
         {
           props.children
