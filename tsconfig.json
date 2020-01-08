@@ -3,7 +3,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noEmitOnError": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,

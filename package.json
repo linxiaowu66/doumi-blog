@@ -12,12 +12,13 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/fc-adapter": "next",
     "@malagu/material-ui": "next",
     "@malagu/react": "next",
     "@malagu/rpc": "next",
+    "@malagu/typeorm": "next",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "mongodb": "^3.4.1",
     "react-markdown": "^4.3.0",
     "react-syntax-highlighter": "^12.2.1"
 ***REMOVED***,
