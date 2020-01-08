@@ -1,9 +1,23 @@
-malagu:
-  material-ui:
-    themeOptions:
-      palette:
-        primary:
-          contrastText: '#fff'
-          main: '#119d55'
-      typography:
-        fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
+appTitle: '豆米的博客'
+frontend:
+  malagu:
+    material-ui:
+      themeOptions:
+        palette:
+          primary:
+            contrastText: '#fff'
+            main: '#119d55'
+        typography:
+          fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
+backend:
+  malagu:
+    typeorm:
+      ormConfig:
+        - type: mongodb
+          host: 47.96.8.45
+          port: 27017
+          synchronize: true
+          useUnifiedTopology: true
+          username: linguang
+          password: Windrun123
+          database: douMiBlog
