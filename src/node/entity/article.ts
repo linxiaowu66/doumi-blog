@@ -1,5 +1,8 @@
-import { Entity, ObjectIdColumn, Column, ObjectID ***REMOVED*** from 'typeorm';
-// import { User ***REMOVED*** from './user';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToMany, JoinTable, Index ***REMOVED*** from 'typeorm';
+import { User ***REMOVED*** from './user';
+import { Tag ***REMOVED*** from './tag';
+import { Archive ***REMOVED*** from './archive';
+import { Category ***REMOVED*** from './category';
 
 
 export enum ArticleStatus {
@@ -10,34 +13,27 @@ export enum ArticleStatus {
 @Entity()
 export class Article {
 
-    @ObjectIdColumn()
-    id: ObjectID;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-    @Column({
-      type: 'string',
-  ***REMOVED***)
+    // 文章标题
+    @Column('string')
     title: string;
 
-    @Column({
-      type: 'string',
-  ***REMOVED***)
+    // 博文主体，markdown格式
+    @Column('string')
     content: string;
 
-    @Column({
-      type: 'string',
-  ***REMOVED***)
-    previewText: string;
-
-    @Column({
-      type: 'string',
-  ***REMOVED***)
+    // 博文链接
+    @Column('string')
+    @Index({unique: true***REMOVED***)
     slug: string;
 
-    @Column({
-      type: 'string',
-  ***REMOVED***)
+    // 博文摘要，这次需要自己填写，不再自动从文章采集字符了，那样实现不准确
+    @Column('string')
     digest: string;
 
+    // 博文状态,默认草稿中
     @Column({
       type: "enum",
       enum: ArticleStatus,
@@ -45,30 +41,28 @@ export class Article {
   ***REMOVED***)
     articleStatus: ArticleStatus;
 
-    // 当天访问本文的IP，每天清零一次
-    @Column({
-      type: 'simple-array'
-  ***REMOVED***)
-    pageViews: string[];
+    // 文章首页图片链接
+    @Column('string')
+    illustration: string;
 
-    @Column({
-      type: 'string',
-  ***REMOVED***)
-    author: string;
+    // 文章作者
+    @OneToOne(type => User, user => user.articles)
+    author: User;
 
-    // 文章首页图片
-    @Column({
-      type: 'string',
+    // 一篇文章可以包含多个tag，所以这里是多对多的关系
+    @ManyToMany(type => Tag, tag => tag.articles)
+    @JoinTable({
+      name: 'article_tags',
+      joinColumn: { name: 'aid' ***REMOVED***,
+      inverseJoinColumn: { name: 'tid' ***REMOVED***,
   ***REMOVED***)
-    picture: string;
+    tags: Tag[];
 
-    @Column({
-      type: 'simple-array'
-  ***REMOVED***)
-    tagsArray: string[];
+    // 文章的归档时间
+    @OneToOne(type => Archive, archive => archive.articles)
+    archiveTime: Archive;
 
-    @Column({
-      type: 'string'
-  ***REMOVED***)
-    archiveTime: string;
+    // 文章的分类
+    @OneToOne(type => Category, category => category.articles)
+    category: Category;
 ***REMOVED***
