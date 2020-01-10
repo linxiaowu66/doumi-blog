@@ -29,7 +29,7 @@ export class Home extends React.Component<Prop, State> {
     }
 
     async componentDidMount() {
-        const response = await this.BlogServer.fetchHottestArticles();
+        const response = await this.BlogServer.fetchHottestArticles(5);
         this.setState({
             response
         });
