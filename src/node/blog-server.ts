@@ -1,18 +1,15 @@
 import { BlogServer ***REMOVED*** from '../common/blog-protocol';
 import { Rpc ***REMOVED*** from '@malagu/rpc';
 // import { Autowired, ApplicationLifecycle, Application ***REMOVED*** from '@malagu/core'
-import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
+// import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { DouMiBlog ***REMOVED*** from '../interface';
-// import { Article ***REMOVED*** from './entity/article';
+// import { User ***REMOVED*** from './entity/user';
 
 @Rpc(BlogServer)
 export class BlogServerImpl implements BlogServer {
 
-  // @Autowired(ApplicationLifecycle)
-  // private lifecycles: ApplicationLifecycle<Application>[]
-
-  @Transactional({ readOnly: true ***REMOVED***)
-  async fetchHottestArticles(): Promise<DouMiBlog.HottestArticlItem[]> {
+  // @Transactional()
+  async fetchHottestArticles(limit: number): Promise<DouMiBlog.HottestArticlItem[]> {
 
     // const repo = OrmContext.getMongoRepository(Article);
     // const result = await repo.find({ title: '由form表单来说说前后台数据之间的交互' ***REMOVED***

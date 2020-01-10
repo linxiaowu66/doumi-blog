@@ -39,7 +39,7 @@ const typeMeans: { [key: string]: {means: string, icon: React.ReactElement***REM
 ***REMOVED***
 ***REMOVED***
 
-@View('/blog/:type')
+@View('/blog/list/:type')
 export default class BlogTypes extends React.Component<State, any> {
   constructor(props: any) {
     super(props);

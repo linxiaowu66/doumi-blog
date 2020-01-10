@@ -70,7 +70,7 @@
   resolved "http://r.cnpmjs.org/@babel/parser/download/@babel/parser-7.7.7.tgz#1b886595419cf92d811316d5b715a53ff38b4937"
   integrity sha1-G4hllUGc+S2BExbVtxWlP/OLSTc=
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.6":
   version "7.7.7"
   resolved "http://r.cnpmjs.org/@babel/runtime/download/@babel/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
   integrity sha1-GUdpyo1td5DsI2Ba+e4+QqCqec8=
@@ -141,10 +141,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@malagu/cli@next":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/cli/download/@malagu/cli-0.1.0-next.8842dae1.tgz#521046c60354d09d7469dc6a05850cb4c372463f"
-  integrity sha1-UhBGxgNU0J10adxqBYUMtMNyRj8=
+"@malagu/cli@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/cli/download/@malagu/cli-0.0.7.tgz#f26dcfed7aaf3b213447046dd139ba67699e6595"
+  integrity sha1-8m3P7XqvOyE0RwRt0Tm6Z2meZZU=
   dependencies:
     "@types/chai" "^4.0.1"
     "@types/chai-string" "^1.4.0"
@@ -153,7 +153,6 @@
     css-loader "^3.1.0"
     decache "^4.5.1"
     delay "^4.3.0"
-    express-ws "^4.0.0"
     file-loader "^4.1.0"
     friendly-errors-webpack-plugin "^1.7.0"
     fs-extra "^8.1.0"
@@ -186,16 +185,16 @@
     webpack-merge "^4.2.1"
     worker-loader "^2.0.0"
 
-"@malagu/core@0.1.0-next.8842dae1":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/core/download/@malagu/core-0.1.0-next.8842dae1.tgz#fec6d17a37e976e1981e64ae54c55af17d6c2eca"
-  integrity sha1-/sbRejfpduGYHmSuVMVa8X1sLso=
+"@malagu/core@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/core/download/@malagu/core-0.0.7.tgz#c7c36d785fee80cc730ad4c50ca3582f021f1dc2"
+  integrity sha1-x8NteF/ugMxzCtTFDKNYLwIfHcI=
   dependencies:
     "@types/express" "^4.16.1"
     "@types/lodash.debounce" "4.0.3"
     "@types/lodash.throttle" "^4.1.3"
     es6-promise "^4.2.4"
-    inversify "^4.14.0"
+    inversify "^5.0.1"
     inversify-binding-decorators "^4.0.0"
     jexl "^2.1.1"
     lodash.debounce "^4.0.8"
@@ -207,62 +206,62 @@
     url-join "^4.0.1"
     vscode-ws-jsonrpc "^0.1.1"
 
-"@malagu/grommet@0.1.0-next.8842dae1":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/grommet/download/@malagu/grommet-0.1.0-next.8842dae1.tgz#086bc74c7126cfcf9fb2d9260ccfbfba22bee0a9"
-  integrity sha1-CGvHTHEmz8+fstkmDM+/uiK+4Kk=
+"@malagu/grommet@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/grommet/download/@malagu/grommet-0.0.7.tgz#c7f56d29717ae5cf4f5a1946ee11436ccc8e1780"
+  integrity sha1-x/VtKXF65c9PWhlG7hFDbMyOF4A=
   dependencies:
-    "@malagu/react" "0.1.0-next.8842dae1"
+    "@malagu/react" "^0.0.7"
     grommet "^2.9.0"
     grommet-icons "^4.4.0"
     styled-components "^4.4.1"
 
-"@malagu/material-ui@next":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/material-ui/download/@malagu/material-ui-0.1.0-next.8842dae1.tgz#9ee648f7e3d07bc95da85d7ad5610246a0bd56af"
-  integrity sha1-nuZI9+PQe8ldqF161WECRqC9Vq8=
+"@malagu/material-ui@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/material-ui/download/@malagu/material-ui-0.0.7.tgz#d256cde41a0e32e6665e9a8b785c153289abda6e"
+  integrity sha1-0lbN5BoOMuZmXpqLeFwVMomr2m4=
   dependencies:
-    "@malagu/grommet" "0.1.0-next.8842dae1"
+    "@malagu/grommet" "^0.0.7"
     "@material-ui/core" "^4.6.0"
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
 
-"@malagu/react@0.1.0-next.8842dae1", "@malagu/react@next":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/react/download/@malagu/react-0.1.0-next.8842dae1.tgz#1041b657ea53200d4296fe36a9e1578283dc31b3"
-  integrity sha1-EEG2V+pTIA1Clv42qeFXgoPcMbM=
+"@malagu/react@^0.0.7", "@malagu/react@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/react/download/@malagu/react-0.0.7.tgz#12b99a9735efdd32fa6807237a9b2042f9634e49"
+  integrity sha1-ErmalzXv3TL6aAcjepsgQvljTkk=
   dependencies:
-    "@malagu/core" "0.1.0-next.8842dae1"
+    "@malagu/core" "^0.0.7"
     history "^4.10.1"
     react "^16.12.0"
     react-dom "^16.12.0"
     react-router "^5.1.2"
     react-router-dom "^5.1.2"
 
-"@malagu/rpc@next":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/rpc/download/@malagu/rpc-0.1.0-next.8842dae1.tgz#986864e720a4d59abf70136fd13ba4a0ba8a8929"
-  integrity sha1-mGhk5yCk1Zq/cBNv0TukoLqKiSk=
+"@malagu/rpc@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/rpc/download/@malagu/rpc-0.0.7.tgz#0b99626ab1d3288d48b84e7be7a6b8ca9d644bd0"
+  integrity sha1-C5liarHTKI1IuE5756a4yp1kS9A=
   dependencies:
-    "@malagu/web" "0.1.0-next.8842dae1"
+    "@malagu/web" "^0.0.7"
     reconnecting-websocket "^4.1.10"
 
-"@malagu/typeorm@next":
-  version "0.1.0-next.8842dae1"
-  resolved "https://registry.npm.taobao.org/@malagu/typeorm/download/@malagu/typeorm-0.1.0-next.8842dae1.tgz#e7a063d6571a74a0384f6a7921cb97c1284058af"
-  integrity sha1-56Bj1lcadKA4T2p5IcuXwShAWK8=
+"@malagu/typeorm@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/typeorm/download/@malagu/typeorm-0.0.7.tgz#346f67c277adda23f55553e5635e2e1627586b6b"
+  integrity sha1-NG9nwnet2iP1VVPlY14uFidYa2s=
   dependencies:
-    "@malagu/web" "0.1.0-next.8842dae1"
+    "@malagu/web" "^0.0.7"
     mysql "^2.17.1"
     typeorm "^0.2.19"
     webpack-filter-warnings-plugin "^1.2.1"
 
-"@malagu/web@0.1.0-next.8842dae1":
-  version "0.1.0-next.8842dae1"
-  resolved "http://r.cnpmjs.org/@malagu/web/download/@malagu/web-0.1.0-next.8842dae1.tgz#1a01d30c4eed0e489e2555173c0f0c8b0bb87de4"
-  integrity sha1-GgHTDE7tDkieJVUXPA8Miwu4feQ=
+"@malagu/web@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/web/download/@malagu/web-0.0.7.tgz#5b4a2ddb241c2728638c8efcac98444f2e32b970"
+  integrity sha1-W0ot2yQcJyhjjI78rJhETy4yuXA=
   dependencies:
-    "@malagu/core" "0.1.0-next.8842dae1"
+    "@malagu/core" "^0.0.7"
     "@types/express" "^4.16.1"
     cookies "^0.7.3"
     crc "^3.8.0"
@@ -1076,6 +1075,11 @@ bcrypt-pbkdf@^1.0.0:
   integrity sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
   dependencies:
     tweetnacl "^0.14.3"
+
+bcryptjs@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.npm.taobao.org/bcryptjs/download/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+  integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
 
 big.js@^3.1.3:
   version "3.2.0"
@@ -2463,13 +2467,6 @@ express-http-context@^1.2.3:
     "@types/express" "^4.16.0"
     cls-hooked "^4.2.2"
 
-express-ws@^4.0.0:
-  version "4.0.0"
-  resolved "http://r.cnpmjs.org/express-ws/download/express-ws-4.0.0.tgz#dabd8dc974516418902a41fe6e30ed949b4d36c4"
-  integrity sha1-2r2NyXRRZBiQKkH+bjDtlJtNNsQ=
-  dependencies:
-    ws "^5.2.0"
-
 express@^4.17.1:
   version "4.17.1"
   resolved "http://r.cnpmjs.org/express/download/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -3379,10 +3376,10 @@ inversify-binding-decorators@^4.0.0:
   resolved "http://r.cnpmjs.org/inversify-binding-decorators/download/inversify-binding-decorators-4.0.0.tgz#c4d1ac50d7d6531f465ee7894e92031f7471c865"
   integrity sha1-xNGsUNfWUx9GXueJTpIDH3RxyGU=
 
-inversify@^4.14.0:
-  version "4.14.0"
-  resolved "http://r.cnpmjs.org/inversify/download/inversify-4.14.0.tgz#393c1f86ee92aef0592eb0e493623b9d88dfb376"
-  integrity sha1-OTwfhu6SrvBZLrDkk2I7nYjfs3Y=
+inversify@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/inversify/download/inversify-5.0.1.tgz#500d709b1434896ce5a0d58915c4a4210e34fb6e"
+  integrity sha1-UA1wmxQ0iWzloNWJFcSkIQ40+24=
 
 invert-kv@^2.0.0:
   version "2.0.0"
@@ -5289,6 +5286,14 @@ react-dom@^16.12.0:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
+react-final-form@^6.3.3:
+  version "6.3.3"
+  resolved "https://registry.npm.taobao.org/react-final-form/download/react-final-form-6.3.3.tgz#8856a92278de2733f83e88c75d9ef347294a66a0"
+  integrity sha1-iFapInjeJzP4PojHXZ7zRylKZqA=
+  dependencies:
+    "@babel/runtime" "^7.4.5"
+    ts-essentials "^3.0.2"
+
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.12.0"
   resolved "http://r.cnpmjs.org/react-is/download/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
@@ -6527,6 +6532,11 @@ ts-custom-error@^3.1.1:
   resolved "http://r.cnpmjs.org/ts-custom-error/download/ts-custom-error-3.1.1.tgz#d30c7415461dac93dc2cc9e9eb2dae92e6423901"
   integrity sha1-0wx0FUYdrJPcLMnp6y2ukuZCOQE=
 
+ts-essentials@^3.0.2:
+  version "3.0.5"
+  resolved "https://registry.npm.taobao.org/ts-essentials/download/ts-essentials-3.0.5.tgz#34a45f9f2b3817ed6756a4a876a0543a1cedc12a"
+  integrity sha1-NKRfnys4F+1nVqSodqBUOhztwSo=
+
 ts-loader@^6.2.0:
   version "6.2.1"
   resolved "http://r.cnpmjs.org/ts-loader/download/ts-loader-6.2.1.tgz#67939d5772e8a8c6bdaf6277ca023a4812da02ef"
@@ -7174,13 +7184,6 @@ wrappy@1:
   version "1.0.2"
   resolved "http://r.cnpmjs.org/wrappy/download/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
-
-ws@^5.2.0:
-  version "5.2.2"
-  resolved "http://r.cnpmjs.org/ws/download/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
-  integrity sha1-3/7xSGa46NyRM1glFNG++vlumA8=
-  dependencies:
-    async-limiter "~1.0.0"
 
 ws@^6.2.1:
   version "6.2.1"
