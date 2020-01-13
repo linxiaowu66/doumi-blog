@@ -21,16 +21,14 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mongodb": "^3.4.1",
-    "react-final-form": "^6.3.3",
+    "react-hook-form": "^4.4.8",
     "react-markdown": "^4.3.0",
-    "react-syntax-highlighter": "^12.2.1",
-    "validator": "^12.1.0"
+    "react-syntax-highlighter": "^12.2.1"
 ***REMOVED***,
   "devDependencies": {
     "@malagu/cli": "latest",
     "@types/react-dom": "^16.8.5",
     "@types/react-syntax-highlighter": "^11.0.4",
-    "@types/validator": "^12.0.1",
     "rimraf": "^2.6.3"
 ***REMOVED***,
   "licenses": [

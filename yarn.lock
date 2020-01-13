@@ -70,7 +70,7 @@
   resolved "https://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.7.7.tgz#1b886595419cf92d811316d5b715a53ff38b4937"
   integrity sha1-G4hllUGc+S2BExbVtxWlP/OLSTc=
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.6":
   version "7.7.7"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
   integrity sha1-GUdpyo1td5DsI2Ba+e4+QqCqec8=
@@ -568,11 +568,6 @@
   dependencies:
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
-
-"@types/validator@^12.0.1":
-  version "12.0.1"
-  resolved "https://registry.npm.taobao.org/@types/validator/download/@types/validator-12.0.1.tgz#73dbc7f5f730ff7131754bca682824eb3c260b79"
-  integrity sha1-c9vH9fcw/3ExdUvKaCgk6zwmC3k=
 
 "@types/yargs-parser@*":
   version "13.1.0"
@@ -5301,13 +5296,10 @@ react-dom@^16.12.0:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
-react-final-form@^6.3.3:
-  version "6.3.3"
-  resolved "https://registry.npm.taobao.org/react-final-form/download/react-final-form-6.3.3.tgz#8856a92278de2733f83e88c75d9ef347294a66a0"
-  integrity sha1-iFapInjeJzP4PojHXZ7zRylKZqA=
-  dependencies:
-    "@babel/runtime" "^7.4.5"
-    ts-essentials "^3.0.2"
+react-hook-form@^4.4.8:
+  version "4.4.8"
+  resolved "https://registry.npm.taobao.org/react-hook-form/download/react-hook-form-4.4.8.tgz#fb228eea8d168362c8ee966fb91cb49b19bfa050"
+  integrity sha1-+yKO6o0Wg2LI7pZvuRy0mxm/oFA=
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.12.0"
@@ -6560,11 +6552,6 @@ ts-custom-error@^3.1.1:
   resolved "https://registry.npm.taobao.org/ts-custom-error/download/ts-custom-error-3.1.1.tgz#d30c7415461dac93dc2cc9e9eb2dae92e6423901"
   integrity sha1-0wx0FUYdrJPcLMnp6y2ukuZCOQE=
 
-ts-essentials@^3.0.2:
-  version "3.0.5"
-  resolved "https://registry.npm.taobao.org/ts-essentials/download/ts-essentials-3.0.5.tgz#34a45f9f2b3817ed6756a4a876a0543a1cedc12a"
-  integrity sha1-NKRfnys4F+1nVqSodqBUOhztwSo=
-
 ts-loader@^6.2.0:
   version "6.2.1"
   resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-6.2.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fts-loader%2Fdownload%2Fts-loader-6.2.1.tgz#67939d5772e8a8c6bdaf6277ca023a4812da02ef"
@@ -6937,11 +6924,6 @@ uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz?cache=0&sync_timestamp=1566221202613&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
-
-validator@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.npm.taobao.org/validator/download/validator-12.1.0.tgz#a3a7315d5238cbc15e46ad8d5e479aafa7119925"
-  integrity sha1-o6cxXVI4y8FeRq2NXkear6cRmSU=
 
 value-equal@^1.0.1:
   version "1.0.1"
