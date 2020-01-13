@@ -6,7 +6,11 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   @Index({unique: true***REMOVED***)
   name: string;
 

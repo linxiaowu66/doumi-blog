@@ -6,13 +6,25 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   username: string;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   password: string;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   @Index({unique: true***REMOVED***)
   email: string;
 
