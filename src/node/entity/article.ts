@@ -17,20 +17,28 @@ export class Article {
     id: number;
 
     // 文章标题
-    @Column('string')
+    @Column({
+      type: "varchar",
+      length: 200,
+      nullable: false
+    })
     title: string;
 
     // 博文主体，markdown格式
-    @Column('string')
+    @Column('varchar')
     content: string;
 
     // 博文链接
-    @Column('string')
+    @Column('varchar')
     @Index({unique: true})
     slug: string;
 
     // 博文摘要，这次需要自己填写，不再自动从文章采集字符了，那样实现不准确
-    @Column('string')
+    @Column({
+      type: "varchar",
+      length: 200,
+      nullable: false
+    })
     digest: string;
 
     // 博文状态,默认草稿中
@@ -42,7 +50,11 @@ export class Article {
     articleStatus: ArticleStatus;
 
     // 文章首页图片链接
-    @Column('string')
+    @Column({
+      type: "varchar",
+      length: 200,
+      nullable: false
+    })
     illustration: string;
 
     // 文章作者

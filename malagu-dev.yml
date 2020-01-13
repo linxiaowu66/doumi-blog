@@ -7,4 +7,6 @@ backend:
           port: 3306
           synchronize: true
           useUnifiedTopology: true
+          username: dev
+          password: '123456'
           database: douMiBlog
