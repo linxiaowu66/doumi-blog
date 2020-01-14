@@ -1,9 +1,8 @@
 import { BlogServer } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
-// import { Autowired, ApplicationLifecycle, Application } from '@malagu/core'
-// import { Transactional } from '@malagu/typeorm/lib/node';
+import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
 import { DouMiBlog } from '../interface';
-// import { User } from './entity/user';
+import { User } from './entity/user';
 
 @Rpc(BlogServer)
 export class BlogServerImpl implements BlogServer {
@@ -25,5 +24,12 @@ export class BlogServerImpl implements BlogServer {
           "archiveTime": "2016-09-24 19:57",
           "slug": "You-formBiao-Dan-Lai-Shuo-Shuo-Qian-Hou-Tai-Shu-Ju-Zhi-Jian-De-Jiao-Hu-88"
       }]);
+    }
+    @Transactional()
+    async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
+      const repo = OrmContext.getRepository(User)
+
+      repo.save(param)
+      return Promise.resolve('注册成功');
     }
 }

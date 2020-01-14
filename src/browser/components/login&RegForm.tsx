@@ -6,7 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 interface FormProps {
   type: 'login' | 'register',
-  visible: boolean
+  visible: boolean,
+  registerCb: (param: {email: string, username: string, password: string}) => Promise<string>
+  loginCb?: (param: {email: string, password: string}) => Promise<string>
 }
 
 const useStyles = makeStyles({
@@ -19,18 +21,34 @@ const useStyles = makeStyles({
     transition: 'all 500ms',
     'transition-delay': '500ms',
     bottom: 0,
-
+    '& header': {
+      color: '#fff',
+      fontSize: '2rem',
+      marginTop: 15,
+      marginBottom: 15,
+      textAlign: 'center'
+    },
+    '& button': {
+      marginTop: 20,
+    }
   })
 })
 
 export default function LoginRegForm(props: FormProps) {
   const { handleSubmit, errors, register } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const { type } = props;
+
+  const onSubmit = (data: any) => {
+    if (type === 'register') {
+      props.registerCb(data)
+    }
+  }
 
   const classes = useStyles(props.visible);
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className={classes.root}>
+        <header>JOIN</header>
         <TextField
           id="outlined-email-input-required"
           label="邮箱地址"
@@ -46,8 +64,24 @@ export default function LoginRegForm(props: FormProps) {
           })}
           helperText={errors.email && "无效的邮箱地址"}
         />
+        {
+          type === 'register' ? (
+          <TextField
+            id="outlined-name-input-required"
+            label="昵称"
+            type="text"
+            name="username"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            error={!!errors.username}
+            inputRef={register}
+            helperText={errors.username && "用户名格式不正确"}
+          />
+          ): null
+        }
         <TextField
-          id="outlined-email-input-required"
+          id="outlined-password-input-required"
           label="密码"
           type="password"
           name="password"
@@ -55,10 +89,11 @@ export default function LoginRegForm(props: FormProps) {
           margin="normal"
           fullWidth
           variant="outlined"
+          inputRef={register}
           helperText={errors.password && "密码错误"}
         />
         <Button type="submit" size="large" color="secondary" variant="contained" fullWidth>
-          登录
+          {type === 'register' ? '注册' : '登录'}
         </Button>
       </form>
     </React.Fragment>
