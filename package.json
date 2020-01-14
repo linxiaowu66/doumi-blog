@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@malagu/cli": "latest",
+    "@types/bcryptjs": "^2.4.2",
     "@types/react-dom": "^16.8.5",
     "@types/react-syntax-highlighter": "^11.0.4",
     "rimraf": "^2.6.3"

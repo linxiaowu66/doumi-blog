@@ -7,20 +7,21 @@ import { makeStyles } from '@material-ui/core/styles';
 interface FormProps {
   type: 'login' | 'register',
   visible: boolean,
-  registerCb: (param: {email: string, username: string, password: string}) => Promise<string>
-  loginCb?: (param: {email: string, password: string}) => Promise<string>
+  actionSuccess: boolean,
+  registerCb: (param: {email: string, username: string, password: string}) => void
+  loginCb?: (param: {email: string, password: string}) => void
 }
 
 const useStyles = makeStyles({
-  root: (props: boolean) => ({
+  root: (props: {visible: boolean, success: boolean}) => ({
     position: 'relative' as 'relative',
     width: '100%',
     height: '94%',
     float: 'left',
-    left: props ? 0 : -390,
+    left: props.visible ? 0 : -390,
     transition: 'all 500ms',
     'transition-delay': '500ms',
-    bottom: 0,
+    bottom: props.success ? '-600px' : 0,
     '& header': {
       color: '#fff',
       fontSize: '2rem',
@@ -44,7 +45,7 @@ export default function LoginRegForm(props: FormProps) {
     }
   }
 
-  const classes = useStyles(props.visible);
+  const classes = useStyles({visible: props.visible, success: props.actionSuccess});
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className={classes.root}>
