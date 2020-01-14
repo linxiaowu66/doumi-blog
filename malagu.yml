@@ -1,4 +1,9 @@
 appTitle: '豆米的博客'
+malagu:
+  security:
+    enabled: true
+    usernameKey: email
+    passwordKey: password
 frontend:
   malagu:
     material-ui:
@@ -9,3 +14,19 @@ frontend:
             main: '#119d55'
         typography:
           fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
+backend:
+  malagu:
+    security:
+      contextKey: malagu:securityContext
+      passwordEncoder:
+        secret: doumiblog
+        encodeHashAsBase64: true
+      basic:
+        realm: realm
+      loginPage: /blog/auth/login
+      loginUrl: /api/login
+      loginMethod: POST
+      loginSuccessUrl: /blog/admin
+      logoutUrl: /api/logout
+      logoutMethod: POST
+      logoutSuccessUrl: /blog/auth/login

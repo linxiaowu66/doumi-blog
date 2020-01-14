@@ -226,6 +226,13 @@
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
 
+"@malagu/mvc@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/mvc/download/@malagu/mvc-0.0.7.tgz#cd87525e9eb0445002feac4a1f9e927acd78c9b1"
+  integrity sha1-zYdSXp6wRFAC/qxKH56Ses14ybE=
+  dependencies:
+    "@malagu/web" "^0.0.7"
+
 "@malagu/react@^0.0.7", "@malagu/react@latest":
   version "0.0.7"
   resolved "https://registry.npm.taobao.org/@malagu/react/download/@malagu/react-0.0.7.tgz#12b99a9735efdd32fa6807237a9b2042f9634e49"
@@ -245,6 +252,14 @@
   dependencies:
     "@malagu/web" "^0.0.7"
     reconnecting-websocket "^4.1.10"
+
+"@malagu/security@latest":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@malagu/security/download/@malagu/security-0.0.7.tgz#d65c67e8c698f23823a9b6a2dc98f44901242d5e"
+  integrity sha1-1lxn6MaY8jgjqbai3Jj0SQEkLV4=
+  dependencies:
+    "@malagu/web" "^0.0.7"
+    crypto-js "^3.1.9-1"
 
 "@malagu/typeorm@latest":
   version "0.0.7"
@@ -382,11 +397,6 @@
     "@babel/runtime" "^7.7.6"
     "@testing-library/dom" "^6.11.0"
     "@types/testing-library__react" "^9.1.2"
-
-"@types/bcryptjs@^2.4.2":
-  version "2.4.2"
-  resolved "https://registry.npm.taobao.org/@types/bcryptjs/download/@types/bcryptjs-2.4.2.tgz#e3530eac9dd136bfdfb0e43df2c4c5ce1f77dfae"
-  integrity sha1-41MOrJ3RNr/fsOQ98sTFzh93364=
 
 "@types/body-parser@*":
   version "1.17.1"
@@ -1072,11 +1082,6 @@ bcrypt-pbkdf@^1.0.0:
   integrity sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
   dependencies:
     tweetnacl "^0.14.3"
-
-bcryptjs@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.npm.taobao.org/bcryptjs/download/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
-  integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
 
 big.js@^3.1.3:
   version "3.2.0"
@@ -1859,6 +1864,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.npm.taobao.org/crypto-js/download/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+  integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
 css-color-keywords@^1.0.0:
   version "1.0.0"

@@ -35,22 +35,26 @@ export class LoginOrRegister extends React.Component<Props, State> {
     }
   }
   registerUser = async (data: DouMiBlog.RegisterParam) => {
-    const result = await this.BlogServer.registerUser(data)
+    try {
+      const result = await this.BlogServer.registerUser(data)
 
-    if (result === '注册成功') {
-      this.setState({
-        reqSuccess: true
-      })
-      setTimeout(() => {
-        location.hash = '/blog/auth/login'
-      }, 2000)
-    } else if (result === '登录成功') {
-      this.setState({
-        reqSuccess: true
-      })
-      setTimeout(() => {
-        location.hash = '/blog/admin'
-      }, 2000)
+      if (result === '注册成功') {
+        this.setState({
+          reqSuccess: true
+        })
+        setTimeout(() => {
+          location.hash = '/blog/auth/login'
+        }, 2000)
+      } else if (result === '登录成功') {
+        this.setState({
+          reqSuccess: true
+        })
+        setTimeout(() => {
+          location.hash = '/blog/admin'
+        }, 2000)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
   render() {

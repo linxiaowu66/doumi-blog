@@ -1,6 +1,7 @@
 import { BlogServer } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
-import * as bcrypt from 'bcryptjs';
+import { PasswordEncoder, Anonymous } from '@malagu/security/lib/node';
+import { Autowired } from '@malagu/core';
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
 import { DouMiBlog } from '../interface/index.d';
 import { User } from './entity/user';
@@ -8,7 +9,10 @@ import { User } from './entity/user';
 @Rpc(BlogServer)
 export class BlogServerImpl implements BlogServer {
 
-  // @Transactional()
+  @Autowired(PasswordEncoder)
+  protected readonly passwordEncoder: PasswordEncoder
+
+  @Transactional()
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.HottestArticlItem[]> {
 
     // const repo = OrmContext.getMongoRepository(Article);
@@ -26,14 +30,14 @@ export class BlogServerImpl implements BlogServer {
           "slug": "You-formBiao-Dan-Lai-Shuo-Shuo-Qian-Hou-Tai-Shu-Ju-Zhi-Jian-De-Jiao-Hu-88"
       }]);
     }
+    @Anonymous()
     @Transactional()
     async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
       const repo = OrmContext.getRepository(User)
 
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(param.password, salt);
+      const pwd = await this.passwordEncoder.encode(param.password);
 
-      await repo.save({ ...param, password: hash});
+      await repo.save({ ...param, password: pwd });
       return Promise.resolve('注册成功');
     }
 }

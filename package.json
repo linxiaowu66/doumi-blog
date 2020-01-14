@@ -13,10 +13,11 @@
   ],
   "dependencies": {
     "@malagu/material-ui": "latest",
+    "@malagu/mvc": "^0.0.7",
     "@malagu/react": "latest",
     "@malagu/rpc": "latest",
+    "@malagu/security": "latest",
     "@malagu/typeorm": "latest",
-    "bcryptjs": "^2.4.3",
     "clsx": "^1.0.4",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
@@ -27,7 +28,6 @@
   },
   "devDependencies": {
     "@malagu/cli": "latest",
-    "@types/bcryptjs": "^2.4.2",
     "@types/react-dom": "^16.8.5",
     "@types/react-syntax-highlighter": "^11.0.4",
     "rimraf": "^2.6.3"
