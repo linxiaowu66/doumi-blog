@@ -1,7 +1,8 @@
 import { BlogServer ***REMOVED*** from '../common/blog-protocol';
 import { Rpc ***REMOVED*** from '@malagu/rpc';
+import * as bcrypt from 'bcryptjs';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { DouMiBlog ***REMOVED*** from '../interface';
+import { DouMiBlog ***REMOVED*** from '../interface/index.d';
 import { User ***REMOVED*** from './entity/user';
 
 @Rpc(BlogServer)
@@ -29,7 +30,10 @@ export class BlogServerImpl implements BlogServer {
     async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
       const repo = OrmContext.getRepository(User)
 
-      repo.save(param)
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(param.password, salt);
+
+      await repo.save({ ...param, password: hash***REMOVED***
       return Promise.resolve('注册成功');
   ***REMOVED***
 ***REMOVED***

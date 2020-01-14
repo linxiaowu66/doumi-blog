@@ -383,6 +383,11 @@
     "@testing-library/dom" "^6.11.0"
     "@types/testing-library__react" "^9.1.2"
 
+"@types/bcryptjs@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.npm.taobao.org/@types/bcryptjs/download/@types/bcryptjs-2.4.2.tgz#e3530eac9dd136bfdfb0e43df2c4c5ce1f77dfae"
+  integrity sha1-41MOrJ3RNr/fsOQ98sTFzh93364=
+
 "@types/body-parser@*":
   version "1.17.1"
   resolved "https://registry.npm.taobao.org/@types/body-parser/download/@types/body-parser-1.17.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fbody-parser%2Fdownload%2F%40types%2Fbody-parser-1.17.1.tgz#18fcf61768fb5c30ccc508c21d6fd2e8b3bf7897"
