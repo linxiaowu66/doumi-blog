@@ -5,4 +5,9 @@ export namespace DouMiBlog {
     slug: string
 ***REMOVED***
 
+  export interface RegisterParam {
+    email: string,
+    username: string,
+    password: string
+***REMOVED***
 ***REMOVED***

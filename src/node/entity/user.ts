@@ -8,7 +8,7 @@ export class User {
 
   @Column({
     type: "varchar",
-    length: 200,
+    length: 20,
     nullable: false
 ***REMOVED***)
   username: string;
