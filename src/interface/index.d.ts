@@ -10,4 +10,9 @@ export namespace DouMiBlog {
     username: string,
     password: string
   }
+
+  export interface LoginParam {
+    email: string,
+    password: string
+  }
 }

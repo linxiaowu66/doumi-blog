@@ -398,6 +398,13 @@
     "@testing-library/dom" "^6.11.0"
     "@types/testing-library__react" "^9.1.2"
 
+"@types/axios@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.npm.taobao.org/@types/axios/download/@types/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
+  integrity sha1-7CMA++fX3d1+udOr+HmZlkyvzkY=
+  dependencies:
+    axios "*"
+
 "@types/body-parser@*":
   version "1.17.1"
   resolved "https://registry.npm.taobao.org/@types/body-parser/download/@types/body-parser-1.17.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fbody-parser%2Fdownload%2F%40types%2Fbody-parser-1.17.1.tgz#18fcf61768fb5c30ccc508c21d6fd2e8b3bf7897"
@@ -536,6 +543,13 @@
   version "16.9.4"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz?cache=0&sync_timestamp=1573057763685&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
   integrity sha1-C1jfCaYJYdy3f2LU8YMkJ1E0IN8=
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-infinite-scroller@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/@types/react-infinite-scroller/download/@types/react-infinite-scroller-1.2.1.tgz#1cd747ef8f50d3c883e375c0491a906e5436fcb2"
+  integrity sha1-HNdH749Q08iD43XASRqQblQ2/LI=
   dependencies:
     "@types/react" "*"
 
@@ -1020,6 +1034,13 @@ aws4@^1.8.0:
   version "1.9.0"
   resolved "https://registry.npm.taobao.org/aws4/download/aws4-1.9.0.tgz?cache=0&sync_timestamp=1574807521525&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faws4%2Fdownload%2Faws4-1.9.0.tgz#24390e6ad61386b0a747265754d2a17219de862c"
   integrity sha1-JDkOatYThrCnRyZXVNKhchnehiw=
+
+axios@*, axios@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.1.tgz#8a6a04eed23dfe72747e1dd43c604b8f1677b5aa"
+  integrity sha1-imoE7tI9/nJ0fh3UPGBLjxZ3tao=
+  dependencies:
+    follow-redirects "1.5.10"
 
 "babel-plugin-styled-components@>= 1":
   version "1.10.6"
@@ -1969,6 +1990,13 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
+debug@=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
+  dependencies:
+    ms "2.0.0"
+
 debug@^3.0.0, debug@^3.1.1, debug@^3.2.5:
   version "3.2.6"
   resolved "https://registry.npm.taobao.org/debug/download/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
@@ -2707,6 +2735,13 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+follow-redirects@1.5.10:
+  version "1.5.10"
+  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  integrity sha1-e3qfmuov3/NnhqlP9kPtB/T/Xio=
+  dependencies:
+    debug "=3.1.0"
 
 follow-redirects@^1.0.0:
   version "1.9.0"
@@ -5150,7 +5185,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -5315,6 +5350,13 @@ react-hook-form@^4.4.8:
   version "4.4.8"
   resolved "https://registry.npm.taobao.org/react-hook-form/download/react-hook-form-4.4.8.tgz#fb228eea8d168362c8ee966fb91cb49b19bfa050"
   integrity sha1-+yKO6o0Wg2LI7pZvuRy0mxm/oFA=
+
+react-infinite-scroller@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.npm.taobao.org/react-infinite-scroller/download/react-infinite-scroller-1.2.4.tgz#f67eaec4940a4ce6417bebdd6e3433bfc38826e9"
+  integrity sha1-9n6uxJQKTOZBe+vdbjQzv8OIJuk=
+  dependencies:
+    prop-types "^15.5.8"
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.12.0"

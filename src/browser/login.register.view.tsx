@@ -1,5 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { View } from '@malagu/react/lib/browser';
 import { Fab } from '@material-ui/core';
@@ -34,6 +35,23 @@ export class LoginOrRegister extends React.Component<Props, State> {
       reqSuccess: false,
     }
   }
+  login = async (data: DouMiBlog.LoginParam) => {
+    try {
+      const res = await axios.post('/api/login', data);
+
+      if (res.data.status && res.data.data === '登录成功') {
+        this.setState({
+          reqSuccess: true
+        })
+        setTimeout(() => {
+          location.hash = '/blog/admin'
+        }, 2000)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
   registerUser = async (data: DouMiBlog.RegisterParam) => {
     try {
       const result = await this.BlogServer.registerUser(data)
@@ -44,13 +62,6 @@ export class LoginOrRegister extends React.Component<Props, State> {
         })
         setTimeout(() => {
           location.hash = '/blog/auth/login'
-        }, 2000)
-      } else if (result === '登录成功') {
-        this.setState({
-          reqSuccess: true
-        })
-        setTimeout(() => {
-          location.hash = '/blog/admin'
         }, 2000)
       }
     } catch (err) {
@@ -80,7 +91,12 @@ export class LoginOrRegister extends React.Component<Props, State> {
            })} onClick={() => this.setState({ showForm: true })}>
             <ArrowForward />
           </Fab>
-          <LoginRegForm type={pageType} visible={showForm} registerCb={this.registerUser} actionSuccess={reqSuccess} />
+          <LoginRegForm
+            type={pageType}
+            visible={showForm}
+            registerCb={this.registerUser}
+            loginCb={this.login}
+            actionSuccess={reqSuccess} />
           <div className={clsx({
             "success-tip": true,
             "active": reqSuccess

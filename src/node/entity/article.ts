@@ -22,6 +22,7 @@ export class Article {
       length: 200,
       nullable: false
     })
+    @Index({unique: true})
     title: string;
 
     // 博文主体，markdown格式

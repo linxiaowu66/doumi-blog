@@ -9,7 +9,7 @@ interface FormProps {
   visible: boolean,
   actionSuccess: boolean,
   registerCb: (param: {email: string, username: string, password: string}) => void
-  loginCb?: (param: {email: string, password: string}) => void
+  loginCb: (param: {email: string, password: string}) => void
 }
 
 const useStyles = makeStyles({
@@ -42,6 +42,8 @@ export default function LoginRegForm(props: FormProps) {
   const onSubmit = (data: any) => {
     if (type === 'register') {
       props.registerCb(data)
+    } else {
+      props.loginCb(data)
     }
   }
 
