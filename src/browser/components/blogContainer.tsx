@@ -2,7 +2,9 @@ import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
-import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud ***REMOVED*** from '@material-ui/icons'
+import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud, ExitToApp
+
+***REMOVED*** from '@material-ui/icons'
 import IconButton from '@material-ui/core/IconButton';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Divider from '@material-ui/core/Divider';
@@ -107,6 +109,12 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ContainerProps {
   children: React.ReactElement | React.ReactElement[];
   contentClass?: string;
+  navigatorList?: {
+    name: string;
+    icon: JSX.Element;
+    link: string;
+***REMOVED***[],
+  isLogin?: boolean
 ***REMOVED***
 
 const navigatorList = [{
@@ -184,12 +192,14 @@ export default function BlogContainer(props: ContainerProps) {
     setMobileOpen(!mobileOpen);
   ***REMOVED***
 
+  const navList = props.navigatorList ? props.navigatorList : navigatorList;
+
   const drawer = (
     <div>
       <div className={classes.toolbar***REMOVED*** />
       <Divider />
       <List>
-        {navigatorList.map((item) => (
+        {navList.map((item) => (
           <Link color="inherit" href={item.link***REMOVED*** key={item.name***REMOVED***>
             <ListItem button>
               <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
@@ -232,16 +242,31 @@ export default function BlogContainer(props: ContainerProps) {
             />
           </div>
           <div className={classes.grow***REMOVED*** />
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            // aria-controls={menuId***REMOVED***
-            aria-haspopup="true"
-            // onClick={handleProfileMenuOpen***REMOVED***
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          {
+            props.isLogin ? (
+              <IconButton
+                edge="end"
+                aria-label="logout"
+                // aria-controls={menuId***REMOVED***
+                aria-haspopup="true"
+                // onClick={handleProfileMenuOpen***REMOVED***
+                color="inherit"
+              >
+                <ExitToApp />
+              </IconButton>
+            ) : (
+              <IconButton
+                edge="end"
+                aria-label="login"
+                // aria-controls={menuId***REMOVED***
+                aria-haspopup="true"
+                // onClick={handleProfileMenuOpen***REMOVED***
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            )
+        ***REMOVED***
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer***REMOVED*** aria-label="blog-navigators">

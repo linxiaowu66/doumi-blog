@@ -7,6 +7,7 @@ import { DouMiBlog ***REMOVED*** from '../interface/index.d';
 import { User ***REMOVED*** from './entity/user';
 
 @Rpc(BlogServer)
+@Anonymous()
 export class BlogServerImpl implements BlogServer {
 
   @Autowired(PasswordEncoder)
@@ -30,7 +31,7 @@ export class BlogServerImpl implements BlogServer {
           "slug": "You-formBiao-Dan-Lai-Shuo-Shuo-Qian-Hou-Tai-Shu-Ju-Zhi-Jian-De-Jiao-Hu-88"
     ***REMOVED***]);
   ***REMOVED***
-    @Anonymous()
+
     @Transactional()
     async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
       const repo = OrmContext.getRepository(User)

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import { Fab ***REMOVED*** from '@material-ui/core';
@@ -34,6 +35,23 @@ export class LoginOrRegister extends React.Component<Props, State> {
       reqSuccess: false,
   ***REMOVED***
 ***REMOVED***
+  login = async (data: DouMiBlog.LoginParam) => {
+  ***REMOVED***
+      const res = await axios.post('/api/login', data);
+
+      if (res.data.status && res.data.data === '登录成功') {
+        this.setState({
+          reqSuccess: true
+      ***REMOVED***)
+        setTimeout(() => {
+          location.hash = '/blog/admin'
+      ***REMOVED***, 2000)
+    ***REMOVED***
+  ***REMOVED*** catch (err) {
+      console.log(err)
+  ***REMOVED***
+
+***REMOVED***
   registerUser = async (data: DouMiBlog.RegisterParam) => {
   ***REMOVED***
       const result = await this.BlogServer.registerUser(data)
@@ -44,13 +62,6 @@ export class LoginOrRegister extends React.Component<Props, State> {
       ***REMOVED***)
         setTimeout(() => {
           location.hash = '/blog/auth/login'
-      ***REMOVED***, 2000)
-    ***REMOVED*** else if (result === '登录成功') {
-        this.setState({
-          reqSuccess: true
-      ***REMOVED***)
-        setTimeout(() => {
-          location.hash = '/blog/admin'
       ***REMOVED***, 2000)
     ***REMOVED***
   ***REMOVED*** catch (err) {
@@ -80,7 +91,12 @@ export class LoginOrRegister extends React.Component<Props, State> {
          ***REMOVED***)***REMOVED*** onClick={() => this.setState({ showForm: true ***REMOVED***)***REMOVED***>
             <ArrowForward />
           </Fab>
-          <LoginRegForm type={pageType***REMOVED*** visible={showForm***REMOVED*** registerCb={this.registerUser***REMOVED*** actionSuccess={reqSuccess***REMOVED*** />
+          <LoginRegForm
+            type={pageType***REMOVED***
+            visible={showForm***REMOVED***
+            registerCb={this.registerUser***REMOVED***
+            loginCb={this.login***REMOVED***
+            actionSuccess={reqSuccess***REMOVED*** />
           <div className={clsx({
             "success-tip": true,
             "active": reqSuccess

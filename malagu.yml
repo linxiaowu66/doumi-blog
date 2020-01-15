@@ -23,10 +23,10 @@ backend:
         encodeHashAsBase64: true
       basic:
         realm: realm
-      loginPage: /blog/auth/login
+      loginPage: /#/blog/auth/login
       loginUrl: /api/login
       loginMethod: POST
-      loginSuccessUrl: /blog/admin
+      loginSuccessUrl: /#/blog/admin
       logoutUrl: /api/logout
       logoutMethod: POST
       logoutSuccessUrl: /blog/auth/login

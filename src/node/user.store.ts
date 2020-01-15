@@ -13,7 +13,7 @@ export class UserStoreImpl implements UserStore {
     async load(username: string): Promise<User> {
       const repo = OrmContext.getRepository(UserModel)
 
-      const user = await repo.findOne({ username ***REMOVED***)
+      const user = await repo.findOne({ email: username ***REMOVED***)
 
       if (!user) {
         throw new UsernameNotFoundError(`${username***REMOVED***不存在`);
