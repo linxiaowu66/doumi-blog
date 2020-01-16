@@ -16,7 +16,12 @@ export class blogAdminController {
     console.log(session['malagu:securityContext'].authentication.principal)
     const repo = OrmContext.getRepository(Article);
 
-    repo.find()
+    const result = await repo.find({
+      take: 20,
+      skip: currentPage, // think this needs to be page * limit
+  ***REMOVED***)
+
+    return { list: result, pageCount: 1, currentPage: 1***REMOVED***
 ***REMOVED***
 
   // 获取博客详情

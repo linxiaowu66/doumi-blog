@@ -12,14 +12,17 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/material-ui": "latest",
+    "@date-io/date-fns": "^1.3.13",
+    "@malagu/material-ui": "^0.0.8",
     "@malagu/mvc": "^0.0.7",
-    "@malagu/react": "latest",
-    "@malagu/rpc": "latest",
-    "@malagu/security": "latest",
-    "@malagu/typeorm": "latest",
+    "@malagu/react": "^0.0.8",
+    "@malagu/rpc": "^0.0.8",
+    "@malagu/security": "^0.0.8",
+    "@malagu/typeorm": "^0.0.8",
+    "@material-ui/pickers": "^3.2.8",
     "axios": "^0.19.1",
     "clsx": "^1.0.4",
+    "date-fns": "^2.9.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mongodb": "^3.4.1",
@@ -29,7 +32,7 @@
     "react-syntax-highlighter": "^12.2.1"
 ***REMOVED***,
   "devDependencies": {
-    "@malagu/cli": "latest",
+    "@malagu/cli": "^0.0.8",
     "@types/axios": "^0.14.0",
     "@types/react-dom": "^16.8.5",
     "@types/react-infinite-scroller": "^1.2.1",

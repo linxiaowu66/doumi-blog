@@ -6,7 +6,7 @@ import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import { Fab ***REMOVED*** from '@material-ui/core';
 import { ArrowForward, Done ***REMOVED*** from '@material-ui/icons';
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import './styles/login.less';
+import './styles/login.register.less';
 import LoginRegForm from './components/login&RegForm';
 
 interface Props {

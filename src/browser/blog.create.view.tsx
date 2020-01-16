@@ -1,17 +1,30 @@
 import * as React from 'react'
 import axios from 'axios';
-import * as InfiniteScroll from 'react-infinite-scroller';
+import * as ReactMarkdown from 'react-markdown';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import BlogContainer from './components/blogContainer';
-import { Create, List ***REMOVED*** from '@material-ui/icons'
+import { Create, List, Settings ***REMOVED*** from '@material-ui/icons'
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
-import BlogItemCard from './components/blogItemCard';
+import CodeBlock from './components/codeBlock';
+import BlogConfig from './components/blogSetting';
+
+import './styles/blog.admin.less';
 
 interface Prop {***REMOVED***
 interface State {
-  blogList: {title: string, archiveTime: string, category: string, tags: string[]***REMOVED***[],
-  pageCount: number,
-  currentPage: number,
-  blogContent: string
+  editMode: boolean,
+  blogContent: string,
+  blogTags: string[],
+  blogCategory: string,
+  blogStatus: 'draft' | 'published',
+  blogArchiveTime: string,
+  anchorEl: null | Element,
+  showSetting: boolean,
+  tags: string[], // 后端存储的当前所有标签
+  categories: string[] // 后端存储的当前所有分类
 ***REMOVED***
 
 const navigatorList = [{
@@ -24,16 +37,22 @@ const navigatorList = [{
   link: '#/blog/admin'
 ***REMOVED***]
 
-@View('/blog/admin/editor/:slug')
+@View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
   constructor(props: Prop) {
     super(props);
 
     this.state = {
-      blogList: [],
-      pageCount: 1,
-      currentPage: 1,
-      blogContent: ''
+      editMode: false,
+      blogContent: '',
+      blogTags: [],
+      blogCategory: '',
+      blogArchiveTime: '',
+      blogStatus: 'draft',
+      tags: [],
+      categories: [],
+      anchorEl: null,
+      showSetting: false,
   ***REMOVED***
 ***REMOVED***
   async componentWillMount() {
@@ -41,58 +60,86 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       const slug = (this.props as any).match.params.slug
 
       if (slug) {
-
+        this.setState({
+          editMode: true
+      ***REMOVED***)
+        await this.fetchBlogDetail(slug)
     ***REMOVED***
-      await this.fetchBlogList(this.state.currentPage)
   ***REMOVED*** catch (err) {
       console.log(err)
   ***REMOVED***
 ***REMOVED***
-  fetchBlogList = async (currentPage: number) => {
-    const result = await axios.get(`/api/blog/list?currentPage=${currentPage***REMOVED***`)
+  fetchBlogDetail = async (slug: string) => {
+    const result = await axios.get(`/api/blog/detail?slug=${slug***REMOVED***`)
 
     this.setState({
-      blogList: result.data.list,
-      pageCount: result.data.pageCount,
-      currentPage: result.data.currentPage
+      blogContent: result.data.content,
+      blogTags: result.data.tags,
+      blogArchiveTime: result.data.archiveTime,
+      blogCategory: result.data.category,
+      blogStatus: result.data.articleStatus
   ***REMOVED***)
 ***REMOVED***
-  loadMore = async () => {
-    const { currentPage ***REMOVED*** = this.state;
-
+  handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    this.setState({
+      blogContent: event.target.value
+    ***REMOVED***
   ***REMOVED***
-      await this.fetchBlogList(currentPage + 1)
-  ***REMOVED*** catch (err) {
-      console.log(err)
-  ***REMOVED***
+  handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    this.setState({
+      anchorEl: event.currentTarget
+  ***REMOVED***)
 ***REMOVED***
-  renderBlogItem = () => {
-    const { blogList ***REMOVED*** = this.state
-
-    return blogList.map(item => (
-      <BlogItemCard {...item***REMOVED*** />
-    ))
+  handleCloseMenu = () => {
+    this.setState({
+      anchorEl: null
+  ***REMOVED***)
 ***REMOVED***
   render() {
-    const { pageCount, currentPage ***REMOVED*** = this.state;
+    const { blogContent, anchorEl, showSetting ***REMOVED*** = this.state
     return(
-      <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin >
+      <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-editor-wrapper" >
+        <header className="blog-title">
+          <TextField
+            id="outlined-helperText"
+            label="文章标题"
+            type="text"
+            variant="outlined"
+            fullWidth
+          />
+          <Settings className="toggle-setting" onClick={() => this.setState({ showSetting: true ***REMOVED***)***REMOVED*** color="primary" />
+          <Button
+            className="toggle-menu"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={this.handleOpenMenu***REMOVED*** variant="contained" color="primary">
+            操作博文
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl***REMOVED***
+            keepMounted
+            open={Boolean(anchorEl)***REMOVED***
+            onClose={this.handleCloseMenu***REMOVED***
+          >
+            <MenuItem>保存草稿</MenuItem>
+            <MenuItem>发布博文</MenuItem>
+            <MenuItem>删除博文</MenuItem>
+          </Menu>
+        </header>
         <div className="blog-admin-container">
-          <section className="blog-list-container">
-            <InfiniteScroll
-                pageStart={0***REMOVED***
-                loadMore={this.loadMore***REMOVED***
-                hasMore={currentPage < pageCount***REMOVED***
-                loader={<div className="loader" key={0***REMOVED***>努力加载中 ...</div>***REMOVED***
-                useWindow={false***REMOVED***
-            >
-              {this.renderBlogItem()***REMOVED***
-            </InfiniteScroll>
+          <section className="blog-editor">
+            <textarea spellCheck='true' className='markdown-realtext' onChange={this.handleChange***REMOVED***>{blogContent***REMOVED***</textarea>
           </section>
-          <section className="blog-content">
-
+          <section className="blog-preview">
+            <ReactMarkdown
+              source={blogContent***REMOVED***
+              renderers={{ code: CodeBlock ***REMOVED******REMOVED***
+              className="blog-preview-text"
+            />
           </section>
         </div>
+        <BlogConfig isOpen={showSetting***REMOVED*** closeCb={() => this.setState({ showSetting: false ***REMOVED***)***REMOVED***/>
       </BlogContainer>
     )
 ***REMOVED***
