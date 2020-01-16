@@ -5,8 +5,7 @@ import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { View } from '@malagu/react/lib/browser';
 import { Fab } from '@material-ui/core';
 import { ArrowForward, Done } from '@material-ui/icons';
-import { BlogServer } from '../common/blog-protocol';
-import { DouMiBlog } from '../interface';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import './styles/login.less';
 import LoginRegForm from './components/login&RegForm';
 

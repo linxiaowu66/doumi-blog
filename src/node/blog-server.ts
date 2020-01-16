@@ -1,9 +1,9 @@
-import { BlogServer } from '../common/blog-protocol';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
 import { PasswordEncoder, Anonymous } from '@malagu/security/lib/node';
 import { Autowired } from '@malagu/core';
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
-import { DouMiBlog } from '../interface/index.d';
+// import { DouMiBlog } from '../interface/index.d';
 import { User } from './entity/user';
 
 @Rpc(BlogServer)

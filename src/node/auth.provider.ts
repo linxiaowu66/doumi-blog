@@ -18,7 +18,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     protected readonly userChecker: UserChecker;
 
     @Autowired(RequestMatcher)
-    protected readonly requestMatcher: RequestMatcher;
+    protected readonly requestMatcher: RequestMatcher
 
     priority = DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY;
 

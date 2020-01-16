@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { Container } from '@material-ui/core'
-import { BlogServer } from '../common/blog-protocol';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 // import Link from '@material-ui/core/Link';
 import { View } from '@malagu/react/lib/browser';
 import { DouMiIntroduction } from './components/doumiIntroduction';
 import DouMiLinks from './components/doumiLinks';
 import HottestArticles from './components/hottestArticles';
-import { DouMiBlog } from '../interface';
 import "./styles/index.less";
 import FootPrint from './components/footPrint';
 
