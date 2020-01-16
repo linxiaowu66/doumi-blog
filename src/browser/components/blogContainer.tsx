@@ -305,7 +305,9 @@ export default function BlogContainer(props: ContainerProps) {
           props.children
         }
         {/* <iframe src="//music.163.com/song?id=1363948882&userid=99607736&auto=1&height=60"></iframe> */}
-        <FootPrint />
+        {
+          props.isLogin ? null : <FootPrint />
+        }
       </main>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">

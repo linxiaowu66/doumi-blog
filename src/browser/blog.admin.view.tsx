@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
-import { Create, List } from '@material-ui/icons'
+import { Create, List, Label } from '@material-ui/icons'
 import { View } from '@malagu/react/lib/browser';
 import BlogItemCard from './components/blogItemCard';
 
@@ -17,14 +17,18 @@ interface State {
 const navigatorList = [{
   name: '新建博文',
   icon: <Create />,
-  link: '#/blog/admin/create'
+  link: '#/blog/admin/editor'
 }, {
   name: '博文列表',
   icon: <List />,
-  link: '#/blog/admin'
+  link: '#/blog/admin/index'
+}, {
+  name: '标签和分类管理',
+  icon: <Label />,
+  link: '#/blog/admin/management'
 }]
 
-@View('/blog/admin')
+@View('/blog/admin/index')
 export default class BlogAdmin extends React.Component<Prop, State> {
   constructor(props: Prop) {
     super(props);
