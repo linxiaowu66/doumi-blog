@@ -24,8 +24,8 @@ const navigatorList = [{
   link: '#/blog/admin'
 ***REMOVED***]
 
-@View('/blog/admin/create')
-export default class BlogAdmin extends React.Component<Prop, State> {
+@View('/blog/admin/editor/:slug')
+export default class BlogAdminEditor extends React.Component<Prop, State> {
   constructor(props: Prop) {
     super(props);
 
@@ -38,6 +38,11 @@ export default class BlogAdmin extends React.Component<Prop, State> {
 ***REMOVED***
   async componentWillMount() {
   ***REMOVED***
+      const slug = (this.props as any).match.params.slug
+
+      if (slug) {
+
+    ***REMOVED***
       await this.fetchBlogList(this.state.currentPage)
   ***REMOVED*** catch (err) {
       console.log(err)

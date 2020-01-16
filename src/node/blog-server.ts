@@ -1,9 +1,9 @@
-import { BlogServer ***REMOVED*** from '../common/blog-protocol';
+import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import { Rpc ***REMOVED*** from '@malagu/rpc';
 import { PasswordEncoder, Anonymous ***REMOVED*** from '@malagu/security/lib/node';
 import { Autowired ***REMOVED*** from '@malagu/core';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { DouMiBlog ***REMOVED*** from '../interface/index.d';
+// import { DouMiBlog ***REMOVED*** from '../interface/index.d';
 import { User ***REMOVED*** from './entity/user';
 
 @Rpc(BlogServer)
