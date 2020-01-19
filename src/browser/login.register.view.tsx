@@ -60,7 +60,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
           reqSuccess: true
         })
         setTimeout(() => {
-          location.hash = '/blog/auth/login'
+          (this.props as any).history.replace( '/blog/auth/login' )
         }, 2000)
       }
     } catch (err) {

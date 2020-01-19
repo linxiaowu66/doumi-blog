@@ -26,7 +26,7 @@ export class Article {
   title: string;
 
   // 博文主体，markdown格式
-  @Column('varchar')
+  @Column('longtext')
   content: string;
 
   // 博文链接
