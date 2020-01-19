@@ -1,6 +1,7 @@
 import * as React from 'react'
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
+import Snackbar from '@material-ui/core/Snackbar';
 import { BlogServer ***REMOVED*** from '../common/blog-protocol'
 import * as ReactMarkdown from 'react-markdown';
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +20,8 @@ interface ConfigProps { digest: string, illustration: string, tags: string[], ar
 interface Prop {***REMOVED***
 interface State {
   editMode: boolean,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
   blogContent: string,
   blogDigest: string,
   blogIllustration: string,
@@ -54,6 +57,8 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
 
     this.state = {
       editMode: false,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
       blogContent: '',
       blogDigest: '',
       blogTitle: '',
@@ -70,7 +75,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
 ***REMOVED***
   async componentWillMount() {
   ***REMOVED***
-      const slug = (this.props as any).match.params.slug
+      const { slug ***REMOVED*** = (this.props as any).location.query
 
       const [tagsList, catList] = await Promise.all([
         this.BlogServer.fetchTagsList(),
@@ -119,6 +124,13 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         illustration: blogIllustration,
         articleStatus: actionType
   ***REMOVED***)
+
+    if (result.data.status && result.data.data) {
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: result.data.data
+    ***REMOVED***)
+  ***REMOVED***
 ***REMOVED***
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({
@@ -146,7 +158,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
    ***REMOVED***)
 ***REMOVED***
   render() {
-    const { blogContent, anchorEl, showSetting, tags, categories ***REMOVED*** = this.state
+    const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state
     return(
       <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-editor-wrapper" >
         <header className="blog-title">
@@ -178,7 +190,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             <MenuItem>删除博文</MenuItem>
           </Menu>
         </header>
-        <div className="blog-admin-container">
+        <div className="blog-editor-container">
           <section className="blog-editor">
             <textarea spellCheck='true' className='markdown-realtext' onChange={this.handleChange***REMOVED***>{blogContent***REMOVED***</textarea>
           </section>
@@ -195,6 +207,20 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           closeCb={this.handleSaveConfig***REMOVED***
           tags={tags***REMOVED***
           cats={categories***REMOVED***
+          initData={{
+            tags: blogTags,
+            cat: string,
+            archiveTime: string,
+            illustration: string,
+            digest: string,
+        ***REMOVED******REMOVED***
+        />
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' ***REMOVED******REMOVED***
+          key={'top,right'***REMOVED***
+          open={isOpenSnackbar***REMOVED***
+          onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
+          message={snackbarMsg***REMOVED***
         />
       </BlogContainer>
     )
