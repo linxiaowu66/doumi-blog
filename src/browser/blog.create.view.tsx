@@ -1,5 +1,7 @@
 import * as React from 'react'
 import axios from 'axios';
+import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
+import { BlogServer } from '../common/blog-protocol'
 import * as ReactMarkdown from 'react-markdown';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -13,10 +15,14 @@ import BlogConfig from './components/blogSetting';
 
 import './styles/blog.admin.less';
 
+interface ConfigProps { digest: string, illustration: string, tags: string[], archiveTime: string, category: string}
 interface Prop {}
 interface State {
   editMode: boolean,
   blogContent: string,
+  blogDigest: string,
+  blogIllustration: string,
+  blogTitle: string,
   blogTags: string[],
   blogCategory: string,
   blogStatus: 'draft' | 'published',
@@ -39,12 +45,19 @@ const navigatorList = [{
 
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
+
+  @Autorpc(BlogServer)
+  protected BlogServer!: BlogServer;
+
   constructor(props: Prop) {
     super(props);
 
     this.state = {
       editMode: false,
       blogContent: '',
+      blogDigest: '',
+      blogTitle: '',
+      blogIllustration: '',
       blogTags: [],
       blogCategory: '',
       blogArchiveTime: '',
@@ -58,6 +71,16 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   async componentWillMount() {
     try {
       const slug = (this.props as any).match.params.slug
+
+      const [tagsList, catList] = await Promise.all([
+        this.BlogServer.fetchTagsList(),
+        this.BlogServer.fetchCatsList()
+      ])
+
+      this.setState({
+        tags: tagsList.map(item => item.name),
+        categories: catList.map(item => item.name),
+      })
 
       if (slug) {
         this.setState({
@@ -74,10 +97,27 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
 
     this.setState({
       blogContent: result.data.content,
+      blogTitle: result.data.title,
+      blogIllustration: result.data.illustration,
+      blogDigest: result.data.digest,
       blogTags: result.data.tags,
       blogArchiveTime: result.data.archiveTime,
       blogCategory: result.data.category,
       blogStatus: result.data.articleStatus
+    })
+  }
+  handleSubmit = async(actionType: string) => {
+    const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration } = this.state;
+
+    const result = await axios.post('/api/blog', {
+        title,
+        content,
+        archiveTime,
+        tags: blogTags,
+        category: blogCategory,
+        digest: blogDigest,
+        illustration: blogIllustration,
+        articleStatus: actionType
     })
   }
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -95,8 +135,18 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       anchorEl: null
     })
   }
+  handleSaveConfig = (data: ConfigProps) => {
+    this.setState({
+      blogArchiveTime: data.archiveTime,
+      showSetting: false,
+      blogIllustration: data.illustration,
+      blogCategory: data.category,
+      blogTags: data.tags,
+      blogDigest: data.digest
+     })
+  }
   render() {
-    const { blogContent, anchorEl, showSetting } = this.state
+    const { blogContent, anchorEl, showSetting, tags, categories } = this.state
     return(
       <BlogContainer navigatorList={navigatorList} isLogin contentClass="blog-editor-wrapper" >
         <header className="blog-title">
@@ -106,6 +156,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             type="text"
             variant="outlined"
             fullWidth
+            onChange={e => this.setState({ blogTitle: e.target.value})}
           />
           <Settings className="toggle-setting" onClick={() => this.setState({ showSetting: true })} color="primary" />
           <Button
@@ -113,7 +164,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={this.handleOpenMenu} variant="contained" color="primary">
-            操作博文
+            博文操作
           </Button>
           <Menu
             id="simple-menu"
@@ -122,8 +173,8 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             open={Boolean(anchorEl)}
             onClose={this.handleCloseMenu}
           >
-            <MenuItem>保存草稿</MenuItem>
-            <MenuItem>发布博文</MenuItem>
+            <MenuItem onClick={() => this.handleSubmit('draft')}>保存草稿</MenuItem>
+            <MenuItem onClick={() => this.handleSubmit('published')}>发布博文</MenuItem>
             <MenuItem>删除博文</MenuItem>
           </Menu>
         </header>
@@ -139,7 +190,12 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             />
           </section>
         </div>
-        <BlogConfig isOpen={showSetting} closeCb={() => this.setState({ showSetting: false })}/>
+        <BlogConfig
+          isOpen={showSetting}
+          closeCb={this.handleSaveConfig}
+          tags={tags}
+          cats={categories}
+        />
       </BlogContainer>
     )
   }

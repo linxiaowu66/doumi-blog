@@ -1,5 +1,6 @@
 import * as React from 'react';
 import 'date-fns';
+import format from 'date-fns/format';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
@@ -21,16 +22,27 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '10px 15px',
     },
     formControl: {
-      margin: theme.spacing(1),
+      margin: `${theme.spacing(2.5)}px 0px `,
       minWidth: 120,
       maxWidth: 300,
     }
   })
 );
 
+interface ConfigProps { digest: string, illustration: string, tags: string[], archiveTime: string, category: string}
+
 interface BlogConfigProps {
   isOpen: boolean,
-  closeCb: () => void
+  closeCb: (data: ConfigProps) => void,
+  tags: string[],
+  cats: string[],
+  initData?: {
+    tags: string[],
+    cat: string,
+    archiveTime: string,
+    illustration: string,
+    digest: string,
+  },
 }
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -43,23 +55,10 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Nodejs',
-  'CSS',
-  'v8',
-  'libuv',
-  '读后感',
-  'javascript',
-  '算法',
-  '理财',
-  '架构',
-  '测试',
-];
-
-function getStyles(name: string, personName: string[], theme: Theme) {
+function getStyles(name: string, arr: string[], theme: Theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      arr.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -68,23 +67,35 @@ function getStyles(name: string, personName: string[], theme: Theme) {
 export default function BlogConfig(props: BlogConfigProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+  const [selectedDate, setSelectedDate] = React.useState<Date>(
     new Date(),
   );
+  const [illustration, setIllustration] = React.useState<string>('');
+  const [digest, setDigest] = React.useState<string>('');
 
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [selectTags, setTags] = React.useState<string[]>([]);
+  const [selectCat, setCategory] = React.useState<string>('');
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = (date: Date) => {
     setSelectedDate(date);
   };
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setPersonName(event.target.value as string[]);
+  const handleTagsChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setTags(event.target.value as string[]);
+  };
+  const handleCatChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setCategory(event.target.value as string);
   };
 
   return (
     <div>
-      <Drawer anchor="right" open={props.isOpen} onClose={props.closeCb}>
+      <Drawer anchor="right" open={props.isOpen} onClose={() => props.closeCb({
+        archiveTime: format(selectedDate, 'yyyy-MM-dd'),
+        illustration,
+        tags: selectTags,
+        category: selectCat,
+        digest
+      })}>
         <div className={classes.root}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -102,20 +113,38 @@ export default function BlogConfig(props: BlogConfigProps) {
               fullWidth
             />
           </MuiPickersUtilsProvider>
-          <TextField id="outlined-basic" label="首页图片" variant="outlined" fullWidth />
+          <TextField className={classes.formControl} id="outlined-basic" label="首页图片" variant="outlined" fullWidth onChange={e => setIllustration(e.target.value)} />
+          <TextField className={classes.formControl} multiline id="outlined-basic" label="文章摘要" variant="outlined" rows={10} fullWidth onChange={e => setDigest(e.target.value)} />
           <FormControl className={classes.formControl} fullWidth>
-            <InputLabel id="demo-mutiple-name-label">标签</InputLabel>
+            <InputLabel id="demo-mutiple-name-label">文章标签</InputLabel>
             <Select
               labelId="demo-mutiple-name-label"
               id="demo-mutiple-name"
               multiple
-              value={personName}
-              onChange={handleChange}
+              value={selectTags}
+              onChange={handleTagsChange}
               input={<Input />}
               MenuProps={MenuProps}
             >
-              {names.map(name => (
-                <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+              {props.tags.map(name => (
+                <MenuItem key={name} value={name} style={getStyles(name, props.tags, theme)}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl} fullWidth>
+            <InputLabel id="demo-mutiple-name-label">文章分类</InputLabel>
+            <Select
+              labelId="demo-mutiple-name-label"
+              id="demo-mutiple-name"
+              value={selectCat}
+              onChange={handleCatChange}
+              input={<Input />}
+              MenuProps={MenuProps}
+            >
+              {props.cats.map(name => (
+                <MenuItem key={name} value={name} style={getStyles(name, props.cats, theme)}>
                   {name}
                 </MenuItem>
               ))}

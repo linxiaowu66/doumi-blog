@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Article } from './article';
 
 @Entity()
@@ -11,9 +11,14 @@ export class Category {
     length: 200,
     nullable: false
   })
-  @Index({unique: true})
   name: string;
 
-  @OneToMany(type => Article, article => article.author)
+  @OneToMany(type => Article, article => article.category)
   articles: Article[]
+
+  @CreateDateColumn()
+  public readonly createdAt!: Date;
+
+  @UpdateDateColumn()
+  public readonly updatedAt!: Date;
 }

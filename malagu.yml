@@ -26,7 +26,7 @@ backend:
       loginPage: /#/blog/auth/login
       loginUrl: /api/login
       loginMethod: POST
-      loginSuccessUrl: /#/blog/admin
+      loginSuccessUrl: /#/blog/admin/index
       logoutUrl: /api/logout
       logoutMethod: POST
       logoutSuccessUrl: /blog/auth/login

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn  } from 'typeorm';
 import { Article } from './article';
 
 @Entity()
@@ -11,7 +11,6 @@ export class Tag {
     length: 200,
     nullable: false
   })
-  @Index({unique: true})
   name: string;
 
   // 一个tag可以包含多篇文章，所以这里是多对多的关系
@@ -22,4 +21,10 @@ export class Tag {
     inverseJoinColumn: { name: 'aid' },
   })
   articles: Article[];
+
+  @CreateDateColumn()
+  public readonly createdAt!: Date;
+
+  @UpdateDateColumn()
+  public readonly updatedAt!: Date;
 }

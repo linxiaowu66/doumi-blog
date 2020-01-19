@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, CreateDateColumn, UpdateDateColumn  } from 'typeorm';
 import { Article } from './article';
 
 @Entity()
@@ -25,9 +25,14 @@ export class User {
     length: 200,
     nullable: false
   })
-  @Index({unique: true})
   email: string;
 
   @OneToMany(type => Article, article => article.author)
-  articles: Article[]
+  articles: Article[];
+
+  @CreateDateColumn()
+  public readonly createdAt!: Date;
+
+  @UpdateDateColumn()
+  public readonly updatedAt!: Date;
 }

@@ -43,7 +43,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
           reqSuccess: true
         })
         setTimeout(() => {
-          location.hash = '/blog/admin'
+          location.hash = '/blog/admin/index'
         }, 2000)
       }
     } catch (err) {
