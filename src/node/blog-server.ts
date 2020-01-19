@@ -5,6 +5,8 @@ import { Autowired ***REMOVED*** from '@malagu/core';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
 // import { DouMiBlog ***REMOVED*** from '../interface/index.d';
 import { User ***REMOVED*** from './entity/user';
+import { Tag ***REMOVED*** from './entity/tag';
+import { Category ***REMOVED*** from './entity/category';
 
 @Rpc(BlogServer)
 @Anonymous()
@@ -30,6 +32,35 @@ export class BlogServerImpl implements BlogServer {
           "archiveTime": "2016-09-24 19:57",
           "slug": "You-formBiao-Dan-Lai-Shuo-Shuo-Qian-Hou-Tai-Shu-Ju-Zhi-Jian-De-Jiao-Hu-88"
     ***REMOVED***]);
+  ***REMOVED***
+
+    @Transactional()
+    async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
+      const repo = OrmContext.getRepository(Tag);
+
+      const result = await repo.find({ relations: ["articles"]***REMOVED***
+
+      const finalRes = result.map(item => ({
+        id: item.id,
+        name: item.name,
+        articlesCount: item.articles.length
+    ***REMOVED***))
+
+      return Promise.resolve(finalRes)
+  ***REMOVED***
+    @Transactional()
+    async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
+      const repo = OrmContext.getRepository(Category);
+
+      const result = await repo.find({ relations: ["articles"]***REMOVED***
+
+      const finalRes = result.map(item => ({
+        id: item.id,
+        name: item.name,
+        articlesCount: item.articles.length
+    ***REMOVED***))
+
+      return Promise.resolve(finalRes)
   ***REMOVED***
 
     @Transactional()
