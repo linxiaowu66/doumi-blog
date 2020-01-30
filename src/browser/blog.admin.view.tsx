@@ -46,20 +46,26 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   ***REMOVED***
 ***REMOVED***
   fetchBlogList = async (currentPage: number) => {
+    const { blogList ***REMOVED*** = this.state
     const result = await axios.get(`/api/blog/list?currentPage=${currentPage***REMOVED***`)
 
     this.setState({
-      blogList: result.data.list,
+      blogList: [...blogList, ...result.data.list],
       pageCount: result.data.pageCount,
       currentPage: result.data.currentPage,
-      blogContent: result.data.list.length > 0 ? result.data.list[0].content : ''
   ***REMOVED***)
+
+    if (result.data.list.length > 0 && +currentPage === 1) {
+      this.setState({
+        blogContent: result.data.list[0].content
+    ***REMOVED***)
+  ***REMOVED***
 ***REMOVED***
   loadMore = async () => {
     const { currentPage ***REMOVED*** = this.state;
 
   ***REMOVED***
-      await this.fetchBlogList(currentPage + 1)
+      await this.fetchBlogList(+currentPage + 1)
   ***REMOVED*** catch (err) {
       console.log(err)
   ***REMOVED***
@@ -73,7 +79,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
         {...item***REMOVED***
         onClick={(content) => this.setState({ blogContent: content ***REMOVED***)***REMOVED***
         onEdit={(slug) => {
-          location.href=`/blog/admin/editor?slug=${slug***REMOVED***`
+          location.hash=`/blog/admin/editor?slug=${slug***REMOVED***`
       ***REMOVED******REMOVED***
       />
     ))

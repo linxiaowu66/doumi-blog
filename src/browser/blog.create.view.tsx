@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as query from 'query-string';
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -30,6 +31,7 @@ interface State {
   blogCategory: string,
   blogStatus: 'draft' | 'published',
   blogArchiveTime: string,
+  slug: string,
   anchorEl: null | Element,
   showSetting: boolean,
   tags: string[], // 后端存储的当前所有标签
@@ -39,11 +41,11 @@ interface State {
 const navigatorList = [{
   name: '新建博文',
   icon: <Create />,
-  link: '#/blog/admin/create'
+  link: '#/blog/admin/editor'
 ***REMOVED***, {
   name: '博文列表',
   icon: <List />,
-  link: '#/blog/admin'
+  link: '#/blog/admin/index'
 ***REMOVED***]
 
 @View('/blog/admin/editor')
@@ -66,6 +68,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       blogTags: [],
       blogCategory: '',
       blogArchiveTime: '',
+      slug: '',
       blogStatus: 'draft',
       tags: [],
       categories: [],
@@ -75,7 +78,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
 ***REMOVED***
   async componentWillMount() {
   ***REMOVED***
-      const { slug ***REMOVED*** = (this.props as any).location.query
+      const { slug ***REMOVED*** = query.parse((this.props as any).location.search)
 
       const [tagsList, catList] = await Promise.all([
         this.BlogServer.fetchTagsList(),
@@ -89,9 +92,10 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
 
       if (slug) {
         this.setState({
-          editMode: true
+          editMode: true,
+          slug: slug as string
       ***REMOVED***)
-        await this.fetchBlogDetail(slug)
+        await this.fetchBlogDetail(slug as  string)
     ***REMOVED***
   ***REMOVED*** catch (err) {
       console.log(err)
@@ -112,18 +116,19 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   ***REMOVED***)
 ***REMOVED***
   handleSubmit = async(actionType: string) => {
-    const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration ***REMOVED*** = this.state;
+    const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration, editMode ***REMOVED*** = this.state;
 
-    const result = await axios.post('/api/blog', {
-        title,
-        content,
-        archiveTime,
-        tags: blogTags,
-        category: blogCategory,
-        digest: blogDigest,
-        illustration: blogIllustration,
-        articleStatus: actionType
-  ***REMOVED***)
+    const postBody = {
+      title,
+      content,
+      archiveTime,
+      tags: blogTags,
+      category: blogCategory,
+      digest: blogDigest,
+      illustration: blogIllustration,
+      articleStatus: actionType
+  ***REMOVED***
+    const result = editMode ? await axios.put('/api/blog', { ...postBody, slug: this.state.slug ***REMOVED***): await axios.post('/api/blog', postBody)
 
     if (result.data.status && result.data.data) {
       this.setState({
@@ -168,6 +173,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             type="text"
             variant="outlined"
             fullWidth
+            value={this.state.blogTitle***REMOVED***
             onChange={e => this.setState({ blogTitle: e.target.value***REMOVED***)***REMOVED***
           />
           <Settings className="toggle-setting" onClick={() => this.setState({ showSetting: true ***REMOVED***)***REMOVED*** color="primary" />
@@ -192,7 +198,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         </header>
         <div className="blog-editor-container">
           <section className="blog-editor">
-            <textarea spellCheck='true' className='markdown-realtext' onChange={this.handleChange***REMOVED***>{blogContent***REMOVED***</textarea>
+            <textarea spellCheck='true' value={this.state.blogContent***REMOVED*** className='markdown-realtext' onChange={this.handleChange***REMOVED***>{blogContent***REMOVED***</textarea>
           </section>
           <section className="blog-preview">
             <ReactMarkdown
@@ -208,11 +214,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           tags={tags***REMOVED***
           cats={categories***REMOVED***
           initData={{
-            tags: blogTags,
-            cat: string,
-            archiveTime: string,
-            illustration: string,
-            digest: string,
+            tags: this.state.blogTags,
+            cat: this.state.blogCategory,
+            archiveTime: this.state.blogArchiveTime,
+            illustration: this.state.blogIllustration,
+            digest: this.state.blogDigest,
         ***REMOVED******REMOVED***
         />
         <Snackbar
