@@ -46,20 +46,26 @@ export default class BlogAdmin extends React.Component<Prop, State> {
     }
   }
   fetchBlogList = async (currentPage: number) => {
+    const { blogList } = this.state
     const result = await axios.get(`/api/blog/list?currentPage=${currentPage}`)
 
     this.setState({
-      blogList: result.data.list,
+      blogList: [...blogList, ...result.data.list],
       pageCount: result.data.pageCount,
       currentPage: result.data.currentPage,
-      blogContent: result.data.list.length > 0 ? result.data.list[0].content : ''
     })
+
+    if (result.data.list.length > 0 && +currentPage === 1) {
+      this.setState({
+        blogContent: result.data.list[0].content
+      })
+    }
   }
   loadMore = async () => {
     const { currentPage } = this.state;
 
     try {
-      await this.fetchBlogList(currentPage + 1)
+      await this.fetchBlogList(+currentPage + 1)
     } catch (err) {
       console.log(err)
     }
@@ -73,7 +79,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
         {...item}
         onClick={(content) => this.setState({ blogContent: content })}
         onEdit={(slug) => {
-          location.href=`/blog/admin/editor?slug=${slug}`
+          location.hash=`/blog/admin/editor?slug=${slug}`
         }}
       />
     ))

@@ -68,13 +68,31 @@ export default function BlogConfig(props: BlogConfigProps) {
   const classes = useStyles();
   const theme = useTheme();
   const [selectedDate, setSelectedDate] = React.useState<Date>(
-    new Date(),
+     new Date()
   );
   const [illustration, setIllustration] = React.useState<string>('');
   const [digest, setDigest] = React.useState<string>('');
 
   const [selectTags, setTags] = React.useState<string[]>([]);
   const [selectCat, setCategory] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (props.initData?.archiveTime) {
+      setSelectedDate(new Date(props.initData?.archiveTime))
+    }
+    if (props.initData?.illustration) {
+      setIllustration(props.initData?.illustration)
+    }
+    if (props.initData?.digest) {
+      setDigest(props.initData?.digest)
+    }
+    if (props.initData?.tags) {
+      setTags(props.initData?.tags)
+    }
+    if (props.initData?.cat) {
+      setCategory(props.initData?.cat)
+    }
+  }, [props])
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);
@@ -113,8 +131,26 @@ export default function BlogConfig(props: BlogConfigProps) {
               fullWidth
             />
           </MuiPickersUtilsProvider>
-          <TextField className={classes.formControl} id="outlined-basic" label="首页图片" variant="outlined" fullWidth onChange={e => setIllustration(e.target.value)} />
-          <TextField className={classes.formControl} multiline id="outlined-basic" label="文章摘要" variant="outlined" rows={10} fullWidth onChange={e => setDigest(e.target.value)} />
+          <TextField
+            className={classes.formControl}
+            id="outlined-basic"
+            label="首页图片"
+            variant="outlined"
+            value={illustration}
+            fullWidth
+            onChange={e => setIllustration(e.target.value)}
+          />
+          <TextField
+            className={classes.formControl}
+            multiline
+            id="outlined-basic"
+            label="文章摘要"
+            variant="outlined"
+            rows={10}
+            value={digest}
+            fullWidth
+            onChange={e => setDigest(e.target.value)}
+          />
           <FormControl className={classes.formControl} fullWidth>
             <InputLabel id="demo-mutiple-name-label">文章标签</InputLabel>
             <Select

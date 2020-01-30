@@ -38,11 +38,12 @@ export class blogAdminController {
       category: item.category.name,
       archiveTime: item.archiveTime.archiveTime,
       author: item.author.username
-    })), pageCount: Math.floor(allArticles.length / 5), currentPage}
+    })), pageCount: Math.ceil(allArticles.length / 5), currentPage}
   }
 
   // 获取博客详情
   @Transactional()
+  // @Catch()
   @Get('blog/detail')
   async fetchBlogDetail(
     @Query('slug') slug: string
@@ -130,6 +131,8 @@ export class blogAdminController {
     instance.archiveTime = archiveTime
 
     await archiveRepo.save(instance);
+
+    console.log('>>>>>', loadTags)
 
     const articleIns = new Article()
     articleIns.archiveTime = instance;
