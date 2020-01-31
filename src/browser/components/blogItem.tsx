@@ -21,7 +21,7 @@ interface BlogItemProps {
   mediaUrl: string,
   digest: string,
   title: string,
-  archiveTime: string
+  // archiveTime: string
 ***REMOVED***
 
 export default function BlogItem(props: BlogItemProps) {
@@ -33,7 +33,7 @@ export default function BlogItem(props: BlogItemProps) {
         <CardMedia
           className={classes.media***REMOVED***
           image={props.mediaUrl***REMOVED***
-          title="Contemplative Reptile"
+          title="blog illustration"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -49,7 +49,7 @@ export default function BlogItem(props: BlogItemProps) {
           分享
         </Button>
         <Button size="small" color="primary">
-          阅读更多
+          阅读全文
         </Button>
       </CardActions>
     </Card>

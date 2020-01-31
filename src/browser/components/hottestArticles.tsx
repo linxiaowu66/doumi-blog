@@ -2,34 +2,7 @@ import * as React from 'react'
 import { Container***REMOVED*** from '@material-ui/core';
 import Typography from './Typography'
 import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
-
-const hotterArticles =  [
-      {
-          "title": "由form表单来说说前后台数据之间的交互",
-          "archiveTime": "2016-09-24 19:57",
-          "slug": "You-formBiao-Dan-Lai-Shuo-Shuo-Qian-Hou-Tai-Shu-Ju-Zhi-Jian-De-Jiao-Hu-88"
-    ***REMOVED***,
-      {
-          "title": "如何让你的github项目更加高大上",
-          "archiveTime": "2016-10-13 22:36",
-          "slug": "Ru-He-Rang-Ni-De-githubXiang-Mu-Geng-Jia-Gao-Da-Shang-20"
-    ***REMOVED***,
-      {
-          "title": "阿里云Ubuntu搭建NodeJs环境",
-          "archiveTime": "2016-08-10 16:15",
-          "slug": "A-Li-Yun-UbuntuDa-Jian-NodeJsHuan-Jing-75"
-    ***REMOVED***,
-      {
-          "title": "babel-preset-env升级迁移完全指北",
-          "archiveTime": "2017-11-13 21:09",
-          "slug": "babel-preset-envSheng-Ji-Qian-Yi-Wan-Quan-Zhi-Bei-70"
-    ***REMOVED***,
-      {
-          "title": "Nodejs下微信网页开发教程(一)",
-          "archiveTime": "2017-01-10 19:57",
-          "slug": "NodejsXia-Wei-Xin-Wang-Ye-Kai-Fa-Jiao-Cheng-Yi-27"
-    ***REMOVED***
-  ]
+import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
 
 const useStyles = makeStyles({
   root: {
@@ -91,7 +64,7 @@ const useStyles = makeStyles({
 ***REMOVED***
 ***REMOVED***)
 
-function HottestArticles() {
+function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] ***REMOVED***) {
   const classes = useStyles();
   return (
     <Container className={classes.root***REMOVED*** component="section">
@@ -100,7 +73,7 @@ function HottestArticles() {
       </Typography>
       <ul>
         {
-          hotterArticles.map(item => (
+          props.list.map(item => (
             <li key={item.slug***REMOVED***>
               <a href='#/blog/{{post.slug***REMOVED******REMOVED***'><span>{item.title***REMOVED***</span><time>{item.archiveTime***REMOVED***</time></a>
             </li>
