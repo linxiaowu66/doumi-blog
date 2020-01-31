@@ -1,37 +1,49 @@
 export const BlogServer = Symbol('BlogServer');
 
 export interface BlogServer {
-    fetchHottestArticles(limit: number): Promise<DouMiBlog.HottestArticlItem[]>;
+    fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
+    fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
+    fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
     registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 }
 
 export namespace DouMiBlog {
-  export interface HottestArticlItem {
+  export interface ArticleList {
+    currentPage: number,
+    list: ArticleBrief[],
+    pageCount: number,
+  }
+  export interface ArticleBrief {
     title: string,
     archiveTime: string,
-    slug: string
+    slug: string,
+    illustration: string,
+    digest: string
   }
 
-  export interface TagsItem {
+  interface PropertyItem {
     id: number,
     name: string,
     articlesCount: number
   }
 
-  export interface CategoryItem {
-    id: number,
-    name: string,
-    articlesCount: number
+  export interface TagsItem extends PropertyItem {}
+
+  export interface CategoryItem extends PropertyItem {}
+
+  export interface ArchiveItem extends PropertyItem {
+    archiveTime: string;
   }
 
-  export interface ArticleItem {
+  export interface ArticleDetail {
     id?: number;
     title: string;
     content: string;
     slug: string;
     digest: string;
+    pv: number;
     articleStatus: 'draft' | 'published';
     illustration: string;
     author: string;

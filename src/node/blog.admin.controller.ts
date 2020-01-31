@@ -18,7 +18,6 @@ export class blogAdminController {
   @Get('/blog/list')
   async fetchBlogList(
     @Query('currentPage') currentPage:number,
-    @Session() session: any,
     ) {
     const repo = OrmContext.getRepository(Article);
 
@@ -68,7 +67,7 @@ export class blogAdminController {
   @Post('/blog')
   @Transactional()
   async createBlog(
-    @Body() article: DouMiBlog.ArticleItem,
+    @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
     const { tags, category, archiveTime } = article;
@@ -111,7 +110,7 @@ export class blogAdminController {
   @Put('/blog')
   @Transactional()
   async updateBlog(
-    @Body() article: DouMiBlog.ArticleItem,
+    @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
     const { tags, category, archiveTime } = article;

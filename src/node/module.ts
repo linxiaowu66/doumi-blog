@@ -1,6 +1,6 @@
 import './blog-server';
 import './auth.provider';
-// import './logout.success.handler';
+import './services';
 import './user.store';
 import './blog.admin.controller';
 import { autoBindEntities } from '@malagu/typeorm';

@@ -1,23 +1,86 @@
 import * as React from 'react'
+import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
+import { BlogServer } from '../common/blog-protocol';
+import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import { View } from '@malagu/react/lib/browser';
 import BlogItem from './components/blogItem';
 
 interface Prop {}
 interface State {
-    response: string
+  blogList: {title: string, digest: string, slug: string, illustration: string}[],
+  pageCount: number,
+  currentPage: number,
 }
 
 @View('/blog')
 export default class BlogList extends React.Component<Prop, State> {
+
+  @Autorpc(BlogServer)
+  protected BlogServer!: BlogServer;
+
+  constructor(prop: Prop) {
+    super(prop);
+    this.state = {
+      blogList: [],
+      pageCount: 1,
+      currentPage: 1,
+    };
+  }
+
+  async componentWillMount() {
+    try {
+      await this.fetchBlogList(this.state.currentPage)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  fetchBlogList = async (currentPage: number) => {
+    const { blogList } = this.state
+    const result = await this.BlogServer.fetchArticleList(currentPage)
+
+    this.setState({
+      blogList: [...blogList, ...result.list],
+      pageCount: result.pageCount,
+      currentPage: result.currentPage,
+    })
+  }
+  loadMore = async () => {
+    const { currentPage } = this.state;
+
+    try {
+      await this.fetchBlogList(+currentPage + 1)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  renderBlogItem = () => {
+    const { blogList } = this.state
+
+    return blogList.map(item => (
+      <BlogItem
+        key={item.slug}
+        title={item.title}
+        mediaUrl={item.illustration}
+        digest={item.digest} />
+    ))
+  }
+
   render() {
+    const { currentPage, pageCount } = this.state;
     return(
-      <BlogContainer>
-        <BlogItem
-          title='还没搞懂nodejs的http服务器？看这一篇就够了'
-          mediaUrl='https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/nodejs/node_server9.png?x-oss-process=style/addWaterMarkBottom'
-          archiveTime='2019-12-02 10:47'
-          digest='全文可以是多少待会撒大声地十点十几等级结算巴巴爸爸爸爸吧' />
+      <BlogContainer contentClass="blog-list-wrapper">
+        <section className="blog-list-container">
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.loadMore}
+            hasMore={currentPage < pageCount}
+            loader={<div className="loader" key={0}>努力加载中 ...</div>}
+            useWindow={false}
+          >
+            {this.renderBlogItem()}
+          </InfiniteScroll>
+          </section>
       </BlogContainer>
     )
   }

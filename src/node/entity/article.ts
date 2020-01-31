@@ -25,6 +25,10 @@ export class Article {
   @Index({unique: true})
   title: string;
 
+  // 文章阅读量
+  @Column('bigint')
+  pv: number;
+
   // 博文主体，markdown格式
   @Column('longtext')
   content: string;

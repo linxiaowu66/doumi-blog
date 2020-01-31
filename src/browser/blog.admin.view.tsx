@@ -55,6 +55,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
     const result = await axios.get(`/api/blog/list?currentPage=${currentPage}`)
 
     if (result.data && !result.data.list) {
+      // 目前无法判断出是没登录造成的错误还是服务器错误
       location.hash = '#/blog/auth/login'
       // this.setState({
       //   isOpenSnackbar: true,
