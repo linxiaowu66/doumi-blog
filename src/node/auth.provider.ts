@@ -25,25 +25,34 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     async authenticate(): Promise<Authentication> {
         const username = this.doGetValue(this.options.usernameKey);
         const password = this.doGetValue(this.options.passwordKey);
-        if (!password || !username) {
-            throw new BadCredentialsError('Bad credentials');
-        }
-        const user = await this.userStore.load(username);
-        await this.userChecker.check(user);
-        if (!await this.passwordEncoder.matches(password, user.password)) {
-            throw new BadCredentialsError('Bad credentials');
-        }
-
-        Context.getResponse().statusCode = 200;
-        Context.getResponse().body = JSON.stringify({status: 1, data: '登录成功'});
-
-        return {
+        let user
+        try {
+          if (!password || !username) {
+              throw new BadCredentialsError('Bad credentials');
+          }
+          user = await this.userStore.load(username);
+          await this.userChecker.check(user);
+          if (!await this.passwordEncoder.matches(password, user.password)) {
+              throw new BadCredentialsError('Bad credentials');
+          }
+          Context.getResponse().statusCode = 200;
+          Context.getResponse().body = JSON.stringify({status: 1, data: '登录成功'});
+          return {
             principal: user,
             credentials: '',
             policies: user.policies,
             authenticated: true
-        };
-
+          };
+        } catch (err) {
+          Context.getResponse().statusCode = 200;
+          Context.getResponse().body = JSON.stringify({status: 0, error: '用户名或密码不正确'});
+          return {
+            principal: null,
+            credentials: '',
+            policies: [],
+            authenticated: false
+          };
+        }
     }
 
     protected doGetValue(key: string): string {

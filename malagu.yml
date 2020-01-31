@@ -29,4 +29,4 @@ backend:
       loginSuccessUrl: /#/blog/admin/index
       logoutUrl: /api/logout
       logoutMethod: POST
-      logoutSuccessUrl: /blog/auth/login
+      logoutSuccessUrl: /#/blog/auth/login

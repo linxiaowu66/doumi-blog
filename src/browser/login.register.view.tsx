@@ -1,5 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { View } from '@malagu/react/lib/browser';
@@ -16,7 +17,9 @@ interface Props {
 interface State {
   showForm: boolean;
   pageType: 'login' | 'register',
-  reqSuccess: boolean
+  reqSuccess: boolean,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 }
 
 @View('/blog/auth/:type')
@@ -32,6 +35,8 @@ export class LoginOrRegister extends React.Component<Props, State> {
       showForm: false,
       pageType: (this.props as any).match.params.type,
       reqSuccess: false,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
     }
   }
   login = async (data: DouMiBlog.LoginParam) => {
@@ -45,6 +50,11 @@ export class LoginOrRegister extends React.Component<Props, State> {
         setTimeout(() => {
           location.hash = '/blog/admin/index'
         }, 2000)
+      } else if (!res.data.status){
+        this.setState({
+          isOpenSnackbar: true,
+          snackbarMsg: res.data.error
+        })
       }
     } catch (err) {
       console.log(err)
@@ -68,7 +78,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
     }
   }
   render() {
-    const { showForm, pageType, reqSuccess } = this.state;
+    const { showForm, pageType, reqSuccess, isOpenSnackbar, snackbarMsg } = this.state;
     return (
     <div className='login-container'>
       <div className='login-wrapper'>
@@ -101,6 +111,13 @@ export class LoginOrRegister extends React.Component<Props, State> {
             "active": reqSuccess
           })}><span>{pageType === 'register' ? '注册成功' : '登录成功'}</span><Done /></div>
         </section>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          key={'top,right'}
+          open={isOpenSnackbar}
+          onClose={() => this.setState({ isOpenSnackbar: false })}
+          message={snackbarMsg}
+        />
       </div>
     </div>
     )
