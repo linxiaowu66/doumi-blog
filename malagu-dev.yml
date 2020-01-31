@@ -1,3 +1,6 @@
+malagu:
+  webpack:
+    devtool: 'source-map'
 backend:
   malagu:
     typeorm:

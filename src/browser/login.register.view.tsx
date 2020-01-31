@@ -1,5 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
@@ -16,7 +17,9 @@ interface Props {
 interface State {
   showForm: boolean;
   pageType: 'login' | 'register',
-  reqSuccess: boolean
+  reqSuccess: boolean,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 ***REMOVED***
 
 @View('/blog/auth/:type')
@@ -32,6 +35,8 @@ export class LoginOrRegister extends React.Component<Props, State> {
       showForm: false,
       pageType: (this.props as any).match.params.type,
       reqSuccess: false,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
   ***REMOVED***
 ***REMOVED***
   login = async (data: DouMiBlog.LoginParam) => {
@@ -45,6 +50,11 @@ export class LoginOrRegister extends React.Component<Props, State> {
         setTimeout(() => {
           location.hash = '/blog/admin/index'
       ***REMOVED***, 2000)
+    ***REMOVED*** else if (!res.data.status){
+        this.setState({
+          isOpenSnackbar: true,
+          snackbarMsg: res.data.error
+      ***REMOVED***)
     ***REMOVED***
   ***REMOVED*** catch (err) {
       console.log(err)
@@ -68,7 +78,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
   ***REMOVED***
 ***REMOVED***
   render() {
-    const { showForm, pageType, reqSuccess ***REMOVED*** = this.state;
+    const { showForm, pageType, reqSuccess, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return (
     <div className='login-container'>
       <div className='login-wrapper'>
@@ -101,6 +111,13 @@ export class LoginOrRegister extends React.Component<Props, State> {
             "active": reqSuccess
         ***REMOVED***)***REMOVED***><span>{pageType === 'register' ? '注册成功' : '登录成功'***REMOVED***</span><Done /></div>
         </section>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
+          key={'top,right'***REMOVED***
+          open={isOpenSnackbar***REMOVED***
+          onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
+          message={snackbarMsg***REMOVED***
+        />
       </div>
     </div>
     )

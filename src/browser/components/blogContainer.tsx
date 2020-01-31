@@ -1,5 +1,6 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud, ExitToApp
@@ -192,6 +193,16 @@ export default function BlogContainer(props: ContainerProps) {
     setMobileOpen(!mobileOpen);
   ***REMOVED***
 
+  const handleLogin = () => {
+    location.hash = '#/blog/auth/login';
+***REMOVED***
+
+  const handleLogout = async () => {
+    await axios.post('/api/logout');
+
+    location.hash = '#/blog/auth/login';
+***REMOVED***
+
   const navList = props.navigatorList ? props.navigatorList : navigatorList;
 
   const drawer = (
@@ -249,7 +260,7 @@ export default function BlogContainer(props: ContainerProps) {
                 aria-label="logout"
                 // aria-controls={menuId***REMOVED***
                 aria-haspopup="true"
-                // onClick={handleProfileMenuOpen***REMOVED***
+                onClick={handleLogout***REMOVED***
                 color="inherit"
               >
                 <ExitToApp />
@@ -260,7 +271,7 @@ export default function BlogContainer(props: ContainerProps) {
                 aria-label="login"
                 // aria-controls={menuId***REMOVED***
                 aria-haspopup="true"
-                // onClick={handleProfileMenuOpen***REMOVED***
+                onClick={handleLogin***REMOVED***
                 color="inherit"
               >
                 <AccountCircle />

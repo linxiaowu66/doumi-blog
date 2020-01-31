@@ -1,6 +1,7 @@
 import * as React from 'react'
 import axios from 'axios';
 import * as InfiniteScroll from 'react-infinite-scroller';
+import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
 import * as ReactMarkdown from 'react-markdown';
 import CodeBlock from './components/codeBlock';
@@ -13,7 +14,9 @@ interface State {
   blogList: {title: string, archiveTime: string, category: string, tags: string[], slug: string, content: string***REMOVED***[],
   pageCount: number,
   currentPage: number,
-  blogContent: string
+  blogContent: string,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 ***REMOVED***
 
 const navigatorList = [{
@@ -35,6 +38,8 @@ export default class BlogAdmin extends React.Component<Prop, State> {
       blogList: [],
       pageCount: 1,
       currentPage: 1,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
       blogContent: ''
   ***REMOVED***
 ***REMOVED***
@@ -48,6 +53,15 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   fetchBlogList = async (currentPage: number) => {
     const { blogList ***REMOVED*** = this.state
     const result = await axios.get(`/api/blog/list?currentPage=${currentPage***REMOVED***`)
+
+    if (result.data && !result.data.list) {
+      location.hash = '#/blog/auth/login'
+      // this.setState({
+      //   isOpenSnackbar: true,
+      //   snackbarMsg: '获取博文列表失败，请稍后重试'
+      // ***REMOVED***)
+      return
+  ***REMOVED***
 
     this.setState({
       blogList: [...blogList, ...result.data.list],
@@ -85,7 +99,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
     ))
 ***REMOVED***
   render() {
-    const { pageCount, currentPage, blogContent ***REMOVED*** = this.state;
+    const { pageCount, currentPage, blogContent, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return(
       <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-admin-container">
         <div className="blog-admin-wrapper">
@@ -108,6 +122,13 @@ export default class BlogAdmin extends React.Component<Prop, State> {
             />
           </section>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
+          key={'top,right'***REMOVED***
+          open={isOpenSnackbar***REMOVED***
+          onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
+          message={snackbarMsg***REMOVED***
+        />
       </BlogContainer>
     )
 ***REMOVED***

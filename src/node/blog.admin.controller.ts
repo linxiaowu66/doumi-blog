@@ -20,7 +20,6 @@ export class blogAdminController {
     @Query('currentPage') currentPage:number,
     @Session() session: any,
     ) {
-    console.log(session['malagu:securityContext'].authentication.principal)
     const repo = OrmContext.getRepository(Article);
 
     const [list, allArticles] = await Promise.all([repo.find({
@@ -131,8 +130,6 @@ export class blogAdminController {
     instance.archiveTime = archiveTime
 
     await archiveRepo.save(instance);
-
-    console.log('>>>>>', loadTags)
 
     const articleIns = new Article()
     articleIns.archiveTime = instance;

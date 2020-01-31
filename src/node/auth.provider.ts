@@ -25,25 +25,34 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     async authenticate(): Promise<Authentication> {
         const username = this.doGetValue(this.options.usernameKey);
         const password = this.doGetValue(this.options.passwordKey);
-        if (!password || !username) {
-            throw new BadCredentialsError('Bad credentials');
+        let user
       ***REMOVED***
-        const user = await this.userStore.load(username);
-        await this.userChecker.check(user);
-        if (!await this.passwordEncoder.matches(password, user.password)) {
-            throw new BadCredentialsError('Bad credentials');
-      ***REMOVED***
-
-        Context.getResponse().statusCode = 200;
-        Context.getResponse().body = JSON.stringify({status: 1, data: '登录成功'***REMOVED***
-
-        return {
+          if (!password || !username) {
+              throw new BadCredentialsError('Bad credentials');
+        ***REMOVED***
+          user = await this.userStore.load(username);
+          await this.userChecker.check(user);
+          if (!await this.passwordEncoder.matches(password, user.password)) {
+              throw new BadCredentialsError('Bad credentials');
+        ***REMOVED***
+          Context.getResponse().statusCode = 200;
+          Context.getResponse().body = JSON.stringify({status: 1, data: '登录成功'***REMOVED***
+          return {
             principal: user,
             credentials: '',
             policies: user.policies,
             authenticated: true
-        ***REMOVED***
-
+          ***REMOVED***
+      ***REMOVED*** catch (err) {
+          Context.getResponse().statusCode = 200;
+          Context.getResponse().body = JSON.stringify({status: 0, error: '用户名或密码不正确'***REMOVED***
+          return {
+            principal: null,
+            credentials: '',
+            policies: [],
+            authenticated: false
+          ***REMOVED***
+      ***REMOVED***
   ***REMOVED***
 
     protected doGetValue(key: string): string {
