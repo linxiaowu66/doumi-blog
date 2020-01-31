@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
+    margin: 5
 ***REMOVED***,
   media: {
     height: 140,
@@ -21,11 +22,16 @@ interface BlogItemProps {
   mediaUrl: string,
   digest: string,
   title: string,
+  slug: string,
   // archiveTime: string
 ***REMOVED***
 
 export default function BlogItem(props: BlogItemProps) {
   const classes = useStyles();
+
+  const handleJumpToDetail = () => {
+    location.hash=`#/blog/detail/${props.slug***REMOVED***`
+***REMOVED***
 
   return (
     <Card className={classes.card***REMOVED***>
@@ -48,7 +54,7 @@ export default function BlogItem(props: BlogItemProps) {
         <Button size="small" color="primary">
           分享
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleJumpToDetail***REMOVED***>
           阅读全文
         </Button>
       </CardActions>

@@ -3,6 +3,7 @@ export const BlogServer = Symbol('BlogServer');
 export interface BlogServer {
     fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
     fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList>;
+    fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
     fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;

@@ -98,6 +98,7 @@ export class blogAdminController {
     articleIns.illustration = article.illustration;
     articleIns.title = article.title;
     articleIns.author = loadUser[0];
+    articleIns.pv = 0;
 
     const repo = OrmContext.getRepository(Article);
 

@@ -30,4 +30,23 @@ export class BlogService {
       author: item.author.username
   ***REMOVED***)), pageCount: Math.ceil(allArticles.length / (pageSize ? pageSize : PAGE_SIZE)), currentPage***REMOVED***
 ***REMOVED***
+
+  @Transactional()
+  async fetchArticleDetail(slug: string) {
+    const repo = OrmContext.getRepository(Article);
+
+    const result = await repo.findOne({ slug ***REMOVED***, { relations: ['tags', 'archiveTime', 'category', 'author'] ***REMOVED***)
+
+    if (!result) {
+      throw new Error('找不到对应文章')
+  ***REMOVED***
+
+    return {
+      ...result,
+      tags: result.tags.map(it => it.name),
+      category: result.category.name,
+      archiveTime: result.archiveTime.archiveTime,
+      author: result.author.username
+  ***REMOVED***
+***REMOVED***
 ***REMOVED***

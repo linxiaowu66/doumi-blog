@@ -5,10 +5,18 @@ export class Reader {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   articleSlug: string;
 
-  @Column('string')
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+***REMOVED***)
   date: string; // 存储每一篇文章阅读的时间
 
   @Column('simple-array')

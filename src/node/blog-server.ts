@@ -1,5 +1,4 @@
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import pick from 'lodash.pick';
 import { Rpc ***REMOVED*** from '@malagu/rpc';
 import { PasswordEncoder, Anonymous ***REMOVED*** from '@malagu/security/lib/node';
 import { Autowired ***REMOVED*** from '@malagu/core';
@@ -9,6 +8,8 @@ import { User ***REMOVED*** from './entity/user';
 import { Tag ***REMOVED*** from './entity/tag';
 import { Category ***REMOVED*** from './entity/category';
 import { Archive ***REMOVED*** from './entity/archive';
+
+const pick = require('lodash.pick');
 
 @Rpc(BlogServer)
 @Anonymous()
@@ -26,7 +27,7 @@ export class BlogServerImpl implements BlogServer {
         pv: 'DESC'
     ***REMOVED***)
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest']))
+      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']))
 
       return Promise.resolve(result)
   ***REMOVED***
@@ -34,9 +35,15 @@ export class BlogServerImpl implements BlogServer {
     async fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList> {
       const result = await this.blogService.fetchArticleList(currentPage)
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest']))
+      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
 
       return Promise.resolve(result)
+  ***REMOVED***
+
+    async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
+      const result = await this.blogService.fetchArticleDetail(slug)
+
+      return Promise.resolve(result);
   ***REMOVED***
 
     @Transactional()

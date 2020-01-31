@@ -6,6 +6,8 @@ import BlogContainer from './components/blogContainer';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogItem from './components/blogItem';
 
+import './styles/blog.list.less';
+
 interface Prop {***REMOVED***
 interface State {
   blogList: {title: string, digest: string, slug: string, illustration: string***REMOVED***[],
@@ -62,6 +64,7 @@ export default class BlogList extends React.Component<Prop, State> {
         key={item.slug***REMOVED***
         title={item.title***REMOVED***
         mediaUrl={item.illustration***REMOVED***
+        slug={item.slug***REMOVED***
         digest={item.digest***REMOVED*** />
     ))
 ***REMOVED***
