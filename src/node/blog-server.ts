@@ -1,5 +1,4 @@
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
-import pick from 'lodash.pick';
 import { Rpc } from '@malagu/rpc';
 import { PasswordEncoder, Anonymous } from '@malagu/security/lib/node';
 import { Autowired } from '@malagu/core';
@@ -9,6 +8,8 @@ import { User } from './entity/user';
 import { Tag } from './entity/tag';
 import { Category } from './entity/category';
 import { Archive } from './entity/archive';
+
+const pick = require('lodash.pick');
 
 @Rpc(BlogServer)
 @Anonymous()
@@ -26,7 +27,7 @@ export class BlogServerImpl implements BlogServer {
         pv: 'DESC'
       })
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest']))
+      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']))
 
       return Promise.resolve(result)
     }
@@ -34,9 +35,15 @@ export class BlogServerImpl implements BlogServer {
     async fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList> {
       const result = await this.blogService.fetchArticleList(currentPage)
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest']))
+      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
 
       return Promise.resolve(result)
+    }
+
+    async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
+      const result = await this.blogService.fetchArticleDetail(slug)
+
+      return Promise.resolve(result);
     }
 
     @Transactional()

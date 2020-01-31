@@ -1,0 +1,15 @@
+.blog-list-wrapper{
+  display: flex;
+  flex-direction: column;
+  .blog-list-container{
+    flex-shrink: 0;
+    flex-grow: 1;
+    overflow: scroll;
+    // height: 100vh;
+    // .no-scrollbar();
+    & > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
