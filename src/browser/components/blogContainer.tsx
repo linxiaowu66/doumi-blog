@@ -125,15 +125,15 @@ const navigatorList = [{
 }, {
   name: '分类',
   icon: <Category />,
-  link: '#/blog/category'
+  link: '#/blog/list/category'
 }, {
   name: '归档',
   icon: <Archive />,
-  link: '#/blog/archive'
+  link: '#/blog/list/archive'
 }, {
   name: '标签',
   icon: <Bookmark />,
-  link: '#/blog/tags'
+  link: '#/blog/list/tags'
 }, {
   name: '关于豆米',
   icon: <PersonPin />,

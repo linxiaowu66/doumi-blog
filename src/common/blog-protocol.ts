@@ -5,8 +5,11 @@ export interface BlogServer {
     fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList>;
     fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
+    fetchTagsList(queryTag: string): Promise<DouMiBlog.ArticleList>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
+    fetchCatsList(queryCat: string): Promise<DouMiBlog.ArticleList>;
     fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
+    fetchArchsList(queryArch: string): Promise<DouMiBlog.ArticleList>;
     registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 }
 

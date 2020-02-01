@@ -23,81 +23,108 @@ export class BlogServerImpl implements BlogServer {
 
   @Transactional()
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
-      const result = await this.blogService.fetchArticleList(1, limit, {
-        pv: 'DESC'
-      })
+    const result = await this.blogService.fetchArticleList(1, limit, {
+      pv: 'DESC'
+    })
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']))
+    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']))
 
-      return Promise.resolve(result)
+    return Promise.resolve(result)
+  }
+
+  async fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList> {
+    const result = await this.blogService.fetchArticleList(currentPage)
+
+    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
+
+    return Promise.resolve(result)
+  }
+
+  async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
+    const result = await this.blogService.fetchArticleDetail(slug)
+
+    return Promise.resolve(result);
+  }
+
+  @Transactional()
+  async fetchTagsList(queryTag?: string): Promise<DouMiBlog.TagsItem[] | DouMiBlog.ArticleList> {
+    const repo = OrmContext.getRepository(Tag);
+
+    const query = queryTag ? {
+      where: { name: queryTag },
+      relations: ["articles"]
+    } : {
+      relations: ["articles"]
     }
 
-    async fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList> {
-      const result = await this.blogService.fetchArticleList(currentPage)
+    const result = await repo.find(query);
 
-      result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
+    const finalRes = result.map(item => ({
+      id: item.id,
+      name: item.name,
+      articlesCount: item.articles.length
+    }))
 
-      return Promise.resolve(result)
+    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
+
+    return Promise.resolve(queryTag ? {list, currentPage: 1, pageCount: 1} : finalRes)
+  }
+  @Transactional()
+  async fetchCatsList(queryCat?: string): Promise<DouMiBlog.ArticleList | DouMiBlog.CategoryItem[]> {
+    const repo = OrmContext.getRepository(Category);
+
+    const query = queryCat ? {
+      where: { name: queryCat },
+      relations: ["articles"]
+    } : {
+      relations: ["articles"]
     }
+    const result = await repo.find(query);
 
-    async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
-      const result = await this.blogService.fetchArticleDetail(slug)
+    const finalRes = result.map(item => ({
+      id: item.id,
+      name: item.name,
+      articlesCount: item.articles.length
+    }))
 
-      return Promise.resolve(result);
+    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
+
+    return Promise.resolve(queryCat ? {list, currentPage: 1, pageCount: 1} : finalRes)
+  }
+
+  @Transactional()
+  async fetchArchsList(queryArch?: string): Promise<DouMiBlog.ArchiveItem[] | DouMiBlog.ArticleList> {
+    const repo = OrmContext.getRepository(Archive);
+
+    const query = queryArch ? {
+      where: { name: queryArch },
+      relations: ["articles"]
+    } : {
+      relations: ["articles"]
     }
+    const result = await repo.find(query);
 
-    @Transactional()
-    async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
-      const repo = OrmContext.getRepository(Tag);
+    // TODO: 这里做分页能实现吗？
 
-      const result = await repo.find({ relations: ["articles"]});
+    const finalRes = result.map(item => ({
+      id: item.id,
+      archiveTime: item.archiveTime,
+      name: '', // fix lint error
+      articlesCount: item.articles.length
+    }))
 
-      const finalRes = result.map(item => ({
-        id: item.id,
-        name: item.name,
-        articlesCount: item.articles.length
-      }))
+    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
 
-      return Promise.resolve(finalRes)
-    }
-    @Transactional()
-    async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
-      const repo = OrmContext.getRepository(Category);
+    return Promise.resolve(queryArch ? {list, currentPage: 1, pageCount: 1} : finalRes)
+  }
 
-      const result = await repo.find({ relations: ["articles"]});
+  @Transactional()
+  async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
+    const repo = OrmContext.getRepository(User)
 
-      const finalRes = result.map(item => ({
-        id: item.id,
-        name: item.name,
-        articlesCount: item.articles.length
-      }))
+    const pwd = await this.passwordEncoder.encode(param.password);
 
-      return Promise.resolve(finalRes)
-    }
-
-    @Transactional()
-    async fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]> {
-      const repo = OrmContext.getRepository(Archive);
-
-      const result = await repo.find({ relations: ["articles"]});
-
-      const finalRes = result.map(item => ({
-        id: item.id,
-        archiveTime: item.archiveTime,
-        name: '', // fix lint error
-        articlesCount: item.articles.length
-      }))
-
-      return Promise.resolve(finalRes)
-    }
-
-    @Transactional()
-    async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
-      const repo = OrmContext.getRepository(User)
-
-      const pwd = await this.passwordEncoder.encode(param.password);
-
-      await repo.save({ ...param, password: pwd });
-      return Promise.resolve('注册成功');
-    }
+    await repo.save({ ...param, password: pwd });
+    return Promise.resolve('注册成功');
+  }
 }
