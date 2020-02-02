@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as query from 'query-string';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer } from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
@@ -15,7 +16,7 @@ interface State {
   currentPage: number,
 }
 
-@View('/blog')
+@View('/blog/list')
 export default class BlogList extends React.Component<Prop, State> {
 
   @Autorpc(BlogServer)
@@ -38,8 +39,19 @@ export default class BlogList extends React.Component<Prop, State> {
     }
   }
   fetchBlogList = async (currentPage: number) => {
+    const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search)
+    let queryCondition = {}
+    if (queryTag) {
+      queryCondition = { ...queryCondition, queryTag }
+    }
+    if (queryArch) {
+      queryCondition = { ...queryCondition, queryArch }
+    }
+    if (queryCat) {
+      queryCondition = { ...queryCondition, queryCat }
+    }
     const { blogList } = this.state
-    const result = await this.BlogServer.fetchArticleList(currentPage)
+    const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
 
     this.setState({
       blogList: [...blogList, ...result.list],

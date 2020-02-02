@@ -2,14 +2,11 @@ export const BlogServer = Symbol('BlogServer');
 
 export interface BlogServer {
     fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
-    fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList>;
+    fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList>;
     fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
-    fetchTagsList(queryTag: string): Promise<DouMiBlog.ArticleList>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
-    fetchCatsList(queryCat: string): Promise<DouMiBlog.ArticleList>;
     fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
-    fetchArchsList(queryArch: string): Promise<DouMiBlog.ArticleList>;
     registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 }
 
@@ -56,6 +53,11 @@ export namespace DouMiBlog {
     category: string;
   }
 
+  export interface queryCondition {
+    queryTag?: number,
+    queryCat?: number,
+    queryArch?: number,
+  }
   export interface RegisterParam {
     email: string,
     username: string,
