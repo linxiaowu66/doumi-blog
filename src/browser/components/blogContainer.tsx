@@ -125,15 +125,15 @@ const navigatorList = [{
 ***REMOVED***, {
   name: '分类',
   icon: <Category />,
-  link: '#/blog/list/category'
+  link: '#/blog/aggregation/category'
 ***REMOVED***, {
   name: '归档',
   icon: <Archive />,
-  link: '#/blog/list/archive'
+  link: '#/blog/aggregation/archive'
 ***REMOVED***, {
   name: '标签',
   icon: <Bookmark />,
-  link: '#/blog/list/tags'
+  link: '#/blog/aggregation/tags'
 ***REMOVED***, {
   name: '关于豆米',
   icon: <PersonPin />,

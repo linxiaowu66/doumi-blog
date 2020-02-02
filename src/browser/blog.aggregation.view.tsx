@@ -12,7 +12,7 @@ import IconBreadcrumbs from './components/breadcrumbs';
 
 interface Prop {***REMOVED***
 interface State {
-  type: string,
+  type: EAggregationType,
   response: (DouMiBlog.CategoryItem | DouMiBlog.TagsItem | DouMiBlog.ArchiveItem)[]
 ***REMOVED***
 
@@ -48,7 +48,7 @@ enum EAggregationType {
   archive = 'archive'
 ***REMOVED***
 
-@View('/blog/list/:aggregationType')
+@View('/blog/aggregation/:type')
 export default class BlogAggregation extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
@@ -63,14 +63,14 @@ export default class BlogAggregation extends React.Component<Prop, State> {
     super(props);
 
     this.state = {
-      type: 'category',
+      type: 'category' as EAggregationType.category,
       response: []
   ***REMOVED***
 ***REMOVED***
 
   async componentWillMount() {
   ***REMOVED***
-      const type = (this.props as any).match.params.aggregationType as EAggregationType
+      const type = (this.props as any).match.params.type as EAggregationType
 
       const method = this.typeMapToMethod[type];
 
@@ -88,6 +88,11 @@ export default class BlogAggregation extends React.Component<Prop, State> {
   render() {
     const { type, response ***REMOVED*** = this.state;
     const info = typeMeans[type]
+    const type2Query = {
+      category: 'queryCat',
+      tags: 'queryTag',
+      archive: 'queryArch'
+  ***REMOVED***
     return (
       <BlogContainer>
         <IconBreadcrumbs position={info.means***REMOVED*** icon={info.icon***REMOVED*** />
@@ -97,7 +102,9 @@ export default class BlogAggregation extends React.Component<Prop, State> {
               const label = item.name || (item as DouMiBlog.ArchiveItem).archiveTime;
               const initial = label.substring(0, 1)
               return (<StyledBadge key={idx***REMOVED*** badgeContent={item.articlesCount***REMOVED*** color="secondary">
-                <Chip avatar={<Avatar>{initial***REMOVED***</Avatar>***REMOVED*** color="primary" label={label***REMOVED*** />
+                <Chip avatar={<Avatar>{initial***REMOVED***</Avatar>***REMOVED*** color="primary" label={label***REMOVED*** onClick={() => {
+                  location.hash = `#/blog/list?${type2Query[type]***REMOVED***=${item.id***REMOVED***`
+              ***REMOVED******REMOVED***/>
               </StyledBadge>)
           ***REMOVED***)
         ***REMOVED***

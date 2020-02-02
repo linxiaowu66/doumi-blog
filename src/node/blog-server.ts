@@ -32,8 +32,8 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(result)
 ***REMOVED***
 
-  async fetchArticleList(currentPage: number): Promise<DouMiBlog.ArticleList> {
-    const result = await this.blogService.fetchArticleList(currentPage)
+  async fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList> {
+    const result = await this.blogService.fetchArticleList(currentPage, 5, null, condition)
 
     result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
 
@@ -47,17 +47,10 @@ export class BlogServerImpl implements BlogServer {
 ***REMOVED***
 
   @Transactional()
-  async fetchTagsList(queryTag?: string): Promise<DouMiBlog.TagsItem[] | DouMiBlog.ArticleList> {
+  async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
     const repo = OrmContext.getRepository(Tag);
 
-    const query = queryTag ? {
-      where: { name: queryTag ***REMOVED***,
-      relations: ["articles"]
-  ***REMOVED*** : {
-      relations: ["articles"]
-  ***REMOVED***
-
-    const result = await repo.find(query);
+    const result = await repo.find({ relations: ["articles"]***REMOVED***
 
     const finalRes = result.map(item => ({
       id: item.id,
@@ -65,21 +58,13 @@ export class BlogServerImpl implements BlogServer {
       articlesCount: item.articles.length
   ***REMOVED***))
 
-    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
-
-    return Promise.resolve(queryTag ? {list, currentPage: 1, pageCount: 1***REMOVED*** : finalRes)
+    return Promise.resolve(finalRes)
 ***REMOVED***
   @Transactional()
-  async fetchCatsList(queryCat?: string): Promise<DouMiBlog.ArticleList | DouMiBlog.CategoryItem[]> {
+  async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
     const repo = OrmContext.getRepository(Category);
 
-    const query = queryCat ? {
-      where: { name: queryCat ***REMOVED***,
-      relations: ["articles"]
-  ***REMOVED*** : {
-      relations: ["articles"]
-  ***REMOVED***
-    const result = await repo.find(query);
+    const result = await repo.find({ relations: ["articles"]***REMOVED***
 
     const finalRes = result.map(item => ({
       id: item.id,
@@ -87,24 +72,14 @@ export class BlogServerImpl implements BlogServer {
       articlesCount: item.articles.length
   ***REMOVED***))
 
-    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
-
-    return Promise.resolve(queryCat ? {list, currentPage: 1, pageCount: 1***REMOVED*** : finalRes)
+    return Promise.resolve(finalRes)
 ***REMOVED***
 
   @Transactional()
-  async fetchArchsList(queryArch?: string): Promise<DouMiBlog.ArchiveItem[] | DouMiBlog.ArticleList> {
+  async fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]> {
     const repo = OrmContext.getRepository(Archive);
 
-    const query = queryArch ? {
-      where: { name: queryArch ***REMOVED***,
-      relations: ["articles"]
-  ***REMOVED*** : {
-      relations: ["articles"]
-  ***REMOVED***
-    const result = await repo.find(query);
-
-    // TODO: 这里做分页能实现吗？
+    const result = await repo.find({ relations: ["articles"]***REMOVED***
 
     const finalRes = result.map(item => ({
       id: item.id,
@@ -113,9 +88,7 @@ export class BlogServerImpl implements BlogServer {
       articlesCount: item.articles.length
   ***REMOVED***))
 
-    const list = result[0].articles.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
-
-    return Promise.resolve(queryArch ? {list, currentPage: 1, pageCount: 1***REMOVED*** : finalRes)
+    return Promise.resolve(finalRes)
 ***REMOVED***
 
   @Transactional()
