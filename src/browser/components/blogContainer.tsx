@@ -211,7 +211,7 @@ export default function BlogContainer(props: ContainerProps) {
       <Divider />
       <List>
         {navList.map((item) => (
-          <Link color="inherit" href={item.link***REMOVED*** key={item.name***REMOVED***>
+          <Link color="inherit" underline={"none"***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
             <ListItem button>
               <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
               <ListItemText primary={item.name***REMOVED*** />
