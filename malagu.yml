@@ -16,6 +16,17 @@ frontend:
           fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
 backend:
   malagu:
+    typeorm:
+      ormConfig:
+        - type: mysql
+          host: 127.0.0.1
+          port: 3306
+          synchronize: false
+          useUnifiedTopology: true
+          charset: 'utf8mb4_unicode_ci'
+          username: dev
+          password: '123456'
+          database: douMiBlog
     security:
       contextKey: malagu:securityContext
       passwordEncoder:
