@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
+    "@malagu/fc-adapter": "^0.0.8",
     "@malagu/material-ui": "^0.0.8",
     "@malagu/mvc": "^0.0.8",
     "@malagu/react": "^0.0.8",
