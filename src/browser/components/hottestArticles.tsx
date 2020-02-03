@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Container***REMOVED*** from '@material-ui/core';
-import Typography from './Typography'
+import Typography from './typography'
 import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
 import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
 
