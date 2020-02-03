@@ -8,6 +8,7 @@ import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node'
 import { Article ***REMOVED*** from '../entity/article';
 import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
 
+
 export const BlogServiceSymbol = Symbol('BlogService');
 
 const PAGE_SIZE = 5;
@@ -123,6 +124,11 @@ export class BlogService {
       reqIp = (Context.getRequest() as any).ip
   ***REMOVED***
 
+    if (!reqIp) {
+      console.log('[blogService]: can not get client ip, ignore it!')
+      return
+  ***REMOVED***
+
     // const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
     const repo = OrmContext.getRepository(Website)
@@ -149,6 +155,17 @@ export class BlogService {
       newData.totalPv = 1
       newData.totalUv = 1;
       repo.save(newData)
+  ***REMOVED***
+***REMOVED***
+  @Transactional()
+  async clearTodayIpsArray() {
+    const repo = OrmContext.getRepository(Website);
+
+    const data = await repo.findOne({ id: 1***REMOVED***)
+
+    if (data) {
+      data.todayIps = []
+      repo.save(data);
   ***REMOVED***
 ***REMOVED***
 ***REMOVED***
