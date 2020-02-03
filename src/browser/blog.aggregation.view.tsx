@@ -68,10 +68,20 @@ export default class BlogAggregation extends React.Component<Prop, State> {
     }
   }
 
-  async componentWillMount() {
-    try {
-      const type = (this.props as any).match.params.type as EAggregationType
+  componentWillReceiveProps(newProps: Prop) {
+    const { type } = this.state;
+    const newType = (newProps as any).match.params.type as EAggregationType
+    if (type !== newType) {
+      this.fetchAggregationTypeList(newType)
+    }
+  }
 
+  componentWillMount() {
+    const { type } = this.state;
+    this.fetchAggregationTypeList(type)
+  }
+  async fetchAggregationTypeList(type: EAggregationType) {
+    try {
       const method = this.typeMapToMethod[type];
 
       const response = await method();

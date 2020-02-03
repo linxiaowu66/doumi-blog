@@ -70,8 +70,17 @@ export class LoginOrRegister extends React.Component<Props, State> {
           reqSuccess: true
         })
         setTimeout(() => {
-          (this.props as any).history.replace( '/blog/auth/login' )
-        }, 2000)
+          this.setState({
+            reqSuccess: false,
+          })
+        }, 1500)
+        setTimeout(() => {
+          location.hash = '/blog/auth/login';
+          this.setState({
+            showForm: true,
+            pageType: 'login',
+          })
+        }, 4000)
       }
     } catch (err) {
       console.log(err)

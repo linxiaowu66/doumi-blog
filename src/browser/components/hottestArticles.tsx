@@ -75,7 +75,7 @@ function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] }) {
         {
           props.list.map(item => (
             <li key={item.slug}>
-              <a href='#/blog/{{post.slug}}'><span>{item.title}</span><time>{item.archiveTime}</time></a>
+              <a href={`#/blog/detail/${item.slug}`}><span>{item.title}</span><time>{item.archiveTime}</time></a>
             </li>
           ))
         }
