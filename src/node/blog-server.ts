@@ -8,6 +8,7 @@ import { User } from './entity/user';
 import { Tag } from './entity/tag';
 import { Category } from './entity/category';
 import { Archive } from './entity/archive';
+import { Schedule, DoumiSchedule } from './schedule';
 
 const pick = require('lodash.pick');
 
@@ -20,6 +21,9 @@ export class BlogServerImpl implements BlogServer {
 
   @Autowired(BlogServiceSymbol)
   protected readonly blogService: BlogService;
+
+  @Autowired(Schedule)
+  protected readonly schedule: DoumiSchedule;
 
   @Transactional()
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {

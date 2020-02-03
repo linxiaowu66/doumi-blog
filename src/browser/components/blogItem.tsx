@@ -35,7 +35,7 @@ export default function BlogItem(props: BlogItemProps) {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={handleJumpToDetail}>
         <CardMedia
           className={classes.media}
           image={props.mediaUrl}
