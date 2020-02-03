@@ -17,7 +17,7 @@ export class Reader {
     length: 200,
     nullable: false
   })
-  date: string; // 存储每一篇文章阅读的时间
+  date: string; // 存储每一篇文章阅读的时间,精确到日
 
   @Column('simple-array')
   ips: string[]; // 存储每一篇文章阅读的读者的ip，等价于uv
