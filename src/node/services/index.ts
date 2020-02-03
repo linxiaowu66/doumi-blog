@@ -1,4 +1,8 @@
+import { Reader ***REMOVED*** from './../entity/reader';
+import { Website ***REMOVED*** from './../entity/website';
 import { Component ***REMOVED*** from '@malagu/core';
+import { Context ***REMOVED*** from '@malagu/web/lib/node';
+import { AwesomeHelp ***REMOVED*** from 'awesome-js';
 import { In ***REMOVED*** from 'typeorm';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { Article ***REMOVED*** from '../entity/article';
@@ -42,6 +46,10 @@ export class BlogService {
     ***REMOVED***
   ***REMOVED***
 
+    if (currentPage === 1) {
+      await this.updateWebsiteStatistics()
+  ***REMOVED***
+
     const [list, allArticles] = await Promise.all([repo.find({...baseQuery, ...whereQuery***REMOVED***), repo.find(whereQuery)])
 
     return { list: list.map(item => ({
@@ -63,12 +71,84 @@ export class BlogService {
       throw new Error('找不到对应文章')
   ***REMOVED***
 
+    let reqIp: string
+    if (Context.getRequest().headers['x-real-ip']) {
+      reqIp = Context.getRequest().headers['x-real-ip'] as string
+  ***REMOVED*** else {
+      reqIp = (Context.getRequest() as any).ip
+  ***REMOVED***
+
+    const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+
+    const readerRepo = OrmContext.getRepository(Reader)
+
+    const reader = await readerRepo.findOne({
+      where: { date: now, articleSlug: slug ***REMOVED***
+  ***REMOVED***)
+
+    if (reader) {
+      if (!reader.ips.includes(reqIp)) {
+        reader.ips.push(reqIp)
+        readerRepo.save(reader)
+    ***REMOVED***
+  ***REMOVED*** else {
+      const newReader = new Reader()
+      newReader.articleSlug = slug;
+      newReader.date = now;
+      newReader.ips = [reqIp];
+      readerRepo.save(newReader);
+  ***REMOVED***
+
+    await this.updateWebsiteStatistics();
+
+    // 对该文章的pv数自增1
+    result.pv = +result.pv + 1;
+
+    await repo.save(result);
+
     return {
       ...result,
       tags: result.tags.map(it => it.name),
       category: result.category.name,
       archiveTime: result.archiveTime.archiveTime,
       author: result.author.username
+  ***REMOVED***
+***REMOVED***
+  @Transactional()
+  async updateWebsiteStatistics() {
+    let reqIp: string
+    if (Context.getRequest().headers['x-real-ip']) {
+      reqIp = Context.getRequest().headers['x-real-ip'] as string
+  ***REMOVED*** else {
+      reqIp = (Context.getRequest() as any).ip
+  ***REMOVED***
+
+    // const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+
+    const repo = OrmContext.getRepository(Website)
+
+    const website = await repo.findOne({id: 1***REMOVED***)
+
+    if (website) {
+      if (!website.todayIps.includes(reqIp)) {
+        website.todayIps.push(reqIp)
+        website.todayPv = +website.todayPv + 1
+        website.todayUv = +website.todayUv + 1
+        website.totalPv = +website.totalPv + 1
+        website.totalUv = +website.totalUv + 1
+    ***REMOVED*** else {
+        website.totalPv = +website.totalPv + 1
+        website.todayPv = +website.todayPv + 1
+    ***REMOVED***
+      repo.save(website)
+  ***REMOVED*** else {
+      const newData = new Website()
+      newData.todayIps = [reqIp];
+      newData.todayPv = 1
+      newData.todayUv = 1;
+      newData.totalPv = 1
+      newData.totalUv = 1;
+      repo.save(newData)
   ***REMOVED***
 ***REMOVED***
 ***REMOVED***
