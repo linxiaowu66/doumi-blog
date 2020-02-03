@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Container} from '@material-ui/core';
-import Typography from './Typography'
+import Typography from './typography'
 import { makeStyles } from '@material-ui/core/styles';
 import { DouMiBlog } from '../../common/blog-protocol';
 

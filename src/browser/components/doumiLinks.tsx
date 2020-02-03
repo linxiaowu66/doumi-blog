@@ -3,7 +3,7 @@ import { withStyles, Theme } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Container from '@material-ui/core/Container';
 // import Link from '@material-ui/core/Link';
-import Typography from './Typography';
+import Typography from './typography';
 
 const styles = (theme: Theme) => ({
   root: {
