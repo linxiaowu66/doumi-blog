@@ -82,13 +82,17 @@ export class blogAdminController {
     const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***)
     const loadCat = await catRepo.find({ name: category***REMOVED***
     const loadUser = await userRepo.find({ email: username ***REMOVED***
-    const instance = new Archive()
-    instance.archiveTime = archiveTime
+    let loadArch = await archiveRepo.findOne({ archiveTime ***REMOVED***)
 
-    await archiveRepo.save(instance);
+    if (!loadArch) {
+      loadArch = new Archive()
+      loadArch.archiveTime = archiveTime
+
+      await archiveRepo.save(loadArch);
+  ***REMOVED***
 
     const articleIns = new Article()
-    articleIns.archiveTime = instance;
+    articleIns.archiveTime = loadArch;
     articleIns.tags = loadTags;
     articleIns.slug = Date.now().toString(); // slug(article.title);
     articleIns.category = loadCat[0];
@@ -126,13 +130,17 @@ export class blogAdminController {
     const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***)
     const loadCat = await catRepo.find({ name: category***REMOVED***
     const loadUser = await userRepo.find({ email: username ***REMOVED***
-    const instance = new Archive()
-    instance.archiveTime = archiveTime
+    let loadArch = await archiveRepo.findOne({ archiveTime ***REMOVED***)
 
-    await archiveRepo.save(instance);
+    if (!loadArch) {
+      loadArch = new Archive()
+      loadArch.archiveTime = archiveTime
+
+      await archiveRepo.save(loadArch);
+  ***REMOVED***
 
     const articleIns = new Article()
-    articleIns.archiveTime = instance;
+    articleIns.archiveTime = loadArch;
     articleIns.tags = loadTags;
     articleIns.category = loadCat[0];
     articleIns.articleStatus = article.articleStatus as ArticleStatus;
