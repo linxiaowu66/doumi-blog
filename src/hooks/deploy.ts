@@ -1,14 +1,17 @@
 import { HookContext, FRONTEND_TARGET } from '@malagu/cli';
+import { homedir } from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 const OSSClient = require('ali-oss');
 import * as ora from 'ora';
 const chalk = require('chalk');
+const ossConfig = JSON.parse(fs.readFileSync(path.resolve(homedir(), 'ossConfig.json'), 'utf-8'))
+
 
 let ossClient = new OSSClient({
   region: 'oss-cn-hangzhou',
-  accessKeyId: 'LTAI57Ua0vDr7995',
-  accessKeySecret: 'oZFyYP5mIRfVTgDgKSJ48zfIWyZ0EZ'
+  accessKeyId: ossConfig.access_key_id,
+  accessKeySecret: ossConfig.access_key_secret
 })
 let frontendCodeDir: string
 
