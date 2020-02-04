@@ -2,13 +2,16 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 import * as ora from 'ora';
 ***REMOVED***
+const ossConfig = JSON.parse(fs.readFileSync(path.resolve(homedir(), 'ossConfig.json'), 'utf-8'))
+
 
 let ossClient = new OSSClient({
 ***REMOVED***
-  accessKeyId: '***REMOVED***',
-  accessKeySecret: '***REMOVED***'
+***REMOVED***
+***REMOVED***
 ***REMOVED***)
 let frontendCodeDir: string
 
