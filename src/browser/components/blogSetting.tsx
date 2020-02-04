@@ -108,7 +108,7 @@ export default function BlogConfig(props: BlogConfigProps) {
   return (
     <div>
       <Drawer anchor="right" open={props.isOpen***REMOVED*** onClose={() => props.closeCb({
-        archiveTime: format(selectedDate, 'yyyy-MM-dd'),
+        archiveTime: format(selectedDate, 'yyyy-MM'),
         illustration,
         tags: selectTags,
         category: selectCat,
