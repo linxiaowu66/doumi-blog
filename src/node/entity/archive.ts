@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
 import { Article } from './article';
 
 @Entity()
@@ -12,6 +12,7 @@ export class Archive {
     length: 200,
     nullable: false
   })
+  @Index({ unique: true })
   archiveTime: string;
 
   @OneToMany(type => Article, article => article.archiveTime)
