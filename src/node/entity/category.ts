@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Index, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Article } from './article';
 
 @Entity()
@@ -11,6 +11,7 @@ export class Category {
     length: 200,
     nullable: false
   })
+  @Index({ unique: true })
   name: string;
 
   @OneToMany(type => Article, article => article.category)
