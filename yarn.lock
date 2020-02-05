@@ -153,16 +153,16 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@malagu/cli@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/cli/download/@malagu/cli-0.0.8.tgz#c608185d876374a7b1799103bd42392c2ea56476"
-  integrity sha1-xggYXYdjdKexeZEDvUI5LC6lZHY=
+"@malagu/cli@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.0.9.tgz#808fbef555b952e0ad63359781c2fbce9fbe7d12"
+  integrity sha512-eL3B2aKwxc9yFbS4WaRazT7mg8bNnPnF+Jqtb6n+OWV+NnTtOY2fH0Med9D9XkMbxOX1MOkCpHKgXtMKvJmSfw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     chalk "^2.4.2"
+    clear-module "^4.0.0"
     commander "^2.20.0"
     css-loader "^3.1.0"
-    decache "^4.5.1"
     delay "^4.3.0"
     file-loader "^4.1.0"
     fork-ts-checker-notifier-webpack-plugin "^1.0.3"
@@ -196,16 +196,19 @@
     webpack "^4.36.1"
     webpack-dev-server "^3.7.2"
     webpack-merge "^4.2.1"
+    webpack-node-externals "^1.7.2"
     worker-loader "^2.0.0"
 
-"@malagu/core@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/core/download/@malagu/core-0.0.8.tgz#9cd060ad0fe49beb9cae5af451aff29514ea18c5"
-  integrity sha1-nNBgrQ/km+ucrlr0Ua/ylRTqGMU=
+"@malagu/core@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.0.9.tgz#b7b9d7cd3a975b70ed403d56a0515092c3153625"
+  integrity sha512-6trMFzOp5WW+Cx1Btr6wKHBRUteeJNzr5C/el1DRhOAXr17cB7X1xBWWpgUi66nKw2UDcsjNVCZMAS7VP7omTg==
   dependencies:
     "@types/express" "^4.16.1"
     "@types/lodash.debounce" "4.0.3"
     "@types/lodash.throttle" "^4.1.3"
+    class-transformer "^0.2.3"
+    class-validator "^0.11.0"
     es6-promise "^4.2.4"
     inversify "^5.0.1"
     inversify-binding-decorators "^4.0.0"
@@ -219,87 +222,88 @@
     url-join "^4.0.1"
     vscode-ws-jsonrpc "^0.1.1"
 
-"@malagu/express-adapter@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.8.tgz#2f8d681b26cc120e913c124ff2e80d4310a4cae8"
-  integrity sha512-AmHOZWysZtZfd0oh4DUAOugnJlq6hQI8iBkOzw1GVyp756lGcdeIhKvdAtoSVrxlPXdjZPMS3rMt/yYuA4kByg==
+"@malagu/express-adapter@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.9.tgz#4a57402739c1255317f4f1aa1471fcbf43a0b89c"
+  integrity sha512-BccSBWLfz0RYOvaCSjE9496fjkOJRCCezen/wHi63/DHHrRIldCdoVOd+SHv4Gv2cOLmvhQzn5vJQmhSGz6Pqw==
   dependencies:
-    "@malagu/web" "^0.0.8"
+    "@malagu/web" "^0.0.9"
     express "^4.17.1"
 
-"@malagu/grommet@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/grommet/download/@malagu/grommet-0.0.8.tgz#8b6e2bedb35e892139a010d7c12f9c3775eb8cab"
-  integrity sha1-i24r7bNeiSE5oBDXwS+cN3XrjKs=
+"@malagu/grommet@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.0.9.tgz#db036d9574c124e268de2eff45a9c8f3416fcc57"
+  integrity sha512-pJDumlTJpBCK2dqDaFN/igjdObGTnUqSa5HRgV7S5anxJEB++2xyk1Zk2H6+IFEL4tjYvBeyilJ3EOJz1mSL4w==
   dependencies:
-    "@malagu/react" "^0.0.8"
+    "@malagu/react" "^0.0.9"
     grommet "^2.9.0"
     grommet-icons "^4.4.0"
     styled-components "^4.4.1"
 
-"@malagu/material-ui@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/material-ui/download/@malagu/material-ui-0.0.8.tgz#6982e8c3ceb0496e62336fdb0d3257df72219111"
-  integrity sha1-aYLow86wSW5iM2/bDTJX33IhkRE=
+"@malagu/material-ui@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.0.9.tgz#97a0c2b4e8b4ae9956faf4c3f984dd34a21d68eb"
+  integrity sha512-9mf05ZAG1LldN91hK3jqAqZcEBHA/tJnW3jto/MN5Jx3ReL83s9LMvXFLvrMRuBAl7RwtuRhasPs9MfjGNz58g==
   dependencies:
-    "@malagu/grommet" "^0.0.8"
+    "@malagu/grommet" "^0.0.9"
     "@material-ui/core" "^4.6.0"
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
 
-"@malagu/mvc@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/mvc/download/@malagu/mvc-0.0.8.tgz#f4065edb1d60587891e9abf3a448e43e18ced3c2"
-  integrity sha1-9AZe2x1gWHiR6avzpEjkPhjO08I=
+"@malagu/mvc@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.0.9.tgz#8eca3d5da011bb25973e21a9bcd9bd034eb09cd9"
+  integrity sha512-wUAs3dOpxRFmiuL14XPakvvq3AOFiAKyriTXU8VZxLYlM23zJTljUzQo6kJwJ9HE4lZ0ORRx1sMy3UaRODnFBg==
   dependencies:
-    "@malagu/web" "^0.0.8"
+    "@malagu/web" "^0.0.9"
 
-"@malagu/react@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/react/download/@malagu/react-0.0.8.tgz#121371f028b743824faf6434cd3e34cff22c378c"
-  integrity sha1-EhNx8Ci3Q4JPr2Q0zT40z/IsN4w=
+"@malagu/react@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.0.9.tgz#313f9e790d1d35884943c1c895c369b080a1a26c"
+  integrity sha512-08KD6GRZhmpDbE45vWHk2CzXCaQdb38lSYIeoY5UDXYcKuRqqPD8Ulj33wF6ZolcG9LV+OJiSdQuiY1tyN3UZg==
   dependencies:
-    "@malagu/core" "^0.0.8"
+    "@malagu/core" "^0.0.9"
     history "^4.10.1"
     react "^16.12.0"
     react-dom "^16.12.0"
     react-router "^5.1.2"
     react-router-dom "^5.1.2"
 
-"@malagu/rpc@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/rpc/download/@malagu/rpc-0.0.8.tgz#b44dbd3edd538e22530fd086fd5f5fdc3a0abe55"
-  integrity sha1-tE29Pt1TjiJTD9CG/V9f3DoKvlU=
+"@malagu/rpc@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.0.9.tgz#252b04068f2cf2bb14fa3c239bee418b2ff8ab33"
+  integrity sha512-hU07Z2lMX/zK9hnE2mdE8EvpzX9WSYs/aug/yEE1ekZSYzJ+3fT+2mm2eFHA7NfVn3PzwFNhgs2nk7Q/4sMqug==
   dependencies:
-    "@malagu/web" "^0.0.8"
+    "@malagu/web" "^0.0.9"
     reconnecting-websocket "^4.1.10"
 
-"@malagu/security@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/security/download/@malagu/security-0.0.8.tgz#dee395975b7c8ce7c0cc7e88d4b9df6f90ff0b90"
-  integrity sha1-3uOVl1t8jOfAzH6I1Lnfb5D/C5A=
+"@malagu/security@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.0.9.tgz#7c8a7e65c348dcb77fbb5a75f7b45e011894a1bf"
+  integrity sha512-rEmCkQIBaZmGSDDDIOimph3GG/m/Y4xEpe0Q4BkJJyaBelT1gCaXH3yqPEkRl6jtOKZBXSMb/SrZONFX108QjQ==
   dependencies:
-    "@malagu/web" "^0.0.8"
+    "@malagu/web" "^0.0.9"
     crypto-js "^3.1.9-1"
 
-"@malagu/typeorm@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/typeorm/download/@malagu/typeorm-0.0.8.tgz#12b66e97f5bdd56246c7844af4063cc2bd9f0af4"
-  integrity sha1-ErZul/W91WJGx4RK9AY8wr2fCvQ=
+"@malagu/typeorm@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.0.9.tgz#d58e11ebdbed7950b2e3532c1819b267c68fa3a0"
+  integrity sha512-1f5LRXaqsmi0h2MfXP9WBMgaUVuh904yuREphzW03UXUjVJspN6e86gskvVy0PX57pi/cOIOtwe+ELBQV9j7jg==
   dependencies:
-    "@malagu/web" "^0.0.8"
+    "@malagu/web" "^0.0.9"
     mysql "^2.17.1"
     typeorm "^0.2.19"
     webpack-filter-warnings-plugin "^1.2.1"
 
-"@malagu/web@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/@malagu/web/download/@malagu/web-0.0.8.tgz#2983dc019faf0b7bd35f0f00c6a27c54ae103f2b"
-  integrity sha1-KYPcAZ+vC3vTXw8AxqJ8VK4QPys=
+"@malagu/web@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.0.9.tgz#c300e6e483dd04f3474f369ccd7eec84a0b946e9"
+  integrity sha512-r7mxSynEk+PBBTP6JHTCTmWZ/e6D+P+Hqi+nyEyfY6GPQSpinR8A34R/5Dmkuu1uSZSfRa2po9xyfjGkq7mujw==
   dependencies:
-    "@malagu/core" "^0.0.8"
+    "@malagu/core" "^0.0.9"
     "@types/express" "^4.16.1"
     cookies "^0.7.3"
+    cors "^2.8.5"
     crc "^3.8.0"
     express-http-context "^1.2.3"
     url-pattern "^1.0.3"
@@ -631,6 +635,11 @@
   dependencies:
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
+
+"@types/validator@10.11.3":
+  version "10.11.3"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-10.11.3.tgz#945799bef24a953c5bc02011ca8ad79331a3ef25"
+  integrity sha512-GKF2VnEkMmEeEGvoo03ocrP9ySMuX1ypKazIYMlsjfslfBMhOAtC5dmEWKdJioW4lJN7MZRS88kalTsVClyQ9w==
 
 "@types/yargs-parser@*":
   version "15.0.0"
@@ -1520,10 +1529,10 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
-callsite@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/callsite/download/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
-  integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
+callsites@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
+  integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
 camel-case@3.0.x:
   version "3.0.0"
@@ -1655,6 +1664,11 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+class-transformer@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.2.3.tgz#598c92ca71dcca73f91ccb875d74a3847ccfa32d"
+  integrity sha512-qsP+0xoavpOlJHuYsQJsN58HXSl8Jvveo+T37rEvCEeRfMWoytAyR0Ua/YsFgpM6AZYZ/og2PJwArwzJl1aXtQ==
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.npm.taobao.org/class-utils/download/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -1664,6 +1678,15 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+class-validator@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.11.0.tgz#5fca8b8a957c738a6749391e03ee81fad375dc4a"
+  integrity sha512-niAmmSPFku9xsnpYYrddy8NZRrCX3yyoZ/rgPKOilE5BG0Ma1eVCIxpR4X0LasL/6BzbYzsutG+mSbAXlh4zNw==
+  dependencies:
+    "@types/validator" "10.11.3"
+    google-libphonenumber "^3.1.6"
+    validator "12.0.0"
 
 clean-css@4.2.x:
   version "4.2.1"
@@ -1676,6 +1699,14 @@ clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/clean-stack/download/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha1-7oRy27Ep5yezHooQpCfe6d/kAIs=
+
+clear-module@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/clear-module/-/clear-module-4.0.0.tgz#9bfc5f5370c7aea2dc9eacd559bd25a106bd10fe"
+  integrity sha512-JiLAmWcshGbujtuyOdDE9GRmdSV5Ud2x+4kJ79hAZSllWs2Kwaf8NY0wq9DOswypcvSL09FGkVq2JoVgaXKbsw==
+  dependencies:
+    parent-module "^2.0.0"
+    resolve-from "^5.0.0"
 
 cli-cursor@^2.1.0:
   version "2.1.0"
@@ -1979,6 +2010,14 @@ core-util-is@1.0.2, core-util-is@^1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+cors@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+  dependencies:
+    object-assign "^4"
+    vary "^1"
+
 crc@^3.8.0:
   version "3.8.0"
   resolved "https://registry.npm.taobao.org/crc/download/crc-3.8.0.tgz#ad60269c2c856f8c299e2c4cc0de4556914056c6"
@@ -2191,13 +2230,6 @@ debug@^3.0.0, debug@^3.1.0, debug@^3.1.1, debug@^3.2.5:
   integrity sha1-6D0X3hbYp++3cX7b5fsQE17uYps=
   dependencies:
     ms "^2.1.1"
-
-decache@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.npm.taobao.org/decache/download/decache-4.5.1.tgz#94a977a88a4188672c96550ec4889582ceecdf49"
-  integrity sha1-lKl3qIpBiGcsllUOxIiVgs7s30k=
-  dependencies:
-    callsite "^1.0.0"
 
 decamelize@^1.2.0:
   version "1.2.0"
@@ -3233,6 +3265,11 @@ good-listener@^1.2.2:
   integrity sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=
   dependencies:
     delegate "^3.1.2"
+
+google-libphonenumber@^3.1.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.6.tgz#3d725b48ff44706b80246e77f95f2c2fdc6fd729"
+  integrity sha512-6QCQAaKJlSd/1dUqvdQf7zzfb3uiZHsG8yhCfOdCVRfMuPZ/VDIEB47y5SYwjPQJPs7ebfW5jj6PeobB9JJ4JA==
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2:
   version "4.2.3"
@@ -5055,7 +5092,7 @@ oauth-sign@~0.9.0:
   resolved "https://registry.npm.taobao.org/oauth-sign/download/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   integrity sha1-R6ewFrqmi1+g7PPe4IqFxnmsZFU=
 
-object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/object-assign/download/object-assign-4.1.1.tgz?cache=0&sync_timestamp=1571657171505&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fobject-assign%2Fdownload%2Fobject-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -5181,24 +5218,10 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-ora@^4.0.2:
+ora@^4.0.2, ora@^4.0.3:
   version "4.0.3"
   resolved "https://registry.npm.taobao.org/ora/download/ora-4.0.3.tgz#752a1b7b4be4825546a7a3d59256fa523b6b6d05"
   integrity sha1-dSobe0vkglVGp6PVklb6UjtrbQU=
-  dependencies:
-    chalk "^3.0.0"
-    cli-cursor "^3.1.0"
-    cli-spinners "^2.2.0"
-    is-interactive "^1.0.0"
-    log-symbols "^3.0.0"
-    mute-stream "0.0.8"
-    strip-ansi "^6.0.0"
-    wcwidth "^1.0.1"
-
-ora@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.3.tgz#752a1b7b4be4825546a7a3d59256fa523b6b6d05"
-  integrity sha512-fnDebVFyz309A73cqCipVL1fBZewq4vwgSHfxh43vVy31mbyoQ8sCH3Oeaog/owYOs/lLlGVPCISQonTneg6Pg==
   dependencies:
     chalk "^3.0.0"
     cli-cursor "^3.1.0"
@@ -5355,6 +5378,13 @@ param-case@2.1.x:
   integrity sha1-35T9jPZTHs915r75oIWPvHK+Ikc=
   dependencies:
     no-case "^2.2.0"
+
+parent-module@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-2.0.0.tgz#fa71f88ff1a50c27e15d8ff74e0e3a9523bf8708"
+  integrity sha512-uo0Z9JJeWzv8BG+tRcapBKNJ0dro9cLyczGzulS6EfeyAdeC9sbojtW6XwvYxJkEne9En+J2XEl4zyglVeIwFg==
+  dependencies:
+    callsites "^3.1.0"
 
 parent-require@^1.0.0:
   version "1.0.0"
@@ -6237,6 +6267,11 @@ resolve-from@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/resolve-from/download/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
   integrity sha1-six699nWiBvItuZTM17rywoYh0g=
+
+resolve-from@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
+  integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
 resolve-pathname@^3.0.0:
   version "3.0.0"
@@ -7638,12 +7673,17 @@ uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
 
+validator@12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-12.0.0.tgz#fb33221f5320abe2422cda2f517dc3838064e813"
+  integrity sha512-r5zA1cQBEOgYlesRmSEwc9LkbfNLTtji+vWyaHzRZUxCTHdsX3bd+sdHfs5tGZ2W6ILGGsxWxCNwT/h3IY/3ng==
+
 value-equal@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/value-equal/download/value-equal-1.0.1.tgz#1e0b794c734c5c0cade179c437d356d931a34d6c"
   integrity sha1-Hgt5THNMXAyt4XnEN9NW2TGjTWw=
 
-vary@~1.1.2:
+vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
@@ -7793,6 +7833,11 @@ webpack-merge@^4.2.1:
   integrity sha1-onxS6ng9E5iv0gh/VH17nS9DY00=
   dependencies:
     lodash "^4.17.15"
+
+webpack-node-externals@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.7.2.tgz#6e1ee79ac67c070402ba700ef033a9b8d52ac4e3"
+  integrity sha512-ajerHZ+BJKeCLviLUUmnyd5B4RavLF76uv3cs6KNuO8W+HuQaEs0y0L7o40NQxdPy5w0pcv8Ew7yPUAQG0UdCg==
 
 webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
   version "1.4.3"
