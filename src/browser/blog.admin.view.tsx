@@ -1,5 +1,6 @@
 import * as React from 'react'
 import axios from 'axios';
+import { Value } from '@malagu/core';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
@@ -31,6 +32,10 @@ const navigatorList = [{
 
 @View('/blog/admin/index')
 export default class BlogAdmin extends React.Component<Prop, State> {
+
+  @Value('malagu.server.endpoint')
+  protected readonly endpoint: string;
+
   constructor(props: Prop) {
     super(props);
 
@@ -52,7 +57,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   }
   fetchBlogList = async (currentPage: number) => {
     const { blogList } = this.state
-    const result = await axios.get(`/api/blog/list?currentPage=${currentPage}`)
+    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/list?currentPage=${currentPage}`)
 
     if (result.data && !result.data.list) {
       // 目前无法判断出是没登录造成的错误还是服务器错误
@@ -102,7 +107,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   render() {
     const { pageCount, currentPage, blogContent, isOpenSnackbar, snackbarMsg } = this.state;
     return(
-      <BlogContainer navigatorList={navigatorList} isLogin contentClass="blog-admin-container">
+      <BlogContainer endpoint={this.endpoint} navigatorList={navigatorList} isLogin contentClass="blog-admin-container">
         <div className="blog-admin-wrapper">
           <section className="blog-list-container">
             <InfiniteScroll

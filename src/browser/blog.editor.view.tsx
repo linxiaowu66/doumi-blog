@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as query from 'query-string';
+import { Value } from '@malagu/core';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -50,6 +51,8 @@ const navigatorList = [{
 
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
+  @Value('malagu.server.endpoint')
+  protected readonly endpoint: string;
 
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
@@ -102,7 +105,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     }
   }
   fetchBlogDetail = async (slug: string) => {
-    const result = await axios.get(`/api/blog/detail?slug=${slug}`)
+    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/detail?slug=${slug}`)
 
     this.setState({
       blogContent: result.data.content,
@@ -128,7 +131,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       illustration: blogIllustration,
       articleStatus: actionType
     }
-    const result = editMode ? await axios.put('/api/blog', { ...postBody, slug: this.state.slug }): await axios.post('/api/blog', postBody)
+    const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }): await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody)
 
     if (result.data.status && result.data.data) {
       this.setState({
@@ -165,7 +168,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   render() {
     const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg } = this.state
     return(
-      <BlogContainer navigatorList={navigatorList} isLogin contentClass="blog-editor-wrapper" >
+      <BlogContainer endpoint={this.endpoint} navigatorList={navigatorList} isLogin contentClass="blog-editor-wrapper" >
         <header className="blog-title">
           <TextField
             id="outlined-helperText"

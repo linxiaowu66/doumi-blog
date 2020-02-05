@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Value } from '@malagu/core';
 import clsx from 'clsx';
 import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
@@ -25,6 +26,9 @@ interface State {
 @View('/blog/auth/:type')
 export class LoginOrRegister extends React.Component<Props, State> {
 
+  @Value('malagu.server.endpoint')
+  protected readonly endpoint: string;
+
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
@@ -41,7 +45,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
   }
   login = async (data: DouMiBlog.LoginParam) => {
     try {
-      const res = await axios.post('/api/login', data);
+      const res = await axios.post(`${this.endpoint ? this.endpoint : ''}/api/login`, data);
 
       if (res.data.status && res.data.data === '登录成功') {
         this.setState({
