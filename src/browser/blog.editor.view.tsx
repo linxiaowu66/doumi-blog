@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as query from 'query-string';
-import { Value } from '@malagu/core';
+// import { Value } from '@malagu/core';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -51,8 +51,8 @@ const navigatorList = [{
 
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
-  @Value('malagu.server.endpoint')
-  protected readonly endpoint: string;
+  // @Value('malagu.server.endpoint')
+  protected readonly endpoint = 'https://bff.5udou.cn';
 
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
@@ -105,7 +105,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     }
   }
   fetchBlogDetail = async (slug: string) => {
-    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/detail?slug=${slug}`)
+    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/detail?slug=${slug}`, {withCredentials: true})
 
     this.setState({
       blogContent: result.data.content,
@@ -131,7 +131,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       illustration: blogIllustration,
       articleStatus: actionType
     }
-    const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }): await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody)
+    const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }, {withCredentials: true}): await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody, {withCredentials: true})
 
     if (result.data.status && result.data.data) {
       this.setState({

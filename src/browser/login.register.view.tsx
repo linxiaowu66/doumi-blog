@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Value } from '@malagu/core';
+// import { Value } from '@malagu/core';
+// import { ENDPOINT } from '@malagu/web';
 import clsx from 'clsx';
 import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
@@ -26,8 +27,9 @@ interface State {
 @View('/blog/auth/:type')
 export class LoginOrRegister extends React.Component<Props, State> {
 
-  @Value('malagu.server.endpoint')
-  protected readonly endpoint: string;
+  // TODO: 为什么取不到endpoint？
+  // @Value(ENDPOINT)
+  protected readonly endpoint = 'https://bff.5udou.cn';
 
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
