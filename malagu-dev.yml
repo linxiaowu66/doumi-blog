@@ -1,3 +1,5 @@
 malagu:
   webpack:
     devtool: 'source-map'
+  server:
+    endpoint: https://bff.5udou.cn

@@ -4,6 +4,9 @@ malagu:
     enabled: true
     usernameKey: email
     passwordKey: password
+  web:
+    cors:
+      origin: 'http://nblog.5udou.cn'
 frontend:
   malagu:
     material-ui:
