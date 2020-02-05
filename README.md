@@ -8,8 +8,4 @@ typeorm支持mongoDB太弱了，mongoDB的ref特性从2017年有人提出到现�
 
 bug：
 
-save的时候archiveTime还是生成多张表？
-
-spa页面的刷新问题，从分类页切换到标签页都没有刷新页面？
-
 查询关系索引的时候需要怎么实现？
