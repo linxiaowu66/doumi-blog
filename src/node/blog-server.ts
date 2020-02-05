@@ -36,6 +36,8 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(result)
 ***REMOVED***
 
+  // TODO: fix the pipeManager bug
+  @Transactional()
   async fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList> {
     const result = await this.blogService.fetchArticleList(currentPage, 5, null, condition)
 
@@ -44,6 +46,7 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(result)
 ***REMOVED***
 
+  @Transactional()
   async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
     const result = await this.blogService.fetchArticleDetail(slug)
 

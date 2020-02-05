@@ -115,7 +115,8 @@ interface ContainerProps {
     icon: JSX.Element;
     link: string;
 ***REMOVED***[],
-  isLogin?: boolean
+  isLogin?: boolean,
+  endpoint?: string
 ***REMOVED***
 
 const navigatorList = [{
@@ -198,7 +199,8 @@ export default function BlogContainer(props: ContainerProps) {
 ***REMOVED***
 
   const handleLogout = async () => {
-    await axios.post('/api/logout');
+    const { endpoint ***REMOVED*** = props;
+    await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`);
 
     location.hash = '#/blog/auth/login';
 ***REMOVED***

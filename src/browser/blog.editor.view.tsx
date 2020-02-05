@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as query from 'query-string';
+import { Value ***REMOVED*** from '@malagu/core';
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -50,6 +51,8 @@ const navigatorList = [{
 
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
+  @Value('malagu.server.endpoint')
+  protected readonly endpoint: string;
 
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
@@ -102,7 +105,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   ***REMOVED***
 ***REMOVED***
   fetchBlogDetail = async (slug: string) => {
-    const result = await axios.get(`/api/blog/detail?slug=${slug***REMOVED***`)
+    const result = await axios.get(`${this.endpoint ? this.endpoint : ''***REMOVED***/api/blog/detail?slug=${slug***REMOVED***`)
 
     this.setState({
       blogContent: result.data.content,
@@ -128,7 +131,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       illustration: blogIllustration,
       articleStatus: actionType
   ***REMOVED***
-    const result = editMode ? await axios.put('/api/blog', { ...postBody, slug: this.state.slug ***REMOVED***): await axios.post('/api/blog', postBody)
+    const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''***REMOVED***/api/blog`, { ...postBody, slug: this.state.slug ***REMOVED***): await axios.post(`${this.endpoint ? this.endpoint : ''***REMOVED***/api/blog`, postBody)
 
     if (result.data.status && result.data.data) {
       this.setState({
@@ -165,7 +168,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   render() {
     const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state
     return(
-      <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-editor-wrapper" >
+      <BlogContainer endpoint={this.endpoint***REMOVED*** navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-editor-wrapper" >
         <header className="blog-title">
           <TextField
             id="outlined-helperText"
