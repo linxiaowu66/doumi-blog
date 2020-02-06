@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as query from 'query-string';
-// import { Value ***REMOVED*** from '@malagu/core';
+import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached'
+import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -51,8 +52,8 @@ const navigatorList = [{
 
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
-  // @Value('malagu.server.endpoint')
-  protected readonly endpoint = 'https://bff.5udou.cn';
+  @Value(ENDPOINT)
+  protected readonly endpoint: string;
 
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;

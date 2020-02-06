@@ -1,6 +1,7 @@
 import * as React from 'react'
 import axios from 'axios';
-// import { Value ***REMOVED*** from '@malagu/core';
+import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached'
+import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
@@ -33,8 +34,8 @@ const navigatorList = [{
 @View('/blog/admin/index')
 export default class BlogAdmin extends React.Component<Prop, State> {
 
-  // @Value('malagu.server.endpoint')
-  protected readonly endpoint = 'https://bff.5udou.cn';
+  @Value(ENDPOINT)
+  protected readonly endpoint: string;
 
   constructor(props: Prop) {
     super(props);

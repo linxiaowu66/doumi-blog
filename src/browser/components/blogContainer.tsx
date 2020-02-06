@@ -200,7 +200,7 @@ export default function BlogContainer(props: ContainerProps) {
 
   const handleLogout = async () => {
     const { endpoint ***REMOVED*** = props;
-    await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`, {withCredentials: true***REMOVED***
+    await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`, null, {withCredentials: true***REMOVED***
 
     location.hash = '#/blog/auth/login';
 ***REMOVED***
