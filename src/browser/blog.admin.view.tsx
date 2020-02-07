@@ -1,7 +1,8 @@
 import * as React from 'react'
-import axios from 'axios';
 import { Value } from '@malagu/core/lib/common/annotation/detached'
 import { ENDPOINT } from '@malagu/web';
+import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol'
 import * as InfiniteScroll from 'react-infinite-scroller';
 import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
@@ -13,7 +14,7 @@ import BlogItemCard from './components/blogItemCard';
 
 interface Prop {}
 interface State {
-  blogList: {title: string, archiveTime: string, category: string, tags: string[], slug: string, content: string}[],
+  blogList: DouMiBlog.ArticleBrief[],
   pageCount: number,
   currentPage: number,
   blogContent: string,
@@ -37,6 +38,9 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   @Value(ENDPOINT)
   protected readonly endpoint: string;
 
+  @Autorpc(BlogServer)
+  protected BlogServer!: BlogServer;
+
   constructor(props: Prop) {
     super(props);
 
@@ -58,29 +62,24 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   }
   fetchBlogList = async (currentPage: number) => {
     const { blogList } = this.state
-    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/list?currentPage=${currentPage}`, {withCredentials: true})
-
-    if (result.data && !result.data.list) {
-      // 目前无法判断出是没登录造成的错误还是服务器错误
-      location.hash = '#/blog/auth/login'
-      // this.setState({
-      //   isOpenSnackbar: true,
-      //   snackbarMsg: '获取博文列表失败，请稍后重试'
-      // })
-      return
-    }
+    const result = await this.BlogServer.fetchArticleList(currentPage);
 
     this.setState({
-      blogList: [...blogList, ...result.data.list],
-      pageCount: result.data.pageCount,
-      currentPage: result.data.currentPage,
+      blogList: [...blogList, ...result.list],
+      pageCount: result.pageCount,
+      currentPage: result.currentPage,
     })
 
-    if (result.data.list.length > 0 && +currentPage === 1) {
-      this.setState({
-        blogContent: result.data.list[0].content
-      })
+    if (result.list.length > 0 && +currentPage === 1) {
+      this.fetchBlogDetail(result.list[0].slug)
     }
+  }
+  fetchBlogDetail = async (slug: string) => {
+    const detail = await this.BlogServer.fetchArticleDetail(slug);
+
+    this.setState({
+      blogContent: detail.content
+    })
   }
   loadMore = async () => {
     const { currentPage } = this.state;
@@ -98,7 +97,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
       <BlogItemCard
         key={item.slug}
         {...item}
-        onClick={(content) => this.setState({ blogContent: content })}
+        onClick={() => this.fetchBlogDetail(item.slug)}
         onEdit={(slug) => {
           location.hash=`/blog/admin/editor?slug=${slug}`
         }}

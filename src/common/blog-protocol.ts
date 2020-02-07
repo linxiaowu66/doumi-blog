@@ -21,6 +21,8 @@ export namespace DouMiBlog {
     archiveTime: string,
     slug: string,
     illustration: string,
+    tags: string[],
+    category: string,
     digest: string
   }
 

@@ -106,17 +106,17 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     }
   }
   fetchBlogDetail = async (slug: string) => {
-    const result = await axios.get(`${this.endpoint ? this.endpoint : ''}/api/blog/detail?slug=${slug}`, {withCredentials: true})
+    const result = await this.BlogServer.fetchArticleDetail(slug);
 
     this.setState({
-      blogContent: result.data.content,
-      blogTitle: result.data.title,
-      blogIllustration: result.data.illustration,
-      blogDigest: result.data.digest,
-      blogTags: result.data.tags,
-      blogArchiveTime: result.data.archiveTime,
-      blogCategory: result.data.category,
-      blogStatus: result.data.articleStatus
+      blogContent: result.content,
+      blogTitle: result.title,
+      blogIllustration: result.illustration,
+      blogDigest: result.digest,
+      blogTags: result.tags,
+      blogArchiveTime: result.archiveTime,
+      blogCategory: result.category,
+      blogStatus: result.articleStatus
     })
   }
   handleSubmit = async(actionType: string) => {
