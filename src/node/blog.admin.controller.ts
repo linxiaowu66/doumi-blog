@@ -1,67 +1,16 @@
-import { Controller, Get, Post, Put, Query, Body, Session ***REMOVED*** from '@malagu/mvc/lib/node';
-// import slug from 'limax';
-import {In***REMOVED*** from "typeorm";
-import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { Article, ArticleStatus ***REMOVED*** from './entity/article';
-import { Tag ***REMOVED*** from './entity/tag';
-import { Category ***REMOVED*** from './entity/category';
-import { Archive ***REMOVED*** from './entity/archive';
-import { User ***REMOVED*** from './entity/user';
+import { Controller, Post, Put, Body, Session ***REMOVED*** from '@malagu/mvc/lib/node';
+import { Autowired ***REMOVED*** from '@malagu/core';
+import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { DouMiBlog ***REMOVED*** from '../common/blog-protocol';
+import { BlogServiceSymbol, BlogService ***REMOVED*** from './services/blog.service';
+import { Article ***REMOVED*** from './entity/article';
 
 // 以下api都是需要身份校验
 @Controller('/api')
 export class blogAdminController {
 
-  // 获取博客列表
-  @Transactional()
-  @Get('/blog/list')
-  async fetchBlogList(
-    @Query('currentPage') currentPage:number,
-    ) {
-    const repo = OrmContext.getRepository(Article);
-
-    const [list, allArticles] = await Promise.all([repo.find({
-      order: {
-        createdAt: 'DESC'
-    ***REMOVED***,
-      take: 5,
-      skip: (currentPage - 1) * 5, // think this needs to be page * limit
-      relations: ['tags', 'archiveTime', 'category', 'author']
-  ***REMOVED***), repo.find()])
-
-    return { list: list.map(item => ({
-      ...item,
-      tags: item.tags.map(it => it.name),
-      category: item.category.name,
-      archiveTime: item.archiveTime.archiveTime,
-      author: item.author.username
-  ***REMOVED***)), pageCount: Math.ceil(allArticles.length / 5), currentPage***REMOVED***
-***REMOVED***
-
-  // 获取博客详情
-  @Transactional()
-  // @Catch()
-  @Get('blog/detail')
-  async fetchBlogDetail(
-    @Query('slug') slug: string
-  ) {
-    const repo = OrmContext.getRepository(Article);
-
-    const result = await repo.findOne({ slug ***REMOVED***, { relations: ['tags', 'archiveTime', 'category', 'author'] ***REMOVED***)
-
-    if (!result) {
-      throw new Error('找不到对应文章')
-  ***REMOVED***
-
-    return {
-      ...result,
-      tags: result.tags.map(it => it.name),
-      category: result.category.name,
-      archiveTime: result.archiveTime.archiveTime,
-      author: result.author.username
-  ***REMOVED***
-***REMOVED***
+  @Autowired(BlogServiceSymbol)
+  protected readonly blogService: BlogService;
 
   // 新建博客
   @Post('/blog')
@@ -70,45 +19,16 @@ export class blogAdminController {
     @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
-    const { tags, category, archiveTime ***REMOVED*** = article;
+
     const userInfo = session['malagu:securityContext'].authentication.principal;
     const { username ***REMOVED*** = userInfo
 
-    const tagRepo = OrmContext.getRepository(Tag);
-    const catRepo = OrmContext.getRepository(Category);
-    const archiveRepo = OrmContext.getRepository(Archive);
-    const userRepo = OrmContext.getRepository(User);
+    const result = await this.blogService.createOrUpdateArticle(article, username);
 
-    const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***)
-    const loadCat = await catRepo.find({ name: category***REMOVED***
-    const loadUser = await userRepo.find({ email: username ***REMOVED***
-    let loadArch = await archiveRepo.findOne({ archiveTime ***REMOVED***)
-
-    if (!loadArch) {
-      loadArch = new Archive()
-      loadArch.archiveTime = archiveTime
-
-      await archiveRepo.save(loadArch);
-  ***REMOVED***
-
-    const articleIns = new Article()
-    articleIns.archiveTime = loadArch;
-    articleIns.tags = loadTags;
-    articleIns.slug = Date.now().toString(); // slug(article.title);
-    articleIns.category = loadCat[0];
-    articleIns.articleStatus = article.articleStatus as ArticleStatus;
-    articleIns.content = article.content;
-    articleIns.digest = article.digest;
-    articleIns.illustration = article.illustration;
-    articleIns.title = article.title;
-    articleIns.author = loadUser[0];
-    articleIns.pv = 0;
-
-    const repo = OrmContext.getRepository(Article);
-
-    await repo.save(articleIns)
-
-    return { status: 1, data: article.articleStatus === 'draft' ? '保存草稿成功' : '发布成功'***REMOVED***
+    return { status: 1, data: {
+      msg: article.articleStatus === 'draft' ? '保存草稿成功' : '发布成功',
+      slug: (result as Article).slug
+  ***REMOVED******REMOVED***
 ***REMOVED***
 
   // 更新博客内容
@@ -118,42 +38,13 @@ export class blogAdminController {
     @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
-    const { tags, category, archiveTime ***REMOVED*** = article;
     const userInfo = session['malagu:securityContext'].authentication.principal;
     const { username ***REMOVED*** = userInfo
 
-    const tagRepo = OrmContext.getRepository(Tag);
-    const catRepo = OrmContext.getRepository(Category);
-    const archiveRepo = OrmContext.getRepository(Archive);
-    const userRepo = OrmContext.getRepository(User);
+    await this.blogService.createOrUpdateArticle(article, username, true);
 
-    const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***)
-    const loadCat = await catRepo.find({ name: category***REMOVED***
-    const loadUser = await userRepo.find({ email: username ***REMOVED***
-    let loadArch = await archiveRepo.findOne({ archiveTime ***REMOVED***)
-
-    if (!loadArch) {
-      loadArch = new Archive()
-      loadArch.archiveTime = archiveTime
-
-      await archiveRepo.save(loadArch);
-  ***REMOVED***
-
-    const articleIns = new Article()
-    articleIns.archiveTime = loadArch;
-    articleIns.tags = loadTags;
-    articleIns.category = loadCat[0];
-    articleIns.articleStatus = article.articleStatus as ArticleStatus;
-    articleIns.content = article.content;
-    articleIns.digest = article.digest;
-    articleIns.illustration = article.illustration;
-    articleIns.title = article.title;
-    articleIns.author = loadUser[0];
-
-    const repo = OrmContext.getRepository(Article);
-
-    await repo.update({ slug: article.slug ***REMOVED***, articleIns)
-
-    return { status: 1, data: article.articleStatus === 'draft' ? '更新草稿成功' : '发布成功'***REMOVED***
+    return { status: 1, data: {
+      msg: article.articleStatus === 'draft' ? '更新草稿成功' : '更新发布成功'
+  ***REMOVED******REMOVED***
 ***REMOVED***
 ***REMOVED***

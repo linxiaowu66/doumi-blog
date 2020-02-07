@@ -4,6 +4,8 @@ malagu:
     enabled: true
     usernameKey: email
     passwordKey: password
+  logger:
+    level: 'info'
   web:
     cors:
       origin: 'http://nblog.5udou.cn'
