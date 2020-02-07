@@ -40,9 +40,8 @@ interface BlogItemCardProps {
   archiveTime: string,
   category: string,
   tags: string[],
-  content: string,
   slug: string,
-  onClick: (content: string) => void,
+  onClick: () => void,
   onEdit: (slug: string) => void
 ***REMOVED***
 
@@ -52,7 +51,7 @@ export default function BlogItemCard(props: BlogItemCardProps) {
   const { title, archiveTime, category, tags ***REMOVED*** = props;
 
   return (
-    <Card className={classes.card***REMOVED*** onClick={() => props.onClick(props.content)***REMOVED***>
+    <Card className={classes.card***REMOVED*** onClick={() => props.onClick()***REMOVED***>
       <CardContent>
         <Typography className={classes.time***REMOVED*** color="textSecondary" gutterBottom>
           {archiveTime***REMOVED***
