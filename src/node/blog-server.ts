@@ -1,14 +1,11 @@
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
-import { PasswordEncoder, Anonymous } from '@malagu/security/lib/node';
+import { Anonymous } from '@malagu/security/lib/node';
 import { Autowired } from '@malagu/core';
-import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
+import { Transactional } from '@malagu/typeorm/lib/node';
 import { BlogServiceSymbol, BlogService } from './services';
-import { User } from './entity/user';
-import { Tag } from './entity/tag';
-import { Category } from './entity/category';
-import { Archive } from './entity/archive';
-import { Schedule, DoumiSchedule } from './schedule';
+import { AuthServiceSymbol, AuthService } from './services/auth.service';
+
 
 const pick = require('lodash.pick');
 
@@ -16,14 +13,11 @@ const pick = require('lodash.pick');
 @Anonymous()
 export class BlogServerImpl implements BlogServer {
 
-  @Autowired(PasswordEncoder)
-  protected readonly passwordEncoder: PasswordEncoder
+  @Autowired(AuthServiceSymbol)
+  protected readonly authService: AuthService;
 
   @Autowired(BlogServiceSymbol)
   protected readonly blogService: BlogService;
-
-  @Autowired(Schedule)
-  protected readonly schedule: DoumiSchedule;
 
   @Transactional()
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
@@ -55,56 +49,27 @@ export class BlogServerImpl implements BlogServer {
 
   @Transactional()
   async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
-    const repo = OrmContext.getRepository(Tag);
+    const result = await this.blogService.fetchTagsListWithArticle();
 
-    const result = await repo.find({ relations: ["articles"]});
-
-    const finalRes = result.map(item => ({
-      id: item.id,
-      name: item.name,
-      articlesCount: item.articles.length
-    }))
-
-    return Promise.resolve(finalRes)
+    return Promise.resolve(result)
   }
   @Transactional()
   async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
-    const repo = OrmContext.getRepository(Category);
+    const result = await this.blogService.fetchCatListWithArticle();
 
-    const result = await repo.find({ relations: ["articles"]});
-
-    const finalRes = result.map(item => ({
-      id: item.id,
-      name: item.name,
-      articlesCount: item.articles.length
-    }))
-
-    return Promise.resolve(finalRes)
+    return Promise.resolve(result)
   }
 
   @Transactional()
   async fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]> {
-    const repo = OrmContext.getRepository(Archive);
+    const result = await this.blogService.fetchArchListWithArticle()
 
-    const result = await repo.find({ relations: ["articles"]});
-
-    const finalRes = result.map(item => ({
-      id: item.id,
-      archiveTime: item.archiveTime,
-      name: '', // fix lint error
-      articlesCount: item.articles.length
-    }))
-
-    return Promise.resolve(finalRes)
+    return Promise.resolve(result)
   }
 
   @Transactional()
   async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
-    const repo = OrmContext.getRepository(User)
-
-    const pwd = await this.passwordEncoder.encode(param.password);
-
-    await repo.save({ ...param, password: pwd });
+    await this.authService.registerUser(param);
     return Promise.resolve('注册成功');
   }
 }

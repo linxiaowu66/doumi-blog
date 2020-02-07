@@ -11,10 +11,16 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
-    margin: 5
+    margin: 5,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flexGrow: 1,
   },
   media: {
     height: 140,
+
   },
 });
 
@@ -35,7 +41,7 @@ export default function BlogItem(props: BlogItemProps) {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea onClick={handleJumpToDetail}>
+      <CardActionArea onClick={handleJumpToDetail} className={classes.content}>
         <CardMedia
           className={classes.media}
           image={props.mediaUrl}

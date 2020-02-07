@@ -75,7 +75,15 @@ export class Article {
   })
   tags: Tag[];
 
-  // 文章的归档时间
+  // 以日为单位
+  @Column({
+    type: "varchar",
+    length: 200,
+    nullable: false
+  })
+  fullArchiveTime: string;
+
+  // 文章的归档时间, 月份为单位
   @ManyToOne(type => Archive, archive => archive.articles)
   archiveTime: Archive;
 

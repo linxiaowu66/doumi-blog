@@ -137,8 +137,14 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     if (result.data.status && result.data.data) {
       this.setState({
         isOpenSnackbar: true,
-        snackbarMsg: result.data.data
+        snackbarMsg: result.data.data.msg
       })
+      if (!editMode) {
+        this.setState({
+          editMode: true,
+          slug: result.data.data.slug
+        })
+      }
     }
   }
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
