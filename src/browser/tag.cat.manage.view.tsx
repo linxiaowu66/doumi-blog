@@ -2,7 +2,9 @@ import * as React from 'react';
 import { View } from "@malagu/react/lib/browser";
 // import BlogTable from './components/blog.table';
 import BlogContainer from './components/blogContainer';
-import { Create, List, Label } from '@material-ui/icons'
+import Create from '@material-ui/icons/Create';
+import List from '@material-ui/icons/List';
+import Label from '@material-ui/icons/Label';
 
 interface Prop {}
 interface State {

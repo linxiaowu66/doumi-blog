@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from '@malagu/react/lib/browser';
-// import { Tooltip, Fab } from '@material-ui/core';
-import {Email, Facebook} from '@material-ui/icons';
+import Facebook from '@material-ui/icons/Facebook';
+import Email from '@material-ui/icons/Email';
 import BlogContainer from './components/blogContainer';
 import { DouMiIntroduction } from './components/doumiIntroduction';
 import DouMiDetailItem from './components/doumiDetailItem';
