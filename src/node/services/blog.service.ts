@@ -110,16 +110,16 @@ export class BlogService {
 
     if (!loadArch) {
       loadArch = new Archive()
-      loadArch.archiveTime = archiveTime
+      loadArch.archiveTime = archiveTime.substr(0, 7)
 
       await archiveRepo.save(loadArch);
   ***REMOVED***
+    console.log('>>>', loadArch, loadCat, loadTags)
 
     const articleIns = new Article()
     articleIns.archiveTime = loadArch;
     articleIns.fullArchiveTime = archiveTime;
     articleIns.tags = loadTags;
-    articleIns.slug = Date.now().toString(); // slug(article.title);
     articleIns.category = loadCat[0];
     articleIns.articleStatus = article.articleStatus as ArticleStatus;
     articleIns.content = article.content;
@@ -127,7 +127,12 @@ export class BlogService {
     articleIns.illustration = article.illustration;
     articleIns.title = article.title;
     articleIns.author = loadUser[0];
-    articleIns.pv = 0;
+
+    console.log('****', isUpdate)
+    if (!isUpdate) {
+      articleIns.slug = Date.now().toString();
+      articleIns.pv = 0;
+  ***REMOVED***
 
     const repo = OrmContext.getRepository(Article);
 
