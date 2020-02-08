@@ -35,7 +35,7 @@ export class BlogServerImpl implements BlogServer {
   async fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList> {
     const result = await this.blogService.fetchArticleList(currentPage, 5, null, condition)
 
-    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']))
+    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category']))
 
     return Promise.resolve(result)
   }

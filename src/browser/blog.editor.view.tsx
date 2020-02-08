@@ -134,6 +134,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       illustration: blogIllustration,
       articleStatus: actionType
     }
+
     const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }, {withCredentials: true}): await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody, {withCredentials: true})
 
     if (result.data.status && result.data.data) {

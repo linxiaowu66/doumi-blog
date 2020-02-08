@@ -69,7 +69,9 @@ export default class BlogAggregation extends React.Component<Prop, State> {
       response: []
     }
   }
+  // static getDerivedStateFromProps() {
 
+  // }
   componentWillReceiveProps(newProps: Prop) {
     const { type } = this.state;
     const newType = (newProps as any).match.params.type as EAggregationType

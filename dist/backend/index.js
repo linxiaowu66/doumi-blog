@@ -12788,7 +12788,7 @@ var BlogServerImpl = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.blogService.fetchArticleList(currentPage, 5, null, condition)];
                     case 1:
                         result = _a.sent();
-                        result.list = result.list.map(function (item) { return pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration']); });
+                        result.list = result.list.map(function (item) { return pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category']); });
                         return [2 /*return*/, Promise.resolve(result)];
                 }
             });
@@ -14056,17 +14056,17 @@ var BlogService = /** @class */ (function () {
                         loadArch = _a.sent();
                         if (!!loadArch) return [3 /*break*/, 6];
                         loadArch = new archive_1.Archive();
-                        loadArch.archiveTime = archiveTime;
+                        loadArch.archiveTime = archiveTime.substr(0, 7);
                         return [4 /*yield*/, archiveRepo.save(loadArch)];
                     case 5:
                         _a.sent();
                         _a.label = 6;
                     case 6:
+                        console.log('>>>', loadArch, loadCat, loadTags);
                         articleIns = new article_1.Article();
                         articleIns.archiveTime = loadArch;
                         articleIns.fullArchiveTime = archiveTime;
                         articleIns.tags = loadTags;
-                        articleIns.slug = Date.now().toString(); // slug(article.title);
                         articleIns.category = loadCat[0];
                         articleIns.articleStatus = article.articleStatus;
                         articleIns.content = article.content;
@@ -14074,7 +14074,11 @@ var BlogService = /** @class */ (function () {
                         articleIns.illustration = article.illustration;
                         articleIns.title = article.title;
                         articleIns.author = loadUser[0];
-                        articleIns.pv = 0;
+                        console.log('****', isUpdate);
+                        if (!isUpdate) {
+                            articleIns.slug = Date.now().toString();
+                            articleIns.pv = 0;
+                        }
                         repo = node_2.OrmContext.getRepository(article_1.Article);
                         if (!!isUpdate) return [3 /*break*/, 8];
                         return [4 /*yield*/, repo.save(articleIns)];

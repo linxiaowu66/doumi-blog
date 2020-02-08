@@ -1,6 +1,6 @@
 如何使用Material-ui提供的那些颜色？
 
-优化material-ui的import方式，使用一个个import
+
 
 去除componentWillMount之类的状态，尽量用最新的react 16语法写页面
 

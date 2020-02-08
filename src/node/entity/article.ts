@@ -68,11 +68,7 @@ export class Article {
 
   // 一篇文章可以包含多个tag，所以这里是多对多的关系
   @ManyToMany(type => Tag, tag => tag.articles)
-  @JoinTable({
-    name: 'article_tags',
-    joinColumn: { name: 'aid' },
-    inverseJoinColumn: { name: 'tid' },
-  })
+  @JoinTable()
   tags: Tag[];
 
   // 以日为单位
