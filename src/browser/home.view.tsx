@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import { Container ***REMOVED*** from '@material-ui/core'
+import Container from '@material-ui/core/Container'
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-// import Link from '@material-ui/core/Link';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
 import DouMiLinks from './components/doumiLinks';

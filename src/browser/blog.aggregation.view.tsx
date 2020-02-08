@@ -7,7 +7,9 @@ import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
 import { Theme, withStyles, createStyles ***REMOVED*** from '@material-ui/core/styles';
 import BlogContainer from './components/blogContainer';
-import { Category, Archive, Bookmark ***REMOVED*** from '@material-ui/icons'
+import Category from '@material-ui/icons/Category';
+import Archive from '@material-ui/icons/Archive';
+import Bookmark from '@material-ui/icons/Bookmark';
 import IconBreadcrumbs from './components/breadcrumbs';
 
 interface Prop {***REMOVED***

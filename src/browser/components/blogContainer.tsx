@@ -3,9 +3,17 @@ import AppBar from '@material-ui/core/AppBar';
 import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
-import { Home, Category, Archive, Bookmark, GitHub, PersonPin, Web, Menu, AccountCircle, Cloud, ExitToApp
-
-***REMOVED*** from '@material-ui/icons'
+import Home from '@material-ui/icons/Home';
+import Category from '@material-ui/icons/Category';
+import Archive from '@material-ui/icons/Archive';
+import Bookmark from '@material-ui/icons/Bookmark';
+import GitHub from '@material-ui/icons/GitHub';
+import PersonPin from '@material-ui/icons/PersonPin';
+import Web from '@material-ui/icons/Web';
+import Menu from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Cloud from '@material-ui/icons/Cloud';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import IconButton from '@material-ui/core/IconButton';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Divider from '@material-ui/core/Divider';

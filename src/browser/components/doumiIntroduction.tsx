@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { makeStyles, Grid ***REMOVED*** from '@material-ui/core';
-import { LocationOn, Link, GitHub, Twitter ***REMOVED*** from '@material-ui/icons'
+import { makeStyles ***REMOVED*** from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import GitHub from '@material-ui/icons/GitHub'
+import LocationOn from '@material-ui/icons/LocationOn'
+import Link from '@material-ui/icons/Link';
+import Twitter from '@material-ui/icons/Twitter'
 import { DouMiAvatar ***REMOVED*** from './doumiAvatar';
 import MuiLink from '@material-ui/core/Link';
 

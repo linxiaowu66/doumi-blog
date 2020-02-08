@@ -8,7 +8,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
 import * as ReactMarkdown from 'react-markdown';
 import CodeBlock from './components/codeBlock';
-import { Create, List ***REMOVED*** from '@material-ui/icons'
+import Create from '@material-ui/icons/Create';
+import List from '@material-ui/icons/List';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogItemCard from './components/blogItemCard';
 

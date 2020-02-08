@@ -12,7 +12,9 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import BlogContainer from './components/blogContainer';
-import { Create, List, Settings ***REMOVED*** from '@material-ui/icons'
+import Create from '@material-ui/icons/Create';
+import List from '@material-ui/icons/List';
+import Settings from '@material-ui/icons/Settings';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import CodeBlock from './components/codeBlock';
 import BlogConfig from './components/blogSetting';

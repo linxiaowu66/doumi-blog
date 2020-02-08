@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container***REMOVED*** from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import Typography from './typography'
 import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
 import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';

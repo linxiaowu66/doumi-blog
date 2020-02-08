@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Tooltip, Fab ***REMOVED*** from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 interface ClickTooltipProps {
