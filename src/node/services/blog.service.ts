@@ -107,6 +107,7 @@ export class BlogService {
     const loadCat = await catRepo.find({ name: category});
     const loadUser = await userRepo.find({ email: username });
     let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) })
+    const repo = OrmContext.getRepository(Article);
 
     if (!loadArch) {
       loadArch = new Archive()
@@ -114,9 +115,17 @@ export class BlogService {
 
       await archiveRepo.save(loadArch);
     }
-    console.log('>>>', loadArch, loadCat, loadTags)
 
-    const articleIns = new Article()
+    let articleIns
+    if (!isUpdate) {
+      articleIns = new Article()
+    } else {
+      articleIns = await repo.findOne({slug: article.slug});
+
+      if (!articleIns) {
+        throw new Error('对应博文不存在，请重新确认');
+      }
+    }
     articleIns.archiveTime = loadArch;
     articleIns.fullArchiveTime = archiveTime;
     articleIns.tags = loadTags;
@@ -128,20 +137,21 @@ export class BlogService {
     articleIns.title = article.title;
     articleIns.author = loadUser[0];
 
-    console.log('****', isUpdate)
     if (!isUpdate) {
       articleIns.slug = Date.now().toString();
       articleIns.pv = 0;
-    }
-
-    const repo = OrmContext.getRepository(Article);
-
-    let result
-    if (!isUpdate) {
-      result = await repo.save(articleIns)
     } else {
-      result = await repo.update({ slug: article.slug }, articleIns)
+      articleIns.slug = article.slug;
     }
+
+    const result = await repo.save(articleIns)
+
+    // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
+    // if (!isUpdate) {
+      // result = await repo.save(articleIns)
+    // } else {
+    //   result = await repo.update({ slug: article.slug }, articleIns)
+    // }
     return result
   }
   @Transactional()

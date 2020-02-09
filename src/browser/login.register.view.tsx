@@ -63,7 +63,10 @@ export class LoginOrRegister extends React.Component<Props, State> {
         })
       }
     } catch (err) {
-      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '登录失败，请联系管理员'
+      })
     }
 
   }
@@ -89,7 +92,10 @@ export class LoginOrRegister extends React.Component<Props, State> {
         }, 4000)
       }
     } catch (err) {
-      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '注册失败，请联系管理员'
+      })
     }
   }
   render() {

@@ -13162,7 +13162,6 @@ var Article = /** @class */ (function () {
             length: 200,
             nullable: false
         }),
-        typeorm_1.Index({ unique: true }),
         __metadata("design:type", String)
     ], Article.prototype, "title", void 0);
     __decorate([
@@ -13208,11 +13207,7 @@ var Article = /** @class */ (function () {
     ], Article.prototype, "author", void 0);
     __decorate([
         typeorm_1.ManyToMany(function (type) { return tag_1.Tag; }, function (tag) { return tag.articles; }),
-        typeorm_1.JoinTable({
-            name: 'article_tags',
-            joinColumn: { name: 'aid' },
-            inverseJoinColumn: { name: 'tid' },
-        }),
+        typeorm_1.JoinTable(),
         __metadata("design:type", Array)
     ], Article.prototype, "tags", void 0);
     __decorate([
@@ -13439,11 +13434,6 @@ var Tag = /** @class */ (function () {
     ], Tag.prototype, "name", void 0);
     __decorate([
         typeorm_1.ManyToMany(function (type) { return article_1.Article; }, function (article) { return article.tags; }, { cascade: true }),
-        typeorm_1.JoinTable({
-            name: 'article_tags',
-            joinColumn: { name: 'tid' },
-            inverseJoinColumn: { name: 'aid' },
-        }),
         __metadata("design:type", Array)
     ], Tag.prototype, "articles", void 0);
     __decorate([
@@ -14033,7 +14023,7 @@ var BlogService = /** @class */ (function () {
     BlogService.prototype.createOrUpdateArticle = function (article, username, isUpdate) {
         if (isUpdate === void 0) { isUpdate = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var tags, category, archiveTime, tagRepo, catRepo, archiveRepo, userRepo, loadTags, loadCat, loadUser, loadArch, articleIns, repo, result;
+            var tags, category, archiveTime, tagRepo, catRepo, archiveRepo, userRepo, loadTags, loadCat, loadUser, loadArch, repo, articleIns, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -14054,6 +14044,7 @@ var BlogService = /** @class */ (function () {
                         return [4 /*yield*/, archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) })];
                     case 4:
                         loadArch = _a.sent();
+                        repo = node_2.OrmContext.getRepository(article_1.Article);
                         if (!!loadArch) return [3 /*break*/, 6];
                         loadArch = new archive_1.Archive();
                         loadArch.archiveTime = archiveTime.substr(0, 7);
@@ -14062,8 +14053,17 @@ var BlogService = /** @class */ (function () {
                         _a.sent();
                         _a.label = 6;
                     case 6:
-                        console.log('>>>', loadArch, loadCat, loadTags);
+                        if (!!isUpdate) return [3 /*break*/, 7];
                         articleIns = new article_1.Article();
+                        return [3 /*break*/, 9];
+                    case 7: return [4 /*yield*/, repo.findOne({ slug: article.slug })];
+                    case 8:
+                        articleIns = _a.sent();
+                        if (!articleIns) {
+                            throw new Error('对应博文不存在，请重新确认');
+                        }
+                        _a.label = 9;
+                    case 9:
                         articleIns.archiveTime = loadArch;
                         articleIns.fullArchiveTime = archiveTime;
                         articleIns.tags = loadTags;
@@ -14074,22 +14074,30 @@ var BlogService = /** @class */ (function () {
                         articleIns.illustration = article.illustration;
                         articleIns.title = article.title;
                         articleIns.author = loadUser[0];
-                        console.log('****', isUpdate);
                         if (!isUpdate) {
                             articleIns.slug = Date.now().toString();
                             articleIns.pv = 0;
                         }
-                        repo = node_2.OrmContext.getRepository(article_1.Article);
-                        if (!!isUpdate) return [3 /*break*/, 8];
-                        return [4 /*yield*/, repo.save(articleIns)];
-                    case 7:
+                        else {
+                            articleIns.slug = article.slug;
+                        }
+                        return [4 /*yield*/, repo.save(articleIns)
+                            // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
+                            // if (!isUpdate) {
+                            // result = await repo.save(articleIns)
+                            // } else {
+                            //   result = await repo.update({ slug: article.slug }, articleIns)
+                            // }
+                        ];
+                    case 10:
                         result = _a.sent();
-                        return [3 /*break*/, 10];
-                    case 8: return [4 /*yield*/, repo.update({ slug: article.slug }, articleIns)];
-                    case 9:
-                        result = _a.sent();
-                        _a.label = 10;
-                    case 10: return [2 /*return*/, result];
+                        // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
+                        // if (!isUpdate) {
+                        // result = await repo.save(articleIns)
+                        // } else {
+                        //   result = await repo.update({ slug: article.slug }, articleIns)
+                        // }
+                        return [2 /*return*/, result];
                 }
             });
         });
