@@ -77,19 +77,19 @@ export default function BlogConfig(props: BlogConfigProps) {
   const [selectCat, setCategory] = React.useState<string>('');
 
   React.useEffect(() => {
-    if (props.initData?.archiveTime) {
-      setSelectedDate(new Date(props.initData?.archiveTime))
+    if (props.initData?.archiveTime !== undefined) {
+      setSelectedDate(props.initData?.archiveTime === '' ? new Date() : new Date(props.initData?.archiveTime))
   ***REMOVED***
-    if (props.initData?.illustration) {
+    if (props.initData?.illustration !== undefined) {
       setIllustration(props.initData?.illustration)
   ***REMOVED***
-    if (props.initData?.digest) {
+    if (props.initData?.digest !== undefined) {
       setDigest(props.initData?.digest)
   ***REMOVED***
-    if (props.initData?.tags) {
+    if (props.initData?.tags !== undefined) {
       setTags(props.initData?.tags)
   ***REMOVED***
-    if (props.initData?.cat) {
+    if (props.initData?.cat !== undefined) {
       setCategory(props.initData?.cat)
   ***REMOVED***
 ***REMOVED***, [props])

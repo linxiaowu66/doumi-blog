@@ -133,6 +133,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
         ***REMOVED***)***REMOVED***><span>{pageType === 'register' ? '注册成功' : '登录成功'***REMOVED***</span><Done /></div>
         </section>
         <Snackbar
+          autoHideDuration={1500***REMOVED***
           anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
           key={'top,right'***REMOVED***
           open={isOpenSnackbar***REMOVED***

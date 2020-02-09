@@ -60,27 +60,27 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
+  private initData = {
+    editMode: false,
+    isOpenSnackbar: false,
+    snackbarMsg: '',
+    blogContent: '',
+    blogDigest: '',
+    blogTitle: '',
+    blogIllustration: '',
+    blogTags: [],
+    blogCategory: '',
+    blogArchiveTime: '',
+    slug: '',
+    blogStatus: 'draft' as 'draft',
+    anchorEl: null,
+    showSetting: false,
+***REMOVED***
+
   constructor(props: Prop) {
     super(props);
 
-    this.state = {
-      editMode: false,
-      isOpenSnackbar: false,
-      snackbarMsg: '',
-      blogContent: '',
-      blogDigest: '',
-      blogTitle: '',
-      blogIllustration: '',
-      blogTags: [],
-      blogCategory: '',
-      blogArchiveTime: '',
-      slug: '',
-      blogStatus: 'draft',
-      tags: [],
-      categories: [],
-      anchorEl: null,
-      showSetting: false,
-  ***REMOVED***
+    this.state = { ...this.initData, tags: [], categories: []***REMOVED***
 ***REMOVED***
   async componentWillMount() {
   ***REMOVED***
@@ -105,6 +105,15 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     ***REMOVED***
   ***REMOVED*** catch (err) {
       console.log(err)
+  ***REMOVED***
+***REMOVED***
+  componentWillReceiveProps(props: Prop) {
+    const { slug: oldSlug ***REMOVED*** = this.state;
+    const { slug ***REMOVED*** = query.parse((props as any).location.search)
+    if (oldSlug && !slug) {
+      this.setState(this.initData)
+  ***REMOVED*** else if (slug && (slug !== oldSlug)) {
+      this.fetchBlogDetail(slug as string);
   ***REMOVED***
 ***REMOVED***
   fetchBlogDetail = async (slug: string) => {
@@ -235,6 +244,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         ***REMOVED******REMOVED***
         />
         <Snackbar
+          autoHideDuration={1500***REMOVED***
           anchorOrigin={{ vertical: 'top', horizontal: 'right' ***REMOVED******REMOVED***
           key={'top,right'***REMOVED***
           open={isOpenSnackbar***REMOVED***
