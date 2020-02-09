@@ -133,6 +133,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
           })}><span>{pageType === 'register' ? '注册成功' : '登录成功'}</span><Done /></div>
         </section>
         <Snackbar
+          autoHideDuration={1500}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           key={'top,right'}
           open={isOpenSnackbar}

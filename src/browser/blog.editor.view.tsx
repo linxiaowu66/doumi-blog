@@ -60,27 +60,27 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
+  private initData = {
+    editMode: false,
+    isOpenSnackbar: false,
+    snackbarMsg: '',
+    blogContent: '',
+    blogDigest: '',
+    blogTitle: '',
+    blogIllustration: '',
+    blogTags: [],
+    blogCategory: '',
+    blogArchiveTime: '',
+    slug: '',
+    blogStatus: 'draft' as 'draft',
+    anchorEl: null,
+    showSetting: false,
+  }
+
   constructor(props: Prop) {
     super(props);
 
-    this.state = {
-      editMode: false,
-      isOpenSnackbar: false,
-      snackbarMsg: '',
-      blogContent: '',
-      blogDigest: '',
-      blogTitle: '',
-      blogIllustration: '',
-      blogTags: [],
-      blogCategory: '',
-      blogArchiveTime: '',
-      slug: '',
-      blogStatus: 'draft',
-      tags: [],
-      categories: [],
-      anchorEl: null,
-      showSetting: false,
-    }
+    this.state = { ...this.initData, tags: [], categories: []}
   }
   async componentWillMount() {
     try {
@@ -105,6 +105,15 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       }
     } catch (err) {
       console.log(err)
+    }
+  }
+  componentWillReceiveProps(props: Prop) {
+    const { slug: oldSlug } = this.state;
+    const { slug } = query.parse((props as any).location.search)
+    if (oldSlug && !slug) {
+      this.setState(this.initData)
+    } else if (slug && (slug !== oldSlug)) {
+      this.fetchBlogDetail(slug as string);
     }
   }
   fetchBlogDetail = async (slug: string) => {
@@ -235,6 +244,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           }}
         />
         <Snackbar
+          autoHideDuration={1500}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           key={'top,right'}
           open={isOpenSnackbar}

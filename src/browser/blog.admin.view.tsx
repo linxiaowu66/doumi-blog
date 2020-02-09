@@ -130,6 +130,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
           </section>
         </div>
         <Snackbar
+          autoHideDuration={1500}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           key={'top,right'}
           open={isOpenSnackbar}
