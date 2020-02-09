@@ -107,6 +107,7 @@ export class BlogService {
     const loadCat = await catRepo.find({ name: category***REMOVED***
     const loadUser = await userRepo.find({ email: username ***REMOVED***
     let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) ***REMOVED***)
+    const repo = OrmContext.getRepository(Article);
 
     if (!loadArch) {
       loadArch = new Archive()
@@ -114,9 +115,17 @@ export class BlogService {
 
       await archiveRepo.save(loadArch);
   ***REMOVED***
-    console.log('>>>', loadArch, loadCat, loadTags)
 
-    const articleIns = new Article()
+    let articleIns
+    if (!isUpdate) {
+      articleIns = new Article()
+  ***REMOVED*** else {
+      articleIns = await repo.findOne({slug: article.slug***REMOVED***
+
+      if (!articleIns) {
+        throw new Error('对应博文不存在，请重新确认');
+    ***REMOVED***
+  ***REMOVED***
     articleIns.archiveTime = loadArch;
     articleIns.fullArchiveTime = archiveTime;
     articleIns.tags = loadTags;
@@ -128,20 +137,21 @@ export class BlogService {
     articleIns.title = article.title;
     articleIns.author = loadUser[0];
 
-    console.log('****', isUpdate)
     if (!isUpdate) {
       articleIns.slug = Date.now().toString();
       articleIns.pv = 0;
-  ***REMOVED***
-
-    const repo = OrmContext.getRepository(Article);
-
-    let result
-    if (!isUpdate) {
-      result = await repo.save(articleIns)
   ***REMOVED*** else {
-      result = await repo.update({ slug: article.slug ***REMOVED***, articleIns)
+      articleIns.slug = article.slug;
   ***REMOVED***
+
+    const result = await repo.save(articleIns)
+
+    // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
+    // if (!isUpdate) {
+      // result = await repo.save(articleIns)
+    // ***REMOVED*** else {
+    //   result = await repo.update({ slug: article.slug ***REMOVED***, articleIns)
+    // ***REMOVED***
     return result
 ***REMOVED***
   @Transactional()

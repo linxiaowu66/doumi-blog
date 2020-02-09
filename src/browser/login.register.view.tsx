@@ -63,7 +63,10 @@ export class LoginOrRegister extends React.Component<Props, State> {
       ***REMOVED***)
     ***REMOVED***
   ***REMOVED*** catch (err) {
-      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '登录失败，请联系管理员'
+    ***REMOVED***)
   ***REMOVED***
 
 ***REMOVED***
@@ -89,7 +92,10 @@ export class LoginOrRegister extends React.Component<Props, State> {
       ***REMOVED***, 4000)
     ***REMOVED***
   ***REMOVED*** catch (err) {
-      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '注册失败，请联系管理员'
+    ***REMOVED***)
   ***REMOVED***
 ***REMOVED***
   render() {

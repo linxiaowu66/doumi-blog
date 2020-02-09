@@ -22,7 +22,6 @@ export class Article {
     length: 200,
     nullable: false
 ***REMOVED***)
-  @Index({unique: true***REMOVED***)
   title: string;
 
   // 文章阅读量
