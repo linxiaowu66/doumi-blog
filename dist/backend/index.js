@@ -13945,10 +13945,12 @@ var BlogService = /** @class */ (function () {
     BlogService.prototype.fetchArticleList = function (currentPage, pageSize, order, condition) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var repo, baseQuery, whereQuery, _a, list, allArticles;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var repo, baseQuery, whereQuery, list, count, orderField_1, orderDef_1;
+            var _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         repo = node_2.OrmContext.getRepository(article_1.Article);
                         baseQuery = {
@@ -13960,32 +13962,57 @@ var BlogService = /** @class */ (function () {
                             relations: ['tags', 'archiveTime', 'category', 'author']
                         };
                         whereQuery = {};
-                        if (condition) {
-                            if (condition.queryTag) {
-                                whereQuery = {
-                                    tags: typeorm_1.In([condition.queryTag])
-                                };
-                            }
-                            else if (condition.queryCat) {
-                                whereQuery = {
-                                    where: { category: condition.queryCat }
-                                };
-                            }
-                            else if (condition.queryArch) {
-                                whereQuery = {
-                                    where: { archiveTime: condition.queryArch }
-                                };
-                            }
-                        }
+                        list = [];
+                        count = 0;
                         if (!(currentPage === 1)) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.updateWebsiteStatistics()];
                     case 1:
-                        _b.sent();
-                        _b.label = 2;
-                    case 2: return [4 /*yield*/, Promise.all([repo.find(__assign(__assign({}, baseQuery), whereQuery)), repo.find(whereQuery)])];
+                        _d.sent();
+                        _d.label = 2;
+                    case 2:
+                        if (!condition) return [3 /*break*/, 5];
+                        if (!condition.queryTag) return [3 /*break*/, 4];
+                        orderField_1 = 'article.createdAt';
+                        orderDef_1 = 'DESC';
+                        if (order) {
+                            // 排序字段仅支持1个字段
+                            Object.keys(order).forEach(function (item) {
+                                orderField_1 = "article." + item;
+                                orderDef_1 = order[item];
+                            });
+                        }
+                        return [4 /*yield*/, repo.createQueryBuilder('article')
+                                .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag })
+                                .skip((currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE))
+                                .take(pageSize ? pageSize : PAGE_SIZE)
+                                .orderBy(orderField_1, orderDef_1)
+                                .innerJoinAndSelect('article.tags', 'tags')
+                                .innerJoinAndSelect('article.category', 'category')
+                                .innerJoinAndSelect('article.archiveTime', 'archiveTime')
+                                .innerJoinAndSelect('article.author', 'author')
+                                .getManyAndCount()];
                     case 3:
-                        _a = __read.apply(void 0, [_b.sent(), 2]), list = _a[0], allArticles = _a[1];
-                        return [2 /*return*/, { list: list.map(function (item) { return (__assign(__assign({}, item), { tags: item.tags.map(function (it) { return it.name; }), category: item.category.name, archiveTime: item.fullArchiveTime, author: item.author.username })); }), pageCount: Math.ceil(allArticles.length / (pageSize ? pageSize : PAGE_SIZE)), currentPage: currentPage }];
+                        _b = __read.apply(void 0, [_d.sent(), 2]), list = _b[0], count = _b[1];
+                        return [3 /*break*/, 5];
+                    case 4:
+                        if (condition.queryCat) {
+                            whereQuery = {
+                                where: { category: condition.queryCat }
+                            };
+                        }
+                        else if (condition.queryArch) {
+                            whereQuery = {
+                                where: { archiveTime: condition.queryArch }
+                            };
+                        }
+                        _d.label = 5;
+                    case 5:
+                        if (!!((_a = condition) === null || _a === void 0 ? void 0 : _a.queryTag)) return [3 /*break*/, 7];
+                        return [4 /*yield*/, repo.findAndCount(__assign(__assign({}, baseQuery), whereQuery))];
+                    case 6:
+                        _c = __read.apply(void 0, [_d.sent(), 2]), list = _c[0], count = _c[1];
+                        _d.label = 7;
+                    case 7: return [2 /*return*/, { list: list.map(function (item) { return (__assign(__assign({}, item), { tags: item.tags.map(function (it) { return it.name; }), category: item.category.name, archiveTime: item.fullArchiveTime, author: item.author.username })); }), pageCount: Math.ceil(count / (pageSize ? pageSize : PAGE_SIZE)), currentPage: currentPage }];
                 }
             });
         });
