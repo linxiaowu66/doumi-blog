@@ -5,6 +5,7 @@ import { Autowired ***REMOVED*** from '@malagu/core';
 import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { BlogServiceSymbol, BlogService ***REMOVED*** from './services';
 import { AuthServiceSymbol, AuthService ***REMOVED*** from './services/auth.service';
+import { WebsiteServiceSymbol, WebsiteService ***REMOVED*** from './services/website.service';
 
 
 const pick = require('lodash.pick');
@@ -18,6 +19,9 @@ export class BlogServerImpl implements BlogServer {
 
   @Autowired(BlogServiceSymbol)
   protected readonly blogService: BlogService;
+
+  @Autowired(WebsiteServiceSymbol)
+  protected readonly websiteService: WebsiteService;
 
   @Transactional()
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
@@ -48,6 +52,15 @@ export class BlogServerImpl implements BlogServer {
 ***REMOVED***
 
   @Transactional()
+  async findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]> {
+    const result = await this.blogService.searchArticleByKeyword(keyword);
+
+    const list = result.map(item => pick(item, ['title', 'slug']))
+
+    return Promise.resolve(list);
+***REMOVED***
+
+  @Transactional()
   async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
     const result = await this.blogService.fetchTagsListWithArticle();
 
@@ -65,6 +78,13 @@ export class BlogServerImpl implements BlogServer {
     const result = await this.blogService.fetchArchListWithArticle()
 
     return Promise.resolve(result)
+***REMOVED***
+
+  @Transactional()
+  async fetchWebsiteChangeLog() {
+    const result = await this.websiteService.websiteChangeLog()
+
+    return Promise.resolve(result.reverse());
 ***REMOVED***
 
   @Transactional()

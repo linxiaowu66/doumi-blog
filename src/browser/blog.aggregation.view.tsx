@@ -7,10 +7,6 @@ import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
 import { Theme, withStyles, createStyles ***REMOVED*** from '@material-ui/core/styles';
 import BlogContainer from './components/blogContainer';
-import Category from '@material-ui/icons/Category';
-import Archive from '@material-ui/icons/Archive';
-import Bookmark from '@material-ui/icons/Bookmark';
-import IconBreadcrumbs from './components/breadcrumbs';
 
 interface Prop {***REMOVED***
 interface State {
@@ -28,21 +24,6 @@ const StyledBadge = withStyles((theme: Theme) =>
   ***REMOVED***,
 ***REMOVED***),
 )(Badge);
-
-const typeMeans: { [key: string]: {means: string, icon: React.ReactElement***REMOVED******REMOVED*** = {
-  category: {
-    means: '分类',
-    icon: <Category />
-***REMOVED***,
-  archive: {
-    means: '归档',
-    icon: <Archive />
-***REMOVED***,
-  tags: {
-    means: '标签',
-    icon: <Bookmark />
-***REMOVED***
-***REMOVED***
 
 enum EAggregationType {
   category = 'category',
@@ -86,7 +67,6 @@ export default class BlogAggregation extends React.Component<Prop, State> {
 ***REMOVED***
   async fetchAggregationTypeList(type: EAggregationType) {
   ***REMOVED***
-      console.log(type)
       const method = this.typeMapToMethod[type];
 
       const response = await method();
@@ -102,7 +82,6 @@ export default class BlogAggregation extends React.Component<Prop, State> {
 
   render() {
     const { type, response ***REMOVED*** = this.state;
-    const info = typeMeans[type]
     const type2Query = {
       category: 'queryCat',
       tags: 'queryTag',
@@ -110,7 +89,6 @@ export default class BlogAggregation extends React.Component<Prop, State> {
   ***REMOVED***
     return (
       <BlogContainer>
-        <IconBreadcrumbs position={info.means***REMOVED*** icon={info.icon***REMOVED*** />
         <section className="blog-type-list">
           {
             response.map((item, idx) => {

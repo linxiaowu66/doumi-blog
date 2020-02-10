@@ -1,6 +1,5 @@
 import { Reader ***REMOVED*** from './../entity/reader';
-import { Website ***REMOVED*** from './../entity/website';
-import { Component ***REMOVED*** from '@malagu/core';
+import { Component, Autowired ***REMOVED*** from '@malagu/core';
 import { Context ***REMOVED*** from '@malagu/web/lib/node';
 import { AwesomeHelp ***REMOVED*** from 'awesome-js';
 import { In ***REMOVED*** from 'typeorm';
@@ -11,6 +10,7 @@ import { Category ***REMOVED*** from '../entity/category';
 import { Archive ***REMOVED*** from '../entity/archive';
 import { User ***REMOVED*** from '../entity/user';
 import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
+import { WebsiteServiceSymbol, WebsiteService ***REMOVED*** from './website.service';
 
 
 export const BlogServiceSymbol = Symbol('BlogService');
@@ -19,6 +19,9 @@ const PAGE_SIZE = 5;
 
 @Component(BlogServiceSymbol)
 export class BlogService {
+
+  @Autowired(WebsiteServiceSymbol)
+  protected readonly websiteService: WebsiteService;
 
   @Transactional()
   async fetchArticleList(currentPage = 1, pageSize = 5, order?: any, condition?: DouMiBlog.queryCondition) {
@@ -38,7 +41,7 @@ export class BlogService {
     let count = 0;
 
     if (currentPage === 1) {
-      await this.updateWebsiteStatistics()
+      await this.websiteService.updateWebsiteStatistics()
   ***REMOVED***
 
     if (condition) {
@@ -205,7 +208,7 @@ export class BlogService {
       readerRepo.save(newReader);
   ***REMOVED***
 
-    await this.updateWebsiteStatistics();
+    await this.websiteService.updateWebsiteStatistics();
 ***REMOVED***
 
   @Transactional()
@@ -247,60 +250,16 @@ export class BlogService {
       articlesCount: item.articles.length
   ***REMOVED***))
 ***REMOVED***
+
   @Transactional()
-  async updateWebsiteStatistics() {
-    let reqIp: string
-    if (Context.getRequest().headers['x-real-ip']) {
-      reqIp = Context.getRequest().headers['x-real-ip'] as string
-  ***REMOVED*** else {
-      reqIp = (Context.getRequest() as any).ip
-  ***REMOVED***
+  async searchArticleByKeyword(keyword: string) {
+    const repo = OrmContext.getRepository(Article);
 
-    if (!reqIp) {
-      console.log('[blogService]: can not get client ip, ignore it!')
-      return
-  ***REMOVED***
+    const result = await repo.createQueryBuilder('article')
+    .where('user.title = :title', { title: keyword***REMOVED***)
+    .orWhere('user.content = :content', { content: keyword***REMOVED***)
+    .getMany()
 
-    // const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
-
-    const repo = OrmContext.getRepository(Website)
-
-    const website = await repo.findOne({id: 1***REMOVED***)
-
-    if (website) {
-      if (!website.todayIps.includes(reqIp)) {
-        website.todayIps.push(reqIp)
-        website.todayPv = +website.todayPv + 1
-        website.todayUv = +website.todayUv + 1
-        website.totalPv = +website.totalPv + 1
-        website.totalUv = +website.totalUv + 1
-    ***REMOVED*** else {
-        website.totalPv = +website.totalPv + 1
-        website.todayPv = +website.todayPv + 1
-    ***REMOVED***
-      repo.save(website)
-  ***REMOVED*** else {
-      const newData = new Website()
-      newData.todayIps = [reqIp];
-      newData.todayPv = 1
-      newData.todayUv = 1;
-      newData.totalPv = 1
-      newData.totalUv = 1;
-      repo.save(newData)
-  ***REMOVED***
+    return result
 ***REMOVED***
-  @Transactional()
-  async clearTodayIpsArray() {
-    const repo = OrmContext.getRepository(Website);
-
-    const data = await repo.findOne({ id: 1***REMOVED***)
-
-    if (data) {
-      data.todayIps = []
-      repo.save(data);
-  ***REMOVED***
-***REMOVED***
-
-  // @Transactional()
-  // async
 ***REMOVED***

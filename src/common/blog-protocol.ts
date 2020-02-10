@@ -3,14 +3,23 @@ export const BlogServer = Symbol('BlogServer');
 export interface BlogServer {
     fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
     fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList>;
+    findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]>
     fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
     fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
+    fetchWebsiteChangeLog(): Promise<DouMiBlog.ChangeLog[]>
     registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 ***REMOVED***
 
 export namespace DouMiBlog {
+  export interface ChangeLog {
+    title: string,
+    desc1: string,
+    desc2: string,
+    date: string,
+    time: string
+***REMOVED***
   export interface ArticleList {
     currentPage: number,
     list: ArticleBrief[],

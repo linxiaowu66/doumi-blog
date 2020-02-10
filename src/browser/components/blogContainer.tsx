@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
+import IconList from '@material-ui/icons/List';
 import Home from '@material-ui/icons/Home';
 import Category from '@material-ui/icons/Category';
 import Archive from '@material-ui/icons/Archive';
@@ -132,6 +133,10 @@ const navigatorList = [{
   icon: <Home />,
   link: ''
 ***REMOVED***, {
+  name: '博文列表',
+  icon: <IconList />,
+  link: '#/blog/list'
+***REMOVED***, {
   name: '分类',
   icon: <Category />,
   link: '#/blog/aggregation/category'
@@ -154,7 +159,7 @@ const navigatorList = [{
 ***REMOVED***, {
   name: '网站数据',
   icon: <Cloud />,
-  link: '/'
+  link: '/#/website'
 ***REMOVED***, {
   name: 'Github',
   icon: <GitHub />,
@@ -194,6 +199,7 @@ function ScrollTop(props: ScrollProps) {
 
 export default function BlogContainer(props: ContainerProps) {
   // const { container ***REMOVED*** = props;
+  let flag = false;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -201,6 +207,10 @@ export default function BlogContainer(props: ContainerProps) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   ***REMOVED***
+
+  const handleSearch = (e: any) => {
+    console.log(e.target.value)
+***REMOVED***
 
   const handleLogin = () => {
     location.hash = '#/blog/auth/login';
@@ -220,14 +230,17 @@ export default function BlogContainer(props: ContainerProps) {
       <div className={classes.toolbar***REMOVED*** />
       <Divider />
       <List>
-        {navList.map((item) => (
+        {navList.map((item) => {
+          const isActive = location.hash.match(item.link) && item.link
+          return (
           <Link color="inherit" underline={"none"***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
-            <ListItem button>
+            <ListItem button style={isActive ? {backgroundColor: 'rgba(17, 157, 85, 0.4)'***REMOVED*** : {***REMOVED******REMOVED***>
               <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
               <ListItemText primary={item.name***REMOVED*** />
             </ListItem>
           </Link>
-        ))***REMOVED***
+          )
+    ***REMOVED***)***REMOVED***
       </List>
     </div>
   );
@@ -260,6 +273,16 @@ export default function BlogContainer(props: ContainerProps) {
                 input: classes.inputInput,
             ***REMOVED******REMOVED***
               inputProps={{ 'aria-label': 'search' ***REMOVED******REMOVED***
+              onCompositionStart={() => { flag = true ***REMOVED******REMOVED***
+              onCompositionEnd={(e) => {
+                flag = false
+                handleSearch(e)
+            ***REMOVED******REMOVED***
+              onInput={(e) => {
+                if (!flag) {
+                  handleSearch(e)
+              ***REMOVED***
+            ***REMOVED******REMOVED***
             />
           </div>
           <div className={classes.grow***REMOVED*** />
