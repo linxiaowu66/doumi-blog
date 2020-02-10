@@ -34,12 +34,35 @@ export class BlogService {
   ***REMOVED***
 
     let whereQuery = {***REMOVED***
+    let list: Article[] = []
+    let count = 0;
+
+    if (currentPage === 1) {
+      await this.updateWebsiteStatistics()
+  ***REMOVED***
 
     if (condition) {
       if (condition.queryTag) {
-        whereQuery = {
-          tags: In([condition.queryTag])
+        // 多对多的关系比较特殊，find不能不满足需求
+        let orderField = 'article.createdAt';
+        let orderDef: "ASC" | "DESC" = 'DESC';
+        if (order) {
+          // 排序字段仅支持1个字段
+          Object.keys(order).forEach(item => {
+            orderField = `article.${item***REMOVED***`
+            orderDef = order[item]
+        ***REMOVED***)
       ***REMOVED***
+        [list, count] = await repo.createQueryBuilder('article')
+        .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag ***REMOVED***)
+        .skip((currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE))
+        .take(pageSize? pageSize : PAGE_SIZE)
+        .orderBy(orderField, orderDef)
+        .innerJoinAndSelect('article.tags', 'tags')
+        .innerJoinAndSelect('article.category', 'category')
+        .innerJoinAndSelect('article.archiveTime', 'archiveTime')
+        .innerJoinAndSelect('article.author', 'author')
+        .getManyAndCount()
     ***REMOVED*** else if (condition.queryCat) {
         whereQuery = {
           where: { category: condition.queryCat ***REMOVED***
@@ -51,11 +74,9 @@ export class BlogService {
     ***REMOVED***
   ***REMOVED***
 
-    if (currentPage === 1) {
-      await this.updateWebsiteStatistics()
+    if (!condition?.queryTag) {
+      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery***REMOVED***)
   ***REMOVED***
-
-    const [list, allArticles] = await Promise.all([repo.find({...baseQuery, ...whereQuery***REMOVED***), repo.find(whereQuery)])
 
     return { list: list.map(item => ({
       ...item,
@@ -63,7 +84,7 @@ export class BlogService {
       category: item.category.name,
       archiveTime: item.fullArchiveTime,
       author: item.author.username
-  ***REMOVED***)), pageCount: Math.ceil(allArticles.length / (pageSize ? pageSize : PAGE_SIZE)), currentPage***REMOVED***
+  ***REMOVED***)), pageCount: Math.ceil(count / (pageSize ? pageSize : PAGE_SIZE)), currentPage***REMOVED***
 ***REMOVED***
 
   @Transactional()
@@ -279,4 +300,7 @@ export class BlogService {
       repo.save(data);
   ***REMOVED***
 ***REMOVED***
+
+  // @Transactional()
+  // async
 ***REMOVED***

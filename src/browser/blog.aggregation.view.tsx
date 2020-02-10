@@ -81,11 +81,12 @@ export default class BlogAggregation extends React.Component<Prop, State> {
 ***REMOVED***
 
   componentWillMount() {
-    const { type ***REMOVED*** = this.state;
+    const type = (this.props as any).match.params.type as EAggregationType;
     this.fetchAggregationTypeList(type)
 ***REMOVED***
   async fetchAggregationTypeList(type: EAggregationType) {
   ***REMOVED***
+      console.log(type)
       const method = this.typeMapToMethod[type];
 
       const response = await method();
