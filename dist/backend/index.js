@@ -12759,6 +12759,7 @@ var core_1 = __webpack_require__(/*! @malagu/core */ "./node_modules/@malagu/cor
 var node_2 = __webpack_require__(/*! @malagu/typeorm/lib/node */ "./node_modules/@malagu/typeorm/lib/node/index.js");
 var services_1 = __webpack_require__(/*! ./services */ "./src/node/services/index.ts");
 var auth_service_1 = __webpack_require__(/*! ./services/auth.service */ "./src/node/services/auth.service.ts");
+var website_service_1 = __webpack_require__(/*! ./services/website.service */ "./src/node/services/website.service.ts");
 var pick = __webpack_require__(/*! lodash.pick */ "lodash.pick");
 var BlogServerImpl = /** @class */ (function () {
     function BlogServerImpl() {
@@ -12807,6 +12808,20 @@ var BlogServerImpl = /** @class */ (function () {
             });
         });
     };
+    BlogServerImpl.prototype.findArticlesByKeyword = function (keyword) {
+        return __awaiter(this, void 0, Promise, function () {
+            var result, list;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.blogService.searchArticleByKeyword(keyword)];
+                    case 1:
+                        result = _a.sent();
+                        list = result.map(function (item) { return pick(item, ['title', 'slug']); });
+                        return [2 /*return*/, Promise.resolve(list)];
+                }
+            });
+        });
+    };
     BlogServerImpl.prototype.fetchTagsList = function () {
         return __awaiter(this, void 0, Promise, function () {
             var result;
@@ -12846,6 +12861,19 @@ var BlogServerImpl = /** @class */ (function () {
             });
         });
     };
+    BlogServerImpl.prototype.fetchWebsiteChangeLog = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.websiteService.websiteChangeLog()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, Promise.resolve(result.reverse())];
+                }
+            });
+        });
+    };
     BlogServerImpl.prototype.registerUser = function (param) {
         return __awaiter(this, void 0, Promise, function () {
             return __generator(this, function (_a) {
@@ -12858,7 +12886,7 @@ var BlogServerImpl = /** @class */ (function () {
             });
         });
     };
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
     __decorate([
         core_1.Autowired(auth_service_1.AuthServiceSymbol),
         __metadata("design:type", typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object)
@@ -12868,46 +12896,62 @@ var BlogServerImpl = /** @class */ (function () {
         __metadata("design:type", typeof (_b = typeof services_1.BlogService !== "undefined" && services_1.BlogService) === "function" ? _b : Object)
     ], BlogServerImpl.prototype, "blogService", void 0);
     __decorate([
+        core_1.Autowired(website_service_1.WebsiteServiceSymbol),
+        __metadata("design:type", typeof (_c = typeof website_service_1.WebsiteService !== "undefined" && website_service_1.WebsiteService) === "function" ? _c : Object)
+    ], BlogServerImpl.prototype, "websiteService", void 0);
+    __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Number]),
-        __metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+        __metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
     ], BlogServerImpl.prototype, "fetchHottestArticles", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Number, typeof (_d = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.queryCondition) === "function" ? _d : Object]),
-        __metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+        __metadata("design:paramtypes", [Number, typeof (_e = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.queryCondition) === "function" ? _e : Object]),
+        __metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
     ], BlogServerImpl.prototype, "fetchArticleList", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+        __metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
     ], BlogServerImpl.prototype, "fetchArticleDetail", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
-    ], BlogServerImpl.prototype, "fetchTagsList", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
+        __metadata("design:paramtypes", [String]),
         __metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
-    ], BlogServerImpl.prototype, "fetchCatsList", null);
+    ], BlogServerImpl.prototype, "findArticlesByKeyword", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    ], BlogServerImpl.prototype, "fetchTagsList", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+    ], BlogServerImpl.prototype, "fetchCatsList", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
     ], BlogServerImpl.prototype, "fetchArchsList", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [typeof (_k = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.RegisterParam) === "function" ? _k : Object]),
-        __metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], BlogServerImpl.prototype, "fetchWebsiteChangeLog", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [typeof (_m = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.RegisterParam) === "function" ? _m : Object]),
+        __metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
     ], BlogServerImpl.prototype, "registerUser", null);
     BlogServerImpl = __decorate([
         rpc_1.Rpc(blog_protocol_1.BlogServer),
@@ -13925,7 +13969,6 @@ var __read = (this && this.__read) || function (o, n) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var reader_1 = __webpack_require__(/*! ./../entity/reader */ "./src/node/entity/reader.ts");
-var website_1 = __webpack_require__(/*! ./../entity/website */ "./src/node/entity/website.ts");
 var core_1 = __webpack_require__(/*! @malagu/core */ "./node_modules/@malagu/core/lib/common/index.js");
 var node_1 = __webpack_require__(/*! @malagu/web/lib/node */ "./node_modules/@malagu/web/lib/node/index.js");
 var awesome_js_1 = __webpack_require__(/*! awesome-js */ "awesome-js");
@@ -13937,6 +13980,7 @@ var category_1 = __webpack_require__(/*! ../entity/category */ "./src/node/entit
 var archive_1 = __webpack_require__(/*! ../entity/archive */ "./src/node/entity/archive.ts");
 var user_1 = __webpack_require__(/*! ../entity/user */ "./src/node/entity/user.ts");
 var blog_protocol_1 = __webpack_require__(/*! ../../common/blog-protocol */ "./src/common/blog-protocol.ts");
+var website_service_1 = __webpack_require__(/*! ./website.service */ "./src/node/services/website.service.ts");
 exports.BlogServiceSymbol = Symbol('BlogService');
 var PAGE_SIZE = 5;
 var BlogService = /** @class */ (function () {
@@ -13965,7 +14009,7 @@ var BlogService = /** @class */ (function () {
                         list = [];
                         count = 0;
                         if (!(currentPage === 1)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.updateWebsiteStatistics()];
+                        return [4 /*yield*/, this.websiteService.updateWebsiteStatistics()];
                     case 1:
                         _d.sent();
                         _d.label = 2;
@@ -14161,7 +14205,7 @@ var BlogService = /** @class */ (function () {
                             newReader.ips = [reqIp];
                             readerRepo.save(newReader);
                         }
-                        return [4 /*yield*/, this.updateWebsiteStatistics()];
+                        return [4 /*yield*/, this.websiteService.updateWebsiteStatistics()];
                     case 2:
                         _a.sent();
                         return [2 /*return*/];
@@ -14227,7 +14271,171 @@ var BlogService = /** @class */ (function () {
             });
         });
     };
-    BlogService.prototype.updateWebsiteStatistics = function () {
+    BlogService.prototype.searchArticleByKeyword = function (keyword) {
+        return __awaiter(this, void 0, void 0, function () {
+            var repo, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        repo = node_2.OrmContext.getRepository(article_1.Article);
+                        return [4 /*yield*/, repo.createQueryBuilder('article')
+                                .where('user.title = :title', { title: keyword })
+                                .orWhere('user.content = :content', { content: keyword })
+                                .getMany()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    var _a, _b, _c;
+    __decorate([
+        core_1.Autowired(website_service_1.WebsiteServiceSymbol),
+        __metadata("design:type", typeof (_a = typeof website_service_1.WebsiteService !== "undefined" && website_service_1.WebsiteService) === "function" ? _a : Object)
+    ], BlogService.prototype, "websiteService", void 0);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object, Object, typeof (_b = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.queryCondition) === "function" ? _b : Object]),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "fetchArticleList", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String, Object]),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "fetchArticleDetail", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [typeof (_c = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.ArticleDetail) === "function" ? _c : Object, String, Object]),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "createOrUpdateArticle", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "updateArticleStatictics", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "fetchTagsListWithArticle", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "fetchArchListWithArticle", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "fetchCatListWithArticle", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [String]),
+        __metadata("design:returntype", Promise)
+    ], BlogService.prototype, "searchArticleByKeyword", null);
+    BlogService = __decorate([
+        core_1.Component(exports.BlogServiceSymbol)
+    ], BlogService);
+    return BlogService;
+}());
+exports.BlogService = BlogService;
+
+
+/***/ }),
+
+/***/ "./src/node/services/index.ts":
+/*!************************************!*\
+  !*** ./src/node/services/index.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(/*! ./auth.service */ "./src/node/services/auth.service.ts"));
+__export(__webpack_require__(/*! ./blog.service */ "./src/node/services/blog.service.ts"));
+__export(__webpack_require__(/*! ./website.service */ "./src/node/services/website.service.ts"));
+
+
+/***/ }),
+
+/***/ "./src/node/services/website.service.ts":
+/*!**********************************************!*\
+  !*** ./src/node/services/website.service.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var node_1 = __webpack_require__(/*! @malagu/web/lib/node */ "./node_modules/@malagu/web/lib/node/index.js");
+var website_1 = __webpack_require__(/*! ./../entity/website */ "./src/node/entity/website.ts");
+var node_2 = __webpack_require__(/*! @malagu/typeorm/lib/node */ "./node_modules/@malagu/typeorm/lib/node/index.js");
+var core_1 = __webpack_require__(/*! @malagu/core */ "./node_modules/@malagu/core/lib/common/index.js");
+exports.WebsiteServiceSymbol = Symbol('WebsiteService');
+var WebsiteService = /** @class */ (function () {
+    function WebsiteService() {
+    }
+    WebsiteService.prototype.updateWebsiteStatistics = function () {
         return __awaiter(this, void 0, void 0, function () {
             var reqIp, repo, website, newData;
             return __generator(this, function (_a) {
@@ -14275,105 +14483,91 @@ var BlogService = /** @class */ (function () {
             });
         });
     };
-    BlogService.prototype.clearTodayIpsArray = function () {
+    WebsiteService.prototype.websiteChangeLog = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var repo, data;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        repo = node_2.OrmContext.getRepository(website_1.Website);
-                        return [4 /*yield*/, repo.findOne({ id: 1 })];
-                    case 1:
-                        data = _a.sent();
-                        if (data) {
-                            data.todayIps = [];
-                            repo.save(data);
-                        }
-                        return [2 /*return*/];
-                }
+                return [2 /*return*/, [{
+                            title: '本站正式上线',
+                            desc1: '8月8号，完成所有博客的基本功能，除了关于豆米的网页暂时没完成之外。',
+                            desc2: '豆米的博客意在分享web开发的点点滴滴，前端和后台都会有所涉及，再适当分享些生活的精彩。',
+                            date: '2016/08',
+                            time: '08 周一'
+                        }, {
+                            title: '完成文章搜索功能',
+                            desc1: '9月11号，完成网站的首页以及后台的文章搜索功能。',
+                            desc2: '暂时只提供对博客的标题搜索，不支持全文搜索。',
+                            date: '2016/09',
+                            time: '11 周日'
+                        }, {
+                            title: '改进网站的SEO',
+                            desc1: '10月10号，修改部分代码，增强网站的SEO。',
+                            desc2: '修改页面的title、description等meta，提高网站的SEO。添加google的verification文件，提高谷歌收录网站的可能性',
+                            date: '2016/10',
+                            time: '10 周一'
+                        }, {
+                            title: '博文列表改版',
+                            desc1: '12月03号，博文列表改版，使之更加简洁大方。',
+                            desc2: '新增博客首页图片，方便显示博文列表中的大图,增加网站形象性',
+                            date: '2016/12',
+                            time: '03 周六'
+                        }, {
+                            title: '增加友情链接面板',
+                            desc1: '01月05号，增加友情链接面板，加大文章标题的可存长度',
+                            desc2: '新增博客的友情链接，外链到一些推荐的博客网站',
+                            date: '2017/01',
+                            time: '05 周四'
+                        }, {
+                            title: '优化管理后台和统计数据',
+                            desc1: '02月09号，优化管理后台，增加操作信息框',
+                            desc2: '优化网站统计数据，修复若干bug',
+                            date: '2017/02',
+                            time: '09 周四'
+                        }, {
+                            title: '增加Markdown编辑器对于数学公式渲染的支持',
+                            desc1: '03月29号，支持数学公式的渲染显示，修复若干个bug',
+                            desc2: '在<a href="https://www.npmjs.com/package/marked">marked</a>解析器的基础上支持数学公式的编辑，并将修改后的包发布到npm上：<a href="https://www.npmjs.com/package/marked-katex">marked-katex</a>',
+                            date: '2017/03',
+                            time: '29 周三'
+                        }, {
+                            title: '迁移网站到https，删掉些功能，添加新东西',
+                            desc1: '05月12号，升级网站到https,05月13号，增加[关于豆米](https://blog.5udou.cn/aboutDouMi)页面',
+                            desc2: '05月13号，增加[米喳简历](https://blog.5udou.cn/resume/mizha)页面',
+                            date: '2018/05',
+                            time: '13 周日'
+                        }, {
+                            title: '抽离controller主逻辑，支持api请求获取数据',
+                            desc1: '01月04号，抽离controller的主逻辑，支持api请求，不再单一支持服务端渲染',
+                            desc2: '01月05号，新增8个api，覆盖完整博客的请求，为小程序和RN版本提供接口',
+                            date: '2019/01',
+                            time: '04 周六'
+                        }, {
+                            title: '接入gitalk评论系统，增加渠道曝光',
+                            desc1: '11月21号，弃用disqus评论系统，改用gitalk评论系统，好用不止一点点~',
+                            desc2: '11月21号，优化SEO，增加小程序曝光，优化博客详情页底部展示信息',
+                            date: '2019/11',
+                            time: '21 周四'
+                        }, {
+                            title: '重构博客',
+                            desc1: '使用malagu框架重构整个博客的实现',
+                            desc2: '博客的整体UI风格全新呈现',
+                            date: '2020/02',
+                            time: '09 周日'
+                        }]];
             });
         });
     };
-    var _a, _b;
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, Object, Object, typeof (_a = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.queryCondition) === "function" ? _a : Object]),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "fetchArticleList", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String, Object]),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "fetchArticleDetail", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [typeof (_b = typeof blog_protocol_1.DouMiBlog !== "undefined" && blog_protocol_1.DouMiBlog.ArticleDetail) === "function" ? _b : Object, String, Object]),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "createOrUpdateArticle", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "updateArticleStatictics", null);
     __decorate([
         node_2.Transactional(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "fetchTagsListWithArticle", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "fetchArchListWithArticle", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "fetchCatListWithArticle", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "updateWebsiteStatistics", null);
-    __decorate([
-        node_2.Transactional(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], BlogService.prototype, "clearTodayIpsArray", null);
-    BlogService = __decorate([
-        core_1.Component(exports.BlogServiceSymbol)
-    ], BlogService);
-    return BlogService;
+    ], WebsiteService.prototype, "updateWebsiteStatistics", null);
+    WebsiteService = __decorate([
+        core_1.Component(exports.WebsiteServiceSymbol)
+    ], WebsiteService);
+    return WebsiteService;
 }());
-exports.BlogService = BlogService;
-
-
-/***/ }),
-
-/***/ "./src/node/services/index.ts":
-/*!************************************!*\
-  !*** ./src/node/services/index.ts ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./auth.service */ "./src/node/services/auth.service.ts"));
-__export(__webpack_require__(/*! ./blog.service */ "./src/node/services/blog.service.ts"));
+exports.WebsiteService = WebsiteService;
 
 
 /***/ }),
