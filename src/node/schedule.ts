@@ -11,14 +11,14 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
   protected job: any;
 
   async onStart(app: Application): Promise<void> {
-    var job = new CronJob('0 24 */1 * * *', async () => {
+    var job = new CronJob('0 0 */1 * * *', async () => {
       try {
         // await this.blogService.clearTodayIpsArray()
         this.logger.info(`schedule trigger at ${new Date()} for clearing the visitor ips`)
       } catch (err) {
         console.error(err)
       }
-    }, null, true);
+    }, null, true, 'Asia/Shanghai');
     job.start();
   }
 
