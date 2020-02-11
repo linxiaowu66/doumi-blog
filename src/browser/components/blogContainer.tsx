@@ -1,6 +1,4 @@
 import * as React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import IconList from '@material-ui/icons/List';
@@ -11,11 +9,7 @@ import Bookmark from '@material-ui/icons/Bookmark';
 import GitHub from '@material-ui/icons/GitHub';
 import PersonPin from '@material-ui/icons/PersonPin';
 import Web from '@material-ui/icons/Web';
-import Menu from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Cloud from '@material-ui/icons/Cloud';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import IconButton from '@material-ui/core/IconButton';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,15 +18,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { makeStyles, useTheme, Theme, createStyles, fade, ***REMOVED*** from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles, ***REMOVED*** from '@material-ui/core/styles';
 import FootPrint from './footPrint';
+import BlogAppBar from './blogAppBar';
 
 const drawerWidth = 240;
 
@@ -47,22 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
         flexShrink: 0,
     ***REMOVED***,
   ***REMOVED***,
-    appBar: {
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth***REMOVED***px)`,
-        marginLeft: drawerWidth,
-    ***REMOVED***,
-  ***REMOVED***,
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
-    ***REMOVED***,
-      flexGrow: 1
-  ***REMOVED***,
-    grow: {
-      flexGrow: 1
-  ***REMOVED***,
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
@@ -75,43 +50,6 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       bottom: theme.spacing(2),
       right: theme.spacing(2),
-  ***REMOVED***,
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-    ***REMOVED***,
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    ***REMOVED***,
-  ***REMOVED***,
-    searchIcon: {
-      width: theme.spacing(7),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-  ***REMOVED***,
-    inputRoot: {
-      color: 'inherit',
-  ***REMOVED***,
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 7),
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: 120,
-        '&:focus': {
-          width: 200,
-      ***REMOVED***,
-    ***REMOVED***,
   ***REMOVED***,
 ***REMOVED***),
 );
@@ -199,29 +137,13 @@ function ScrollTop(props: ScrollProps) {
 
 export default function BlogContainer(props: ContainerProps) {
   // const { container ***REMOVED*** = props;
-  let flag = false;
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   ***REMOVED***
-
-  const handleSearch = (e: any) => {
-    console.log(e.target.value)
-***REMOVED***
-
-  const handleLogin = () => {
-    location.hash = '#/blog/auth/login';
-***REMOVED***
-
-  const handleLogout = async () => {
-    const { endpoint ***REMOVED*** = props;
-    await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`, null, {withCredentials: true***REMOVED***
-
-    location.hash = '#/blog/auth/login';
-***REMOVED***
 
   const navList = props.navigatorList ? props.navigatorList : navigatorList;
 
@@ -248,77 +170,17 @@ export default function BlogContainer(props: ContainerProps) {
   return (
     <div className={classes.root***REMOVED***>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar***REMOVED***>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle***REMOVED***
-            className={classes.menuButton***REMOVED***
-          >
-            <Menu />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            豆米的博客
-          </Typography>
-          <div className={classes.search***REMOVED***>
-            <div className={classes.searchIcon***REMOVED***>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-            ***REMOVED******REMOVED***
-              inputProps={{ 'aria-label': 'search' ***REMOVED******REMOVED***
-              onCompositionStart={() => { flag = true ***REMOVED******REMOVED***
-              onCompositionEnd={(e) => {
-                flag = false
-                handleSearch(e)
-            ***REMOVED******REMOVED***
-              onInput={(e) => {
-                if (!flag) {
-                  handleSearch(e)
-              ***REMOVED***
-            ***REMOVED******REMOVED***
-            />
-          </div>
-          <div className={classes.grow***REMOVED*** />
-          {
-            props.isLogin ? (
-              <IconButton
-                edge="end"
-                aria-label="logout"
-                // aria-controls={menuId***REMOVED***
-                aria-haspopup="true"
-                onClick={handleLogout***REMOVED***
-                color="inherit"
-              >
-                <ExitToApp />
-              </IconButton>
-            ) : (
-              <IconButton
-                edge="end"
-                aria-label="login"
-                // aria-controls={menuId***REMOVED***
-                aria-haspopup="true"
-                onClick={handleLogin***REMOVED***
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            )
-        ***REMOVED***
-        </Toolbar>
-      </AppBar>
+      <BlogAppBar
+        endpoint={props.endpoint***REMOVED***
+        isLogin={props.isLogin***REMOVED***
+        handleDrawerToggle={handleDrawerToggle***REMOVED***
+      />
       <nav className={classes.drawer***REMOVED*** aria-label="blog-navigators">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */***REMOVED***
         <Hidden xsUp implementation="css">
           <Drawer
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'***REMOVED***
+            anchor={'left'***REMOVED***
             open={mobileOpen***REMOVED***
             onClose={handleDrawerToggle***REMOVED***
             classes={{
@@ -348,7 +210,6 @@ export default function BlogContainer(props: ContainerProps) {
         {
           props.children
       ***REMOVED***
-        {/* <iframe src="//music.163.com/song?id=1363948882&userid=99607736&auto=1&height=60"></iframe> */***REMOVED***
         {
           props.isLogin ? null : <FootPrint />
       ***REMOVED***

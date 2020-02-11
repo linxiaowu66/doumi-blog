@@ -256,8 +256,8 @@ export class BlogService {
     const repo = OrmContext.getRepository(Article);
 
     const result = await repo.createQueryBuilder('article')
-    .where('user.title = :title', { title: keyword***REMOVED***)
-    .orWhere('user.content = :content', { content: keyword***REMOVED***)
+    .where('article.title like :title', { title: `%${keyword***REMOVED***%`***REMOVED***)
+    .orWhere('article.content like :content', { content: `%${keyword***REMOVED***%`***REMOVED***)
     .getMany()
 
     return result

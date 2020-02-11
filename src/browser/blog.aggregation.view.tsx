@@ -88,7 +88,7 @@ export default class BlogAggregation extends React.Component<Prop, State> {
       archive: 'queryArch'
   ***REMOVED***
     return (
-      <BlogContainer>
+      <BlogContainer contentClass="blog-types-wrapper">
         <section className="blog-type-list">
           {
             response.map((item, idx) => {

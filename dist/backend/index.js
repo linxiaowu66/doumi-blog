@@ -14279,8 +14279,8 @@ var BlogService = /** @class */ (function () {
                     case 0:
                         repo = node_2.OrmContext.getRepository(article_1.Article);
                         return [4 /*yield*/, repo.createQueryBuilder('article')
-                                .where('user.title = :title', { title: keyword ***REMOVED***)
-                                .orWhere('user.content = :content', { content: keyword ***REMOVED***)
+                                .where('article.title like :title', { title: "%" + keyword + "%" ***REMOVED***)
+                                .orWhere('article.content like :content', { content: "%" + keyword + "%" ***REMOVED***)
                                 .getMany()];
                     case 1:
                         result = _a.sent();
