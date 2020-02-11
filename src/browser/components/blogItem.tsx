@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
+    width: 345,
     margin: 5,
     display: 'flex',
     flexDirection: 'column',
