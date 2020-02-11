@@ -62,6 +62,7 @@ export namespace DouMiBlog {
     tags: string[];
     archiveTime: string;
     category: string;
+    catId: number;
   }
 
   export interface queryCondition {

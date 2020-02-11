@@ -113,6 +113,7 @@ export class BlogService {
       ...result,
       tags: result.tags.map(it => it.name),
       category: result.category.name,
+      catId: result.category.id,
       archiveTime: result.fullArchiveTime,
       author: result.author.username
     }
