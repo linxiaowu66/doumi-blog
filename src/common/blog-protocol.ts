@@ -4,7 +4,7 @@ export interface BlogServer {
     fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
     fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList>;
     findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]>
-    fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail>;
+    fetchArticleDetail(slug: string, shouldBeUpdateStats?: boolean): Promise<DouMiBlog.ArticleDetail>;
     fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
     fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
     fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;

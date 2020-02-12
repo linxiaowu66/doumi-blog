@@ -45,8 +45,8 @@ export class BlogServerImpl implements BlogServer {
   }
 
   @Transactional()
-  async fetchArticleDetail(slug: string): Promise<DouMiBlog.ArticleDetail> {
-    const result = await this.blogService.fetchArticleDetail(slug)
+  async fetchArticleDetail(slug: string, shouldBeUpdateStats = false): Promise<DouMiBlog.ArticleDetail> {
+    const result = await this.blogService.fetchArticleDetail(slug, shouldBeUpdateStats)
 
     return Promise.resolve(result);
   }
