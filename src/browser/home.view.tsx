@@ -12,7 +12,7 @@ import FootPrint from './components/footPrint';
 
 interface Prop {***REMOVED***
 interface State {
-    response: DouMiBlog.ArticleBrief[]
+  response: DouMiBlog.ArticleBrief[]
 ***REMOVED***
 
 @View()
@@ -23,14 +23,20 @@ export class Home extends React.Component<Prop, State> {
 
     constructor(prop: Prop) {
         super(prop);
-        this.state = { response: [] ***REMOVED***
+        this.state = {
+          response: []
+        ***REMOVED***
   ***REMOVED***
 
     async componentDidMount() {
+    ***REMOVED***
         const response = await this.BlogServer.fetchHottestArticles(5);
         this.setState({
-            response: response.list
+          response: response.list
         ***REMOVED***
+    ***REMOVED*** catch (err) {
+        console.error(err);
+    ***REMOVED***
   ***REMOVED***
 
     render() {

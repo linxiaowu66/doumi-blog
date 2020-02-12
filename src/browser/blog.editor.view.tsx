@@ -4,7 +4,6 @@ import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached'
 import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import axios from 'axios';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import Snackbar from '@material-ui/core/Snackbar';
 import { BlogServer ***REMOVED*** from '../common/blog-protocol'
 import * as ReactMarkdown from 'react-markdown';
 import TextField from '@material-ui/core/TextField';
@@ -51,7 +50,22 @@ const navigatorList = [{
   icon: <List />,
   link: '#/blog/admin/index'
 ***REMOVED***]
-
+const initData = {
+  editMode: false,
+  isOpenSnackbar: false,
+  snackbarMsg: '',
+  blogContent: '',
+  blogDigest: '',
+  blogTitle: '',
+  blogIllustration: '',
+  blogTags: [],
+  blogCategory: '',
+  blogArchiveTime: '',
+  slug: '',
+  blogStatus: 'draft' as 'draft',
+  anchorEl: null,
+  showSetting: false,
+***REMOVED***
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Value(ENDPOINT)
@@ -60,29 +74,12 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
-  private initData = {
-    editMode: false,
-    isOpenSnackbar: false,
-    snackbarMsg: '',
-    blogContent: '',
-    blogDigest: '',
-    blogTitle: '',
-    blogIllustration: '',
-    blogTags: [],
-    blogCategory: '',
-    blogArchiveTime: '',
-    slug: '',
-    blogStatus: 'draft' as 'draft',
-    anchorEl: null,
-    showSetting: false,
-***REMOVED***
-
   constructor(props: Prop) {
     super(props);
 
-    this.state = { ...this.initData, tags: [], categories: []***REMOVED***
+    this.state = { ...initData, tags: [], categories: []***REMOVED***
 ***REMOVED***
-  async componentWillMount() {
+  async componentDidMount() {
   ***REMOVED***
       const { slug ***REMOVED*** = query.parse((this.props as any).location.search)
 
@@ -104,31 +101,44 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         await this.fetchBlogDetail(slug as  string)
     ***REMOVED***
   ***REMOVED*** catch (err) {
-      console.log(err)
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博客信息失败，请稍后再试',
+    ***REMOVED***)
   ***REMOVED***
 ***REMOVED***
-  componentWillReceiveProps(props: Prop) {
-    const { slug: oldSlug ***REMOVED*** = this.state;
-    const { slug ***REMOVED*** = query.parse((props as any).location.search)
-    if (oldSlug && !slug) {
-      this.setState(this.initData)
-  ***REMOVED*** else if (slug && (slug !== oldSlug)) {
-      this.fetchBlogDetail(slug as string);
+  static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
+    const { slug ***REMOVED*** = query.parse((nextProps as any).location.search)
+    if (prevState.slug && !slug) {
+      return initData
   ***REMOVED***
+    return null
+***REMOVED***
+  componentDidUpdate() {
+    this.fetchBlogDetail(this.state.slug as string);
 ***REMOVED***
   fetchBlogDetail = async (slug: string) => {
-    const result = await this.BlogServer.fetchArticleDetail(slug);
+  ***REMOVED***
+      const result = await this.BlogServer.fetchArticleDetail(slug);
 
-    this.setState({
-      blogContent: result.content,
-      blogTitle: result.title,
-      blogIllustration: result.illustration,
-      blogDigest: result.digest,
-      blogTags: result.tags,
-      blogArchiveTime: result.archiveTime,
-      blogCategory: result.category,
-      blogStatus: result.articleStatus
-  ***REMOVED***)
+      this.setState({
+        blogContent: result.content,
+        blogTitle: result.title,
+        blogIllustration: result.illustration,
+        blogDigest: result.digest,
+        blogTags: result.tags,
+        blogArchiveTime: result.archiveTime,
+        blogCategory: result.category,
+        blogStatus: result.articleStatus
+    ***REMOVED***)
+  ***REMOVED*** catch (err) {
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博客详情失败，请稍后再试',
+    ***REMOVED***)
+  ***REMOVED***
 ***REMOVED***
   handleSubmit = async(actionType: string) => {
     const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration, editMode ***REMOVED*** = this.state;
@@ -157,6 +167,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           slug: result.data.data.slug
       ***REMOVED***)
     ***REMOVED***
+  ***REMOVED*** else {
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '保存博文失败，请稍后再试',
+    ***REMOVED***)
   ***REMOVED***
 ***REMOVED***
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -187,7 +202,14 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   render() {
     const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state
     return(
-      <BlogContainer endpoint={this.endpoint***REMOVED*** navigatorList={navigatorList***REMOVED*** isLogin contentClass="blog-editor-wrapper" >
+      <BlogContainer
+        endpoint={this.endpoint***REMOVED***
+        navigatorList={navigatorList***REMOVED***
+        isLogin
+        contentClass="blog-editor-wrapper"
+        isOpenSnackbar={isOpenSnackbar***REMOVED***
+        snackbarMsg={snackbarMsg***REMOVED***
+      >
         <header className="blog-title">
           <TextField
             id="outlined-helperText"
@@ -242,14 +264,6 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             illustration: this.state.blogIllustration,
             digest: this.state.blogDigest,
         ***REMOVED******REMOVED***
-        />
-        <Snackbar
-          autoHideDuration={1500***REMOVED***
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' ***REMOVED******REMOVED***
-          key={'top,right'***REMOVED***
-          open={isOpenSnackbar***REMOVED***
-          onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
-          message={snackbarMsg***REMOVED***
         />
       </BlogContainer>
     )

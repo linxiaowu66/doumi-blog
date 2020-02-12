@@ -14,6 +14,8 @@ interface State {
   blogList: {title: string, digest: string, slug: string, illustration: string***REMOVED***[],
   pageCount: number,
   currentPage: number,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 ***REMOVED***
 
 @View('/blog/list')
@@ -28,45 +30,47 @@ export default class BlogList extends React.Component<Prop, State> {
       blogList: [],
       pageCount: 1,
       currentPage: 1,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
     ***REMOVED***
 ***REMOVED***
 
-  async componentWillMount() {
-  ***REMOVED***
-      await this.fetchBlogList(this.state.currentPage)
-  ***REMOVED*** catch (err) {
-      console.log(err)
-  ***REMOVED***
+  async componentDidMount() {
+    await this.fetchBlogList(this.state.currentPage)
 ***REMOVED***
   fetchBlogList = async (currentPage: number) => {
-    const { queryTag, queryArch, queryCat ***REMOVED*** = query.parse((this.props as any).location.search)
-    let queryCondition = {***REMOVED***
-    if (queryTag) {
-      queryCondition = { ...queryCondition, queryTag ***REMOVED***
   ***REMOVED***
-    if (queryArch) {
-      queryCondition = { ...queryCondition, queryArch ***REMOVED***
-  ***REMOVED***
-    if (queryCat) {
-      queryCondition = { ...queryCondition, queryCat ***REMOVED***
-  ***REMOVED***
-    const { blogList ***REMOVED*** = this.state
-    const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
+      const { queryTag, queryArch, queryCat ***REMOVED*** = query.parse((this.props as any).location.search)
+      let queryCondition = {***REMOVED***
+      if (queryTag) {
+        queryCondition = { ...queryCondition, queryTag ***REMOVED***
+    ***REMOVED***
+      if (queryArch) {
+        queryCondition = { ...queryCondition, queryArch ***REMOVED***
+    ***REMOVED***
+      if (queryCat) {
+        queryCondition = { ...queryCondition, queryCat ***REMOVED***
+    ***REMOVED***
+      const { blogList ***REMOVED*** = this.state
+      const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
 
-    this.setState({
-      blogList: [...blogList, ...result.list],
-      pageCount: result.pageCount,
-      currentPage: result.currentPage,
-  ***REMOVED***)
+      this.setState({
+        blogList: [...blogList, ...result.list],
+        pageCount: result.pageCount,
+        currentPage: result.currentPage,
+    ***REMOVED***)
+  ***REMOVED*** catch (err) {
+      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取列表失败，请稍后重试',
+    ***REMOVED***)
+  ***REMOVED***
 ***REMOVED***
   loadMore = async () => {
     const { currentPage ***REMOVED*** = this.state;
 
-  ***REMOVED***
-      await this.fetchBlogList(+currentPage + 1)
-  ***REMOVED*** catch (err) {
-      console.log(err)
-  ***REMOVED***
+    await this.fetchBlogList(+currentPage + 1)
 ***REMOVED***
   renderBlogItem = () => {
     const { blogList ***REMOVED*** = this.state
@@ -82,9 +86,13 @@ export default class BlogList extends React.Component<Prop, State> {
 ***REMOVED***
 
   render() {
-    const { currentPage, pageCount ***REMOVED*** = this.state;
+    const { currentPage, pageCount, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return(
-      <BlogContainer contentClass="blog-list-wrapper">
+      <BlogContainer
+        contentClass="blog-list-wrapper"
+        isOpenSnackbar={isOpenSnackbar***REMOVED***
+        snackbarMsg={snackbarMsg***REMOVED***
+      >
         <section className="blog-list-container">
           <InfiniteScroll
             pageStart={0***REMOVED***

@@ -8,7 +8,9 @@ import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 
 interface Prop {***REMOVED***
 interface State {
-  changeLog: DouMiBlog.ChangeLog[]
+  changeLog: DouMiBlog.ChangeLog[],
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 ***REMOVED***
 
 @View('/about/blog')
@@ -21,22 +23,32 @@ export default class AboutWebsite extends React.Component<Prop, State> {
     super(props)
 
     this.state = {
-      changeLog: []
+      changeLog: [],
+      isOpenSnackbar: false,
+      snackbarMsg: '',
   ***REMOVED***
 ***REMOVED***
 
-  async componentWillMount() {
-    const result = await this.blogServer.fetchWebsiteChangeLog()
+  async componentDidMount() {
+  ***REMOVED***
+      const result = await this.blogServer.fetchWebsiteChangeLog()
 
-    this.setState({
-      changeLog: result,
-  ***REMOVED***)
+      this.setState({
+        changeLog: result,
+    ***REMOVED***)
+  ***REMOVED*** catch (err) {
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取变更记录失败，请稍后重试',
+    ***REMOVED***)
+  ***REMOVED***
 ***REMOVED***
 
   render() {
-    const { changeLog ***REMOVED*** = this.state;
+    const { changeLog, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return (
-      <BlogContainer>
+      <BlogContainer isOpenSnackbar={isOpenSnackbar***REMOVED*** snackbarMsg={snackbarMsg***REMOVED***>
         <Timeline
           title='网站更新记录'
           timeList={changeLog.map(item => ({
