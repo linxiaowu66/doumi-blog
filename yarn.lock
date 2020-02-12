@@ -153,10 +153,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@malagu/cli@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.0.9.tgz#808fbef555b952e0ad63359781c2fbce9fbe7d12"
-  integrity sha512-eL3B2aKwxc9yFbS4WaRazT7mg8bNnPnF+Jqtb6n+OWV+NnTtOY2fH0Med9D9XkMbxOX1MOkCpHKgXtMKvJmSfw==
+"@malagu/cli@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.0.10.tgz#f6413aee90580ea1c74c44638a9e9f17e56aa435"
+  integrity sha512-fhTd0OHXBjJL3QU8oCcBy6pEo3gnqNdhFufNCeZO81rMTZmWPu6kQ83BAYTVhBExhaqSOlC3tsQxzGJmUpW6nA==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     chalk "^2.4.2"
@@ -199,10 +199,10 @@
     webpack-node-externals "^1.7.2"
     worker-loader "^2.0.0"
 
-"@malagu/core@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.0.9.tgz#b7b9d7cd3a975b70ed403d56a0515092c3153625"
-  integrity sha512-6trMFzOp5WW+Cx1Btr6wKHBRUteeJNzr5C/el1DRhOAXr17cB7X1xBWWpgUi66nKw2UDcsjNVCZMAS7VP7omTg==
+"@malagu/core@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.0.10.tgz#7657d8b872e97ffcf20ef06f614f4799b878c5b7"
+  integrity sha512-ZIzRX3qnXaWe1H0TbssBv6xrst/x7Hm8E9F8Pltj5KxFRs08qayY7eU0ercf0MeYZSmhyD41zPM8oAne6Houcw==
   dependencies:
     "@types/express" "^4.16.1"
     "@types/lodash.debounce" "4.0.3"
@@ -222,91 +222,92 @@
     url-join "^4.0.1"
     vscode-ws-jsonrpc "^0.1.1"
 
-"@malagu/express-adapter@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.9.tgz#4a57402739c1255317f4f1aa1471fcbf43a0b89c"
-  integrity sha512-BccSBWLfz0RYOvaCSjE9496fjkOJRCCezen/wHi63/DHHrRIldCdoVOd+SHv4Gv2cOLmvhQzn5vJQmhSGz6Pqw==
+"@malagu/express-adapter@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.10.tgz#e521081e9effbf7b0de39fb585e71b39c396d808"
+  integrity sha512-vRfNSSaicy24l7uOnpFUPh3yK7g+AtNp5WFrS+xDqF1VStOuPUwwAseNlwsW+YVxu+Mrj6ArmSYAXxK4MGqPrg==
   dependencies:
-    "@malagu/web" "^0.0.9"
+    "@malagu/web" "^0.0.10"
     express "^4.17.1"
 
-"@malagu/grommet@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.0.9.tgz#db036d9574c124e268de2eff45a9c8f3416fcc57"
-  integrity sha512-pJDumlTJpBCK2dqDaFN/igjdObGTnUqSa5HRgV7S5anxJEB++2xyk1Zk2H6+IFEL4tjYvBeyilJ3EOJz1mSL4w==
+"@malagu/grommet@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.0.10.tgz#a8cc18924c6c9ba33e8afc27b3893a972ff252ea"
+  integrity sha512-OpumG8OVHNNh30e7b64Zhl52Dd/Z7mNcUrbGAff00LKaw8ni1rXLwcVfRUu+FCqvLh7h86ACQ5sD59vi7xxupg==
   dependencies:
-    "@malagu/react" "^0.0.9"
+    "@malagu/react" "^0.0.10"
     grommet "^2.9.0"
     grommet-icons "^4.4.0"
     styled-components "^4.4.1"
 
-"@malagu/material-ui@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.0.9.tgz#97a0c2b4e8b4ae9956faf4c3f984dd34a21d68eb"
-  integrity sha512-9mf05ZAG1LldN91hK3jqAqZcEBHA/tJnW3jto/MN5Jx3ReL83s9LMvXFLvrMRuBAl7RwtuRhasPs9MfjGNz58g==
+"@malagu/material-ui@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.0.10.tgz#19ed1a4abce3bb52620eb8a8491236c83a3ec46e"
+  integrity sha512-ea4ivpj64MsEFKkUbKNVqGoZw66j3VxwNbRTBDvYWgFisLHD+2OGv9qno+L7jwC/F35Hic04e2Y7dZKsKpVakg==
   dependencies:
-    "@malagu/grommet" "^0.0.9"
+    "@malagu/grommet" "^0.0.10"
     "@material-ui/core" "^4.6.0"
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
 
-"@malagu/mvc@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.0.9.tgz#8eca3d5da011bb25973e21a9bcd9bd034eb09cd9"
-  integrity sha512-wUAs3dOpxRFmiuL14XPakvvq3AOFiAKyriTXU8VZxLYlM23zJTljUzQo6kJwJ9HE4lZ0ORRx1sMy3UaRODnFBg==
+"@malagu/mvc@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.0.10.tgz#25780b96e0cae13d4db61c0048dcd1745d91040e"
+  integrity sha512-jtqblpWW7j/OGfqSaWloGaeM/aDxUjjCt08C2GpMXvUWr3pVbV24TH7NzLMITboc/ReFLfrFLbVE4UZ8XbakLQ==
   dependencies:
-    "@malagu/web" "^0.0.9"
+    "@malagu/web" "^0.0.10"
 
-"@malagu/react@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.0.9.tgz#313f9e790d1d35884943c1c895c369b080a1a26c"
-  integrity sha512-08KD6GRZhmpDbE45vWHk2CzXCaQdb38lSYIeoY5UDXYcKuRqqPD8Ulj33wF6ZolcG9LV+OJiSdQuiY1tyN3UZg==
+"@malagu/react@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.0.10.tgz#81bb9852df5faca11fad271c2beb1586e27b2f14"
+  integrity sha512-IJu6AnFThXQsEB5OTam/EblUH3+SJ9zDXOcusEtoUaybnPTJWXBZJphrUgQ+R92gNpdZUDkBPj2qIPexLd1BFA==
   dependencies:
-    "@malagu/core" "^0.0.9"
+    "@malagu/core" "^0.0.10"
     history "^4.10.1"
     react "^16.12.0"
     react-dom "^16.12.0"
     react-router "^5.1.2"
     react-router-dom "^5.1.2"
 
-"@malagu/rpc@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.0.9.tgz#252b04068f2cf2bb14fa3c239bee418b2ff8ab33"
-  integrity sha512-hU07Z2lMX/zK9hnE2mdE8EvpzX9WSYs/aug/yEE1ekZSYzJ+3fT+2mm2eFHA7NfVn3PzwFNhgs2nk7Q/4sMqug==
+"@malagu/rpc@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.0.10.tgz#92243d5dfd79817427bc24db24094515c4c81e96"
+  integrity sha512-OQ+idSbgbjdD+cHVfmTuEIii6l4NTiz8ZQYIHCZqH9fAVudG5b4WtvuevWl0kqWVnGsbdx2fW59iayNdYwyibw==
   dependencies:
-    "@malagu/web" "^0.0.9"
+    "@malagu/web" "^0.0.10"
     reconnecting-websocket "^4.1.10"
 
-"@malagu/security@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.0.9.tgz#7c8a7e65c348dcb77fbb5a75f7b45e011894a1bf"
-  integrity sha512-rEmCkQIBaZmGSDDDIOimph3GG/m/Y4xEpe0Q4BkJJyaBelT1gCaXH3yqPEkRl6jtOKZBXSMb/SrZONFX108QjQ==
+"@malagu/security@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.0.10.tgz#8e63c43e05f51e1ef554e9a41e07efdf92480314"
+  integrity sha512-igd+38FsIp7caiehY+vcyBwc4tCRoNNc03FT7iF6nLx7hk4TzEL+NGcBTJ3Nf8H9uGM+Ainjv2ygFZ5H8DOi+A==
   dependencies:
-    "@malagu/web" "^0.0.9"
+    "@malagu/web" "^0.0.10"
     crypto-js "^3.1.9-1"
 
-"@malagu/typeorm@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.0.9.tgz#d58e11ebdbed7950b2e3532c1819b267c68fa3a0"
-  integrity sha512-1f5LRXaqsmi0h2MfXP9WBMgaUVuh904yuREphzW03UXUjVJspN6e86gskvVy0PX57pi/cOIOtwe+ELBQV9j7jg==
+"@malagu/typeorm@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.0.10.tgz#60437aa347a97fa2c8768118dcf5a0cdece08753"
+  integrity sha512-vlbNb7463zE57K4VlxQyFfKXqRJ6J3S3lplaxUXHOugROpeqnKbGfO+EG0hSPdggPcNRSJn+5bIJNZXyH4Eb4A==
   dependencies:
-    "@malagu/web" "^0.0.9"
+    "@malagu/web" "^0.0.10"
     mysql "^2.17.1"
     typeorm "^0.2.19"
     webpack-filter-warnings-plugin "^1.2.1"
 
-"@malagu/web@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.0.9.tgz#c300e6e483dd04f3474f369ccd7eec84a0b946e9"
-  integrity sha512-r7mxSynEk+PBBTP6JHTCTmWZ/e6D+P+Hqi+nyEyfY6GPQSpinR8A34R/5Dmkuu1uSZSfRa2po9xyfjGkq7mujw==
+"@malagu/web@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.0.10.tgz#01a0fa84bf4866acbd9164dcdd225dc77a069fec"
+  integrity sha512-/7TFUogWa3HLnexacEknwM4FVfeb+lV1DIawqaBUdYapg3VzaxX6xVp7DBp14HeT+JmdenC1yXIk3nq4NNvWkA==
   dependencies:
-    "@malagu/core" "^0.0.9"
+    "@malagu/core" "^0.0.10"
     "@types/express" "^4.16.1"
     cookies "^0.7.3"
     cors "^2.8.5"
     crc "^3.8.0"
     express-http-context "^1.2.3"
     url-pattern "^1.0.3"
+    uuid "^3.4.0"
 
 "@material-ui/core@^4.6.0":
   version "4.8.3"
@@ -7805,6 +7806,11 @@ uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
+
+uuid@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 validator@12.0.0:
   version "12.0.0"
