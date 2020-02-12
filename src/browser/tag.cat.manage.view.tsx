@@ -28,7 +28,7 @@ const navigatorList = [{
 export default class TagCatManagement extends React.Component<Prop, State> {
   render() {
     return (
-    <BlogContainer navigatorList={navigatorList} isLogin >
+    <BlogContainer navigatorList={navigatorList} isLogin isOpenSnackbar={false}>
       {/* <BlogTable
         title="标签"
         data={[{

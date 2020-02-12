@@ -4,7 +4,6 @@ import { Value } from '@malagu/core/lib/common/annotation/detached'
 import { ENDPOINT } from '@malagu/web';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
-import Snackbar from '@material-ui/core/Snackbar';
 import { BlogServer } from '../common/blog-protocol'
 import * as ReactMarkdown from 'react-markdown';
 import TextField from '@material-ui/core/TextField';
@@ -51,7 +50,22 @@ const navigatorList = [{
   icon: <List />,
   link: '#/blog/admin/index'
 }]
-
+const initData = {
+  editMode: false,
+  isOpenSnackbar: false,
+  snackbarMsg: '',
+  blogContent: '',
+  blogDigest: '',
+  blogTitle: '',
+  blogIllustration: '',
+  blogTags: [],
+  blogCategory: '',
+  blogArchiveTime: '',
+  slug: '',
+  blogStatus: 'draft' as 'draft',
+  anchorEl: null,
+  showSetting: false,
+}
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Value(ENDPOINT)
@@ -60,29 +74,12 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
-  private initData = {
-    editMode: false,
-    isOpenSnackbar: false,
-    snackbarMsg: '',
-    blogContent: '',
-    blogDigest: '',
-    blogTitle: '',
-    blogIllustration: '',
-    blogTags: [],
-    blogCategory: '',
-    blogArchiveTime: '',
-    slug: '',
-    blogStatus: 'draft' as 'draft',
-    anchorEl: null,
-    showSetting: false,
-  }
-
   constructor(props: Prop) {
     super(props);
 
-    this.state = { ...this.initData, tags: [], categories: []}
+    this.state = { ...initData, tags: [], categories: []}
   }
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const { slug } = query.parse((this.props as any).location.search)
 
@@ -104,31 +101,44 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         await this.fetchBlogDetail(slug as  string)
       }
     } catch (err) {
-      console.log(err)
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博客信息失败，请稍后再试',
+      })
     }
   }
-  componentWillReceiveProps(props: Prop) {
-    const { slug: oldSlug } = this.state;
-    const { slug } = query.parse((props as any).location.search)
-    if (oldSlug && !slug) {
-      this.setState(this.initData)
-    } else if (slug && (slug !== oldSlug)) {
-      this.fetchBlogDetail(slug as string);
+  static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
+    const { slug } = query.parse((nextProps as any).location.search)
+    if (prevState.slug && !slug) {
+      return initData
     }
+    return null
+  }
+  componentDidUpdate() {
+    this.fetchBlogDetail(this.state.slug as string);
   }
   fetchBlogDetail = async (slug: string) => {
-    const result = await this.BlogServer.fetchArticleDetail(slug);
+    try {
+      const result = await this.BlogServer.fetchArticleDetail(slug);
 
-    this.setState({
-      blogContent: result.content,
-      blogTitle: result.title,
-      blogIllustration: result.illustration,
-      blogDigest: result.digest,
-      blogTags: result.tags,
-      blogArchiveTime: result.archiveTime,
-      blogCategory: result.category,
-      blogStatus: result.articleStatus
-    })
+      this.setState({
+        blogContent: result.content,
+        blogTitle: result.title,
+        blogIllustration: result.illustration,
+        blogDigest: result.digest,
+        blogTags: result.tags,
+        blogArchiveTime: result.archiveTime,
+        blogCategory: result.category,
+        blogStatus: result.articleStatus
+      })
+    } catch (err) {
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博客详情失败，请稍后再试',
+      })
+    }
   }
   handleSubmit = async(actionType: string) => {
     const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration, editMode } = this.state;
@@ -157,6 +167,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           slug: result.data.data.slug
         })
       }
+    } else {
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '保存博文失败，请稍后再试',
+      })
     }
   }
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -187,7 +202,14 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   render() {
     const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg } = this.state
     return(
-      <BlogContainer endpoint={this.endpoint} navigatorList={navigatorList} isLogin contentClass="blog-editor-wrapper" >
+      <BlogContainer
+        endpoint={this.endpoint}
+        navigatorList={navigatorList}
+        isLogin
+        contentClass="blog-editor-wrapper"
+        isOpenSnackbar={isOpenSnackbar}
+        snackbarMsg={snackbarMsg}
+      >
         <header className="blog-title">
           <TextField
             id="outlined-helperText"
@@ -242,14 +264,6 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
             illustration: this.state.blogIllustration,
             digest: this.state.blogDigest,
           }}
-        />
-        <Snackbar
-          autoHideDuration={1500}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          key={'top,right'}
-          open={isOpenSnackbar}
-          onClose={() => this.setState({ isOpenSnackbar: false })}
-          message={snackbarMsg}
         />
       </BlogContainer>
     )

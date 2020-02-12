@@ -11,7 +11,9 @@ import BlogContainer from './components/blogContainer';
 interface Prop {}
 interface State {
   type: EAggregationType,
-  response: (DouMiBlog.CategoryItem | DouMiBlog.TagsItem | DouMiBlog.ArchiveItem)[]
+  response: (DouMiBlog.CategoryItem | DouMiBlog.TagsItem | DouMiBlog.ArchiveItem)[],
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 }
 
 const StyledBadge = withStyles((theme: Theme) =>
@@ -42,26 +44,33 @@ export default class BlogAggregation extends React.Component<Prop, State> {
     archive: this.BlogServer.fetchArchsList
   }
 
+  /*To remove - Can't perform a React state update on an unmounted component warning, use componentDidMount method under a condition and make false that condition on componentWillUnmount method. */
+  _isMounted = false;
+
   constructor(props: Prop) {
     super(props);
 
     this.state = {
       type: 'category' as EAggregationType.category,
-      response: []
+      response: [],
+      isOpenSnackbar: false,
+      snackbarMsg: '',
     }
   }
-  // static getDerivedStateFromProps() {
-
-  // }
-  componentWillReceiveProps(newProps: Prop) {
+  static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
+    const newType = (nextProps as any).match.params.type as EAggregationType
+    if (prevState.type !== newType) {
+      return { type: newType }
+    }
+    return null
+  }
+  componentDidUpdate() {
     const { type } = this.state;
-    const newType = (newProps as any).match.params.type as EAggregationType
-    if (type !== newType) {
-      this.fetchAggregationTypeList(newType)
-    }
+    this.fetchAggregationTypeList(type);
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this._isMounted = true;
     const type = (this.props as any).match.params.type as EAggregationType;
     this.fetchAggregationTypeList(type)
   }
@@ -71,24 +80,38 @@ export default class BlogAggregation extends React.Component<Prop, State> {
 
       const response = await method();
 
-      this.setState({
-        response,
-        type
-      })
+      if (this._isMounted) {
+        this.setState({
+          response,
+          type
+        })
+      }
     } catch (err) {
-
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取列表失败，请稍后重试',
+      })
     }
   }
 
+  componentWillUnmount() {
+    this._isMounted = false
+  }
+
   render() {
-    const { type, response } = this.state;
+    const { type, response, isOpenSnackbar, snackbarMsg } = this.state;
     const type2Query = {
       category: 'queryCat',
       tags: 'queryTag',
       archive: 'queryArch'
     }
     return (
-      <BlogContainer contentClass="blog-types-wrapper">
+      <BlogContainer
+        contentClass="blog-types-wrapper"
+        isOpenSnackbar={isOpenSnackbar}
+        snackbarMsg={snackbarMsg}
+      >
         <section className="blog-type-list">
           {
             response.map((item, idx) => {

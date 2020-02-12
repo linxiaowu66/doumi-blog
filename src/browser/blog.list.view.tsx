@@ -14,6 +14,8 @@ interface State {
   blogList: {title: string, digest: string, slug: string, illustration: string}[],
   pageCount: number,
   currentPage: number,
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 }
 
 @View('/blog/list')
@@ -28,45 +30,47 @@ export default class BlogList extends React.Component<Prop, State> {
       blogList: [],
       pageCount: 1,
       currentPage: 1,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
     };
   }
 
-  async componentWillMount() {
-    try {
-      await this.fetchBlogList(this.state.currentPage)
-    } catch (err) {
-      console.log(err)
-    }
+  async componentDidMount() {
+    await this.fetchBlogList(this.state.currentPage)
   }
   fetchBlogList = async (currentPage: number) => {
-    const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search)
-    let queryCondition = {}
-    if (queryTag) {
-      queryCondition = { ...queryCondition, queryTag }
-    }
-    if (queryArch) {
-      queryCondition = { ...queryCondition, queryArch }
-    }
-    if (queryCat) {
-      queryCondition = { ...queryCondition, queryCat }
-    }
-    const { blogList } = this.state
-    const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
+    try {
+      const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search)
+      let queryCondition = {}
+      if (queryTag) {
+        queryCondition = { ...queryCondition, queryTag }
+      }
+      if (queryArch) {
+        queryCondition = { ...queryCondition, queryArch }
+      }
+      if (queryCat) {
+        queryCondition = { ...queryCondition, queryCat }
+      }
+      const { blogList } = this.state
+      const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
 
-    this.setState({
-      blogList: [...blogList, ...result.list],
-      pageCount: result.pageCount,
-      currentPage: result.currentPage,
-    })
+      this.setState({
+        blogList: [...blogList, ...result.list],
+        pageCount: result.pageCount,
+        currentPage: result.currentPage,
+      })
+    } catch (err) {
+      console.log(err)
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取列表失败，请稍后重试',
+      })
+    }
   }
   loadMore = async () => {
     const { currentPage } = this.state;
 
-    try {
-      await this.fetchBlogList(+currentPage + 1)
-    } catch (err) {
-      console.log(err)
-    }
+    await this.fetchBlogList(+currentPage + 1)
   }
   renderBlogItem = () => {
     const { blogList } = this.state
@@ -82,9 +86,13 @@ export default class BlogList extends React.Component<Prop, State> {
   }
 
   render() {
-    const { currentPage, pageCount } = this.state;
+    const { currentPage, pageCount, isOpenSnackbar, snackbarMsg } = this.state;
     return(
-      <BlogContainer contentClass="blog-list-wrapper">
+      <BlogContainer
+        contentClass="blog-list-wrapper"
+        isOpenSnackbar={isOpenSnackbar}
+        snackbarMsg={snackbarMsg}
+      >
         <section className="blog-list-container">
           <InfiniteScroll
             pageStart={0}

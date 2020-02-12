@@ -22,6 +22,8 @@ interface Prop {}
 interface State {
   response?: DouMiBlog.ArticleDetail,
   open: boolean;
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 }
 
 @View('/blog/detail/:slug')
@@ -34,10 +36,12 @@ export default class BlogDetail extends React.Component<Prop, State> {
 
     this.state = {
       open: true,
+      isOpenSnackbar: false,
+      snackbarMsg: '',
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const slug = (this.props as any).match.params.slug;
       const response = await this.BlogServer.fetchArticleDetail(slug);
@@ -47,11 +51,12 @@ export default class BlogDetail extends React.Component<Prop, State> {
         open: false,
       })
     } catch(err) {
-
+      console.error(err);
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博文详情失败，请稍后再试',
+      })
     }
-  }
-
-  componentDidMount() {
     const gitalk = new Gitalk({
       clientID: '16018f2091e0cd02d37c',
       clientSecret: 'c1c36729e8fdb3c309cd6e24939ad047cf904884',
@@ -69,9 +74,13 @@ export default class BlogDetail extends React.Component<Prop, State> {
     location.hash = `#/blog/list?queryCat=${catId}`
   }
   render() {
-    const { response, open } = this.state;
+    const { response, open, isOpenSnackbar, snackbarMsg } = this.state;
     return (
-      <BlogContainer contentClass="blog-detail-wrapper">
+      <BlogContainer
+        contentClass="blog-detail-wrapper"
+        isOpenSnackbar={isOpenSnackbar}
+        snackbarMsg={snackbarMsg}
+      >
         {
           response ? (
             <React.Fragment>

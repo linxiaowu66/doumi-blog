@@ -4,7 +4,6 @@ import { ENDPOINT } from '@malagu/web';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog } from '../common/blog-protocol'
 import * as InfiniteScroll from 'react-infinite-scroller';
-import Snackbar from '@material-ui/core/Snackbar';
 import BlogContainer from './components/blogContainer';
 import * as ReactMarkdown from 'react-markdown';
 import CodeBlock from './components/codeBlock';
@@ -54,16 +53,21 @@ export default class BlogAdmin extends React.Component<Prop, State> {
       blogContent: ''
     }
   }
-  async componentWillMount() {
-    try {
-      await this.fetchBlogList(this.state.currentPage)
-    } catch (err) {
-      console.log(err)
-    }
+  async componentDidMount() {
+    await this.fetchBlogList(this.state.currentPage)
   }
   fetchBlogList = async (currentPage: number) => {
     const { blogList } = this.state
-    const result = await this.BlogServer.fetchArticleList(currentPage);
+    let result
+    try {
+      result = await this.BlogServer.fetchArticleList(currentPage);
+    } catch (err) {
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '获取博客列表失败，请稍后重试'
+      })
+      return
+    }
 
     this.setState({
       blogList: [...blogList, ...result.list],
@@ -85,11 +89,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   loadMore = async () => {
     const { currentPage } = this.state;
 
-    try {
-      await this.fetchBlogList(+currentPage + 1)
-    } catch (err) {
-      console.log(err)
-    }
+    await this.fetchBlogList(+currentPage + 1)
   }
   renderBlogItem = () => {
     const { blogList } = this.state
@@ -108,7 +108,14 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   render() {
     const { pageCount, currentPage, blogContent, isOpenSnackbar, snackbarMsg } = this.state;
     return(
-      <BlogContainer endpoint={this.endpoint} navigatorList={navigatorList} isLogin contentClass="blog-admin-container">
+      <BlogContainer
+        endpoint={this.endpoint}
+        navigatorList={navigatorList}
+        isLogin
+        contentClass="blog-admin-container"
+        isOpenSnackbar={isOpenSnackbar}
+        snackbarMsg={snackbarMsg}
+      >
         <div className="blog-admin-wrapper">
           <section className="blog-list-container">
             <InfiniteScroll
@@ -129,14 +136,6 @@ export default class BlogAdmin extends React.Component<Prop, State> {
             />
           </section>
         </div>
-        <Snackbar
-          autoHideDuration={1500}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          key={'top,right'}
-          open={isOpenSnackbar}
-          onClose={() => this.setState({ isOpenSnackbar: false })}
-          message={snackbarMsg}
-        />
       </BlogContainer>
     )
   }

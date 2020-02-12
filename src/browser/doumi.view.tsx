@@ -12,55 +12,69 @@ import ClickTooltip from './components/clickTooltip';
 
 interface Prop {}
 interface State {
-  // isShowReward: boolean
-}
-
-function copyTextToClipboard(text: string) {
-  var textArea = document.createElement("textarea");
-
-  // Place in top-left corner of screen regardless of scroll position.
-  textArea.style.position = 'fixed';
-  textArea.style.top = '0px';
-  textArea.style.left = '0px';
-
-  // Ensure it has a small width and height. Setting to 1px / 1em
-  // doesn't work as this gives a negative w/h on some browsers.
-  textArea.style.width = '2em';
-  textArea.style.height = '2em';
-
-  // We don't need padding, reducing the size if it does flash render.
-  textArea.style.padding = '0px';
-
-  // Clean up any borders.
-  textArea.style.border = 'none';
-  textArea.style.outline = 'none';
-  textArea.style.boxShadow = 'none';
-
-  // Avoid flash of white box if rendered for any reason.
-  textArea.style.background = 'transparent';
-
-  textArea.value = text;
-
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('信息复制结果：' + msg);
-  } catch (err) {
-    console.log('浏览器不支持复制！！');
-  }
-
-  document.body.removeChild(textArea);
+  isOpenSnackbar: boolean,
+  snackbarMsg: string,
 }
 
 @View('/about/doumi')
 export default class AboutDouMi extends React.Component<Prop, State> {
+  constructor(props: Prop) {
+    super(props);
+
+    this.state = {
+      isOpenSnackbar: false,
+      snackbarMsg: '',
+    }
+  }
+  copyTextToClipboard = (text: string) => {
+    var textArea = document.createElement("textarea");
+
+    // Place in top-left corner of screen regardless of scroll position.
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0px';
+    textArea.style.left = '0px';
+
+    // Ensure it has a small width and height. Setting to 1px / 1em
+    // doesn't work as this gives a negative w/h on some browsers.
+    textArea.style.width = '2em';
+    textArea.style.height = '2em';
+
+    // We don't need padding, reducing the size if it does flash render.
+    textArea.style.padding = '0px';
+
+    // Clean up any borders.
+    textArea.style.border = 'none';
+    textArea.style.outline = 'none';
+    textArea.style.boxShadow = 'none';
+
+    // Avoid flash of white box if rendered for any reason.
+    textArea.style.background = 'transparent';
+
+    textArea.value = text;
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: successful ? '复制成功' : '复制失败'
+      })
+    } catch (err) {
+      this.setState({
+        isOpenSnackbar: true,
+        snackbarMsg: '浏览器不支持复制！！'
+      })
+    }
+
+    document.body.removeChild(textArea);
+  }
   render() {
+    const { isOpenSnackbar, snackbarMsg } = this.state;
     return (
-      <BlogContainer contentClass="doumi-info">
+      <BlogContainer contentClass="doumi-info" isOpenSnackbar={isOpenSnackbar} snackbarMsg={snackbarMsg}>
         <DouMiIntroduction avatarSize={120} fontSize={16} />
         <DouMiDetailItem title="关于豆米">
           <p className="detail-intro"><span>大洋芋</span>：2012年毕业的豆，从一开始就投入到前端开发的行业中，一去不回头。工作地点曾经在深圳待过两年，之后辗转到杭州，公司也从吉祥腾达科技切换到阿里巴巴，目前在家暂时带娃。回望7年工作以往，经历了前端行业剧变的年代，写过JQuery，处理过一大堆的浏览器兼容性。最后在所谓的互联网大厂中继续磨练，深谙React之道，经过鉴定，是个纯正的前端er。希望今年(2020年)可以找到自己热爱的一个新团体和新公司~</p>
@@ -85,10 +99,10 @@ export default class AboutDouMi extends React.Component<Prop, State> {
         <DouMiDetailItem title="联系豆米">
           <p className="contact-me-tip">您可以通过以下方式找到豆米，欢迎交朋友，一起探讨人生、美食、带娃，哦~也可以交流前端知识~我在杭州等你(<em>点击即复制，由于material-ui没有微信图标，懒得再重新引入新的图标库，所以以facebook的图标代表微信</em>)</p>
           <div className="contact-me-channels">
-            <ClickTooltip title="linguang66990@126.com" extraAction={copyTextToClipboard}>
+            <ClickTooltip title="linguang66990@126.com" extraAction={this.copyTextToClipboard}>
               <Email />
             </ClickTooltip>
-            <ClickTooltip title="lg997312609" extraAction={copyTextToClipboard}>
+            <ClickTooltip title="lg997312609" extraAction={this.copyTextToClipboard}>
               <Facebook />
             </ClickTooltip>
           </div>

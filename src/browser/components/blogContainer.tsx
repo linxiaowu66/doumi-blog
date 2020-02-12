@@ -16,6 +16,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Snackbar from '@material-ui/core/Snackbar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Zoom from '@material-ui/core/Zoom';
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
+      overflow: 'hidden',
       padding: theme.spacing(3),
     },
     fixedZoom: {
@@ -63,7 +65,9 @@ interface ContainerProps {
     link: string;
   }[],
   isLogin?: boolean,
-  endpoint?: string
+  endpoint?: string,
+  isOpenSnackbar: boolean,
+  snackbarMsg?: string,
 }
 
 const navigatorList = [{
@@ -140,6 +144,13 @@ export default function BlogContainer(props: ContainerProps) {
   const classes = useStyles();
   // const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [snackBarOpen, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (props.isOpenSnackbar !== snackBarOpen) {
+      setOpen(props.isOpenSnackbar)
+    }
+  }, [props])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -219,6 +230,14 @@ export default function BlogContainer(props: ContainerProps) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+      <Snackbar
+        autoHideDuration={1500}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        key={'top,right'}
+        open={snackBarOpen}
+        onClose={() => setOpen(false)}
+        message={props.snackbarMsg}
+      />
     </div>
   );
 }
