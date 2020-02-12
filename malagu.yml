@@ -1,4 +1,7 @@
-appTitle: '豆米的博客'
+webpack:
+  htmlWebpackPlugin:
+    title: '豆米的博客'
+    template: 'src/browser/index.html'
 malagu:
   security:
     enabled: true
