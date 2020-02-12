@@ -44,7 +44,7 @@ export default class BlogDetail extends React.Component<Prop, State> {
   async componentDidMount() {
   ***REMOVED***
       const slug = (this.props as any).match.params.slug;
-      const response = await this.BlogServer.fetchArticleDetail(slug);
+      const response = await this.BlogServer.fetchArticleDetail(slug, true);
 
       this.setState({
         response,

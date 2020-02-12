@@ -11,7 +11,7 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
   protected job: any;
 
   async onStart(app: Application): Promise<void> {
-    var job = new CronJob('0 0 */1 * * *', async () => {
+    var job = new CronJob('0 0 0 */1 * *', async () => {
     ***REMOVED***
         // await this.blogService.clearTodayIpsArray()
         this.logger.info(`schedule trigger at ${new Date()***REMOVED*** for clearing the visitor ips`)
