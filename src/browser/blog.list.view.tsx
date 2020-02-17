@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as query from 'query-string';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer } from '../common/blog-protocol';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import { View } from '@malagu/react/lib/browser';
@@ -41,15 +41,15 @@ export default class BlogList extends React.Component<Prop, State> {
   fetchBlogList = async (currentPage: number) => {
     try {
       const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search)
-      let queryCondition = {}
+      let queryCondition: DouMiBlog.queryCondition = { articleStatus: 'published' }
       if (queryTag) {
-        queryCondition = { ...queryCondition, queryTag }
+        queryCondition = { ...queryCondition, queryTag: +queryTag }
       }
       if (queryArch) {
-        queryCondition = { ...queryCondition, queryArch }
+        queryCondition = { ...queryCondition, queryArch: +queryArch }
       }
       if (queryCat) {
-        queryCondition = { ...queryCondition, queryCat }
+        queryCondition = { ...queryCondition, queryCat: +queryCat }
       }
       const { blogList } = this.state
       const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)

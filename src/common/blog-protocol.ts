@@ -69,6 +69,7 @@ export namespace DouMiBlog {
     queryTag?: number,
     queryCat?: number,
     queryArch?: number,
+    [key: string]: any
   }
   export interface RegisterParam {
     email: string,

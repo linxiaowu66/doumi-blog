@@ -56,7 +56,11 @@ export class BlogService {
             orderDef = order[item]
           })
         }
-        [list, count] = await repo.createQueryBuilder('article')
+        let queryBuilder = repo.createQueryBuilder('article')
+        if (condition.articleStatus) {
+          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus })
+        }
+        [list, count] = await queryBuilder
         .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag })
         .skip((currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE))
         .take(pageSize? pageSize : PAGE_SIZE)
@@ -73,6 +77,12 @@ export class BlogService {
       } else if (condition.queryArch) {
         whereQuery = {
           where: { archiveTime: condition.queryArch }
+        }
+      }
+      if (condition.articleStatus) {
+        whereQuery = {
+          ...whereQuery,
+          ...{ where: { articleStatus: condition.articleStatus }}
         }
       }
     }
