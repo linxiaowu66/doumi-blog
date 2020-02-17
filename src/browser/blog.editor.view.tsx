@@ -116,7 +116,10 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     return null
 ***REMOVED***
   componentDidUpdate() {
-    this.fetchBlogDetail(this.state.slug as string);
+    const { slug ***REMOVED*** = this.state;
+    if (slug) {
+      this.fetchBlogDetail(slug as string);
+  ***REMOVED***
 ***REMOVED***
   fetchBlogDetail = async (slug: string) => {
   ***REMOVED***

@@ -56,7 +56,11 @@ export class BlogService {
             orderDef = order[item]
         ***REMOVED***)
       ***REMOVED***
-        [list, count] = await repo.createQueryBuilder('article')
+        let queryBuilder = repo.createQueryBuilder('article')
+        if (condition.articleStatus) {
+          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus ***REMOVED***)
+      ***REMOVED***
+        [list, count] = await queryBuilder
         .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag ***REMOVED***)
         .skip((currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE))
         .take(pageSize? pageSize : PAGE_SIZE)
@@ -73,6 +77,12 @@ export class BlogService {
     ***REMOVED*** else if (condition.queryArch) {
         whereQuery = {
           where: { archiveTime: condition.queryArch ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      if (condition.articleStatus) {
+        whereQuery = {
+          ...whereQuery,
+          ...{ where: { articleStatus: condition.articleStatus ***REMOVED******REMOVED***
       ***REMOVED***
     ***REMOVED***
   ***REMOVED***

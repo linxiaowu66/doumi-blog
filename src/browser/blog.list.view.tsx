@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as query from 'query-string';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer ***REMOVED*** from '../common/blog-protocol';
+import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
@@ -41,15 +41,15 @@ export default class BlogList extends React.Component<Prop, State> {
   fetchBlogList = async (currentPage: number) => {
   ***REMOVED***
       const { queryTag, queryArch, queryCat ***REMOVED*** = query.parse((this.props as any).location.search)
-      let queryCondition = {***REMOVED***
+      let queryCondition: DouMiBlog.queryCondition = { articleStatus: 'published' ***REMOVED***
       if (queryTag) {
-        queryCondition = { ...queryCondition, queryTag ***REMOVED***
+        queryCondition = { ...queryCondition, queryTag: +queryTag ***REMOVED***
     ***REMOVED***
       if (queryArch) {
-        queryCondition = { ...queryCondition, queryArch ***REMOVED***
+        queryCondition = { ...queryCondition, queryArch: +queryArch ***REMOVED***
     ***REMOVED***
       if (queryCat) {
-        queryCondition = { ...queryCondition, queryCat ***REMOVED***
+        queryCondition = { ...queryCondition, queryCat: +queryCat ***REMOVED***
     ***REMOVED***
       const { blogList ***REMOVED*** = this.state
       const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
