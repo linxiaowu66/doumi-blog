@@ -37,7 +37,7 @@ export class BlogServerImpl implements BlogServer {
   // TODO: fix the pipeManager bug
   @Transactional()
   async fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList> {
-    const result = await this.blogService.fetchArticleList(currentPage, 5, null, condition)
+    const result = await this.blogService.fetchArticleList(currentPage, 20, null, condition)
 
     result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category']))
 

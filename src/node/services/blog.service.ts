@@ -15,8 +15,6 @@ import { WebsiteServiceSymbol, WebsiteService } from './website.service';
 
 export const BlogServiceSymbol = Symbol('BlogService');
 
-const PAGE_SIZE = 5;
-
 @Component(BlogServiceSymbol)
 export class BlogService {
 
@@ -24,15 +22,15 @@ export class BlogService {
   protected readonly websiteService: WebsiteService;
 
   @Transactional()
-  async fetchArticleList(currentPage = 1, pageSize = 5, order?: any, condition?: DouMiBlog.queryCondition) {
+  async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.queryCondition) {
     const repo = OrmContext.getRepository(Article);
 
     const baseQuery = {
       order: order ? order : {
         createdAt: 'DESC'
       },
-      take: pageSize? pageSize : PAGE_SIZE,
-      skip: (currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE), // think this needs to be page * limit
+      take: pageSize,
+      skip: (currentPage - 1) * pageSize, // think this needs to be page * limit
       relations: ['tags', 'archiveTime', 'category', 'author']
     }
 
@@ -62,8 +60,8 @@ export class BlogService {
         }
         [list, count] = await queryBuilder
         .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag })
-        .skip((currentPage - 1) * (pageSize ? pageSize : PAGE_SIZE))
-        .take(pageSize? pageSize : PAGE_SIZE)
+        .skip((currentPage - 1) * pageSize)
+        .take(pageSize)
         .orderBy(orderField, orderDef)
         .innerJoinAndSelect('article.tags', 'tags')
         .innerJoinAndSelect('article.category', 'category')
@@ -97,7 +95,7 @@ export class BlogService {
       category: item.category.name,
       archiveTime: item.fullArchiveTime,
       author: item.author.username
-    })), pageCount: Math.ceil(count / (pageSize ? pageSize : PAGE_SIZE)), currentPage}
+    })), pageCount: Math.ceil(count / pageSize), currentPage}
   }
 
   @Transactional()
