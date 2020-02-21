@@ -32,7 +32,8 @@ export namespace DouMiBlog {
     illustration: string,
     tags: string[],
     category: string,
-    digest: string
+    digest: string,
+    articleStatus: 'draft' | 'published',
 ***REMOVED***
 
   interface PropertyItem {

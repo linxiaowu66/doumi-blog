@@ -98,7 +98,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           editMode: true,
           slug: slug as string
       ***REMOVED***)
-        await this.fetchBlogDetail(slug as  string)
+        await this.fetchBlogDetail(slug as string)
     ***REMOVED***
   ***REMOVED*** catch (err) {
       console.error(err);
@@ -115,9 +115,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   ***REMOVED***
     return null
 ***REMOVED***
-  componentDidUpdate() {
-    const { slug ***REMOVED*** = this.state;
-    if (slug) {
+  componentDidUpdate(prevProps: Prop, prevState: State) {
+    // const { slug ***REMOVED*** = this.state;
+    const { slug ***REMOVED*** = query.parse((this.props as any).location.search)
+    const { slug: oldSlug ***REMOVED*** = query.parse((prevProps as any).location.search)
+    if (slug !== oldSlug) {
       this.fetchBlogDetail(slug as string);
   ***REMOVED***
 ***REMOVED***
@@ -163,13 +165,9 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: result.data.data.msg
+    ***REMOVED***, () => {
+        setTimeout(() => location.hash = '#/blog/admin/index', 3000);
     ***REMOVED***)
-      if (!editMode) {
-        this.setState({
-          editMode: true,
-          slug: result.data.data.slug
-      ***REMOVED***)
-    ***REMOVED***
   ***REMOVED*** else {
       this.setState({
         isOpenSnackbar: true,
@@ -212,6 +210,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         contentClass="blog-editor-wrapper"
         isOpenSnackbar={isOpenSnackbar***REMOVED***
         snackbarMsg={snackbarMsg***REMOVED***
+        closeSnackBar={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
       >
         <header className="blog-title">
           <TextField
