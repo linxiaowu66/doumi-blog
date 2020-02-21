@@ -1,3 +1,4 @@
+appTitle: '豆米的博客'
 webpack:
   htmlWebpackPlugin:
     title: '豆米的博客'
@@ -11,7 +12,7 @@ malagu:
     level: 'info'
   web:
     cors:
-      origin: 'http://nblog.5udou.cn'
+      origin: 'https://blog.5udou.cn'
 frontend:
   malagu:
     material-ui:
