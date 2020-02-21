@@ -68,6 +68,7 @@ interface ContainerProps {
   endpoint?: string,
   isOpenSnackbar: boolean,
   snackbarMsg?: string,
+  closeSnackBar?: () => void,
 }
 
 const navigatorList = [{
@@ -235,7 +236,7 @@ export default function BlogContainer(props: ContainerProps) {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         key={'top,right'}
         open={snackBarOpen}
-        onClose={() => setOpen(false)}
+        onClose={() => { setOpen(false); props.closeSnackBar && props.closeSnackBar() }}
         message={props.snackbarMsg}
       />
     </div>

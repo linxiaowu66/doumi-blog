@@ -98,7 +98,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           editMode: true,
           slug: slug as string
         })
-        await this.fetchBlogDetail(slug as  string)
+        await this.fetchBlogDetail(slug as string)
       }
     } catch (err) {
       console.error(err);
@@ -115,9 +115,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     }
     return null
   }
-  componentDidUpdate() {
-    const { slug } = this.state;
-    if (slug) {
+  componentDidUpdate(prevProps: Prop, prevState: State) {
+    // const { slug } = this.state;
+    const { slug } = query.parse((this.props as any).location.search)
+    const { slug: oldSlug } = query.parse((prevProps as any).location.search)
+    if (slug !== oldSlug) {
       this.fetchBlogDetail(slug as string);
     }
   }
@@ -163,13 +165,9 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: result.data.data.msg
+      }, () => {
+        setTimeout(() => location.hash = '#/blog/admin/index', 3000);
       })
-      if (!editMode) {
-        this.setState({
-          editMode: true,
-          slug: result.data.data.slug
-        })
-      }
     } else {
       this.setState({
         isOpenSnackbar: true,
@@ -212,6 +210,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         contentClass="blog-editor-wrapper"
         isOpenSnackbar={isOpenSnackbar}
         snackbarMsg={snackbarMsg}
+        closeSnackBar={() => this.setState({ isOpenSnackbar: false })}
       >
         <header className="blog-title">
           <TextField
