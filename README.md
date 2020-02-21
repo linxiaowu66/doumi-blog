@@ -66,6 +66,8 @@ $ npm start
   - [ ] malagu框架默认没有通过身份认证的请求都会返回302重定向，目前因为是SPA，重定向给浏览器的是一个Hash页面，谷歌浏览器
     不认，不知道怎么解决这个？或许是Chome的bug？
   - [ ] 一篇Malagu框架的使用测评？
+  - [ ] 目前的hash history可以转换为browser history吗？
+  - [ ] 使用的snackbar组件的设计目前太诡异了，后续找到更好的解决方案？
 
 
 ## 开发记录
