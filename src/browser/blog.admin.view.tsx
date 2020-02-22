@@ -5,12 +5,12 @@ import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached'
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol'
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
-import * as ReactMarkdown from 'react-markdown';
 import CodeBlock from './components/codeBlock';
 import Create from '@material-ui/icons/Create';
 import List from '@material-ui/icons/List';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogItemCard from './components/blogItemCard';
+const ReactMarkdown = require('react-markdown/with-html');
 
 interface Prop {***REMOVED***
 interface State {
@@ -133,6 +133,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
           <section className="blog-content">
             <ReactMarkdown
               source={blogContent***REMOVED***
+              escapeHtml={false***REMOVED***
               renderers={{ code: CodeBlock ***REMOVED******REMOVED***
               className="blog-preview-text"
             />
