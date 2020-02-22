@@ -5,7 +5,6 @@ import { ENDPOINT } from '@malagu/web';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer } from '../common/blog-protocol'
-import * as ReactMarkdown from 'react-markdown';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -17,6 +16,7 @@ import Settings from '@material-ui/icons/Settings';
 import { View } from '@malagu/react/lib/browser';
 import CodeBlock from './components/codeBlock';
 import BlogConfig from './components/blogSetting';
+const ReactMarkdown = require('react-markdown/with-html');
 
 import './styles/blog.admin.less';
 
@@ -249,6 +249,7 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           <section className="blog-preview">
             <ReactMarkdown
               source={blogContent}
+              escapeHtml={false}
               renderers={{ code: CodeBlock }}
               className="blog-preview-text"
             />

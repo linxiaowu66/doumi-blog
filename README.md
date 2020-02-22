@@ -68,7 +68,8 @@ $ npm start
   - [ ] 一篇Malagu框架的使用测评？
   - [ ] 目前的hash history可以转换为browser history吗？
   - [ ] 使用的snackbar组件的设计目前太诡异了，后续找到更好的解决方案？
-
+  - [ ] 完成网站数据页面
+  - [x] Markdown的Table样式完成
 
 ## 开发记录
 * typeorm支持mongoDB太弱了，mongoDB的ref特性从2017年有人提出到现在还没有实现😅

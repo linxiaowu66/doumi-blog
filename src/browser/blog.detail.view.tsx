@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
 import format from 'date-fns/format';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import Update from '@material-ui/icons/Update';
@@ -13,6 +12,8 @@ import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { View } from '@malagu/react/lib/browser';
 import BlogContainer from './components/blogContainer';
 import CodeBlock from './components/codeBlock';
+
+const ReactMarkdown = require('react-markdown/with-html');
 
 import 'gitalk/dist/gitalk.css';
 
@@ -110,6 +111,7 @@ export default class BlogDetail extends React.Component<Prop, State> {
               <ReactMarkdown
                 source={response ? response.content : ''}
                 renderers={{ code: CodeBlock }}
+                escapeHtml={false}
                 className="blog-detail"
               />
               <section className='micro-program'>
