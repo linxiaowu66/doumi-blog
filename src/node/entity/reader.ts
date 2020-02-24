@@ -6,14 +6,14 @@ export class Reader {
   id: number;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })
   articleSlug: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useForm } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
       marginTop: 20,
     }
   })
-})
+});
 
 export default function LoginRegForm(props: FormProps) {
   const { handleSubmit, errors, register } = useForm();
@@ -41,11 +41,11 @@ export default function LoginRegForm(props: FormProps) {
 
   const onSubmit = (data: any) => {
     if (type === 'register') {
-      props.registerCb(data)
+      props.registerCb(data);
     } else {
-      props.loginCb(data)
+      props.loginCb(data);
     }
-  }
+  };
 
   const classes = useStyles({visible: props.visible, success: props.actionSuccess});
   return (
@@ -65,22 +65,23 @@ export default function LoginRegForm(props: FormProps) {
           inputRef={register({
             pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           })}
-          helperText={errors.email && "无效的邮箱地址"}
+          helperText={errors.email && '无效的邮箱地址'}
         />
         {
           type === 'register' ? (
-          <TextField
-            id="outlined-name-input-required"
-            label="昵称"
-            type="text"
-            name="username"
-            margin="normal"
-            fullWidth
-            variant="outlined"
-            error={!!errors.username}
-            inputRef={register}
-            helperText={errors.username && "用户名格式不正确"}
-          />
+            <TextField
+              id="outlined-name-input-required"
+              label="昵称"
+              type="text"
+              name="username"
+              margin="normal"
+              fullWidth
+              variant="outlined"
+              error={!!errors.username}
+              inputRef={register}
+              helperText={errors.username && '用户名格式不正确'}
+            />
+          // eslint-disable-next-line no-null/no-null
           ): null
         }
         <TextField
@@ -93,7 +94,7 @@ export default function LoginRegForm(props: FormProps) {
           fullWidth
           variant="outlined"
           inputRef={register}
-          helperText={errors.password && "密码错误"}
+          helperText={errors.password && '密码错误'}
         />
         <Button type="submit" size="large" color="secondary" variant="contained" fullWidth>
           {type === 'register' ? '注册' : '登录'}

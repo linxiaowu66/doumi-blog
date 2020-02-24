@@ -1,10 +1,10 @@
-import * as React from 'react'
+import * as React from 'react';
 import * as query from 'query-string';
-import { Value } from '@malagu/core/lib/common/annotation/detached'
+import { Value } from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT } from '@malagu/web';
 import axios from 'axios';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer } from '../common/blog-protocol'
+import { BlogServer } from '../common/blog-protocol';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -35,7 +35,7 @@ interface State {
   blogStatus: 'draft' | 'published',
   blogArchiveTime: string,
   slug: string,
-  anchorEl: null | Element,
+  anchorEl: undefined | Element,
   showSetting: boolean,
   tags: string[], // 后端存储的当前所有标签
   categories: string[] // 后端存储的当前所有分类
@@ -49,7 +49,7 @@ const navigatorList = [{
   name: '博文列表',
   icon: <List />,
   link: '#/blog/admin/index'
-}]
+}];
 const initData = {
   editMode: false,
   isOpenSnackbar: false,
@@ -63,9 +63,9 @@ const initData = {
   blogArchiveTime: '',
   slug: '',
   blogStatus: 'draft' as 'draft',
-  anchorEl: null,
+  anchorEl: undefined,
   showSetting: false,
-}
+};
 @View('/blog/admin/editor')
 export default class BlogAdminEditor extends React.Component<Prop, State> {
   @Value(ENDPOINT)
@@ -77,48 +77,49 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   constructor(props: Prop) {
     super(props);
 
-    this.state = { ...initData, tags: [], categories: []}
+    this.state = { ...initData, tags: [], categories: []};
   }
   async componentDidMount() {
     try {
-      const { slug } = query.parse((this.props as any).location.search)
+      const { slug } = query.parse((this.props as any).location.search);
 
       const [tagsList, catList] = await Promise.all([
         this.BlogServer.fetchTagsList(),
         this.BlogServer.fetchCatsList()
-      ])
+      ]);
 
       this.setState({
         tags: tagsList.map(item => item.name),
         categories: catList.map(item => item.name),
-      })
+      });
 
       if (slug) {
         this.setState({
           editMode: true,
           slug: slug as string
-        })
-        await this.fetchBlogDetail(slug as string)
+        });
+        await this.fetchBlogDetail(slug as string);
       }
     } catch (err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博客信息失败，请稍后再试',
-      })
+      });
     }
   }
   static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
-    const { slug } = query.parse((nextProps as any).location.search)
+    const { slug } = query.parse((nextProps as any).location.search);
     if (prevState.slug && !slug) {
-      return initData
+      return initData;
     }
-    return null
+    // eslint-disable-next-line no-null/no-null
+    return null;
   }
   componentDidUpdate(prevProps: Prop, prevState: State) {
     // const { slug } = this.state;
-    const { slug } = query.parse((this.props as any).location.search)
-    const { slug: oldSlug } = query.parse((prevProps as any).location.search)
+    const { slug } = query.parse((this.props as any).location.search);
+    const { slug: oldSlug } = query.parse((prevProps as any).location.search);
     if (slug !== oldSlug) {
       this.fetchBlogDetail(slug as string);
     }
@@ -136,15 +137,15 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         blogArchiveTime: result.archiveTime,
         blogCategory: result.category,
         blogStatus: result.articleStatus
-      })
+      });
     } catch (err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博客详情失败，请稍后再试',
-      })
+      });
     }
-  }
+  };
   handleSubmit = async(actionType: string) => {
     const { blogTitle: title, blogContent: content, blogArchiveTime: archiveTime, blogTags, blogCategory, blogDigest, blogIllustration, editMode } = this.state;
 
@@ -157,9 +158,11 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       digest: blogDigest,
       illustration: blogIllustration,
       articleStatus: actionType
-    }
+    };
 
-    const result = editMode ? await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }, {withCredentials: true}): await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody, {withCredentials: true})
+    const result = editMode ?
+      await axios.put(`${this.endpoint ? this.endpoint : ''}/api/blog`, { ...postBody, slug: this.state.slug }, {withCredentials: true}) :
+      await axios.post(`${this.endpoint ? this.endpoint : ''}/api/blog`, postBody, {withCredentials: true});
 
     if (result.data.status && result.data.data) {
       this.setState({
@@ -167,14 +170,14 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
         snackbarMsg: result.data.data.msg
       }, () => {
         setTimeout(() => location.hash = '#/blog/admin/index', 3000);
-      })
+      });
     } else {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '保存博文失败，请稍后再试',
-      })
+      });
     }
-  }
+  };
   handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({
       blogContent: event.target.value
@@ -183,13 +186,13 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
   handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.setState({
       anchorEl: event.currentTarget
-    })
-  }
+    });
+  };
   handleCloseMenu = () => {
     this.setState({
-      anchorEl: null
-    })
-  }
+      anchorEl: undefined
+    });
+  };
   handleSaveConfig = (data: ConfigProps) => {
     this.setState({
       blogArchiveTime: data.archiveTime,
@@ -198,10 +201,10 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
       blogCategory: data.category,
       blogTags: data.tags,
       blogDigest: data.digest
-     })
-  }
+    });
+  };
   render() {
-    const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg } = this.state
+    const { blogContent, anchorEl, showSetting, tags, categories, isOpenSnackbar, snackbarMsg } = this.state;
     return(
       <BlogContainer
         endpoint={this.endpoint}
@@ -269,6 +272,6 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
           }}
         />
       </BlogContainer>
-    )
+    );
   }
 }

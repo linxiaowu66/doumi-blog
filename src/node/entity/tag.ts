@@ -7,7 +7,7 @@ export class Tag {
   id: number;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })

@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import Category from '@material-ui/icons/Category';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import DescriptionOutlined from '@material-ui/icons/DescriptionOutlined'
+import DescriptionOutlined from '@material-ui/icons/DescriptionOutlined';
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { View } from '@malagu/react/lib/browser';
 import BlogContainer from './components/blogContainer';
@@ -39,7 +39,7 @@ export default class BlogDetail extends React.Component<Prop, State> {
       open: true,
       isOpenSnackbar: false,
       snackbarMsg: '',
-    }
+    };
   }
 
   async componentDidMount() {
@@ -50,13 +50,13 @@ export default class BlogDetail extends React.Component<Prop, State> {
       this.setState({
         response,
         open: false,
-      })
+      });
     } catch(err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博文详情失败，请稍后再试',
-      })
+      });
     }
     const gitalk = new Gitalk({
       clientID: '16018f2091e0cd02d37c',
@@ -66,14 +66,14 @@ export default class BlogDetail extends React.Component<Prop, State> {
       admin: ['linxiaowu66'],
       id: location.pathname.slice(0, 50),      // Ensure uniqueness and length less than 50
       distractionFreeMode: false  // Facebook-like distraction free mode
-    })
+    });
 
-    gitalk.render('gitalk-container')
+    gitalk.render('gitalk-container');
   }
 
   handleJumpToList = (catId: number) => {
-    location.hash = `#/blog/list?queryCat=${catId}`
-  }
+    location.hash = `#/blog/list?queryCat=${catId}`;
+  };
   render() {
     const { response, open, isOpenSnackbar, snackbarMsg } = this.state;
     return (
@@ -134,6 +134,6 @@ export default class BlogDetail extends React.Component<Prop, State> {
         }
         <div id="gitalk-container" />
       </BlogContainer>
-    )
+    );
   }
 }

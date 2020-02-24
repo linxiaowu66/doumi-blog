@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     fontSize: 13,
     color: '#ccc'
   }
-})
+});
 
 function FootPrint() {
   const classes = useStyles();
@@ -21,7 +21,7 @@ function FootPrint() {
         Copyright © <a href='/'>豆米博客</a>. 2020 • All rights reserved. | 浙ICP备15041819号-1
       </div>
     </footer>
-  )
+  );
 }
 
 export default FootPrint;

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import * as query from 'query-string';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
@@ -36,44 +36,44 @@ export default class BlogList extends React.Component<Prop, State> {
   }
 
   async componentDidMount() {
-    await this.fetchBlogList(this.state.currentPage)
+    await this.fetchBlogList(this.state.currentPage);
   }
   fetchBlogList = async (currentPage: number) => {
     try {
-      const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search)
-      let queryCondition: DouMiBlog.queryCondition = { articleStatus: 'published' }
+      const { queryTag, queryArch, queryCat } = query.parse((this.props as any).location.search);
+      let queryCondition: DouMiBlog.QueryCondition = { articleStatus: 'published' };
       if (queryTag) {
-        queryCondition = { ...queryCondition, queryTag: +queryTag }
+        queryCondition = { ...queryCondition, queryTag: +queryTag };
       }
       if (queryArch) {
-        queryCondition = { ...queryCondition, queryArch: +queryArch }
+        queryCondition = { ...queryCondition, queryArch: +queryArch };
       }
       if (queryCat) {
-        queryCondition = { ...queryCondition, queryCat: +queryCat }
+        queryCondition = { ...queryCondition, queryCat: +queryCat };
       }
-      const { blogList } = this.state
-      const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition)
+      const { blogList } = this.state;
+      const result = await this.BlogServer.fetchArticleList(currentPage, queryCondition);
 
       this.setState({
         blogList: [...blogList, ...result.list],
         pageCount: result.pageCount,
         currentPage: result.currentPage,
-      })
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取列表失败，请稍后重试',
-      })
+      });
     }
-  }
+  };
   loadMore = async () => {
     const { currentPage } = this.state;
 
-    await this.fetchBlogList(+currentPage + 1)
-  }
+    await this.fetchBlogList(+currentPage + 1);
+  };
   renderBlogItem = () => {
-    const { blogList } = this.state
+    const { blogList } = this.state;
 
     return blogList.map(item => (
       <BlogItem
@@ -82,8 +82,8 @@ export default class BlogList extends React.Component<Prop, State> {
         mediaUrl={item.illustration}
         slug={item.slug}
         digest={item.digest} />
-    ))
-  }
+    ));
+  };
 
   render() {
     const { currentPage, pageCount, isOpenSnackbar, snackbarMsg } = this.state;
@@ -103,8 +103,8 @@ export default class BlogList extends React.Component<Prop, State> {
           >
             {this.renderBlogItem()}
           </InfiniteScroll>
-          </section>
+        </section>
       </BlogContainer>
-    )
+    );
   }
 }

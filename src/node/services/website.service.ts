@@ -9,44 +9,44 @@ export const WebsiteServiceSymbol = Symbol('WebsiteService');
 export class WebsiteService {
   @Transactional()
   async updateWebsiteStatistics() {
-    let reqIp: string
+    let reqIp: string;
     if (Context.getRequest().headers['x-real-ip']) {
-      reqIp = Context.getRequest().headers['x-real-ip'] as string
+      reqIp = Context.getRequest().headers['x-real-ip'] as string;
     } else {
-      reqIp = (Context.getRequest() as any).ip
+      reqIp = (Context.getRequest() as any).ip;
     }
 
     if (!reqIp) {
-      console.log('[blogService]: can not get client ip, ignore it!')
-      return
+      console.log('[blogService]: can not get client ip, ignore it!');
+      return;
     }
 
     // const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
-    const repo = OrmContext.getRepository(Website)
+    const repo = OrmContext.getRepository(Website);
 
-    const website = await repo.findOne({id: 1})
+    const website = await repo.findOne({id: 1});
 
     if (website) {
       if (!website.todayIps.includes(reqIp)) {
-        website.todayIps.push(reqIp)
-        website.todayPv = +website.todayPv + 1
-        website.todayUv = +website.todayUv + 1
-        website.totalPv = +website.totalPv + 1
-        website.totalUv = +website.totalUv + 1
+        website.todayIps.push(reqIp);
+        website.todayPv = +website.todayPv + 1;
+        website.todayUv = +website.todayUv + 1;
+        website.totalPv = +website.totalPv + 1;
+        website.totalUv = +website.totalUv + 1;
       } else {
-        website.totalPv = +website.totalPv + 1
-        website.todayPv = +website.todayPv + 1
+        website.totalPv = +website.totalPv + 1;
+        website.todayPv = +website.todayPv + 1;
       }
-      repo.save(website)
+      repo.save(website);
     } else {
-      const newData = new Website()
+      const newData = new Website();
       newData.todayIps = [reqIp];
-      newData.todayPv = 1
+      newData.todayPv = 1;
       newData.todayUv = 1;
-      newData.totalPv = 1
+      newData.totalPv = 1;
       newData.totalUv = 1;
-      repo.save(newData)
+      repo.save(newData);
     }
   }
 
@@ -117,6 +117,6 @@ export class WebsiteService {
       desc2: '博客的整体UI风格全新呈现',
       date: '2020/02',
       time: '09 周日'
-    }]
+    }];
   }
 }

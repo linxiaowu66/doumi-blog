@@ -107,7 +107,7 @@ const navigatorList = [{
   name: 'Github',
   icon: <GitHub />,
   link: 'https://github.com/linxiaowu66/doumi-blog'
-}]
+}];
 interface ScrollProps {
   children: React.ReactElement;
 }
@@ -149,9 +149,9 @@ export default function BlogContainer(props: ContainerProps) {
 
   React.useEffect(() => {
     if (props.isOpenSnackbar !== snackBarOpen) {
-      setOpen(props.isOpenSnackbar)
+      setOpen(props.isOpenSnackbar);
     }
-  }, [props])
+  }, [props]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -164,17 +164,17 @@ export default function BlogContainer(props: ContainerProps) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {navList.map((item) => {
-          const isActive = location.hash.match(item.link) && item.link
+        {navList.map(item => {
+          const isActive = location.hash.match(item.link) && item.link;
           return (
-          <Link color="inherit" underline={"none"} href={item.link} key={item.name}>
-            <ListItem button style={isActive ? {backgroundColor: 'rgba(17, 157, 85, 0.4)'} : {}}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.name} />
-            </ListItem>
-          </Link>
-          )
-      })}
+            <Link color="inherit" underline={'none'} href={item.link} key={item.name}>
+              <ListItem button style={isActive ? {backgroundColor: 'rgba(17, 157, 85, 0.4)'} : {}}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.name} />
+              </ListItem>
+            </Link>
+          );
+        })}
       </List>
     </div>
   );
@@ -223,6 +223,7 @@ export default function BlogContainer(props: ContainerProps) {
           props.children
         }
         {
+          // eslint-disable-next-line no-null/no-null
           props.isLogin ? null : <FootPrint />
         }
       </main>
@@ -236,7 +237,7 @@ export default function BlogContainer(props: ContainerProps) {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         key={'top,right'}
         open={snackBarOpen}
-        onClose={() => { setOpen(false); props.closeSnackBar && props.closeSnackBar() }}
+        onClose={() => { setOpen(false); props.closeSnackBar && props.closeSnackBar(); }}
         message={props.snackbarMsg}
       />
     </div>

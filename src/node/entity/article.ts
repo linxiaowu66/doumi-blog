@@ -6,8 +6,8 @@ import { Category } from './category';
 
 
 export enum ArticleStatus {
-  DRAFT = "draft",
-  PUBLISHED = "published",
+  DRAFT = 'draft',
+  PUBLISHED = 'published',
 }
 
 @Entity()
@@ -18,7 +18,7 @@ export class Article {
 
   // 文章标题
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })
@@ -39,7 +39,7 @@ export class Article {
 
   // 博文摘要，这次需要自己填写，不再自动从文章采集字符了，那样实现不准确
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })
@@ -47,7 +47,7 @@ export class Article {
 
   // 博文状态,默认草稿中
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: ArticleStatus,
     default: ArticleStatus.DRAFT
   })
@@ -55,7 +55,7 @@ export class Article {
 
   // 文章首页图片链接
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })
@@ -72,7 +72,7 @@ export class Article {
 
   // 以日为单位
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
   })

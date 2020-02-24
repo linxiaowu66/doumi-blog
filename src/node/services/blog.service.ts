@@ -22,7 +22,7 @@ export class BlogService {
   protected readonly websiteService: WebsiteService;
 
   @Transactional()
-  async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.queryCondition) {
+  async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.QueryCondition) {
     const repo = OrmContext.getRepository(Article);
 
     const baseQuery = {
@@ -32,61 +32,61 @@ export class BlogService {
       take: pageSize,
       skip: (currentPage - 1) * pageSize, // think this needs to be page * limit
       relations: ['tags', 'archiveTime', 'category', 'author']
-    }
+    };
 
-    let whereQuery = {}
-    let list: Article[] = []
+    let whereQuery = {};
+    let list: Article[] = [];
     let count = 0;
 
     if (currentPage === 1) {
-      await this.websiteService.updateWebsiteStatistics()
+      await this.websiteService.updateWebsiteStatistics();
     }
 
     if (condition) {
       if (condition.queryTag) {
         // 多对多的关系比较特殊，find不能不满足需求
         let orderField = 'article.createdAt';
-        let orderDef: "ASC" | "DESC" = 'DESC';
+        let orderDef: 'ASC' | 'DESC' = 'DESC';
         if (order) {
           // 排序字段仅支持1个字段
           Object.keys(order).forEach(item => {
-            orderField = `article.${item}`
-            orderDef = order[item]
-          })
+            orderField = `article.${item}`;
+            orderDef = order[item];
+          });
         }
-        let queryBuilder = repo.createQueryBuilder('article')
+        const queryBuilder = repo.createQueryBuilder('article');
         if (condition.articleStatus) {
-          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus })
+          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus });
         }
         [list, count] = await queryBuilder
-        .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag })
-        .skip((currentPage - 1) * pageSize)
-        .take(pageSize)
-        .orderBy(orderField, orderDef)
-        .innerJoinAndSelect('article.tags', 'tags')
-        .innerJoinAndSelect('article.category', 'category')
-        .innerJoinAndSelect('article.archiveTime', 'archiveTime')
-        .innerJoinAndSelect('article.author', 'author')
-        .getManyAndCount()
+          .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag })
+          .skip((currentPage - 1) * pageSize)
+          .take(pageSize)
+          .orderBy(orderField, orderDef)
+          .innerJoinAndSelect('article.tags', 'tags')
+          .innerJoinAndSelect('article.category', 'category')
+          .innerJoinAndSelect('article.archiveTime', 'archiveTime')
+          .innerJoinAndSelect('article.author', 'author')
+          .getManyAndCount();
       } else if (condition.queryCat) {
         whereQuery = {
           where: { category: condition.queryCat }
-        }
+        };
       } else if (condition.queryArch) {
         whereQuery = {
           where: { archiveTime: condition.queryArch }
-        }
+        };
       }
       if (condition.articleStatus) {
         whereQuery = {
           ...whereQuery,
           ...{ where: { articleStatus: condition.articleStatus }}
-        }
+        };
       }
     }
 
     if (!condition?.queryTag) {
-      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery})
+      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery});
     }
 
     return { list: list.map(item => ({
@@ -95,17 +95,17 @@ export class BlogService {
       category: item.category.name,
       archiveTime: item.fullArchiveTime,
       author: item.author.username
-    })), pageCount: Math.ceil(count / pageSize), currentPage}
+    })), pageCount: Math.ceil(count / pageSize), currentPage};
   }
 
   @Transactional()
   async fetchArticleDetail(slug: string, shouldBeUpdateStats = false) {
     const repo = OrmContext.getRepository(Article);
 
-    const result = await repo.findOne({ slug }, { relations: ['tags', 'archiveTime', 'category', 'author'] })
+    const result = await repo.findOne({ slug }, { relations: ['tags', 'archiveTime', 'category', 'author'] });
 
     if (!result) {
-      throw new Error('找不到对应文章')
+      throw new Error('找不到对应文章');
     }
 
     if (shouldBeUpdateStats) {
@@ -124,7 +124,7 @@ export class BlogService {
       catId: result.category.id,
       archiveTime: result.fullArchiveTime,
       author: result.author.username
-    }
+    };
   }
 
   @Transactional()
@@ -136,22 +136,22 @@ export class BlogService {
     const archiveRepo = OrmContext.getRepository(Archive);
     const userRepo = OrmContext.getRepository(User);
 
-    const loadTags = await tagRepo.find({ name: In(tags)})
+    const loadTags = await tagRepo.find({ name: In(tags)});
     const loadCat = await catRepo.find({ name: category});
     const loadUser = await userRepo.find({ email: username });
-    let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) })
+    let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) });
     const repo = OrmContext.getRepository(Article);
 
     if (!loadArch) {
-      loadArch = new Archive()
-      loadArch.archiveTime = archiveTime.substr(0, 7)
+      loadArch = new Archive();
+      loadArch.archiveTime = archiveTime.substr(0, 7);
 
       await archiveRepo.save(loadArch);
     }
 
-    let articleIns
+    let articleIns;
     if (!isUpdate) {
-      articleIns = new Article()
+      articleIns = new Article();
     } else {
       articleIns = await repo.findOne({slug: article.slug});
 
@@ -177,40 +177,40 @@ export class BlogService {
       articleIns.slug = article.slug;
     }
 
-    const result = await repo.save(articleIns)
+    const result = await repo.save(articleIns);
 
     // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
     // if (!isUpdate) {
-      // result = await repo.save(articleIns)
+    // result = await repo.save(articleIns)
     // } else {
     //   result = await repo.update({ slug: article.slug }, articleIns)
     // }
-    return result
+    return result;
   }
   @Transactional()
   async updateArticleStatictics(slug: string) {
-    let reqIp: string
+    let reqIp: string;
     if (Context.getRequest().headers['x-real-ip']) {
-      reqIp = Context.getRequest().headers['x-real-ip'] as string
+      reqIp = Context.getRequest().headers['x-real-ip'] as string;
     } else {
-      reqIp = (Context.getRequest() as any).ip
+      reqIp = (Context.getRequest() as any).ip;
     }
 
     const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
-    const readerRepo = OrmContext.getRepository(Reader)
+    const readerRepo = OrmContext.getRepository(Reader);
 
     const reader = await readerRepo.findOne({
       where: { date: now, articleSlug: slug }
-    })
+    });
 
     if (reader) {
       if (!reader.ips.includes(reqIp)) {
-        reader.ips.push(reqIp)
-        readerRepo.save(reader)
+        reader.ips.push(reqIp);
+        readerRepo.save(reader);
       }
     } else {
-      const newReader = new Reader()
+      const newReader = new Reader();
       newReader.articleSlug = slug;
       newReader.date = now;
       newReader.ips = [reqIp];
@@ -224,40 +224,40 @@ export class BlogService {
   async fetchTagsListWithArticle() {
     const repo = OrmContext.getRepository(Tag);
 
-    const result = await repo.find({ relations: ["articles"]});
+    const result = await repo.find({ relations: ['articles']});
 
     return result.map(item => ({
       id: item.id,
       name: item.name,
       articlesCount: item.articles.length
-    }))
+    }));
   }
 
   @Transactional()
   async fetchArchListWithArticle() {
     const repo = OrmContext.getRepository(Archive);
 
-    const result = await repo.find({ relations: ["articles"]});
+    const result = await repo.find({ relations: ['articles']});
 
     return result.map(item => ({
       id: item.id,
       archiveTime: item.archiveTime,
       name: '', // fix lint error
       articlesCount: item.articles.length
-    }))
+    }));
   }
 
   @Transactional()
   async fetchCatListWithArticle() {
     const repo = OrmContext.getRepository(Category);
 
-    const result = await repo.find({ relations: ["articles"]});
+    const result = await repo.find({ relations: ['articles']});
 
     return result.map(item => ({
       id: item.id,
       name: item.name,
       articlesCount: item.articles.length
-    }))
+    }));
   }
 
   @Transactional()
@@ -265,10 +265,10 @@ export class BlogService {
     const repo = OrmContext.getRepository(Article);
 
     const result = await repo.createQueryBuilder('article')
-    .where('article.title like :title', { title: `%${keyword}%`})
-    .orWhere('article.content like :content', { content: `%${keyword}%`})
-    .getMany()
+      .where('article.title like :title', { title: `%${keyword}%`})
+      .orWhere('article.content like :content', { content: `%${keyword}%`})
+      .getMany();
 
-    return result
+    return result;
   }
 }
