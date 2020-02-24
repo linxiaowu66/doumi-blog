@@ -164,7 +164,7 @@ export class BlogService {
     articleIns.tags = loadTags;
     articleIns.category = loadCat[0];
     articleIns.articleStatus = article.articleStatus as ArticleStatus;
-    articleIns.content = article.content.replace(/http:\/\/blogimages2016/, 'https://blogimages2016');
+    articleIns.content = article.content.replace(/http:\/\/blogimages2016/g, 'https://blogimages2016');
     articleIns.digest = article.digest;
     articleIns.illustration = article.illustration.replace(/http:\/\//, 'https://');
     articleIns.title = article.title;
