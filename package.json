@@ -63,7 +63,7 @@
   },
   "scripts": {
     "clean": "rimraf lib dist",
-    "build": "malagu build",
+    "build": "malagu build -m prod",
     "start": "malagu serve",
     "deploy": "malagu deploy"
   }
