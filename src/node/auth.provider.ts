@@ -49,6 +49,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
       Context.getResponse().statusCode = 200;
       Context.getResponse().body = JSON.stringify({status: 0, error: '用户名或密码不正确'});
       return {
+        // eslint-disable-next-line no-null/no-null
         principal: null,
         credentials: '',
         policies: [],
