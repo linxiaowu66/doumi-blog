@@ -7,28 +7,28 @@ export class User {
   id: number;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 20,
     nullable: false
 ***REMOVED***)
   username: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
 ***REMOVED***)
   password: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
 ***REMOVED***)
   @Index({ unique: true ***REMOVED***)
   email: string;
 
-  @OneToMany(type => Article, article => article.author)
+  @OneToMany(type => {return Article;***REMOVED***, article => {return article.author;***REMOVED***)
   articles: Article[];
 
   @CreateDateColumn()

@@ -7,7 +7,7 @@ export class Category {
   id: number;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
 ***REMOVED***)
@@ -15,7 +15,7 @@ export class Category {
   name: string;
 
   @OneToMany(type => Article, article => article.category)
-  articles: Article[]
+  articles: Article[];
 
   @CreateDateColumn()
   public readonly createdAt!: Date;

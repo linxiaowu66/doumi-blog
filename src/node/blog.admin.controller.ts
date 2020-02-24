@@ -7,7 +7,7 @@ import { Article ***REMOVED*** from './entity/article';
 
 // 以下api都是需要身份校验
 @Controller('/api')
-export class blogAdminController {
+export class BlogAdminController {
 
   @Autowired(BlogServiceSymbol)
   protected readonly blogService: BlogService;
@@ -16,12 +16,12 @@ export class blogAdminController {
   @Post('/blog')
   @Transactional()
   async createBlog(
-    @Body() article: DouMiBlog.ArticleDetail,
+  @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
 
     const userInfo = session['malagu:securityContext'].authentication.principal;
-    const { username ***REMOVED*** = userInfo
+    const { username ***REMOVED*** = userInfo;
 
     const result = await this.blogService.createOrUpdateArticle(article, username);
 
@@ -35,11 +35,11 @@ export class blogAdminController {
   @Put('/blog')
   @Transactional()
   async updateBlog(
-    @Body() article: DouMiBlog.ArticleDetail,
+  @Body() article: DouMiBlog.ArticleDetail,
     @Session() session: any,
   ) {
     const userInfo = session['malagu:securityContext'].authentication.principal;
-    const { username ***REMOVED*** = userInfo
+    const { username ***REMOVED*** = userInfo;
 
     await this.blogService.createOrUpdateArticle(article, username, true);
 

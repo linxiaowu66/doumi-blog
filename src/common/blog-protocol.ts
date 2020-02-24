@@ -1,15 +1,15 @@
 export const BlogServer = Symbol('BlogServer');
 
 export interface BlogServer {
-    fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
-    fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList>;
-    findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]>
-    fetchArticleDetail(slug: string, shouldBeUpdateStats?: boolean): Promise<DouMiBlog.ArticleDetail>;
-    fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
-    fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
-    fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
-    fetchWebsiteChangeLog(): Promise<DouMiBlog.ChangeLog[]>
-    registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
+  fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList>;
+  fetchArticleList(currentPage: number, condition?: DouMiBlog.QueryCondition): Promise<DouMiBlog.ArticleList>;
+  findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]>
+  fetchArticleDetail(slug: string, shouldBeUpdateStats?: boolean): Promise<DouMiBlog.ArticleDetail>;
+  fetchTagsList(): Promise<DouMiBlog.TagsItem[]>;
+  fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
+  fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
+  fetchWebsiteChangeLog(): Promise<DouMiBlog.ChangeLog[]>
+  registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 ***REMOVED***
 
 export namespace DouMiBlog {
@@ -66,7 +66,7 @@ export namespace DouMiBlog {
     catId: number;
 ***REMOVED***
 
-  export interface queryCondition {
+  export interface QueryCondition {
     queryTag?: number,
     queryCat?: number,
     queryArch?: number,

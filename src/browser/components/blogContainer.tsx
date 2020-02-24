@@ -107,7 +107,7 @@ const navigatorList = [{
   name: 'Github',
   icon: <GitHub />,
   link: 'https://github.com/linxiaowu66/doumi-blog'
-***REMOVED***]
+***REMOVED***];
 interface ScrollProps {
   children: React.ReactElement;
 ***REMOVED***
@@ -149,9 +149,9 @@ export default function BlogContainer(props: ContainerProps) {
 
   React.useEffect(() => {
     if (props.isOpenSnackbar !== snackBarOpen) {
-      setOpen(props.isOpenSnackbar)
+      setOpen(props.isOpenSnackbar);
   ***REMOVED***
-***REMOVED***, [props])
+***REMOVED***, [props]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -164,17 +164,17 @@ export default function BlogContainer(props: ContainerProps) {
       <div className={classes.toolbar***REMOVED*** />
       <Divider />
       <List>
-        {navList.map((item) => {
-          const isActive = location.hash.match(item.link) && item.link
+        {navList.map(item => {
+          const isActive = location.hash.match(item.link) && item.link;
           return (
-          <Link color="inherit" underline={"none"***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
-            <ListItem button style={isActive ? {backgroundColor: 'rgba(17, 157, 85, 0.4)'***REMOVED*** : {***REMOVED******REMOVED***>
-              <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
-              <ListItemText primary={item.name***REMOVED*** />
-            </ListItem>
-          </Link>
-          )
-    ***REMOVED***)***REMOVED***
+            <Link color="inherit" underline={'none'***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
+              <ListItem button style={isActive ? {backgroundColor: 'rgba(17, 157, 85, 0.4)'***REMOVED*** : {***REMOVED******REMOVED***>
+                <ListItemIcon>{item.icon***REMOVED***</ListItemIcon>
+                <ListItemText primary={item.name***REMOVED*** />
+              </ListItem>
+            </Link>
+          );
+      ***REMOVED***)***REMOVED***
       </List>
     </div>
   );
@@ -223,6 +223,7 @@ export default function BlogContainer(props: ContainerProps) {
           props.children
       ***REMOVED***
         {
+          // eslint-disable-next-line no-null/no-null
           props.isLogin ? null : <FootPrint />
       ***REMOVED***
       </main>
@@ -236,7 +237,7 @@ export default function BlogContainer(props: ContainerProps) {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
         key={'top,right'***REMOVED***
         open={snackBarOpen***REMOVED***
-        onClose={() => { setOpen(false); props.closeSnackBar && props.closeSnackBar() ***REMOVED******REMOVED***
+        onClose={() => { setOpen(false); props.closeSnackBar && props.closeSnackBar(); ***REMOVED******REMOVED***
         message={props.snackbarMsg***REMOVED***
       />
     </div>

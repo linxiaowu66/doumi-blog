@@ -17,22 +17,23 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
   async onStart(app: Application): Promise<void> {
     // 只有1个连接
     const { ormConfig ***REMOVED*** = this.options;
-    const config = ormConfig[0]
+    const config = ormConfig[0];
     config.name = 'schedule';
     config.entities = [Website];
     const connections = await createConnections([ config ]);
-    var job = new CronJob('0 0 0 */1 * *', async () => {
+    const job = new CronJob('0 0 0 */1 * *', async () => {
     ***REMOVED***
-        const websiteRepo = connections[0].getRepository(Website)
+        const websiteRepo = connections[0].getRepository(Website);
         const res = await websiteRepo.findOne({ id: 1***REMOVED***
         res!.todayIps = [];
         res!.todayPv = 0;
         res!.todayUv = 0;
         await websiteRepo.save(res!);
-        this.logger.info(`schedule trigger at ${new Date()***REMOVED*** for clearing the visitor ips`)
+        this.logger.info(`schedule trigger at ${new Date()***REMOVED*** for clearing the visitor ips`);
     ***REMOVED*** catch (err) {
-        this.logger.error(err)
+        this.logger.error(err);
     ***REMOVED***
+    // eslint-disable-next-line no-null/no-null
   ***REMOVED***, null, true, 'Asia/Shanghai');
     job.start();
 ***REMOVED***

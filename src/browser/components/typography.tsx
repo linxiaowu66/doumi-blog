@@ -54,6 +54,7 @@ function Typography(props: any) {
       {children***REMOVED***
       {marked ? (
         <span className={classes[`marked${capitalize(variant) + capitalize(marked)***REMOVED***`]***REMOVED*** />
+      // eslint-disable-next-line no-null/no-null
       ) : null***REMOVED***
     </MuiTypography>
   );
@@ -63,7 +64,7 @@ export interface CTypographyProps extends TypographyProps {
   children: React.ReactNode,
   classes: { [key: string]: any ***REMOVED***,
   marked: false | 'center' | 'left',
-  variant: "h1" | "h3" | "h2" | "button" | "caption" | "h4" | "h5" | "h6" | "inherit" | "subtitle1" | "subtitle2" | "body1" | "body2" | "overline" | "srOnly" | undefined
+  variant: 'h1' | 'h3' | 'h2' | 'button' | 'caption' | 'h4' | 'h5' | 'h6' | 'inherit' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'overline' | 'srOnly' | undefined
 ***REMOVED***
 
 export default withStyles(styles)(Typography);

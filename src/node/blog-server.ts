@@ -27,26 +27,26 @@ export class BlogServerImpl implements BlogServer {
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
     const result = await this.blogService.fetchArticleList(1, limit, {
       pv: 'DESC'
-  ***REMOVED***)
+    ***REMOVED***
 
-    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']))
+    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']));
 
-    return Promise.resolve(result)
+    return Promise.resolve(result);
 ***REMOVED***
 
   // TODO: fix the pipeManager bug
   @Transactional()
-  async fetchArticleList(currentPage: number, condition?: DouMiBlog.queryCondition): Promise<DouMiBlog.ArticleList> {
-    const result = await this.blogService.fetchArticleList(currentPage, 20, null, condition)
+  async fetchArticleList(currentPage: number, condition?: DouMiBlog.QueryCondition): Promise<DouMiBlog.ArticleList> {
+    const result = await this.blogService.fetchArticleList(currentPage, 20, undefined, condition);
 
-    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category', 'articleStatus']))
+    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category', 'articleStatus']));
 
-    return Promise.resolve(result)
+    return Promise.resolve(result);
 ***REMOVED***
 
   @Transactional()
   async fetchArticleDetail(slug: string, shouldBeUpdateStats = false): Promise<DouMiBlog.ArticleDetail> {
-    const result = await this.blogService.fetchArticleDetail(slug, shouldBeUpdateStats)
+    const result = await this.blogService.fetchArticleDetail(slug, shouldBeUpdateStats);
 
     return Promise.resolve(result);
 ***REMOVED***
@@ -55,7 +55,7 @@ export class BlogServerImpl implements BlogServer {
   async findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]> {
     const result = await this.blogService.searchArticleByKeyword(keyword);
 
-    const list = result.map(item => pick(item, ['title', 'slug']))
+    const list = result.map(item => pick(item, ['title', 'slug']));
 
     return Promise.resolve(list);
 ***REMOVED***
@@ -64,25 +64,25 @@ export class BlogServerImpl implements BlogServer {
   async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
     const result = await this.blogService.fetchTagsListWithArticle();
 
-    return Promise.resolve(result)
+    return Promise.resolve(result);
 ***REMOVED***
   @Transactional()
   async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
     const result = await this.blogService.fetchCatListWithArticle();
 
-    return Promise.resolve(result)
+    return Promise.resolve(result);
 ***REMOVED***
 
   @Transactional()
   async fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]> {
-    const result = await this.blogService.fetchArchListWithArticle()
+    const result = await this.blogService.fetchArchListWithArticle();
 
-    return Promise.resolve(result)
+    return Promise.resolve(result);
 ***REMOVED***
 
   @Transactional()
   async fetchWebsiteChangeLog() {
-    const result = await this.websiteService.websiteChangeLog()
+    const result = await this.websiteService.websiteChangeLog();
 
     return Promise.resolve(result.reverse());
 ***REMOVED***

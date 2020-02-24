@@ -22,7 +22,7 @@ export class BlogService {
   protected readonly websiteService: WebsiteService;
 
   @Transactional()
-  async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.queryCondition) {
+  async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.QueryCondition) {
     const repo = OrmContext.getRepository(Article);
 
     const baseQuery = {
@@ -32,61 +32,61 @@ export class BlogService {
       take: pageSize,
       skip: (currentPage - 1) * pageSize, // think this needs to be page * limit
       relations: ['tags', 'archiveTime', 'category', 'author']
-  ***REMOVED***
+    ***REMOVED***
 
     let whereQuery = {***REMOVED***
-    let list: Article[] = []
+    let list: Article[] = [];
     let count = 0;
 
     if (currentPage === 1) {
-      await this.websiteService.updateWebsiteStatistics()
+      await this.websiteService.updateWebsiteStatistics();
   ***REMOVED***
 
     if (condition) {
       if (condition.queryTag) {
         // 多对多的关系比较特殊，find不能不满足需求
         let orderField = 'article.createdAt';
-        let orderDef: "ASC" | "DESC" = 'DESC';
+        let orderDef: 'ASC' | 'DESC' = 'DESC';
         if (order) {
           // 排序字段仅支持1个字段
           Object.keys(order).forEach(item => {
-            orderField = `article.${item***REMOVED***`
-            orderDef = order[item]
-        ***REMOVED***)
+            orderField = `article.${item***REMOVED***`;
+            orderDef = order[item];
+          ***REMOVED***
       ***REMOVED***
-        let queryBuilder = repo.createQueryBuilder('article')
+        const queryBuilder = repo.createQueryBuilder('article');
         if (condition.articleStatus) {
-          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus ***REMOVED***)
+          queryBuilder.where('article.articleStatus = :status', { status: condition.articleStatus ***REMOVED***
       ***REMOVED***
         [list, count] = await queryBuilder
-        .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag ***REMOVED***)
-        .skip((currentPage - 1) * pageSize)
-        .take(pageSize)
-        .orderBy(orderField, orderDef)
-        .innerJoinAndSelect('article.tags', 'tags')
-        .innerJoinAndSelect('article.category', 'category')
-        .innerJoinAndSelect('article.archiveTime', 'archiveTime')
-        .innerJoinAndSelect('article.author', 'author')
-        .getManyAndCount()
+          .innerJoin('article.tags', 'tag', 'tag.id IN (:...tagId)', { tagId: condition.queryTag ***REMOVED***)
+          .skip((currentPage - 1) * pageSize)
+          .take(pageSize)
+          .orderBy(orderField, orderDef)
+          .innerJoinAndSelect('article.tags', 'tags')
+          .innerJoinAndSelect('article.category', 'category')
+          .innerJoinAndSelect('article.archiveTime', 'archiveTime')
+          .innerJoinAndSelect('article.author', 'author')
+          .getManyAndCount();
     ***REMOVED*** else if (condition.queryCat) {
         whereQuery = {
           where: { category: condition.queryCat ***REMOVED***
-      ***REMOVED***
+        ***REMOVED***
     ***REMOVED*** else if (condition.queryArch) {
         whereQuery = {
           where: { archiveTime: condition.queryArch ***REMOVED***
-      ***REMOVED***
+        ***REMOVED***
     ***REMOVED***
       if (condition.articleStatus) {
         whereQuery = {
           ...whereQuery,
           ...{ where: { articleStatus: condition.articleStatus ***REMOVED******REMOVED***
-      ***REMOVED***
+        ***REMOVED***
     ***REMOVED***
   ***REMOVED***
 
     if (!condition?.queryTag) {
-      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery***REMOVED***)
+      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery***REMOVED***
   ***REMOVED***
 
     return { list: list.map(item => ({
@@ -102,10 +102,10 @@ export class BlogService {
   async fetchArticleDetail(slug: string, shouldBeUpdateStats = false) {
     const repo = OrmContext.getRepository(Article);
 
-    const result = await repo.findOne({ slug ***REMOVED***, { relations: ['tags', 'archiveTime', 'category', 'author'] ***REMOVED***)
+    const result = await repo.findOne({ slug ***REMOVED***, { relations: ['tags', 'archiveTime', 'category', 'author'] ***REMOVED***
 
     if (!result) {
-      throw new Error('找不到对应文章')
+      throw new Error('找不到对应文章');
   ***REMOVED***
 
     if (shouldBeUpdateStats) {
@@ -124,7 +124,7 @@ export class BlogService {
       catId: result.category.id,
       archiveTime: result.fullArchiveTime,
       author: result.author.username
-  ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 
   @Transactional()
@@ -136,22 +136,22 @@ export class BlogService {
     const archiveRepo = OrmContext.getRepository(Archive);
     const userRepo = OrmContext.getRepository(User);
 
-    const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***)
+    const loadTags = await tagRepo.find({ name: In(tags)***REMOVED***
     const loadCat = await catRepo.find({ name: category***REMOVED***
     const loadUser = await userRepo.find({ email: username ***REMOVED***
-    let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) ***REMOVED***)
+    let loadArch = await archiveRepo.findOne({ archiveTime: archiveTime.substr(0, 7) ***REMOVED***
     const repo = OrmContext.getRepository(Article);
 
     if (!loadArch) {
-      loadArch = new Archive()
-      loadArch.archiveTime = archiveTime.substr(0, 7)
+      loadArch = new Archive();
+      loadArch.archiveTime = archiveTime.substr(0, 7);
 
       await archiveRepo.save(loadArch);
   ***REMOVED***
 
-    let articleIns
+    let articleIns;
     if (!isUpdate) {
-      articleIns = new Article()
+      articleIns = new Article();
   ***REMOVED*** else {
       articleIns = await repo.findOne({slug: article.slug***REMOVED***
 
@@ -177,40 +177,40 @@ export class BlogService {
       articleIns.slug = article.slug;
   ***REMOVED***
 
-    const result = await repo.save(articleIns)
+    const result = await repo.save(articleIns);
 
     // 这里不能用update!https://github.com/typeorm/typeorm/issues/4197
     // if (!isUpdate) {
-      // result = await repo.save(articleIns)
+    // result = await repo.save(articleIns)
     // ***REMOVED*** else {
     //   result = await repo.update({ slug: article.slug ***REMOVED***, articleIns)
     // ***REMOVED***
-    return result
+    return result;
 ***REMOVED***
   @Transactional()
   async updateArticleStatictics(slug: string) {
-    let reqIp: string
+    let reqIp: string;
     if (Context.getRequest().headers['x-real-ip']) {
-      reqIp = Context.getRequest().headers['x-real-ip'] as string
+      reqIp = Context.getRequest().headers['x-real-ip'] as string;
   ***REMOVED*** else {
-      reqIp = (Context.getRequest() as any).ip
+      reqIp = (Context.getRequest() as any).ip;
   ***REMOVED***
 
     const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
-    const readerRepo = OrmContext.getRepository(Reader)
+    const readerRepo = OrmContext.getRepository(Reader);
 
     const reader = await readerRepo.findOne({
       where: { date: now, articleSlug: slug ***REMOVED***
-  ***REMOVED***)
+    ***REMOVED***
 
     if (reader) {
       if (!reader.ips.includes(reqIp)) {
-        reader.ips.push(reqIp)
-        readerRepo.save(reader)
+        reader.ips.push(reqIp);
+        readerRepo.save(reader);
     ***REMOVED***
   ***REMOVED*** else {
-      const newReader = new Reader()
+      const newReader = new Reader();
       newReader.articleSlug = slug;
       newReader.date = now;
       newReader.ips = [reqIp];
@@ -224,40 +224,40 @@ export class BlogService {
   async fetchTagsListWithArticle() {
     const repo = OrmContext.getRepository(Tag);
 
-    const result = await repo.find({ relations: ["articles"]***REMOVED***
+    const result = await repo.find({ relations: ['articles']***REMOVED***
 
     return result.map(item => ({
       id: item.id,
       name: item.name,
       articlesCount: item.articles.length
-  ***REMOVED***))
+  ***REMOVED***));
 ***REMOVED***
 
   @Transactional()
   async fetchArchListWithArticle() {
     const repo = OrmContext.getRepository(Archive);
 
-    const result = await repo.find({ relations: ["articles"]***REMOVED***
+    const result = await repo.find({ relations: ['articles']***REMOVED***
 
     return result.map(item => ({
       id: item.id,
       archiveTime: item.archiveTime,
       name: '', // fix lint error
       articlesCount: item.articles.length
-  ***REMOVED***))
+  ***REMOVED***));
 ***REMOVED***
 
   @Transactional()
   async fetchCatListWithArticle() {
     const repo = OrmContext.getRepository(Category);
 
-    const result = await repo.find({ relations: ["articles"]***REMOVED***
+    const result = await repo.find({ relations: ['articles']***REMOVED***
 
     return result.map(item => ({
       id: item.id,
       name: item.name,
       articlesCount: item.articles.length
-  ***REMOVED***))
+  ***REMOVED***));
 ***REMOVED***
 
   @Transactional()
@@ -265,10 +265,10 @@ export class BlogService {
     const repo = OrmContext.getRepository(Article);
 
     const result = await repo.createQueryBuilder('article')
-    .where('article.title like :title', { title: `%${keyword***REMOVED***%`***REMOVED***)
-    .orWhere('article.content like :content', { content: `%${keyword***REMOVED***%`***REMOVED***)
-    .getMany()
+      .where('article.title like :title', { title: `%${keyword***REMOVED***%`***REMOVED***)
+      .orWhere('article.content like :content', { content: `%${keyword***REMOVED***%`***REMOVED***)
+      .getMany();
 
-    return result
+    return result;
 ***REMOVED***
 ***REMOVED***

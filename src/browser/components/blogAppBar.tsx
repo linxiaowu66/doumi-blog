@@ -44,13 +44,14 @@ export default function BlogAppBar(props: AppBarProps) {
   const { endpoint, isLogin, handleDrawerToggle ***REMOVED*** = props;
   const handleLogin = () => {
     location.hash = '#/blog/auth/login';
-***REMOVED***
+  ***REMOVED***
 
   const handleLogout = async () => {
+    // eslint-disable-next-line no-null/no-null
     await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`, null, {withCredentials: true***REMOVED***
 
     location.hash = '#/blog/auth/login';
-***REMOVED***
+  ***REMOVED***
 
   const classes = useStyles();
 
@@ -102,5 +103,5 @@ export default function BlogAppBar(props: AppBarProps) {
       ***REMOVED***
       </Toolbar>
     </AppBar>
-  )
+  );
 ***REMOVED***

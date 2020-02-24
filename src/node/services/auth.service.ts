@@ -10,7 +10,7 @@ export const AuthServiceSymbol = Symbol('AuthService');
 @Component(AuthServiceSymbol)
 export class AuthService {
   @Autowired(PasswordEncoder)
-  protected readonly passwordEncoder: PasswordEncoder
+  protected readonly passwordEncoder: PasswordEncoder;
 
   @Transactional()
   async registerUser(param: DouMiBlog.RegisterParam) {

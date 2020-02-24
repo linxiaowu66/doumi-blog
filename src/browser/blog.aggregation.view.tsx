@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import { View ***REMOVED*** from "@malagu/react/lib/browser";
+import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
@@ -42,9 +42,10 @@ export default class BlogAggregation extends React.Component<Prop, State> {
     category: this.BlogServer.fetchCatsList,
     tags: this.BlogServer.fetchTagsList,
     archive: this.BlogServer.fetchArchsList
-***REMOVED***
+  ***REMOVED***
 
-  /*To remove - Can't perform a React state update on an unmounted component warning, use componentDidMount method under a condition and make false that condition on componentWillUnmount method. */
+  /* To remove - Can't perform a React state update on an unmounted component
+    warning, use componentDidMount method under a condition and make false that condition on componentWillUnmount method. */
   _isMounted = false;
 
   constructor(props: Prop) {
@@ -55,14 +56,15 @@ export default class BlogAggregation extends React.Component<Prop, State> {
       response: [],
       isOpenSnackbar: false,
       snackbarMsg: '',
-  ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
   static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
-    const newType = (nextProps as any).match.params.type as EAggregationType
+    const newType = (nextProps as any).match.params.type as EAggregationType;
     if (prevState.type !== newType) {
       return { type: newType ***REMOVED***
   ***REMOVED***
-    return null
+    // eslint-disable-next-line no-null/no-null
+    return null;
 ***REMOVED***
   componentDidUpdate() {
     const { type ***REMOVED*** = this.state;
@@ -72,7 +74,7 @@ export default class BlogAggregation extends React.Component<Prop, State> {
   componentDidMount() {
     this._isMounted = true;
     const type = (this.props as any).match.params.type as EAggregationType;
-    this.fetchAggregationTypeList(type)
+    this.fetchAggregationTypeList(type);
 ***REMOVED***
   async fetchAggregationTypeList(type: EAggregationType) {
   ***REMOVED***
@@ -84,19 +86,19 @@ export default class BlogAggregation extends React.Component<Prop, State> {
         this.setState({
           response,
           type
-      ***REMOVED***)
+        ***REMOVED***
     ***REMOVED***
   ***REMOVED*** catch (err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取列表失败，请稍后重试',
-    ***REMOVED***)
+      ***REMOVED***
   ***REMOVED***
 ***REMOVED***
 
   componentWillUnmount() {
-    this._isMounted = false
+    this._isMounted = false;
 ***REMOVED***
 
   render() {
@@ -105,7 +107,7 @@ export default class BlogAggregation extends React.Component<Prop, State> {
       category: 'queryCat',
       tags: 'queryTag',
       archive: 'queryArch'
-  ***REMOVED***
+    ***REMOVED***
     return (
       <BlogContainer
         contentClass="blog-types-wrapper"
@@ -116,16 +118,16 @@ export default class BlogAggregation extends React.Component<Prop, State> {
           {
             response.map((item, idx) => {
               const label = item.name || (item as DouMiBlog.ArchiveItem).archiveTime;
-              const initial = label.substring(0, 1)
+              const initial = label.substring(0, 1);
               return (<StyledBadge key={idx***REMOVED*** badgeContent={item.articlesCount***REMOVED*** color="secondary">
                 <Chip avatar={<Avatar>{initial***REMOVED***</Avatar>***REMOVED*** color="primary" label={label***REMOVED*** onClick={() => {
-                  location.hash = `#/blog/list?${type2Query[type]***REMOVED***=${item.id***REMOVED***`
+                  location.hash = `#/blog/list?${type2Query[type]***REMOVED***=${item.id***REMOVED***`;
               ***REMOVED******REMOVED***/>
-              </StyledBadge>)
+              </StyledBadge>);
           ***REMOVED***)
         ***REMOVED***
         </section>
       </BlogContainer>
-    )
+    );
 ***REMOVED***
 ***REMOVED***

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogContainer from './components/blogContainer';
 import Timeline from './components/timeline';
@@ -20,28 +20,28 @@ export default class AboutWebsite extends React.Component<Prop, State> {
   protected readonly blogServer: BlogServer;
 
   constructor(props: Prop) {
-    super(props)
+    super(props);
 
     this.state = {
       changeLog: [],
       isOpenSnackbar: false,
       snackbarMsg: '',
-  ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 
   async componentDidMount() {
   ***REMOVED***
-      const result = await this.blogServer.fetchWebsiteChangeLog()
+      const result = await this.blogServer.fetchWebsiteChangeLog();
 
       this.setState({
         changeLog: result,
-    ***REMOVED***)
+      ***REMOVED***
   ***REMOVED*** catch (err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取变更记录失败，请稍后重试',
-    ***REMOVED***)
+      ***REMOVED***
   ***REMOVED***
 ***REMOVED***
 
@@ -51,11 +51,11 @@ export default class AboutWebsite extends React.Component<Prop, State> {
       <BlogContainer isOpenSnackbar={isOpenSnackbar***REMOVED*** snackbarMsg={snackbarMsg***REMOVED***>
         <Timeline
           title='网站更新记录'
-          timeList={changeLog.map(item => ({
+          timeList={changeLog.map(item => {return {
             subTitle: item.title,
             time: `${item.date***REMOVED*** ${item.time***REMOVED***`,
             desc: `${item.desc1***REMOVED***${item.desc2***REMOVED***`
-        ***REMOVED***))***REMOVED***
+          ***REMOVED******REMOVED***)***REMOVED***
         />
         <Divider />
         <Timeline
@@ -71,6 +71,6 @@ export default class AboutWebsite extends React.Component<Prop, State> {
         ***REMOVED***]***REMOVED***
         />
       </BlogContainer>
-    )
+    );
 ***REMOVED***
 ***REMOVED***
