@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="博文列表 - 豆米的博客">
     <meta property="og:description" content="热爱前端的豆米打造了这么一个记录前端的博客，希望可以和大家一起见证前端的变化和发展，一起进步">
-    <meta property="og:url" content="http://nblog.5udou.cn/#/blog/list">
+    <meta property="og:url" content="https://blog.5udou.cn/#/blog/list">
     <meta property="og:image" content="/279a1a9574b8d5db35ccac49a8effb38.jpg">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script type="application/ld+json">
@@ -20,7 +20,7 @@
       "@context": "http://schema.org",
       "@type": "Website",
       "publisher": "linxiaowu66",
-      "url": "https://nblog.5udou.cn/#/blog/list",
+      "url": "https://blog.5udou.cn/#/blog/list",
       "image": "/images/279a1a9574b8d5db35ccac49a8effb38.jpg",
       "description": "热爱前端的豆米打造了这么一个记录前端的博客，希望可以和大家一起见证前端的变化和发展，一起进步"
     ***REMOVED***
@@ -36,6 +36,11 @@
 
     ga('create', 'UA-85522412-2', 'auto');
     ga('send', 'pageview');
-
+    // 兼容旧版博客的链接跳转
+    const path = window.location.pathname
+    if (path.match(/^\/blog/)) {
+      const slug = path.split('/')[2]
+      location.href = 'https://' + location.host + '/#/blog/detail/' + slug
+  ***REMOVED***
   </script>
 </html>
