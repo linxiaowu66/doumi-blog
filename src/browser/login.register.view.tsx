@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached'
+import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import clsx from 'clsx';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -43,7 +43,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
       reqSuccess: false,
       isOpenSnackbar: false,
       snackbarMsg: '',
-  ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
   login = async (data: DouMiBlog.LoginParam) => {
   ***REMOVED***
@@ -52,96 +52,96 @@ export class LoginOrRegister extends React.Component<Props, State> {
       if (res.data.status && res.data.data === '登录成功') {
         this.setState({
           reqSuccess: true
-      ***REMOVED***)
+        ***REMOVED***
         setTimeout(() => {
-          location.hash = '/blog/admin/index'
-      ***REMOVED***, 2000)
+          location.hash = '/blog/admin/index';
+      ***REMOVED***, 2000);
     ***REMOVED*** else if (!res.data.status){
         this.setState({
           isOpenSnackbar: true,
           snackbarMsg: res.data.error
-      ***REMOVED***)
+        ***REMOVED***
     ***REMOVED***
   ***REMOVED*** catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '登录失败，请联系管理员'
-    ***REMOVED***)
+      ***REMOVED***
   ***REMOVED***
 
-***REMOVED***
+  ***REMOVED***
   registerUser = async (data: DouMiBlog.RegisterParam) => {
   ***REMOVED***
-      const result = await this.BlogServer.registerUser(data)
+      const result = await this.BlogServer.registerUser(data);
 
       if (result === '注册成功') {
         this.setState({
           reqSuccess: true
-      ***REMOVED***)
+        ***REMOVED***
         setTimeout(() => {
           this.setState({
             reqSuccess: false,
-        ***REMOVED***)
-      ***REMOVED***, 1500)
+          ***REMOVED***
+      ***REMOVED***, 1500);
         setTimeout(() => {
           location.hash = '/blog/auth/login';
           this.setState({
             showForm: true,
             pageType: 'login',
-        ***REMOVED***)
-      ***REMOVED***, 4000)
+          ***REMOVED***
+      ***REMOVED***, 4000);
     ***REMOVED***
   ***REMOVED*** catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '注册失败，请联系管理员'
-    ***REMOVED***)
+      ***REMOVED***
   ***REMOVED***
-***REMOVED***
+  ***REMOVED***
   render() {
     const { showForm, pageType, reqSuccess, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return (
-    <div className='login-container'>
-      <div className='login-wrapper'>
-        <section className={clsx({
-          'login-form': true,
-          'animation': reqSuccess
-      ***REMOVED***)***REMOVED***>
-          <div className={clsx({
-            'welcome-login': true,
-            'hidden': showForm
+      <div className='login-container'>
+        <div className='login-wrapper'>
+          <section className={clsx({
+            'login-form': true,
+            'animation': reqSuccess
         ***REMOVED***)***REMOVED***>
-            <p>We</p>
-            <p>LOVE</p>
-            <p>LIFE</p>
-          </div>
-          <Fab color="secondary" className={clsx({
-            'login-forward': true,
-            'hidden': showForm
-         ***REMOVED***)***REMOVED*** onClick={() => this.setState({ showForm: true ***REMOVED***)***REMOVED***>
-            <ArrowForward />
-          </Fab>
-          <LoginRegForm
-            type={pageType***REMOVED***
-            visible={showForm***REMOVED***
-            registerCb={this.registerUser***REMOVED***
-            loginCb={this.login***REMOVED***
-            actionSuccess={reqSuccess***REMOVED*** />
-          <div className={clsx({
-            "success-tip": true,
-            "active": reqSuccess
-        ***REMOVED***)***REMOVED***><span>{pageType === 'register' ? '注册成功' : '登录成功'***REMOVED***</span><Done /></div>
-        </section>
-        <Snackbar
-          autoHideDuration={1500***REMOVED***
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
-          key={'top,right'***REMOVED***
-          open={isOpenSnackbar***REMOVED***
-          onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
-          message={snackbarMsg***REMOVED***
-        />
+            <div className={clsx({
+              'welcome-login': true,
+              'hidden': showForm
+          ***REMOVED***)***REMOVED***>
+              <p>We</p>
+              <p>LOVE</p>
+              <p>LIFE</p>
+            </div>
+            <Fab color="secondary" className={clsx({
+              'login-forward': true,
+              'hidden': showForm
+          ***REMOVED***)***REMOVED*** onClick={() => this.setState({ showForm: true ***REMOVED***)***REMOVED***>
+              <ArrowForward />
+            </Fab>
+            <LoginRegForm
+              type={pageType***REMOVED***
+              visible={showForm***REMOVED***
+              registerCb={this.registerUser***REMOVED***
+              loginCb={this.login***REMOVED***
+              actionSuccess={reqSuccess***REMOVED*** />
+            <div className={clsx({
+              'success-tip': true,
+              'active': reqSuccess
+          ***REMOVED***)***REMOVED***><span>{pageType === 'register' ? '注册成功' : '登录成功'***REMOVED***</span><Done /></div>
+          </section>
+          <Snackbar
+            autoHideDuration={1500***REMOVED***
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' ***REMOVED******REMOVED***
+            key={'top,right'***REMOVED***
+            open={isOpenSnackbar***REMOVED***
+            onClose={() => this.setState({ isOpenSnackbar: false ***REMOVED***)***REMOVED***
+            message={snackbarMsg***REMOVED***
+          />
+        </div>
       </div>
-    </div>
-    )
+    );
 ***REMOVED***
 ***REMOVED***

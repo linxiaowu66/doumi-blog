@@ -237,7 +237,8 @@ module.exports = {
       "@material-ui/core/ClickAwayListener",
       "@material-ui/icons/Facebook",
       "@material-ui/icons/Email",
-      "react"
+      "react",
+      "winston"
     ]
 ***REMOVED***
 ***REMOVED***
