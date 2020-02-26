@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Value } from '@malagu/core/lib/common/annotation/detached'
+import { Value } from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT } from '@malagu/web';
 import clsx from 'clsx';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -43,7 +43,7 @@ export class LoginOrRegister extends React.Component<Props, State> {
       reqSuccess: false,
       isOpenSnackbar: false,
       snackbarMsg: '',
-    }
+    };
   }
   login = async (data: DouMiBlog.LoginParam) => {
     try {
@@ -52,96 +52,96 @@ export class LoginOrRegister extends React.Component<Props, State> {
       if (res.data.status && res.data.data === '登录成功') {
         this.setState({
           reqSuccess: true
-        })
+        });
         setTimeout(() => {
-          location.hash = '/blog/admin/index'
-        }, 2000)
+          location.hash = '/blog/admin/index';
+        }, 2000);
       } else if (!res.data.status){
         this.setState({
           isOpenSnackbar: true,
           snackbarMsg: res.data.error
-        })
+        });
       }
     } catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '登录失败，请联系管理员'
-      })
+      });
     }
 
-  }
+  };
   registerUser = async (data: DouMiBlog.RegisterParam) => {
     try {
-      const result = await this.BlogServer.registerUser(data)
+      const result = await this.BlogServer.registerUser(data);
 
       if (result === '注册成功') {
         this.setState({
           reqSuccess: true
-        })
+        });
         setTimeout(() => {
           this.setState({
             reqSuccess: false,
-          })
-        }, 1500)
+          });
+        }, 1500);
         setTimeout(() => {
           location.hash = '/blog/auth/login';
           this.setState({
             showForm: true,
             pageType: 'login',
-          })
-        }, 4000)
+          });
+        }, 4000);
       }
     } catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '注册失败，请联系管理员'
-      })
+      });
     }
-  }
+  };
   render() {
     const { showForm, pageType, reqSuccess, isOpenSnackbar, snackbarMsg } = this.state;
     return (
-    <div className='login-container'>
-      <div className='login-wrapper'>
-        <section className={clsx({
-          'login-form': true,
-          'animation': reqSuccess
-        })}>
-          <div className={clsx({
-            'welcome-login': true,
-            'hidden': showForm
+      <div className='login-container'>
+        <div className='login-wrapper'>
+          <section className={clsx({
+            'login-form': true,
+            'animation': reqSuccess
           })}>
-            <p>We</p>
-            <p>LOVE</p>
-            <p>LIFE</p>
-          </div>
-          <Fab color="secondary" className={clsx({
-            'login-forward': true,
-            'hidden': showForm
-           })} onClick={() => this.setState({ showForm: true })}>
-            <ArrowForward />
-          </Fab>
-          <LoginRegForm
-            type={pageType}
-            visible={showForm}
-            registerCb={this.registerUser}
-            loginCb={this.login}
-            actionSuccess={reqSuccess} />
-          <div className={clsx({
-            "success-tip": true,
-            "active": reqSuccess
-          })}><span>{pageType === 'register' ? '注册成功' : '登录成功'}</span><Done /></div>
-        </section>
-        <Snackbar
-          autoHideDuration={1500}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          key={'top,right'}
-          open={isOpenSnackbar}
-          onClose={() => this.setState({ isOpenSnackbar: false })}
-          message={snackbarMsg}
-        />
+            <div className={clsx({
+              'welcome-login': true,
+              'hidden': showForm
+            })}>
+              <p>We</p>
+              <p>LOVE</p>
+              <p>LIFE</p>
+            </div>
+            <Fab color="secondary" className={clsx({
+              'login-forward': true,
+              'hidden': showForm
+            })} onClick={() => this.setState({ showForm: true })}>
+              <ArrowForward />
+            </Fab>
+            <LoginRegForm
+              type={pageType}
+              visible={showForm}
+              registerCb={this.registerUser}
+              loginCb={this.login}
+              actionSuccess={reqSuccess} />
+            <div className={clsx({
+              'success-tip': true,
+              'active': reqSuccess
+            })}><span>{pageType === 'register' ? '注册成功' : '登录成功'}</span><Done /></div>
+          </section>
+          <Snackbar
+            autoHideDuration={1500}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            key={'top,right'}
+            open={isOpenSnackbar}
+            onClose={() => this.setState({ isOpenSnackbar: false })}
+            message={snackbarMsg}
+          />
+        </div>
       </div>
-    </div>
-    )
+    );
   }
 }

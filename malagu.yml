@@ -10,8 +10,6 @@ malagu:
     enabled: true
     usernameKey: email
     passwordKey: password
-  logger:
-    level: 'info'
   web:
     cors:
       origin: 'https://blog.5udou.cn'

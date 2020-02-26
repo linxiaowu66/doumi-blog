@@ -1,0 +1,11 @@
+mode: 'local'
+malagu:
+  webpack:
+    devtool: 'source-map'
+  logger:
+    winstonConfig:
+      level: 'info'
+    dailyRotateConfig:
+      frequency: '1d'
+      filename: 'doumi-blog-%DATE%.log'
+      dirname: './log'

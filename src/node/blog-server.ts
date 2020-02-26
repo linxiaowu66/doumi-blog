@@ -2,10 +2,11 @@ import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
 import { Anonymous } from '@malagu/security/lib/node';
 import { Autowired } from '@malagu/core';
-import { Transactional } from '@malagu/typeorm/lib/node';
 import { BlogServiceSymbol, BlogService } from './services';
 import { AuthServiceSymbol, AuthService } from './services/auth.service';
 import { WebsiteServiceSymbol, WebsiteService } from './services/website.service';
+import { DoumiBlogLogger } from './services/logger.service';
+import { WinstonLogger } from 'malagu-winston';
 
 
 const pick = require('lodash.pick');
@@ -23,19 +24,21 @@ export class BlogServerImpl implements BlogServer {
   @Autowired(WebsiteServiceSymbol)
   protected readonly websiteService: WebsiteService;
 
-  @Transactional()
+  @Autowired(DoumiBlogLogger)
+  protected readonly logger: WinstonLogger;
+
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
+    this.logger.info(`fetch hottest articles with limit[${limit}]`);
     const result = await this.blogService.fetchArticleList(1, limit, {
       pv: 'DESC'
     });
 
     result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']));
 
+    this.logger.info(`hottest articles result: ${JSON.stringify(result)}`);
     return Promise.resolve(result);
   }
 
-  // TODO: fix the pipeManager bug
-  @Transactional()
   async fetchArticleList(currentPage: number, condition?: DouMiBlog.QueryCondition): Promise<DouMiBlog.ArticleList> {
     const result = await this.blogService.fetchArticleList(currentPage, 20, undefined, condition);
 
@@ -44,14 +47,12 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(result);
   }
 
-  @Transactional()
   async fetchArticleDetail(slug: string, shouldBeUpdateStats = false): Promise<DouMiBlog.ArticleDetail> {
     const result = await this.blogService.fetchArticleDetail(slug, shouldBeUpdateStats);
 
     return Promise.resolve(result);
   }
 
-  @Transactional()
   async findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]> {
     const result = await this.blogService.searchArticleByKeyword(keyword);
 
@@ -60,34 +61,29 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(list);
   }
 
-  @Transactional()
   async fetchTagsList(): Promise<DouMiBlog.TagsItem[]> {
     const result = await this.blogService.fetchTagsListWithArticle();
 
     return Promise.resolve(result);
   }
-  @Transactional()
   async fetchCatsList(): Promise<DouMiBlog.CategoryItem[]> {
     const result = await this.blogService.fetchCatListWithArticle();
 
     return Promise.resolve(result);
   }
 
-  @Transactional()
   async fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]> {
     const result = await this.blogService.fetchArchListWithArticle();
 
     return Promise.resolve(result);
   }
 
-  @Transactional()
   async fetchWebsiteChangeLog() {
     const result = await this.websiteService.websiteChangeLog();
 
     return Promise.resolve(result.reverse());
   }
 
-  @Transactional()
   async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
     await this.authService.registerUser(param);
     return Promise.resolve('注册成功');
