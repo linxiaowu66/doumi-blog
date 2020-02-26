@@ -1,15 +1,18 @@
 #!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export PATH
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 #数据库ip
-DBHOST='127.0.0.1' // your db host
+DBHOST='127.0.0.1'
 #数据库用户名
-DBUSER='dev' // 数据库用户名
+DBUSER='dev'
 #数据库用密码
-DBPASSWD='123456' // 数据库用户名对应的密码
+DBPASSWD='123456'
 #需要备份的数据库，多个数据库用空格分开
-DBNAME='douMiBlog' // 数据库名
+DBNAME='douMiBlog'
 
 #备份时间
 backtime=`date +%Y-%m-%d_%H%M%S`
@@ -33,7 +36,8 @@ for table in $DBNAME; do
 source=`mysqldump -u ${DBUSER***REMOVED*** -h${DBHOST***REMOVED*** -p${DBPASSWD***REMOVED*** ${table***REMOVED***> ${LOGPATH***REMOVED***/${backtime***REMOVED***.sql` 2>> ${LOGPATH***REMOVED***/mysqlback.log;
 
 #备份成功以下操作 $?获取上一个命令的操作结果，0代表成功
-if [ "$?" == 0 ];then
+ret=$?
+if [ $ret -eq 0 ];then
 cd ${LOGPATH***REMOVED***
 #为节约硬盘空间，将数据库压缩
 tar -czf ${DBPATH***REMOVED***/${table***REMOVED***${backtime***REMOVED***.tar.gz ./${backtime***REMOVED***.sql > /dev/null
