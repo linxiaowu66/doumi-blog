@@ -5,7 +5,7 @@ import { Autowired } from '@malagu/core';
 import { BlogServiceSymbol, BlogService } from './services';
 import { AuthServiceSymbol, AuthService } from './services/auth.service';
 import { WebsiteServiceSymbol, WebsiteService } from './services/website.service';
-import { DoumiBlogLogger } from './services/logger.service';
+import { DouMiBlogloggerSymbol } from './services/logger.service';
 import { WinstonLogger } from 'malagu-winston';
 
 
@@ -24,7 +24,7 @@ export class BlogServerImpl implements BlogServer {
   @Autowired(WebsiteServiceSymbol)
   protected readonly websiteService: WebsiteService;
 
-  @Autowired(DoumiBlogLogger)
+  @Autowired(DouMiBlogloggerSymbol)
   protected readonly logger: WinstonLogger;
 
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
