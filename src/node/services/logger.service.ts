@@ -1,7 +1,7 @@
 import { Autowired, Logger, Component, Value, LOGGER_CONFIG } from '@malagu/core';
 import { WinstonLogger } from 'malagu-winston';
 import { format, transports } from 'winston';
-import formatDate from 'date-fns/format';
+import { format as formatDate } from 'date-fns';
 
 const DailyRotateFile = require('winston-daily-rotate-file');
 
