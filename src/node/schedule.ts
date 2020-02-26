@@ -1,5 +1,5 @@
 import { Autowired, Component, ApplicationLifecycle, Application, Logger, Value ***REMOVED*** from '@malagu/core';
-import { createConnections ***REMOVED*** from 'typeorm';
+import { createConnection, Connection ***REMOVED*** from 'typeorm';
 import { Website ***REMOVED*** from './entity/website';
 
 const CronJob = require('cron').CronJob;
@@ -13,6 +13,7 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
   protected readonly options: any;
 
   protected job: any;
+  protected connection: Connection;
 
   async onStart(app: Application): Promise<void> {
     // 只有1个连接
@@ -20,10 +21,10 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
     const config = ormConfig[0];
     config.name = 'schedule';
     config.entities = [Website];
-    const connections = await createConnections([ config ]);
-    const job = new CronJob('0 0 0 */1 * *', async () => {
+    this.connection = await createConnection(config);
+    this.job = new CronJob('0 0 0 */1 * *', async () => {
     ***REMOVED***
-        const websiteRepo = connections[0].getRepository(Website);
+        const websiteRepo = this.connection.getRepository(Website);
         const res = await websiteRepo.findOne({ id: 1***REMOVED***
         res!.todayIps = [];
         res!.todayPv = 0;
@@ -35,11 +36,12 @@ export class DouMiApplicationLifecycle implements ApplicationLifecycle<Applicati
     ***REMOVED***
     // eslint-disable-next-line no-null/no-null
   ***REMOVED***, null, true, 'Asia/Shanghai');
-    job.start();
+    this.job.start();
 ***REMOVED***
 
   onStop(app: Application): void {
     this.job.stop();
+    this.connection.close();
 ***REMOVED***
 
 ***REMOVED***
