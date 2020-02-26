@@ -2,9 +2,9 @@ malagu:
   server:
     endpoint: https://bff.5udou.cn
   logger:
-  winstonConfig:
-    level: 'info'
-  dailyRotateConfig:
-    frequency: '1d'
-    filename: 'doumi-blog-%DATE%.log'
-    dirname: '/home/deploy/logs/doumi-blog'
+    winstonConfig:
+      level: 'info'
+    dailyRotateConfig:
+      frequency: '1d'
+      filename: 'doumi-blog-%DATE%.log'
+      dirname: '/home/deploy/logs/doumi-blog'
