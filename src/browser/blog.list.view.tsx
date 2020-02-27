@@ -3,6 +3,8 @@ import * as query from 'query-string';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import BlogContainer from './components/blogContainer';
 import { View } from '@malagu/react/lib/browser';
 import BlogItem from './components/blogItem';
@@ -16,6 +18,7 @@ interface State {
   currentPage: number,
   isOpenSnackbar: boolean,
   snackbarMsg: string,
+  open: boolean,
 }
 
 @View('/blog/list')
@@ -32,6 +35,7 @@ export default class BlogList extends React.Component<Prop, State> {
       currentPage: 1,
       isOpenSnackbar: false,
       snackbarMsg: '',
+      open: true,
     };
   }
 
@@ -58,6 +62,7 @@ export default class BlogList extends React.Component<Prop, State> {
         blogList: [...blogList, ...result.list],
         pageCount: result.pageCount,
         currentPage: result.currentPage,
+        open: false,
       });
     } catch (err) {
       console.log(err);
@@ -86,24 +91,28 @@ export default class BlogList extends React.Component<Prop, State> {
   };
 
   render() {
-    const { currentPage, pageCount, isOpenSnackbar, snackbarMsg } = this.state;
+    const { currentPage, pageCount, isOpenSnackbar, snackbarMsg, open } = this.state;
     return(
       <BlogContainer
         contentClass="blog-list-wrapper"
         isOpenSnackbar={isOpenSnackbar}
         snackbarMsg={snackbarMsg}
       >
-        <section className="blog-list-container">
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={this.loadMore}
-            hasMore={currentPage < pageCount}
-            loader={<div className="loader" key={0}>努力加载中 ...</div>}
-            useWindow={false}
-          >
-            {this.renderBlogItem()}
-          </InfiniteScroll>
-        </section>
+        {
+          !open ? <section className="blog-list-container">
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.loadMore}
+              hasMore={currentPage < pageCount}
+              loader={<div className="loader" key={0}>努力加载中 ...</div>}
+              useWindow={false}
+            >
+              {this.renderBlogItem()}
+            </InfiniteScroll>
+          </section> : <Backdrop className='loading' open={open}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        }
       </BlogContainer>
     );
   }
