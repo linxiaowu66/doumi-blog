@@ -47,28 +47,33 @@ export default class BlogDetail extends React.Component<Prop, State> {
       const slug = (this.props as any).match.params.slug;
       const response = await this.BlogServer.fetchArticleDetail(slug, true);
 
-      this.setState({
-        response,
-        open: false,
+      // this.setState({
+      //   response,
+      //   open: false,
+      // });
+
+      const gitalk = new Gitalk({
+        clientID: '16018f2091e0cd02d37c',
+        clientSecret: 'c1c36729e8fdb3c309cd6e24939ad047cf904884',
+        repo: 'doumi-blog-comments',
+        owner: 'linxiaowu66',
+        admin: ['linxiaowu66'],
+        title: response.title,
+        body: `${location.href} \n\n ${response.digest}`,
+        labels: [response.category],
+        id: location.hash.split('/')[3].slice(0, 50),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
       });
+
+      gitalk.render('gitalk-container');
     } catch(err) {
       console.error(err);
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博文详情失败，请稍后再试',
+        open: false,
       });
     }
-    const gitalk = new Gitalk({
-      clientID: '16018f2091e0cd02d37c',
-      clientSecret: 'c1c36729e8fdb3c309cd6e24939ad047cf904884',
-      repo: 'doumi-blog-comments',
-      owner: 'linxiaowu66',
-      admin: ['linxiaowu66'],
-      id: location.pathname.slice(0, 50),      // Ensure uniqueness and length less than 50
-      distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
   }
 
   handleJumpToList = (catId: number) => {

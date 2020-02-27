@@ -14,9 +14,9 @@ export default function ClickTooltip(props: ClickTooltipProps) {
 
   const handleTooltipClose = () => {
     setOpen(false);
-    if (props.extraAction) {
-      props.extraAction(props.title)
-    }
+    // if (props.extraAction) {
+    //   props.extraAction(props.title);
+    // }
   };
 
   const handleTooltipOpen = () => {
@@ -27,25 +27,25 @@ export default function ClickTooltip(props: ClickTooltipProps) {
   };
 
   return (<ClickAwayListener onClickAway={handleTooltipClose}>
-      <div>
-        <Tooltip
-          PopperProps={{
-            disablePortal: true,
-          }}
-          onClose={handleTooltipClose}
-          open={open}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-          title={props.title}
-        >
-          <Fab onClick={handleTooltipOpen} color="secondary">
-            {
-              props.children
-            }
-          </Fab>
-        </Tooltip>
-      </div>
-    </ClickAwayListener>
-  )
+    <div>
+      <Tooltip
+        PopperProps={{
+          disablePortal: true,
+        }}
+        onClose={handleTooltipClose}
+        open={open}
+        disableFocusListener
+        disableHoverListener
+        disableTouchListener
+        title={props.title}
+      >
+        <Fab onClick={handleTooltipOpen} color="secondary">
+          {
+            props.children
+          }
+        </Fab>
+      </Tooltip>
+    </div>
+  </ClickAwayListener>
+  );
 }
