@@ -6,6 +6,9 @@ import BlogContainer from './components/blogContainer';
 import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
 import DouMiDetailItem from './components/doumiDetailItem';
 
+import 'gitalk/dist/gitalk.css';
+
+const Gitalk = require('gitalk');
 
 import './styles/doumi.less';
 import ClickTooltip from './components/clickTooltip';
@@ -25,6 +28,22 @@ export default class AboutDouMi extends React.Component<Prop, State> {
       isOpenSnackbar: false,
       snackbarMsg: '',
     ***REMOVED***
+***REMOVED***
+  componentDidMount() {
+    const gitalk = new Gitalk({
+      clientID: '16018f2091e0cd02d37c',
+      clientSecret: 'c1c36729e8fdb3c309cd6e24939ad047cf904884',
+      repo: 'doumi-blog-comments',
+      owner: 'linxiaowu66',
+      admin: ['linxiaowu66'],
+      title: '关于豆米',
+      body: `${location.href***REMOVED*** \n\n 豆米目前生活在“上有天堂，下有苏杭”的杭州，美不胜收的美景之地也收获着甜蜜恩爱的生活。豆米热爱前端，热爱互联网，豆米是洋芋(土豆-豆)和米喳(米)的简称。`,
+      labels: ['关于豆米'],
+      id: 'about-doumi-blog',      // Ensure uniqueness and length less than 50
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    ***REMOVED***
+
+    gitalk.render('gitalk-container');
 ***REMOVED***
   copyTextToClipboard = (text: string) => {
     const textArea = document.createElement('textarea');
@@ -117,6 +136,7 @@ export default class AboutDouMi extends React.Component<Prop, State> {
             <img src="http://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/WechatIMG3.jpeg?x-oss-process=image/resize,l_600/crop,x_60,y_120,w_320,h_320/resize,l_160" />
           </div>
         </DouMiDetailItem>
+        <div id="gitalk-container" />
       </BlogContainer>
     );
 ***REMOVED***
