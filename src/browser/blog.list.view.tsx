@@ -27,6 +27,8 @@ export default class BlogList extends React.Component<Prop, State> {
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
+  protected blogListContainer: any;
+
   constructor(prop: Prop) {
     super(prop);
     this.state = {
@@ -41,15 +43,10 @@ export default class BlogList extends React.Component<Prop, State> {
 
   async componentDidMount() {
     await this.fetchBlogList(this.state.currentPage);
-    const top = window.localStorage.getItem('doumi-blog-list');
-    if (top) {
-      window.scrollBy(0, +top);
-  ***REMOVED***
-    window.addEventListener('scroll', this.bindScroll);
 ***REMOVED***
   bindScroll = (event: any) => {
     // 滚动的高度
-    const scrollTop = (event.srcElement ? event.srcElement.documentElement.scrollTop : false) || window.pageYOffset || (event.srcElement ? event.srcElement.body.scrollTop : 0);
+    const scrollTop = event.srcElement.documentElement.scrollTop;
     window.localStorage.setItem('doumi-blog-list', scrollTop);
   ***REMOVED***
   componentWillUnmount() {
@@ -76,6 +73,14 @@ export default class BlogList extends React.Component<Prop, State> {
         pageCount: result.pageCount,
         currentPage: result.currentPage,
         open: false,
+    ***REMOVED***, () => {
+        if (currentPage === this.state.pageCount) {
+          const top = window.localStorage.getItem('doumi-blog-list');
+          if (top) {
+            window.scrollTo({ top: +top, behavior: 'smooth' ***REMOVED***
+        ***REMOVED***
+          window.addEventListener('scroll', this.bindScroll);
+      ***REMOVED***
       ***REMOVED***
   ***REMOVED*** catch (err) {
       console.log(err);
@@ -86,6 +91,7 @@ export default class BlogList extends React.Component<Prop, State> {
   ***REMOVED***
   ***REMOVED***
   loadMore = async () => {
+    // 这里的loadMore貌似没有什么作用，页面加载好了之后会一次性拉取所有的数据！
     const { currentPage ***REMOVED*** = this.state;
 
     await this.fetchBlogList(+currentPage + 1);
@@ -112,7 +118,7 @@ export default class BlogList extends React.Component<Prop, State> {
         snackbarMsg={snackbarMsg***REMOVED***
       >
         {
-          !open ? <section className="blog-list-container">
+          !open ? <section className="blog-list-container" ref={ref => this.blogListContainer = ref***REMOVED***>
             <InfiniteScroll
               pageStart={0***REMOVED***
               loadMore={this.loadMore***REMOVED***

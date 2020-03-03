@@ -1,13 +1,11 @@
-import * as React from 'react'
-import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached'
+import * as React from 'react';
+import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol'
+import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import CodeBlock from './components/codeBlock';
-import Create from '@material-ui/icons/Create';
-import List from '@material-ui/icons/List';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogItemCard from './components/blogItemCard';
 const ReactMarkdown = require('react-markdown/with-html');
@@ -21,16 +19,6 @@ interface State {
   isOpenSnackbar: boolean,
   snackbarMsg: string,
 ***REMOVED***
-
-const navigatorList = [{
-  name: '新建博文',
-  icon: <Create />,
-  link: '#/blog/admin/editor'
-***REMOVED***, {
-  name: '博文列表',
-  icon: <List />,
-  link: '#/blog/admin/index'
-***REMOVED***]
 
 @View('/blog/admin/index')
 export default class BlogAdmin extends React.Component<Prop, State> {
@@ -51,68 +39,67 @@ export default class BlogAdmin extends React.Component<Prop, State> {
       isOpenSnackbar: false,
       snackbarMsg: '',
       blogContent: ''
-  ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
   async componentDidMount() {
-    await this.fetchBlogList(this.state.currentPage)
+    await this.fetchBlogList(this.state.currentPage);
 ***REMOVED***
   fetchBlogList = async (currentPage: number) => {
-    const { blogList ***REMOVED*** = this.state
-    let result
+    const { blogList ***REMOVED*** = this.state;
+    let result;
   ***REMOVED***
       result = await this.BlogServer.fetchArticleList(currentPage);
   ***REMOVED*** catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博客列表失败，请稍后重试'
-    ***REMOVED***)
-      return
+      ***REMOVED***
+  ***REMOVED***
   ***REMOVED***
 
     this.setState({
       blogList: [...blogList, ...result.list],
       pageCount: result.pageCount,
       currentPage: result.currentPage,
-  ***REMOVED***)
+    ***REMOVED***
 
     if (result.list.length > 0 && +currentPage === 1) {
-      this.fetchBlogDetail(result.list[0].slug)
+      this.fetchBlogDetail(result.list[0].slug);
   ***REMOVED***
-***REMOVED***
+  ***REMOVED***
   fetchBlogDetail = async (slug: string) => {
     const detail = await this.BlogServer.fetchArticleDetail(slug);
 
     this.setState({
       blogContent: detail.content
-  ***REMOVED***)
-***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
   loadMore = async () => {
     const { currentPage ***REMOVED*** = this.state;
 
-    await this.fetchBlogList(+currentPage + 1)
-***REMOVED***
+    await this.fetchBlogList(+currentPage + 1);
+  ***REMOVED***
   renderBlogItem = () => {
-    const { blogList ***REMOVED*** = this.state
+    const { blogList ***REMOVED*** = this.state;
 
-    console.log(blogList)
+    console.log(blogList);
 
     return blogList.map(item => (
       <BlogItemCard
         key={item.slug***REMOVED***
         {...item***REMOVED***
         onClick={() => this.fetchBlogDetail(item.slug)***REMOVED***
-        onEdit={(slug) => {
-          location.hash=`/blog/admin/editor?slug=${slug***REMOVED***`
+        onEdit={slug => {
+          location.hash=`/blog/admin/editor?slug=${slug***REMOVED***`;
       ***REMOVED******REMOVED***
       />
-    ))
-***REMOVED***
+    ));
+  ***REMOVED***
   render() {
     const { pageCount, currentPage, blogContent, isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
     return(
       <BlogContainer
         endpoint={this.endpoint***REMOVED***
-        navigatorList={navigatorList***REMOVED***
         isLogin
         contentClass="blog-admin-container"
         isOpenSnackbar={isOpenSnackbar***REMOVED***
@@ -140,6 +127,6 @@ export default class BlogAdmin extends React.Component<Prop, State> {
           </section>
         </div>
       </BlogContainer>
-    )
+    );
 ***REMOVED***
 ***REMOVED***

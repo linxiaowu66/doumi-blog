@@ -1,15 +1,6 @@
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
-import IconList from '@material-ui/icons/List';
-import Home from '@material-ui/icons/Home';
-import Category from '@material-ui/icons/Category';
-import Archive from '@material-ui/icons/Archive';
-import Bookmark from '@material-ui/icons/Bookmark';
-import GitHub from '@material-ui/icons/GitHub';
-import PersonPin from '@material-ui/icons/PersonPin';
-import Web from '@material-ui/icons/Web';
-import Cloud from '@material-ui/icons/Cloud';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
@@ -25,6 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { makeStyles, Theme, createStyles, ***REMOVED*** from '@material-ui/core/styles';
 import FootPrint from './footPrint';
 import BlogAppBar from './blogAppBar';
+import { navigatorListWithLogin, navigatorListWithNotLogin ***REMOVED*** from '../constants/navigators';
 
 const drawerWidth = 240;
 
@@ -59,11 +51,6 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ContainerProps {
   children: React.ReactElement | React.ReactElement[];
   contentClass?: string;
-  navigatorList?: {
-    name: string;
-    icon: JSX.Element;
-    link: string;
-***REMOVED***[],
   isLogin?: boolean,
   endpoint?: string,
   isOpenSnackbar: boolean,
@@ -71,43 +58,6 @@ interface ContainerProps {
   closeSnackBar?: () => void,
 ***REMOVED***
 
-const navigatorList = [{
-  name: '首页',
-  icon: <Home />,
-  link: ''
-***REMOVED***, {
-  name: '博文列表',
-  icon: <IconList />,
-  link: '#/blog/list'
-***REMOVED***, {
-  name: '分类',
-  icon: <Category />,
-  link: '#/blog/aggregation/category'
-***REMOVED***, {
-  name: '归档',
-  icon: <Archive />,
-  link: '#/blog/aggregation/archive'
-***REMOVED***, {
-  name: '标签',
-  icon: <Bookmark />,
-  link: '#/blog/aggregation/tags'
-***REMOVED***, {
-  name: '关于豆米',
-  icon: <PersonPin />,
-  link: '#/about/doumi'
-***REMOVED***, {
-  name: '关于本站',
-  icon: <Web />,
-  link: '#/about/blog'
-***REMOVED***, {
-  name: '网站数据',
-  icon: <Cloud />,
-  link: '/#/website'
-***REMOVED***, {
-  name: 'Github',
-  icon: <GitHub />,
-  link: 'https://github.com/linxiaowu66/doumi-blog'
-***REMOVED***];
 interface ScrollProps {
   children: React.ReactElement;
 ***REMOVED***
@@ -157,7 +107,7 @@ export default function BlogContainer(props: ContainerProps) {
     setMobileOpen(!mobileOpen);
   ***REMOVED***
 
-  const navList = props.navigatorList ? props.navigatorList : navigatorList;
+  const navList = props.isLogin ? navigatorListWithLogin : navigatorListWithNotLogin;
 
   const drawer = (
     <div>

@@ -1,35 +1,19 @@
 import * as React from 'react';
-import { View ***REMOVED*** from "@malagu/react/lib/browser";
+import { View ***REMOVED*** from '@malagu/react/lib/browser';
 // import BlogTable from './components/blog.table';
 import BlogContainer from './components/blogContainer';
-import Create from '@material-ui/icons/Create';
-import List from '@material-ui/icons/List';
-import Label from '@material-ui/icons/Label';
 
 interface Prop {***REMOVED***
 interface State {
 ***REMOVED***
 
-const navigatorList = [{
-  name: '新建博文',
-  icon: <Create />,
-  link: '#/blog/admin/editor'
-***REMOVED***, {
-  name: '博文列表',
-  icon: <List />,
-  link: '#/blog/admin/index'
-***REMOVED***, {
-  name: '标签和分类管理',
-  icon: <Label />,
-  link: '#/blog/admin/management'
-***REMOVED***]
 
 @View('/blog/admin/management')
 export default class TagCatManagement extends React.Component<Prop, State> {
   render() {
     return (
-    <BlogContainer navigatorList={navigatorList***REMOVED*** isLogin isOpenSnackbar={false***REMOVED***>
-      {/* <BlogTable
+      <BlogContainer isLogin isOpenSnackbar={false***REMOVED***>
+        {/* <BlogTable
         title="标签"
         data={[{
           id: 1,
@@ -45,6 +29,6 @@ export default class TagCatManagement extends React.Component<Prop, State> {
           count: 10
       ***REMOVED***]***REMOVED***
       /> */***REMOVED***
-    </BlogContainer>)
+      </BlogContainer>);
 ***REMOVED***
 ***REMOVED***
