@@ -41,6 +41,19 @@ export default class BlogList extends React.Component<Prop, State> {
 
   async componentDidMount() {
     await this.fetchBlogList(this.state.currentPage);
+    const top = window.localStorage.getItem('doumi-blog-list');
+    if (top) {
+      window.scrollBy(0, +top);
+  ***REMOVED***
+    window.addEventListener('scroll', this.bindScroll);
+***REMOVED***
+  bindScroll = (event: any) => {
+    // 滚动的高度
+    const scrollTop = (event.srcElement ? event.srcElement.documentElement.scrollTop : false) || window.pageYOffset || (event.srcElement ? event.srcElement.body.scrollTop : 0);
+    window.localStorage.setItem('doumi-blog-list', scrollTop);
+  ***REMOVED***
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.bindScroll);
 ***REMOVED***
   fetchBlogList = async (currentPage: number) => {
   ***REMOVED***
