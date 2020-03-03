@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import BlogContainer from './components/blogContainer';
-import Create from '@material-ui/icons/Create';
-import List from '@material-ui/icons/List';
 import Settings from '@material-ui/icons/Settings';
 import { View } from '@malagu/react/lib/browser';
 import CodeBlock from './components/codeBlock';
@@ -41,15 +39,6 @@ interface State {
   categories: string[] // 后端存储的当前所有分类
 }
 
-const navigatorList = [{
-  name: '新建博文',
-  icon: <Create />,
-  link: '#/blog/admin/editor'
-}, {
-  name: '博文列表',
-  icon: <List />,
-  link: '#/blog/admin/index'
-}];
 const initData = {
   editMode: false,
   isOpenSnackbar: false,
@@ -208,7 +197,6 @@ export default class BlogAdminEditor extends React.Component<Prop, State> {
     return(
       <BlogContainer
         endpoint={this.endpoint}
-        navigatorList={navigatorList}
         isLogin
         contentClass="blog-editor-wrapper"
         isOpenSnackbar={isOpenSnackbar}

@@ -36,8 +36,8 @@ export default function BlogItem(props: BlogItemProps) {
   const classes = useStyles();
 
   const handleJumpToDetail = () => {
-    location.hash=`#/blog/detail/${props.slug}`
-  }
+    location.hash=`#/blog/detail/${props.slug}`;
+  };
 
   return (
     <Card className={classes.card}>

@@ -1,13 +1,11 @@
-import * as React from 'react'
-import { Value } from '@malagu/core/lib/common/annotation/detached'
+import * as React from 'react';
+import { Value } from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT } from '@malagu/web';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer, DouMiBlog } from '../common/blog-protocol'
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import * as InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import CodeBlock from './components/codeBlock';
-import Create from '@material-ui/icons/Create';
-import List from '@material-ui/icons/List';
 import { View } from '@malagu/react/lib/browser';
 import BlogItemCard from './components/blogItemCard';
 const ReactMarkdown = require('react-markdown/with-html');
@@ -21,16 +19,6 @@ interface State {
   isOpenSnackbar: boolean,
   snackbarMsg: string,
 }
-
-const navigatorList = [{
-  name: '新建博文',
-  icon: <Create />,
-  link: '#/blog/admin/editor'
-}, {
-  name: '博文列表',
-  icon: <List />,
-  link: '#/blog/admin/index'
-}]
 
 @View('/blog/admin/index')
 export default class BlogAdmin extends React.Component<Prop, State> {
@@ -51,68 +39,67 @@ export default class BlogAdmin extends React.Component<Prop, State> {
       isOpenSnackbar: false,
       snackbarMsg: '',
       blogContent: ''
-    }
+    };
   }
   async componentDidMount() {
-    await this.fetchBlogList(this.state.currentPage)
+    await this.fetchBlogList(this.state.currentPage);
   }
   fetchBlogList = async (currentPage: number) => {
-    const { blogList } = this.state
-    let result
+    const { blogList } = this.state;
+    let result;
     try {
       result = await this.BlogServer.fetchArticleList(currentPage);
     } catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '获取博客列表失败，请稍后重试'
-      })
-      return
+      });
+      return;
     }
 
     this.setState({
       blogList: [...blogList, ...result.list],
       pageCount: result.pageCount,
       currentPage: result.currentPage,
-    })
+    });
 
     if (result.list.length > 0 && +currentPage === 1) {
-      this.fetchBlogDetail(result.list[0].slug)
+      this.fetchBlogDetail(result.list[0].slug);
     }
-  }
+  };
   fetchBlogDetail = async (slug: string) => {
     const detail = await this.BlogServer.fetchArticleDetail(slug);
 
     this.setState({
       blogContent: detail.content
-    })
-  }
+    });
+  };
   loadMore = async () => {
     const { currentPage } = this.state;
 
-    await this.fetchBlogList(+currentPage + 1)
-  }
+    await this.fetchBlogList(+currentPage + 1);
+  };
   renderBlogItem = () => {
-    const { blogList } = this.state
+    const { blogList } = this.state;
 
-    console.log(blogList)
+    console.log(blogList);
 
     return blogList.map(item => (
       <BlogItemCard
         key={item.slug}
         {...item}
         onClick={() => this.fetchBlogDetail(item.slug)}
-        onEdit={(slug) => {
-          location.hash=`/blog/admin/editor?slug=${slug}`
+        onEdit={slug => {
+          location.hash=`/blog/admin/editor?slug=${slug}`;
         }}
       />
-    ))
-  }
+    ));
+  };
   render() {
     const { pageCount, currentPage, blogContent, isOpenSnackbar, snackbarMsg } = this.state;
     return(
       <BlogContainer
         endpoint={this.endpoint}
-        navigatorList={navigatorList}
         isLogin
         contentClass="blog-admin-container"
         isOpenSnackbar={isOpenSnackbar}
@@ -140,6 +127,6 @@ export default class BlogAdmin extends React.Component<Prop, State> {
           </section>
         </div>
       </BlogContainer>
-    )
+    );
   }
 }
