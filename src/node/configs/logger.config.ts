@@ -1,25 +1,23 @@
-import { Autowired, Logger, Component, Value, LOGGER_CONFIG ***REMOVED*** from '@malagu/core';
-import { WinstonLogger ***REMOVED*** from 'malagu-winston';
+import { Component, Value, LOGGER_CONFIG ***REMOVED*** from '@malagu/core';
+import { WinstonConfig ***REMOVED*** from 'malagu-winston';
 import { format, transports ***REMOVED*** from 'winston';
+import * as Transport from 'winston-transport';
 import { format as formatDate ***REMOVED*** from 'date-fns';
 
 const DailyRotateFile = require('winston-daily-rotate-file');
 
-export const DouMiBlogloggerSymbol = Symbol('DouMiBlogLogger');
-
-@Component(DouMiBlogloggerSymbol)
-export class DoumiBlogLogger {
+@Component(WinstonConfig)
+export class WinstonConfigImpl implements WinstonConfig {
+  transports: Transport[];
 
   constructor(
-    @Autowired(Logger)
-    protected readonly logger: WinstonLogger,
     @Value(LOGGER_CONFIG)
     protected readonly config: any,
     @Value('mode')
     protected readonly mode: string
   ) {
     const { dailyRotateConfig ***REMOVED*** = this.config;
-    const addTransports = [
+    this.transports = [
       new DailyRotateFile({
         ...dailyRotateConfig,
         format: format.combine(
@@ -31,8 +29,9 @@ export class DoumiBlogLogger {
         ),
     ***REMOVED***),
     ];
+    console.log('>>>', mode);
     if (this.mode === 'local') {
-      addTransports.push(new transports.Console({
+      this.transports.push(new transports.Console({
         format: format.combine(
           format.colorize(),
           format.timestamp({ format: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss,SSS')***REMOVED***),
@@ -43,23 +42,5 @@ export class DoumiBlogLogger {
         ),
     ***REMOVED***));
     ***REMOVED***
-    this.logger.getLogger().configure({
-      transports: addTransports
-    ***REMOVED***
-***REMOVED***
-  info(message: string) {
-    this.logger.info(message);
-***REMOVED***
-  error(message: string) {
-    this.logger.error(message);
-***REMOVED***
-  warn(message: string) {
-    this.logger.warn(message);
-***REMOVED***
-  debug(message: string) {
-    this.logger.debug(message);
-***REMOVED***
-  verbose(message: string) {
-    this.logger.verbose(message);
 ***REMOVED***
 ***REMOVED***

@@ -238,7 +238,8 @@ module.exports = {
       "@material-ui/icons/Facebook",
       "@material-ui/icons/Email",
       "react",
-      "winston"
+      "winston",
+      "winston-transport"
     ]
 ***REMOVED***
 ***REMOVED***
