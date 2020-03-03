@@ -1,11 +1,10 @@
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import { Rpc } from '@malagu/rpc';
 import { Anonymous } from '@malagu/security/lib/node';
-import { Autowired } from '@malagu/core';
+import { Autowired, Logger } from '@malagu/core';
 import { BlogServiceSymbol, BlogService } from './services';
 import { AuthServiceSymbol, AuthService } from './services/auth.service';
 import { WebsiteServiceSymbol, WebsiteService } from './services/website.service';
-import { DouMiBlogloggerSymbol } from './services/logger.service';
 import { WinstonLogger } from 'malagu-winston';
 
 
@@ -24,7 +23,7 @@ export class BlogServerImpl implements BlogServer {
   @Autowired(WebsiteServiceSymbol)
   protected readonly websiteService: WebsiteService;
 
-  @Autowired(DouMiBlogloggerSymbol)
+  @Autowired(Logger)
   protected readonly logger: WinstonLogger;
 
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
