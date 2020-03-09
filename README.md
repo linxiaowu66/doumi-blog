@@ -16,7 +16,7 @@
   + MySql
   + TypeORM
 
-新的博客系统已经部署在阿里云ECS上，尝鲜可以访问：http://nblog.5udou.cn
+新的博客系统已经部署在阿里云ECS上，尝鲜可以访问：https://blog.5udou.cn/
 
 # 如何在本地环境开发本博客系统
 
