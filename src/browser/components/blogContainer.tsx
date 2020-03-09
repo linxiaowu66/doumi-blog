@@ -168,7 +168,7 @@ export default function BlogContainer(props: ContainerProps) {
         </Hidden>
       </nav>
       <main className={`${classes.content} ${props.contentClass}`}>
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar} id="back-to-top-anchor" />
         {
           props.children
         }

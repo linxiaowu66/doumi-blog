@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { BlogServer, DouMiBlog } from '../../common/blog-protocol';
 
 import '../styles/search.less';
@@ -20,38 +21,38 @@ export default class BlogSearch extends React.Component<Props, State> {
   flag = false;
 
   constructor(props: Props) {
-    super(props)
+    super(props);
 
     this.state = {
       keyword: '',
       list: [],
       showList: false
-    }
+    };
   }
 
 
   handleSearch = async (e: any) => {
-    const keyword = e.target.value
+    const keyword = e.target.value;
     if (keyword === '') {
-      return
+      return;
     }
-    const result = await this.blogServer.findArticlesByKeyword(keyword)
+    const result = await this.blogServer.findArticlesByKeyword(keyword);
 
     this.setState({
       keyword,
       list: result,
       showList: true
-    })
-  }
+    });
+  };
 
   handleJumpToDetail = () => {
 
-  }
+  };
 
   render() {
     const { list, showList, keyword } = this.state;
     return (
-      <React.Fragment>
+      <ClickAwayListener onClickAway={() => this.setState({ showList: false })}>
         <div className='blog-search'>
           <div className='search-icon'>
             <SearchIcon />
@@ -62,32 +63,37 @@ export default class BlogSearch extends React.Component<Props, State> {
               root: 'input-root',
               input: 'input',
             }}
-            inputProps={{ 'aria-label': 'search' }}
-            onCompositionStart={() => { this.flag = true }}
-            onCompositionEnd={(e) => {
-              this.flag = false
-              this.handleSearch(e)
+            onFocus={() => {
+              if (this.state.keyword) {
+                this.setState({ showList: true });
+              }
             }}
-            onInput={(e) => {
+            inputProps={{ 'aria-label': 'search' }}
+            onCompositionStart={() => { this.flag = true; }}
+            onCompositionEnd={e => {
+              this.flag = false;
+              this.handleSearch(e);
+            }}
+            onInput={e => {
               if (!this.flag) {
-                this.handleSearch(e)
+                this.handleSearch(e);
               }
             }}
           />
-          <div className={showList ? "search-result show" : "search-result"}>
+          <div className={showList ? 'search-result show' : 'search-result'}>
             {
               <div className="result-tip">{list.length === 0 ? '搜索不到' : ''}包含关键词<span>“{keyword}”</span>的文章{list.length ? '如下：' : ''}</div>
             }
             <ul>
-            {
-              list.map(item => (
-                <li key={item.slug} className="article-item">”{item.title}“</li>
-              ))
-            }
+              {
+                list.map(item => (
+                  <li key={item.slug} className="article-item">”{item.title}“</li>
+                ))
+              }
             </ul>
           </div>
         </div>
-      </React.Fragment>
-    )
+      </ClickAwayListener>
+    );
   }
 }
