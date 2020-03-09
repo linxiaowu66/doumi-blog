@@ -1,7 +1,8 @@
 mode: 'local'
 malagu:
   webpack:
-    devtool: 'source-map'
+    config:
+      devtool: 'source-map'
   logger:
     winstonConfig:
       level: 'info'

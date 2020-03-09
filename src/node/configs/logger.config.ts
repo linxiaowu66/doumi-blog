@@ -29,8 +29,7 @@ export class WinstonConfigImpl implements WinstonConfig {
         ),
     ***REMOVED***),
     ];
-    console.log('>>>', mode);
-    if (this.mode === 'local') {
+    if (this.mode.includes('local')) {
       this.transports.push(new transports.Console({
         format: format.combine(
           format.colorize(),
