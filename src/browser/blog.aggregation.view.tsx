@@ -66,9 +66,12 @@ export default class BlogAggregation extends React.Component<Prop, State> {
     // eslint-disable-next-line no-null/no-null
     return null;
 ***REMOVED***
-  componentDidUpdate() {
-    const { type ***REMOVED*** = this.state;
-    this.fetchAggregationTypeList(type);
+  componentDidUpdate(prevProps: Prop, prevState: State) {
+    const type = (this.props as any).match.params.type as EAggregationType;
+    const oldType = (prevProps as any).match.params.type as EAggregationType;
+    if (type !== oldType) {
+      this.fetchAggregationTypeList(type);
+  ***REMOVED***
 ***REMOVED***
 
   componentDidMount() {

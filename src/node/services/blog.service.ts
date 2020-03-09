@@ -244,7 +244,7 @@ export class BlogService {
       archiveTime: item.archiveTime,
       name: '', // fix lint error
       articlesCount: item.articles.length
-  ***REMOVED***));
+  ***REMOVED***)).sort((a, b) => new Date(b.archiveTime).getTime() - new Date(a.archiveTime).getTime());
 ***REMOVED***
 
   @Transactional()
