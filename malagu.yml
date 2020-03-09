@@ -1,10 +1,3 @@
-webpack:
-  htmlWebpackPlugin:
-    title: '豆米的博客'
-    template: 'src/browser/index.html'
-  forkTSCheckerWebpackPlugin:
-    eslintOptions:
-      fix: true
 malagu:
   security:
     enabled: true
@@ -13,8 +6,16 @@ malagu:
   web:
     cors:
       origin: 'https://blog.5udou.cn'
+  webpack:
+    forkTSCheckerWebpackPlugin:
+      eslintOptions:
+        fix: true
 frontend:
   malagu:
+    webpack:
+      htmlWebpackPlugin:
+        title: '豆米的博客'
+        template: 'src/browser/index.html'
     material-ui:
       themeOptions:
         palette:
