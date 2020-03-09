@@ -7,6 +7,6 @@ malagu:
     winstonConfig:
       level: 'info'
     dailyRotateConfig:
-      frequency: '1d'
-      filename: 'doumi-blog-%DATE%.log'
+      frequency: '24h'
+      filename: 'doum-blog-%DATE%.log'
       dirname: './log'
