@@ -42,7 +42,7 @@ export const navigatorListWithNotLogin = [{
 ***REMOVED***, {
   name: '网站数据',
   icon: <Cloud />,
-  link: '/#/website'
+  link: '#/website/stats'
 ***REMOVED***, {
   name: 'Github',
   icon: <GitHub />,
