@@ -2,7 +2,6 @@ import { Component, Value, LOGGER_CONFIG ***REMOVED*** from '@malagu/core';
 import { WinstonConfig ***REMOVED*** from 'malagu-winston';
 import { format, transports ***REMOVED*** from 'winston';
 import * as Transport from 'winston-transport';
-import { format as formatDate ***REMOVED*** from 'date-fns';
 
 const DailyRotateFile = require('winston-daily-rotate-file');
 
@@ -21,7 +20,7 @@ export class WinstonConfigImpl implements WinstonConfig {
       new DailyRotateFile({
         ...dailyRotateConfig,
         format: format.combine(
-          format.timestamp({ format: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss,SSS')***REMOVED***),
+          format.timestamp({ format: 'yyyy-MM-dd HH:mm:ss,SSS'***REMOVED***),
           format.simple(),
           format.printf(msg =>
             `${msg.timestamp***REMOVED*** - ${msg.level***REMOVED***: ${msg.message***REMOVED***`
@@ -33,7 +32,7 @@ export class WinstonConfigImpl implements WinstonConfig {
       this.transports.push(new transports.Console({
         format: format.combine(
           format.colorize(),
-          format.timestamp({ format: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss,SSS')***REMOVED***),
+          format.timestamp({ format: 'yyyy-MM-dd HH:mm:ss,SSS'***REMOVED***),
           format.simple(),
           format.printf(msg =>
             `${msg.timestamp***REMOVED*** - ${msg.level***REMOVED***: ${msg.message***REMOVED***`
