@@ -16,6 +16,11 @@ frontend:
       htmlWebpackPlugin:
         title: '豆米的博客'
         template: 'src/browser/index.html'
+      htmlWebpackTagsPlugin:
+        biz-charts: https://unpkg.com/bizcharts@3/umd/BizCharts.min.js
+      config:
+        externals:
+          bizcharts: BizCharts
     material-ui:
       themeOptions:
         palette:
