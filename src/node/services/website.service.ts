@@ -2,6 +2,7 @@ import { Context ***REMOVED*** from '@malagu/web/lib/node';
 import { Website ***REMOVED*** from './../entity/website';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { Component ***REMOVED*** from '@malagu/core';
+import { AwesomeHelp ***REMOVED*** from 'awesome-js';
 
 export const WebsiteServiceSymbol = Symbol('WebsiteService');
 
@@ -21,11 +22,12 @@ export class WebsiteService {
   ***REMOVED***
   ***REMOVED***
 
-    // const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+    const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
     const repo = OrmContext.getRepository(Website);
 
-    const website = await repo.findOne({id: 1***REMOVED***
+    // 查找数据库中是否存在今天的数据
+    const website = await repo.findOne({ date: now ***REMOVED***
 
     if (website) {
       if (!website.todayIps.includes(reqIp)) {
@@ -40,13 +42,22 @@ export class WebsiteService {
     ***REMOVED***
       repo.save(website);
   ***REMOVED*** else {
+      // 不存在的话，那么新建，同时需要删除7天之外的数据
+      const yesterday = new Date().getTime() - 24 * 3600 * 1000;
+      const yesResult = await repo.findOne({ date: AwesomeHelp.convertDate(new Date(yesterday), 'YYYY-MM-DD')***REMOVED***
       const newData = new Website();
       newData.todayIps = [reqIp];
       newData.todayPv = 1;
       newData.todayUv = 1;
-      newData.totalPv = 1;
-      newData.totalUv = 1;
+      newData.totalPv = yesResult!.totalPv + 1;
+      newData.totalUv = yesResult!.totalUv + 1;
+      newData.date = now;
       repo.save(newData);
+      const beyond7Days = new Date().getTime() - 7 * 24 * 3600 * 1000;
+      const result = await repo.findOne({ date: AwesomeHelp.convertDate(new Date(beyond7Days), 'YYYY-MM-DD')***REMOVED***
+      if (result) {
+        repo.delete(result.id);
+    ***REMOVED***
   ***REMOVED***
 ***REMOVED***
 
@@ -118,5 +129,12 @@ export class WebsiteService {
       date: '2020/02',
       time: '09 周日'
   ***REMOVED***];
+***REMOVED***
+  async fetchWebsiteStatistics() {
+    const repo = OrmContext.getRepository(Website);
+
+    const results = await repo.find();
+
+    return results;
 ***REMOVED***
 ***REMOVED***

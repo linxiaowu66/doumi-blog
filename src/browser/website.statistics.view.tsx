@@ -43,26 +43,38 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
     const [tagList, archList, catList] = await Promise.all<DouMiBlog.TagsItem[], DouMiBlog.ArchiveItem[], DouMiBlog.CategoryItem[]>([
       this.BlogServer.fetchTagsList(),
       this.BlogServer.fetchArchsList(),
-      this.BlogServer.fetchCatsList(),
+      this.BlogServer.fetchCatsList()
     ]);
 
     let totalCount = 0;
     catList.map(item => totalCount += item.articlesCount);
 
     this.setState({
-      archList,
+      archList: archList.slice(0, 12),
       catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)***REMOVED***)),
-      tagList
+      tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)***REMOVED***))
     ***REMOVED***
 ***REMOVED***
   render() {
-    const { archList, catList ***REMOVED*** = this.state;
+    const { archList, catList, tagList ***REMOVED*** = this.state;
     const colsForArch = {
       articlesCount: {
         alias: '文章数'
     ***REMOVED***,
       archiveTime: {
         alias: '月份'
+    ***REMOVED***
+    ***REMOVED***
+    const colsForTag = {
+      name: {
+        alias: '标签'
+    ***REMOVED***,
+      articlesCount: {
+        alias: '文章数'
+    ***REMOVED***,
+      percent: {
+        alias: '占比',
+        formatter: (value: string) => (+value * 100).toFixed(2) + '%'
     ***REMOVED***
     ***REMOVED***
     // const colsForCat = {
@@ -126,6 +138,35 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
                 lineWidth: 1,
                 stroke: '#fff',
             ***REMOVED******REMOVED***
+            />
+          </Chart>
+        </div>
+        <div>
+          <Chart height={400***REMOVED*** data={tagList***REMOVED*** scale={colsForTag***REMOVED*** forceFit>
+            <Tooltip showTitle={false***REMOVED*** />
+            <Axis name="articlesCount" title />
+            <Axis
+              name="percent"
+              title
+            />
+            <Legend slidable={false***REMOVED*** width={0***REMOVED*** height={0***REMOVED*** />
+            <Geom
+              type="point"
+              position="percent*articlesCount"
+              color="name"
+              tooltip="name*articlesCount*percent"
+              opacity={0.65***REMOVED***
+              shape="circle"
+              size={['articlesCount', [4, 65]]***REMOVED***
+              style={[
+                'name',
+                {
+                  lineWidth: 1,
+                  strokeOpacity: 1,
+                  fillOpacity: 0.3,
+                  opacity: 0.65,
+              ***REMOVED***
+              ]***REMOVED***
             />
           </Chart>
         </div>

@@ -1,5 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ***REMOVED*** from 'typeorm';
 
+// 只会统计七天内的数据
+
 @Entity()
 export class Reader {
   @PrimaryGeneratedColumn()

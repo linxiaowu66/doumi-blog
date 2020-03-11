@@ -9,6 +9,8 @@ export interface BlogServer {
   fetchCatsList(): Promise<DouMiBlog.CategoryItem[]>;
   fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
   fetchWebsiteChangeLog(): Promise<DouMiBlog.ChangeLog[]>
+  fetchWebsiteStatistics(): Promise<DouMiBlog.WebsiteStatsItem[]>;
+  fetchHottestArticleLast7Days(): Promise<DouMiBlog.ArticleStatsItem[]>;
   registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 ***REMOVED***
 
@@ -19,6 +21,19 @@ export namespace DouMiBlog {
     desc2: string,
     date: string,
     time: string
+***REMOVED***
+  export interface WebsiteStatsItem {
+    date: string,
+    todayUv: number,
+    todayPv: number,
+    totalUv: number,
+    totalPv: number
+***REMOVED***
+
+  export interface ArticleStatsItem {
+    slug: string,
+    name: string,
+    count: number
 ***REMOVED***
   export interface ArticleList {
     currentPage: number,

@@ -200,6 +200,15 @@ export class BlogService {
 
     const readerRepo = OrmContext.getRepository(Reader);
 
+    // 现根据日期查找，如果没有任何该日期的条目，就表示需要删除7天之外的数据
+    const hasTodayItems = await readerRepo.find({ date: now ***REMOVED***
+
+    if (!hasTodayItems.length) {
+      const beyond7Days = new Date().getTime() - 7 * 24 * 3600 * 1000;
+      const results = await readerRepo.find({ date: AwesomeHelp.convertDate(new Date(beyond7Days), 'YYYY-MM-DD') ***REMOVED***
+      await readerRepo.delete(results.map(it => it.id));
+  ***REMOVED***
+
     const reader = await readerRepo.findOne({
       where: { date: now, articleSlug: slug ***REMOVED***
     ***REMOVED***
@@ -270,5 +279,35 @@ export class BlogService {
       .getMany();
 
     return result;
+***REMOVED***
+  /**
+   * 查询最近最热门的文章，最多可查7天
+  */
+  @Transactional()
+  async fetchHottestArticleRecently() {
+    const readerRepo = OrmContext.getRepository(Reader);
+    const reader = await readerRepo.find();
+
+    const result: {slug: string, count: number***REMOVED***[] = [];
+
+    reader.forEach((item: Reader) => {
+      const index = result.findIndex(it => it.slug === item.articleSlug);
+      if (index) {
+        result[index].count = result[index].count + item.ips.length;
+    ***REMOVED*** else {
+        result[index].count = item.ips.length;
+    ***REMOVED***
+    ***REMOVED***
+
+    // 取出排名前10的文章
+    const sortResult = result.sort((a, b) => a.count - b.count).slice(0, 9);
+
+    const articleRepo = OrmContext.getRepository(Article);
+
+    const articles = await Promise.all(sortResult.map(it => articleRepo.findOne({ slug: it.slug***REMOVED***)));
+
+    const finalRes = sortResult.map((item, idx) => ({ ...item, name: articles[idx]?.title***REMOVED***));
+
+    return finalRes;
 ***REMOVED***
 ***REMOVED***

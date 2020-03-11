@@ -1,3 +1,4 @@
+// 暂时不需要这个定时器了~
 import { Autowired, Component, ApplicationLifecycle, Application, Logger, Value ***REMOVED*** from '@malagu/core';
 import { createConnection, Connection ***REMOVED*** from 'typeorm';
 import { Website ***REMOVED*** from './entity/website';

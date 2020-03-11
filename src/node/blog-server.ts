@@ -83,6 +83,18 @@ export class BlogServerImpl implements BlogServer {
     return Promise.resolve(result.reverse());
 ***REMOVED***
 
+  async fetchWebsiteStatistics() {
+    const result = await this.websiteService.fetchWebsiteStatistics();
+
+    return Promise.resolve(result);
+***REMOVED***
+
+  async fetchHottestArticleLast7Days() {
+    const result = await this.blogService.fetchHottestArticleRecently();
+
+    return Promise.resolve(result);
+***REMOVED***
+
   async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
     await this.authService.registerUser(param);
     return Promise.resolve('注册成功');
