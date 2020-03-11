@@ -43,26 +43,38 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
     const [tagList, archList, catList] = await Promise.all<DouMiBlog.TagsItem[], DouMiBlog.ArchiveItem[], DouMiBlog.CategoryItem[]>([
       this.BlogServer.fetchTagsList(),
       this.BlogServer.fetchArchsList(),
-      this.BlogServer.fetchCatsList(),
+      this.BlogServer.fetchCatsList()
     ]);
 
     let totalCount = 0;
     catList.map(item => totalCount += item.articlesCount);
 
     this.setState({
-      archList,
+      archList: archList.slice(0, 12),
       catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
-      tagList
+      tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)}))
     });
   }
   render() {
-    const { archList, catList } = this.state;
+    const { archList, catList, tagList } = this.state;
     const colsForArch = {
       articlesCount: {
         alias: '文章数'
       },
       archiveTime: {
         alias: '月份'
+      }
+    };
+    const colsForTag = {
+      name: {
+        alias: '标签'
+      },
+      articlesCount: {
+        alias: '文章数'
+      },
+      percent: {
+        alias: '占比',
+        formatter: (value: string) => (+value * 100).toFixed(2) + '%'
       }
     };
     // const colsForCat = {
@@ -126,6 +138,35 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
                 lineWidth: 1,
                 stroke: '#fff',
               }}
+            />
+          </Chart>
+        </div>
+        <div>
+          <Chart height={400} data={tagList} scale={colsForTag} forceFit>
+            <Tooltip showTitle={false} />
+            <Axis name="articlesCount" title />
+            <Axis
+              name="percent"
+              title
+            />
+            <Legend slidable={false} width={0} height={0} />
+            <Geom
+              type="point"
+              position="percent*articlesCount"
+              color="name"
+              tooltip="name*articlesCount*percent"
+              opacity={0.65}
+              shape="circle"
+              size={['articlesCount', [4, 65]]}
+              style={[
+                'name',
+                {
+                  lineWidth: 1,
+                  strokeOpacity: 1,
+                  fillOpacity: 0.3,
+                  opacity: 0.65,
+                }
+              ]}
             />
           </Chart>
         </div>
