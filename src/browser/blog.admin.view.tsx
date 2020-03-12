@@ -82,8 +82,6 @@ export default class BlogAdmin extends React.Component<Prop, State> {
   renderBlogItem = () => {
     const { blogList } = this.state;
 
-    console.log(blogList);
-
     return blogList.map(item => (
       <BlogItemCard
         key={item.slug}

@@ -292,7 +292,7 @@ export class BlogService {
 
     reader.forEach((item: Reader) => {
       const index = result.findIndex(it => it.slug === item.articleSlug);
-      if (index) {
+      if (index !== -1) {
         result[index].count = result[index].count + item.ips.length;
       } else {
         result[index].count = item.ips.length;
