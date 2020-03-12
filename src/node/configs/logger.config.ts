@@ -20,7 +20,7 @@ export class WinstonConfigImpl implements WinstonConfig {
       new DailyRotateFile({
         ...dailyRotateConfig,
         format: format.combine(
-          format.timestamp({ format: 'yyyy-MM-dd HH:mm:ss,SSS'}),
+          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'}),
           format.simple(),
           format.printf(msg =>
             `${msg.timestamp} - ${msg.level}: ${msg.message}`
@@ -32,7 +32,7 @@ export class WinstonConfigImpl implements WinstonConfig {
       this.transports.push(new transports.Console({
         format: format.combine(
           format.colorize(),
-          format.timestamp({ format: 'yyyy-MM-dd HH:mm:ss,SSS'}),
+          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'}),
           format.simple(),
           format.printf(msg =>
             `${msg.timestamp} - ${msg.level}: ${msg.message}`
