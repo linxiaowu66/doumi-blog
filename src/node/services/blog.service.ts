@@ -306,7 +306,7 @@ export class BlogService {
 
     const articles = await Promise.all(sortResult.map(it => articleRepo.findOne({ slug: it.slug***REMOVED***)));
 
-    const finalRes = sortResult.map((item, idx) => ({ ...item, name: articles[idx]?.title***REMOVED***));
+    const finalRes = sortResult.map((item, idx) => ({ ...item, name: articles[idx]!.title***REMOVED***));
 
     return finalRes;
 ***REMOVED***
