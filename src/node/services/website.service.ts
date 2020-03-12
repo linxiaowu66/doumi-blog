@@ -1,13 +1,17 @@
 import { Context ***REMOVED*** from '@malagu/web/lib/node';
 import { Website ***REMOVED*** from './../entity/website';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { Component ***REMOVED*** from '@malagu/core';
+import { Component, Autowired, Logger ***REMOVED*** from '@malagu/core';
 import { AwesomeHelp ***REMOVED*** from 'awesome-js';
+import { WinstonLogger ***REMOVED*** from 'malagu-winston';
 
 export const WebsiteServiceSymbol = Symbol('WebsiteService');
 
 @Component(WebsiteServiceSymbol)
 export class WebsiteService {
+  @Autowired(Logger)
+  protected logger: WinstonLogger;
+
   @Transactional()
   async updateWebsiteStatistics() {
     let reqIp: string;
@@ -18,7 +22,7 @@ export class WebsiteService {
   ***REMOVED***
 
     if (!reqIp) {
-      console.log('[blogService]: can not get client ip, ignore it!');
+      this.logger.info('[blogService]: can not get client ip, ignore it!');
   ***REMOVED***
   ***REMOVED***
 
@@ -130,6 +134,7 @@ export class WebsiteService {
       time: '09 周日'
   ***REMOVED***];
 ***REMOVED***
+  @Transactional()
   async fetchWebsiteStatistics() {
     const repo = OrmContext.getRepository(Website);
 
