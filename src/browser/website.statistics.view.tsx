@@ -10,7 +10,9 @@ import {
   Tooltip,
   Coord,
   Legend,
-  View as G2View
+  View as G2View,
+  Label,
+  G2
 ***REMOVED*** from 'bizcharts';
 // eslint-disable-next-line
 import DataSet from '@antv/data-set';
@@ -79,14 +81,14 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
         alias: '月份'
     ***REMOVED***
     ***REMOVED***
-    const colsForArticle = {
-      name: {
-        alias: '文章'
-    ***REMOVED***,
-      count: {
-        alias: '阅读次数'
-    ***REMOVED***
-    ***REMOVED***
+    // const colsForArticle = {
+    //   name: {
+    //     alias: '文章'
+    // ***REMOVED***,
+    //   count: {
+    //     alias: '阅读次数'
+    // ***REMOVED***
+    // ***REMOVED***
     const colsForTag = {
       name: {
         alias: '标签'
@@ -121,7 +123,36 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
           return d.type !== ds.state.type;
       ***REMOVED***
       ***REMOVED***
-    console.log('>>>>', dv);
+
+    let max = 0;
+    hottestList.forEach(function(obj) {
+      if (obj.count > max) {
+        max = obj.count;
+    ***REMOVED***
+    ***REMOVED***
+    // console.log('>>>>', hottestList);
+    (G2.Shape as any).registerShape('interval', 'sliceShape', {
+      draw(cfg: any, container: any) {
+        const points = cfg.points;
+        const origin = cfg.origin._origin;
+        const percent = origin.count / max;
+        const xWidth = points[2].x - points[1].x;
+        const width = xWidth * percent;
+        let path = [];
+        path.push(['M', points[0].x, points[0].y]);
+        path.push(['L', points[1].x, points[1].y]);
+        path.push(['L', points[0].x + width, points[2].y]);
+        path.push(['L', points[0].x + width, points[3].y]);
+        path.push('Z');
+        path = this.parsePath(path);
+        return container.addShape('path', {
+          attrs: {
+            fill: cfg.color,
+            path: path
+        ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***
+    ***REMOVED***
     const scale = {
       totalPv: {
         type: 'linear',
@@ -276,15 +307,17 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
           </Chart>
         </div>
         <div>
-          <Chart height={400***REMOVED*** data={hottestList***REMOVED*** scale={colsForArticle***REMOVED*** forceFit>
-            <Axis name="name" />
-            <Axis name="count" title />
-            <Tooltip
-              crosshairs={{
-                type: 'y'
-            ***REMOVED******REMOVED***
-            />
-            <Geom type="interval" position="name*count" />
+          <Chart height={400***REMOVED*** data={hottestList***REMOVED*** forceFit>
+            <Coord type="theta" radius={0.8***REMOVED*** />
+            <Tooltip />
+            <Geom
+              type="intervalStack"
+              position="count"
+              color="name"
+              shape="sliceShape"
+            >
+              <Label content="name" />
+            </Geom>
           </Chart>
           <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'***REMOVED******REMOVED***>豆米博客每月发布文章分布图</div>
         </div>
