@@ -27,7 +27,9 @@ export namespace DouMiBlog {
     todayUv: number,
     todayPv: number,
     totalUv: number,
-    totalPv: number
+    totalPv: number,
+    pvGrowthRate: number,
+    uvGrowthRate: number
   }
 
   export interface ArticleStatsItem {

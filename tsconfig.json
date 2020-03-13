@@ -5,6 +5,7 @@
     "declarationMap": true,
     "noImplicitAny": true,
     "noEmitOnError": false,
+    "esModuleInterop": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,

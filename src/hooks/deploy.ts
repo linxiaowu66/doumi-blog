@@ -3,7 +3,7 @@ import { homedir } from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 const OSSClient = require('ali-oss');
-import * as ora from 'ora';
+import ora from 'ora';
 const chalk = require('chalk');
 const ossConfig = JSON.parse(fs.readFileSync(path.resolve(homedir(), 'ossConfig.json'), 'utf-8'));
 

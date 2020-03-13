@@ -1,5 +1,5 @@
 import { Reader } from './../entity/reader';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired, Logger } from '@malagu/core';
 import { Context } from '@malagu/web/lib/node';
 import { AwesomeHelp } from 'awesome-js';
 import { In } from 'typeorm';
@@ -11,7 +11,7 @@ import { Archive } from '../entity/archive';
 import { User } from '../entity/user';
 import { DouMiBlog } from '../../common/blog-protocol';
 import { WebsiteServiceSymbol, WebsiteService } from './website.service';
-
+import { WinstonLogger } from 'malagu-winston';
 
 export const BlogServiceSymbol = Symbol('BlogService');
 
@@ -20,6 +20,9 @@ export class BlogService {
 
   @Autowired(WebsiteServiceSymbol)
   protected readonly websiteService: WebsiteService;
+
+  @Autowired(Logger)
+  protected logger: WinstonLogger;
 
   @Transactional()
   async fetchArticleList(currentPage = 1, pageSize = 20, order?: any, condition?: DouMiBlog.QueryCondition) {
@@ -295,12 +298,12 @@ export class BlogService {
       if (index !== -1) {
         result[index].count = result[index].count + item.ips.length;
       } else {
-        result[index].count = item.ips.length;
+        result.push({ count: item.ips.length, slug: item.articleSlug });
       }
     });
 
     // 取出排名前10的文章
-    const sortResult = result.sort((a, b) => a.count - b.count).slice(0, 9);
+    const sortResult = result.sort((a, b) => b.count - a.count).slice(0, 9);
 
     const articleRepo = OrmContext.getRepository(Article);
 

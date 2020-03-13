@@ -9,8 +9,11 @@ import {
   Axis,
   Tooltip,
   Coord,
-  Legend
+  Legend,
+  View as G2View
 } from 'bizcharts';
+// eslint-disable-next-line
+import DataSet from '@antv/data-set';
 
 interface Props {
 
@@ -30,6 +33,8 @@ interface State {
 
 @View('/website/stats')
 export default class WebsiteStatistics extends React.Component<Props, State> {
+  chart: G2.Chart;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -57,7 +62,7 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
     catList.map(item => totalCount += item.articlesCount);
 
     this.setState({
-      archList: archList.slice(0, 12),
+      archList: archList.slice(0, 24),
       catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
       tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
       hottestList,
@@ -65,13 +70,21 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
     });
   }
   render() {
-    const { archList, catList, tagList } = this.state;
+    const { archList, catList, tagList, websiteList, hottestList } = this.state;
     const colsForArch = {
       articlesCount: {
         alias: '文章数'
       },
       archiveTime: {
         alias: '月份'
+      }
+    };
+    const colsForArticle = {
+      name: {
+        alias: '文章'
+      },
+      count: {
+        alias: '阅读次数'
       }
     };
     const colsForTag = {
@@ -91,6 +104,40 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
     //     formatter: (val: string | number) => (val = `${+val * 100}%`),
     //   },
     // };
+    const ds = new DataSet();
+    ds.setState('type', '');
+    const dv = ds.createView().source(websiteList);
+
+    dv.transform({
+      type: 'fold',
+      fields: ['todayUv', 'todayPv'], // 展开字段集
+      key: 'type', // key字段
+      value: 'value', // value字段
+    })
+      .transform({
+        type: 'filter',
+        callback: d => {
+          console.log(ds.state.type);
+          return d.type !== ds.state.type;
+        }
+      });
+    console.log('>>>>', dv);
+    const scale = {
+      totalPv: {
+        type: 'linear',
+        alias: '博客访问量',
+      },
+      // 因为是个日期导致触达这个错误：“dodge is not support linear attribute”,根据网上的解决方案需要添加这个配置
+      date:{
+        type:'timeCat'
+      },
+    };
+
+    const legendItems = [
+      { value: 'todayUv', marker: { symbol: 'square', fill: '#3182bd', radius: 5 } },
+      { value: 'todayPv', marker: { symbol: 'square', fill: '#54ca76', radius: 5 } },
+      { value: 'totalPv', marker: { symbol: 'hyphen', stroke: '#fad248', radius: 5, lineWidth: 3 } },
+    ];
 
     return (
       <BlogContainer
@@ -106,7 +153,8 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
                 type: 'y'
               }}
             />
-            <Geom type="interval" position="archiveTime*articlesCount" />
+            <Geom type="line" position="archiveTime*articlesCount" size={2} shape={'smooth'} />
+            <Geom type="point" position="archiveTime*articlesCount" />
           </Chart>
           <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'}}>豆米博客每月发布文章分布图</div>
         </div>
@@ -158,7 +206,7 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
               name="percent"
               title
             />
-            <Legend slidable={false} width={0} height={0} />
+            <Legend name="name" slidable={false} width={0} height={0} itemWidth={70} />
             <Geom
               type="point"
               position="percent*articlesCount"
@@ -178,6 +226,67 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
               ]}
             />
           </Chart>
+        </div>
+        <div>
+          <Chart height={400} width={500} forceFit data={dv} scale={scale} padding="auto" onGetG2Instance={c => {
+            this.chart = c;
+          }}>
+            <Legend
+              custom
+              // allowAllCanceled
+              items={legendItems}
+            />
+            <Axis name="date" />
+            <Axis name="value" position={'left'} />
+            <Tooltip />
+            <Geom
+              type="interval"
+              position="date*value"
+              color={['type', value => {
+                if (value === 'todayUv') {
+                  return '#3182bd';
+                }
+                if (value === 'todayPv') {
+                  return '#54ca76';
+                }
+                return '';
+              }]}
+              adjust={[{
+                type: 'dodge',
+                marginRatio: 1 / 32,
+              }]}
+            />
+            <G2View data={websiteList} >
+              <Axis name="totalPv" position="right" label={{
+                formatter: val => `${(+val / 10000)}万`
+              }} />
+              <Geom type="line" position="date*totalPv" color="#fad248" size={3} shape={'smooth'} />
+              <Geom
+                type="point"
+                position="date*totalPv"
+                size={4}
+                shape={'circle'}
+                color={'totalPv'}
+                style={{
+                  stroke: '#fff',
+                  lineWidth: 1
+                }}
+              />
+            </G2View>
+          </Chart>
+        </div>
+        <div>
+          <Chart height={400} data={hottestList} scale={colsForArticle} forceFit>
+            <Axis name="name" />
+            <Axis name="count" title />
+            <Tooltip
+              crosshairs={{
+                type: 'y'
+              }}
+            />
+            <Geom type="interval" position="name*count" />
+          </Chart>
+          <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'}}>豆米博客每月发布文章分布图</div>
         </div>
       </BlogContainer>
     );
