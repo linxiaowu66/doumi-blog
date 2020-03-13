@@ -17,6 +17,12 @@ export class Website {
   todayPv: number;
 
   @Column('bigint')
+  yesterdayPv: number;
+
+  @Column('bigint')
+  yesterdayUv: number;
+
+  @Column('bigint')
   totalUv: number;
 
   @Column('bigint')

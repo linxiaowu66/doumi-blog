@@ -3,7 +3,7 @@ import { Value ***REMOVED*** from '@malagu/core/lib/common/annotation/detached';
 import { ENDPOINT ***REMOVED*** from '@malagu/web';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import * as InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroller';
 import BlogContainer from './components/blogContainer';
 import CodeBlock from './components/codeBlock';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';

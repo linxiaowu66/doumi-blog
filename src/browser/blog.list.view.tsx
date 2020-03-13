@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as query from 'query-string';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import * as InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroller';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import BlogContainer from './components/blogContainer';

@@ -5,6 +5,8 @@ import { Component, Autowired, Logger ***REMOVED*** from '@malagu/core';
 import { AwesomeHelp ***REMOVED*** from 'awesome-js';
 import { WinstonLogger ***REMOVED*** from 'malagu-winston';
 
+const pick = require('lodash.pick');
+
 export const WebsiteServiceSymbol = Symbol('WebsiteService');
 
 @Component(WebsiteServiceSymbol)
@@ -53,8 +55,10 @@ export class WebsiteService {
       newData.todayIps = [reqIp];
       newData.todayPv = 1;
       newData.todayUv = 1;
-      newData.totalPv = yesResult!.totalPv + 1;
-      newData.totalUv = yesResult!.totalUv + 1;
+      newData.totalPv = +yesResult!.totalPv + 1;
+      newData.yesterdayPv = yesResult!.totalPv;
+      newData.yesterdayUv = yesResult!.totalUv;
+      newData.totalUv = +yesResult!.totalUv + 1;
       newData.date = now;
       repo.save(newData);
       const beyond7Days = new Date().getTime() - 7 * 24 * 3600 * 1000;
@@ -140,6 +144,20 @@ export class WebsiteService {
 
     const results = await repo.find();
 
-    return results;
+    return results.map(item => {
+      const partial = pick(item, ['todayPv', 'todayUv', 'totalPv', 'date']);
+
+      const pvGrowthRate = +((((item.totalPv - item.yesterdayPv) / item.yesterdayPv) * 100).toFixed(2));
+      const uvGrowthRate = +((((item.totalUv - item.yesterdayUv) / item.yesterdayUv) * 100).toFixed(2));
+
+      return {
+        ...partial,
+        todayPv: +partial.todayPv,
+        todayUv: +partial.todayUv,
+        totalPv: +partial.totalPv, // 这里强转有精度丢失的风险，考虑到目前还不会达到那么大的数目
+        pvGrowthRate,
+        uvGrowthRate
+      ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 ***REMOVED***
