@@ -20,8 +20,8 @@
 ***REMOVED***
 
 ***REMOVED***
-  const { pkg, dest ***REMOVED*** = context;
-  frontendCodeDir = path.resolve(pkg.projectPath, dest, FRONTEND_TARGET);
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***

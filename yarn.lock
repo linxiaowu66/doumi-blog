@@ -267,10 +267,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@malagu/cli@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.1.0-next.64fc048d.tgz#4f4754095837ce4085ea23d427c24ca98d7ab00b"
-  integrity sha512-AEp/JIoCYboRCEwZML8L/Rr896X4wzVpqAVDlj8/B5zTYZYDtwXJy1tedXufAx/z/YMH8ExbNvG/K1zh97F+nA==
+"@malagu/cli@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.1.0-next.f9a9f7ef.tgz#81aea41954d5af0baa3d29f893f49ad93af7e495"
+  integrity sha512-aW03xX9XPiJ56PxfSjIndbpqQrCERPd+8V+6GtFqwcN7ah3HJ01hPzd7uKUqtuvqajFBBlaEgUJQVmPaOLMB7Q==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     chalk "^2.4.2"
@@ -317,10 +317,10 @@
     webpack-node-externals "^1.7.2"
     worker-loader "^2.0.0"
 
-"@malagu/core@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.1.0-next.64fc048d.tgz#737c33acac4cc88593fb9d0031d3eaeb51e3c8d5"
-  integrity sha512-dLcCU7bAC7x9CKz2CsZkh+IxUcUQUMwhiBh9F9U9F442PzISW58rDgg8tIu2+DD5R6WgEl8M/KIvdhqdhX0YJQ==
+"@malagu/core@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.1.0-next.f9a9f7ef.tgz#436b3d37162f011c9eba562ee1598c63de6fdb3b"
+  integrity sha512-ki9CkO8tNnvYaEvFogs28qKvUTdrG5fq7Z09hxt3xCSDD7ftE6tbUh6mDS3Dqw9nLTJBGGKnfRmGaOI8xA4cTQ==
   dependencies:
     "@types/express" "^4.16.1"
     "@types/lodash.debounce" "4.0.3"
@@ -340,89 +340,89 @@
     url-join "^4.0.1"
     vscode-ws-jsonrpc "^0.1.1"
 
-"@malagu/express-adapter@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.1.0-next.64fc048d.tgz#ba22d9a6c9c502d24d228868b4c796c176025e3b"
-  integrity sha512-DeJQDogV2epL0lTWnQrXMOLYgAkZS4/ts8NizGTd5KTfFCj+TrZG5GQytl7jNvu02VZ+sLl1ZmrfNrA+c+iynw==
+"@malagu/express-adapter@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.1.0-next.f9a9f7ef.tgz#cbed6dc6382a8e5cece85a932709634859a2fec4"
+  integrity sha512-sJOhMxCDjxhCiF4rvFMKyI+6CEXTv71oFfdesdFWqngLQmwvOOzc/b5OCMwuynDY/95sXtt4TsscIK4jXzQm8Q==
   dependencies:
-    "@malagu/web" "0.1.0-next.64fc048d"
+    "@malagu/web" "0.1.0-next.f9a9f7ef"
     express "^4.17.1"
 
-"@malagu/grommet@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.1.0-next.64fc048d.tgz#4234ab5de48fe09036c0632dc9105648677ca90f"
-  integrity sha512-J6AdJG4es7yRDg7bH7NpKXJcZN5/K/9GlX/bHJHcWIBf6VljylOeUNB7FBM0D8Xqmtro1NCDlOdg6WEOHZPR2w==
+"@malagu/grommet@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.1.0-next.f9a9f7ef.tgz#096db152af33c32ff3f201022c7e2aba2f04efc7"
+  integrity sha512-0ciFG0BuvuZC4BOeiqD2xMWW9WVTFVZBqAznOL+irTkeliou94h0jh8ggAQFqHv8bPJOhPQ2Wt8MC4ypBYiImA==
   dependencies:
-    "@malagu/react" "0.1.0-next.64fc048d"
+    "@malagu/react" "0.1.0-next.f9a9f7ef"
     grommet "^2.9.0"
     grommet-icons "^4.4.0"
     react "^16.12.0"
     react-dom "^16.12.0"
     styled-components "^4.4.1"
 
-"@malagu/material-ui@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.1.0-next.64fc048d.tgz#77fc89b89b08dab2e4b85321ac5ed26f92b4b6e6"
-  integrity sha512-pCXVaCO9QiXx8GSnzufzGiLjh0upc3shHUZWbmeDWG7QJ052a7KgqvxngqJJpzaSEN90qBY/o1Qh/wax8zSRpA==
+"@malagu/material-ui@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.1.0-next.f9a9f7ef.tgz#5b374409cf46679fd743f7c74d91af7cf6aaa33b"
+  integrity sha512-orquVu7yOm7yhUj3N1uAiNwbaFX7xRAe1YHqrgoA7sfGm7kXdlP9udkvBp9x/snLC3oTOOmGzqUoyQUxvuGFrQ==
   dependencies:
-    "@malagu/grommet" "0.1.0-next.64fc048d"
+    "@malagu/grommet" "0.1.0-next.f9a9f7ef"
     "@material-ui/core" "^4.6.0"
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
     react "^16.12.0"
     react-dom "^16.12.0"
 
-"@malagu/mvc@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.1.0-next.64fc048d.tgz#581313c4b39b464d5c6a8d6edc027922bf220605"
-  integrity sha512-pG494QktD5Do9z74GcGN1Jl4Ea3HS25tPyenRAfYPwt+d7tG6WeFUj4krJWJTI+aX66NgM/TXX8rFaVJ7dxxog==
+"@malagu/mvc@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.1.0-next.f9a9f7ef.tgz#1f3cf2ba850de72c7e3f895f31ed55bd44cd89f6"
+  integrity sha512-eshj6GR98LEahUOthgtXu7PHkSE9vVYMsoorrVwsDQmFs2TPBe1+/WDX1k7sZmLM55xKL+G6+55Hq6ehcaUBTw==
   dependencies:
-    "@malagu/web" "0.1.0-next.64fc048d"
+    "@malagu/web" "0.1.0-next.f9a9f7ef"
     mustache "^4.0.0"
 
-"@malagu/react@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.1.0-next.64fc048d.tgz#0692e4ccbbf424067a9b08d6a946a18e6784e952"
-  integrity sha512-2aC8IeqgX1qa+d7TeHmH2oSR8ahaptLyv/61rO9JD5emVo24meyfPVrEoU0UsnGXMG3ZyGsZzkrUN63uYYTHcA==
+"@malagu/react@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.1.0-next.f9a9f7ef.tgz#872191207e97eae961fcc89112211a6dfbc5f596"
+  integrity sha512-pc6I7PIIBdRZzXCAGO4Av04wGin+DplESnxEZLsiUC5IM0ttBVydp4XrHatZNDbRb3Mn3VsS7MAMGb8ZJJN6KA==
   dependencies:
-    "@malagu/core" "0.1.0-next.64fc048d"
+    "@malagu/core" "0.1.0-next.f9a9f7ef"
     history "^4.10.1"
     react "^16.12.0"
     react-dom "^16.12.0"
     react-router "^5.1.2"
     react-router-dom "^5.1.2"
 
-"@malagu/rpc@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.1.0-next.64fc048d.tgz#91a003ee3466bc9687d70fe8ad3f1d2d76489547"
-  integrity sha512-RwyiFNomsGHEZNwEqkLKZR5iChYFrQ8rGKx5oeEI4IRTcRgIhk6Q+WIQ84B69Xd0IX/AqXAG4f87dfTKFg48UQ==
+"@malagu/rpc@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.1.0-next.f9a9f7ef.tgz#b5b92b12adbe682290ca3c42ec0ba2ecb2effbc6"
+  integrity sha512-ToY3Nvb11S/EbqV073O9px6UZ+73I1y7yOAeyhpumpSE+gjFgVbfHP6jjtYu7eO4k1+k5aKBo5U+pp7gLlSU2g==
   dependencies:
-    "@malagu/web" "0.1.0-next.64fc048d"
+    "@malagu/web" "0.1.0-next.f9a9f7ef"
     reconnecting-websocket "^4.1.10"
 
-"@malagu/security@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.1.0-next.64fc048d.tgz#de6b329db4c74ebca132bc0012c61b4e9fcb31c6"
-  integrity sha512-5yDtKWhnSRi9lR9r6srwwkZpczBQFNpQKsD20d6ttMtWd07KJzN6gGBki2W+2UzSTxEOq6OzEVhsmw4vDbUJJg==
+"@malagu/security@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.1.0-next.f9a9f7ef.tgz#cbce7a2e741d8aa8b1e4ba827c90aad577dbc821"
+  integrity sha512-9jHuRn/tDNvujxhJ8XOiY4Uv1JXlI5vxGD6gMAeDbcb5VPMrYT1iwihc4VCmTL58KCV4D3j6WBVJDCW2dcySsw==
   dependencies:
-    "@malagu/web" "0.1.0-next.64fc048d"
+    "@malagu/web" "0.1.0-next.f9a9f7ef"
     crypto-js "^3.1.9-1"
 
-"@malagu/typeorm@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.1.0-next.64fc048d.tgz#607775e3a1ea9a67405a122cef887d2e25d09bec"
-  integrity sha512-pOynQ9zvQO/UTPiPlXTnEAzYWW40urGXANRT4iItP/o0FILqMnZ/qsxrqS+fbCBZu3vjIKG76m8gJnpJb+TPlA==
+"@malagu/typeorm@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.1.0-next.f9a9f7ef.tgz#844638ce8d7279d29e3955ac8636b90eaf04e3e1"
+  integrity sha512-szFJF99fLhh5xepLvwNjL+g0QhneCDNi2W0JCZKbtKyFaYtBOXqEPRHFU9GHW+Xoe88EWt53afug/+HigHfI3Q==
   dependencies:
-    "@malagu/web" "0.1.0-next.64fc048d"
+    "@malagu/web" "0.1.0-next.f9a9f7ef"
     mysql "^2.17.1"
     typeorm "^0.2.19"
 
-"@malagu/web@0.1.0-next.64fc048d":
-  version "0.1.0-next.64fc048d"
-  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.1.0-next.64fc048d.tgz#c34d6887dfa3f152265a2af59ba3882a16690d04"
-  integrity sha512-4h2wXyO/h3SoYF/PBGMp6yCOIJ+CdrERM7uNSOywNQd5/PQMyHQVBvfprYNyZL/WD5TQbETLS/5j5nM2Ln6/vg==
+"@malagu/web@0.1.0-next.f9a9f7ef":
+  version "0.1.0-next.f9a9f7ef"
+  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.1.0-next.f9a9f7ef.tgz#7adb2ac65484f65a3c3806c36567bec5fd673636"
+  integrity sha512-WU1PblwIzXJiGFSs6r5ALs2qzEnKOKCc8NtyFnhFMECsQAAfjLSkM9ZqhMZyko/R+tJdR0NXQssp4pozbBShGg==
   dependencies:
-    "@malagu/core" "0.1.0-next.64fc048d"
+    "@malagu/core" "0.1.0-next.f9a9f7ef"
     "@types/express" "^4.16.1"
     cookies "^0.7.3"
     cors "^2.8.5"

@@ -1,0 +1,83 @@
+malagu:
+  logger:
+    level: info
+    winstonConfig:
+      level: info
+    dailyRotateConfig:
+      frequency: 1d
+      filename: malagu-%DATE%.log
+  session:
+    autoCommit: true
+    maxAge: 86400000
+    sessionIdKey: 'malagu:sessionId'
+    sessionKey: 'malagu:session'
+  server:
+    path: /
+    port: 3000
+    endpoint: 'http://localhost:{port***REMOVED***'
+  trace:
+    responseField: X-Malagu-Trace-ID
+  mvc:
+    path: /*
+    defaultViewName: json
+  mustache:
+    cache: false
+    baseViewDir: assets/views
+  rpc:
+    path: api
+  security:
+    enabled: true
+    usernameKey: email
+    passwordKey: password
+    contextKey: 'malagu:securityContext'
+    username: admin
+    password: MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk
+    passwordEncoder:
+      secret: doumiblog
+      encodeHashAsBase64: true
+    basic:
+      realm: realm
+    loginPage: '/#/blog/auth/login'
+    loginUrl: /api/login
+    loginMethod: POST
+    loginSuccessUrl: '/#/blog/admin/index'
+    logoutUrl: /api/logout
+    logoutMethod: POST
+    logoutSuccessUrl: '/#/blog/auth/login'
+  web:
+    cors:
+      origin: 'https://blog.5udou.cn'
+  webpack:
+    forkTSCheckerWebpackPlugin:
+      eslintOptions:
+        fix: true
+  core:
+    validationPipeOptions:
+      detailedOutputDisabled: false
+      transformEnabled: true
+  cookies:
+    keys:
+      - abcdef
+  typeorm:
+    ormConfig:
+      - type: mysql
+        host: 127.0.0.1
+        port: 3306
+        synchronize: false
+        useUnifiedTopology: true
+        charset: utf8mb4_unicode_ci
+        username: dev
+        password: '123456'
+        database: douMiBlog
+webpackHooks:
+  - src/hooks/webpack
+initHooks: []
+buildHooks: []
+deployHooks:
+  - src/hooks/deploy
+serveHooks: []
+entry: '@malagu/web/lib/node/application/dev-application-entry'
+modules:
+  - src/node/module
+assets: []
+mode: []

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import IconList from '@material-ui/icons/List';
 import Home from '@material-ui/icons/Home';
-import Category from '@material-ui/icons/Category';
-import Archive from '@material-ui/icons/Archive';
-import Bookmark from '@material-ui/icons/Bookmark';
+// import Category from '@material-ui/icons/Category';
+// import Archive from '@material-ui/icons/Archive';
+// import Bookmark from '@material-ui/icons/Bookmark';
 import GitHub from '@material-ui/icons/GitHub';
 import PersonPin from '@material-ui/icons/PersonPin';
 import Web from '@material-ui/icons/Web';
@@ -20,17 +20,9 @@ export const navigatorListWithNotLogin = [{
   icon: <IconList />,
   link: '#/blog/list'
 ***REMOVED***, {
-  name: '分类',
-  icon: <Category />,
-  link: '#/blog/aggregation/category'
-***REMOVED***, {
-  name: '归档',
-  icon: <Archive />,
-  link: '#/blog/aggregation/archive'
-***REMOVED***, {
-  name: '标签',
-  icon: <Bookmark />,
-  link: '#/blog/aggregation/tags'
+  name: '网站数据',
+  icon: <Cloud />,
+  link: '#/website/stats'
 ***REMOVED***, {
   name: '关于豆米',
   icon: <PersonPin />,
@@ -39,10 +31,6 @@ export const navigatorListWithNotLogin = [{
   name: '关于本站',
   icon: <Web />,
   link: '#/about/blog'
-***REMOVED***, {
-  name: '网站数据',
-  icon: <Cloud />,
-  link: '#/website/stats'
 ***REMOVED***, {
   name: 'Github',
   icon: <GitHub />,
