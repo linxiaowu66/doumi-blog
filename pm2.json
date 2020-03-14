@@ -1,7 +1,7 @@
 {
   "apps": [{
     "name": "doumi-blog",
-    "script": "./dist/backend/index.js",
+    "script": "./.malagu/backend/dist/index.js",
     "cwd": "/home/doumi-blog",
     "exec_mode": "cluster",
     "instances": 2,
