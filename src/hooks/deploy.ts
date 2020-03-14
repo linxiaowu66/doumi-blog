@@ -20,8 +20,8 @@ export default async (context: HookContext) => {
 };
 
 async function deployFrontend(context: HookContext) {
-  const { pkg, dest } = context;
-  frontendCodeDir = path.resolve(pkg.projectPath, dest, FRONTEND_TARGET);
+  const { pkg } = context;
+  frontendCodeDir = path.resolve(pkg.projectPath, '.malagu', FRONTEND_TARGET, 'dist');
   if (!fs.existsSync(frontendCodeDir)) {
     console.log(chalk`{yellow Please build frontend first with "malagu build"}`);
     return;

@@ -1,6 +1,6 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import {
-  AuthenticationProvider, Authentication, DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY,
+  AuthenticationProvider, Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY,
   PasswordEncoder, UserStore, UserChecker, BadCredentialsError } from '@malagu/security/lib/node';
 import { Context, RequestMatcher } from '@malagu/web/lib/node';
 
@@ -22,7 +22,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
   @Autowired(RequestMatcher)
   protected readonly requestMatcher: RequestMatcher;
 
-  priority = DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY;
+  priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY;
 
   async authenticate(): Promise<Authentication> {
     const username = this.doGetValue(this.options.usernameKey);

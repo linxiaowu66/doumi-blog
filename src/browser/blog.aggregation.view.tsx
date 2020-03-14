@@ -1,3 +1,4 @@
+// 暂时作废掉该页面了
 import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { BlogServer, DouMiBlog } from '../common/blog-protocol';
