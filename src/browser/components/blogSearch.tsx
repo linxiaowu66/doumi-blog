@@ -45,8 +45,8 @@ export default class BlogSearch extends React.Component<Props, State> {
     ***REMOVED***
   ***REMOVED***
 
-  handleJumpToDetail = () => {
-
+  handleJumpToDetail = (slug: string) => {
+    location.hash = `/blog/detail/${slug***REMOVED***`;
   ***REMOVED***
 
   render() {
@@ -87,7 +87,7 @@ export default class BlogSearch extends React.Component<Props, State> {
             <ul>
               {
                 list.map(item => (
-                  <li key={item.slug***REMOVED*** className="article-item">”{item.title***REMOVED***“</li>
+                  <li key={item.slug***REMOVED*** className="article-item" onClick={() => this.handleJumpToDetail(item.slug)***REMOVED***>”{item.title***REMOVED***“</li>
                 ))
             ***REMOVED***
             </ul>

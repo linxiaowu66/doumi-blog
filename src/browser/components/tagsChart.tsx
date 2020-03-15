@@ -23,7 +23,11 @@ export default function TagsChart(props: {list: DouMiBlog.TagsItem[]***REMOVED**
   ***REMOVED***
   return (
     <React.Fragment>
-      <Chart height={400***REMOVED*** data={props.list***REMOVED*** scale={colsForTag***REMOVED*** forceFit>
+      <Chart height={400***REMOVED*** data={props.list***REMOVED*** scale={colsForTag***REMOVED*** forceFit onPlotClick={ev => {
+        const id = ev.data._origin.id;
+
+        location.hash = `#/blog/list?queryTag=${id***REMOVED***`;
+    ***REMOVED******REMOVED***>
         <Tooltip showTitle={false***REMOVED*** />
         <Axis name="articlesCount" title />
         <Axis

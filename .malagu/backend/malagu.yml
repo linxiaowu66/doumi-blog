@@ -84,5 +84,3 @@ assets: []
 mode:
   - cdn
   - prod
-  - cdn
-  - prod

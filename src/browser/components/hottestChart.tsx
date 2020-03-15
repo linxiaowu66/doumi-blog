@@ -40,7 +40,11 @@ export default function HottestChart(props: {list: DouMiBlog.ArticleStatsItem[]*
   ***REMOVED***
   return (
     <React.Fragment>
-      <Chart height={400***REMOVED*** data={props.list***REMOVED*** forceFit>
+      <Chart height={400***REMOVED*** data={props.list***REMOVED*** forceFit onPlotClick={ev => {
+        const slug = ev.data._origin.slug;
+
+        location.hash = `#/blog/detail/${slug***REMOVED***`;
+    ***REMOVED******REMOVED***>
         <Coord type="theta" radius={0.8***REMOVED*** />
         <Tooltip />
         <Geom

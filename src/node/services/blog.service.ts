@@ -82,14 +82,17 @@ export class BlogService {
     ***REMOVED***
       if (condition.articleStatus) {
         whereQuery = {
-          ...whereQuery,
-          ...{ where: { articleStatus: condition.articleStatus ***REMOVED******REMOVED***
+          where: { ...(whereQuery as any).where, articleStatus: condition.articleStatus ***REMOVED***
         ***REMOVED***
     ***REMOVED***
   ***REMOVED***
 
+    const finalQuery = {...baseQuery, ...whereQuery***REMOVED***
+
+    this.logger.info(`search blog list with query condition: ${JSON.stringify(finalQuery)***REMOVED***`);
+
     if (!condition?.queryTag) {
-      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery***REMOVED***
+      [list, count] = await repo.findAndCount(finalQuery);
   ***REMOVED***
 
     return { list: list.map(item => ({

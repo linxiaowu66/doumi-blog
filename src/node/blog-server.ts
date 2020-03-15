@@ -39,6 +39,7 @@ export class BlogServerImpl implements BlogServer {
 ***REMOVED***
 
   async fetchArticleList(currentPage: number, condition?: DouMiBlog.QueryCondition): Promise<DouMiBlog.ArticleList> {
+    this.logger.info(`fetchArticleList with currentPage[${currentPage***REMOVED***], condition[${JSON.stringify(condition)***REMOVED***]`);
     const result = await this.blogService.fetchArticleList(currentPage, 20, undefined, condition);
 
     result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category', 'articleStatus']));
