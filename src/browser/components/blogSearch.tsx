@@ -45,8 +45,8 @@ export default class BlogSearch extends React.Component<Props, State> {
     });
   };
 
-  handleJumpToDetail = () => {
-
+  handleJumpToDetail = (slug: string) => {
+    location.hash = `/blog/detail/${slug}`;
   };
 
   render() {
@@ -87,7 +87,7 @@ export default class BlogSearch extends React.Component<Props, State> {
             <ul>
               {
                 list.map(item => (
-                  <li key={item.slug} className="article-item">”{item.title}“</li>
+                  <li key={item.slug} className="article-item" onClick={() => this.handleJumpToDetail(item.slug)}>”{item.title}“</li>
                 ))
               }
             </ul>

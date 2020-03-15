@@ -19,7 +19,9 @@ export default function CategoryChart(props: { list: CatItem[], }) {
         padding="auto"
         forceFit
         onPlotClick={ev => {
-          console.log('跳转...', ev);
+          const id = ev.data._origin.id;
+
+          location.hash = `#/blog/list?queryCat=${id}`;
         }}
       >
         <Coord type="theta" radius={0.65} />

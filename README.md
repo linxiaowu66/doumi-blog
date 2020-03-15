@@ -71,6 +71,7 @@ $ npm start
   - [ ] 完成网站数据页面
   - [x] Markdown的Table样式完成
   - [ ] 关于typeorm报”AlreadyHasActiveConnectionError“和"ERR_EXIST_TABLE"错误的问题？
+  - [ ] bizCharts的forceFit没能完完全全的fit view？需要继续调整优化。
 
 ## 开发记录
 * typeorm支持mongoDB太弱了，mongoDB的ref特性从2017年有人提出到现在还没有实现😅

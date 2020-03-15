@@ -82,14 +82,17 @@ export class BlogService {
       }
       if (condition.articleStatus) {
         whereQuery = {
-          ...whereQuery,
-          ...{ where: { articleStatus: condition.articleStatus }}
+          where: { ...(whereQuery as any).where, articleStatus: condition.articleStatus }
         };
       }
     }
 
+    const finalQuery = {...baseQuery, ...whereQuery};
+
+    this.logger.info(`search blog list with query condition: ${JSON.stringify(finalQuery)}`);
+
     if (!condition?.queryTag) {
-      [list, count] = await repo.findAndCount({...baseQuery, ...whereQuery});
+      [list, count] = await repo.findAndCount(finalQuery);
     }
 
     return { list: list.map(item => ({

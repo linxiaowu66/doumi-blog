@@ -18,7 +18,11 @@ export default function ArchiveChart(props: {list: DouMiBlog.ArchiveItem[]}) {
   };
   return (
     <React.Fragment>
-      <Chart height={400} data={props.list} scale={colsForArch} forceFit>
+      <Chart height={400} data={props.list} scale={colsForArch} forceFit onPlotClick={ev => {
+        const id = ev.data._origin.id;
+
+        location.hash = `#/blog/list?queryArch=${id}`;
+      }}>
         <Axis name="archiveTime" title />
         <Axis name="articlesCount" title />
         <Tooltip

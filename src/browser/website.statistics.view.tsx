@@ -9,6 +9,7 @@ import HottestChart from './components/hottestChart';
 import VisitorChart from './components/visitorChart';
 import TagsChart from './components/tagsChart';
 
+import './styles/statistics.less';
 
 interface Props {
 
@@ -72,19 +73,21 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
         contentClass="statistics-container"
         isOpenSnackbar={false}
       >
-        <div>
-          <CategoryChart list={catList} />
+        <div className="first-row">
+          <div className="chart-item flex-basis-50">
+            <CategoryChart list={catList} />
+          </div>
+          <div className="chart-item flex-basis-50">
+            <HottestChart list={hottestList} />
+          </div>
         </div>
-        <div>
-          <HottestChart list={hottestList} />
-        </div>
-        <div>
+        <div className="chart-item">
           <VisitorChart list={websiteList} />
         </div>
-        <div>
+        <div className="chart-item">
           <ArchiveChart list={archList} />
         </div>
-        <div>
+        <div className="chart-item">
           <TagsChart list={tagList} />
         </div>
       </BlogContainer>

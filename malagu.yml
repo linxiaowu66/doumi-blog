@@ -18,9 +18,11 @@ frontend:
         template: 'src/browser/index.html'
       htmlWebpackTagsPlugin:
         biz-charts: https://unpkg.com/bizcharts@3/umd/BizCharts.min.js
+        data-set: https://unpkg.com/@antv/data-set@0.11.1/build/data-set.js
       config:
         externals:
           bizcharts: BizCharts
+          '@antv/data-set': DataSet
     material-ui:
       themeOptions:
         palette:
