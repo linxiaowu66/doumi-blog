@@ -1,9 +1,10 @@
-import { Controller, Post, Put, Body, Session ***REMOVED*** from '@malagu/mvc/lib/node';
+import { Controller, Post, Put, Body ***REMOVED*** from '@malagu/mvc/lib/node';
 import { Autowired ***REMOVED*** from '@malagu/core';
 import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import { BlogServiceSymbol, BlogService ***REMOVED*** from './services/blog.service';
 import { Article ***REMOVED*** from './entity/article';
+import { SecurityContext ***REMOVED*** from '@malagu/security/lib/node';
 
 // 以下api都是需要身份校验
 @Controller('/api')
@@ -17,10 +18,8 @@ export class BlogAdminController {
   @Transactional()
   async createBlog(
   @Body() article: DouMiBlog.ArticleDetail,
-    @Session() session: any,
   ) {
-
-    const userInfo = session['malagu:securityContext'].authentication.principal;
+    const userInfo = SecurityContext.getAuthentication().principal;
     const { username ***REMOVED*** = userInfo;
 
     const result = await this.blogService.createOrUpdateArticle(article, username);
@@ -36,9 +35,8 @@ export class BlogAdminController {
   @Transactional()
   async updateBlog(
   @Body() article: DouMiBlog.ArticleDetail,
-    @Session() session: any,
   ) {
-    const userInfo = session['malagu:securityContext'].authentication.principal;
+    const userInfo = SecurityContext.getAuthentication().principal;
     const { username ***REMOVED*** = userInfo;
 
     await this.blogService.createOrUpdateArticle(article, username, true);
