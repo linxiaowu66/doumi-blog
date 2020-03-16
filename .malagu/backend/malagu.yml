@@ -4,9 +4,8 @@ malagu:
     winstonConfig:
       level: info
     dailyRotateConfig:
-      frequency: 24h
-      filename: doumi-blog-%DATE%.log
-      dirname: /home/deploy/logs/doumi-blog
+      frequency: 1d
+      filename: malagu-%DATE%.log
   session:
     autoCommit: true
     maxAge: 86400000
@@ -15,7 +14,7 @@ malagu:
   server:
     path: /
     port: 3000
-    endpoint: 'https://bff.5udou.cn'
+    endpoint: 'http://localhost:{port}'
   trace:
     responseField: X-Malagu-Trace-ID
   mvc:
@@ -77,10 +76,8 @@ buildHooks: []
 deployHooks:
   - src/hooks/deploy
 serveHooks: []
-entry: '@malagu/express-adapter/lib/node/http-application-entry'
+entry: '@malagu/web/lib/node/application/dev-application-entry'
 modules:
   - src/node/module
 assets: []
-mode:
-  - cdn
-  - prod
+mode: []
