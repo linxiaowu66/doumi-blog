@@ -68,10 +68,10 @@ const useStyles = makeStyles({
       }
     },
     '& i': {
-        margin: '3px 0 6px 0',
-        fontStyle: 'unset',
-        fontSize: 12,
-        color: 'rgba(0, 0, 0, 0.5)',
+      margin: '3px 0 6px 0',
+      fontStyle: 'unset',
+      fontSize: 12,
+      color: 'rgba(0, 0, 0, 0.5)',
     },
     '& span': {
       fontWeight: 'lighter',
@@ -79,7 +79,7 @@ const useStyles = makeStyles({
       // fontFamily: '"Hiragino Sans GB", "Hiragino Sans GB W3", "Century Gothic", Arial, Verdana, Tahoma,"\5FAE\8F6F\96C5\9ED1"',
     }
   }
-})
+});
 
 interface TimeItemProps {
   subTitle: string,
@@ -88,7 +88,7 @@ interface TimeItemProps {
 }
 
 function Timeline(props: { title: string, timeList: TimeItemProps[] }) {
-  const classes = useStyles()
+  const classes = useStyles();
   const { title, timeList } = props;
   return (
     <div className={classes.root}>
@@ -103,7 +103,7 @@ function Timeline(props: { title: string, timeList: TimeItemProps[] }) {
         ))
       }
     </div>
-  )
+  );
 }
 
-export default Timeline
+export default Timeline;

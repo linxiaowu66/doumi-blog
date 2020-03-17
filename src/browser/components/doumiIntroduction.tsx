@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import GitHub from '@material-ui/icons/GitHub'
-import LocationOn from '@material-ui/icons/LocationOn'
+import GitHub from '@material-ui/icons/GitHub';
+import LocationOn from '@material-ui/icons/LocationOn';
 import Link from '@material-ui/icons/Link';
-import Twitter from '@material-ui/icons/Twitter'
+import Twitter from '@material-ui/icons/Twitter';
 import { DouMiAvatar } from './doumiAvatar';
 import MuiLink from '@material-ui/core/Link';
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
       fontStyle: 'italic'
     }
   })
-})
+});
 
 export function DouMiIntroduction(props: IntroProps) {
   const classes = useStyles(props.fontSize);
@@ -65,5 +65,5 @@ export function DouMiIntroduction(props: IntroProps) {
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }

@@ -99,21 +99,21 @@ function DouMiLinks(props: LinksProp) {
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E8%A5%BF%E6%BA%AA%E6%B9%BF%E5%9C%B0.jpg?x-oss-process=image/resize,h_300',
       title: '西溪湿地',
       width: '33.3%',
-      link: '#/blog/aggregation/category'
+      link: '#/website/stats'
     },
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E4%B9%9D%E6%BA%AA%E7%83%9F%E6%A0%91.jpg?x-oss-process=image/resize,h_300',
       title: '九溪烟树',
       width: '33.3%',
-      link: '#/blog/aggregation/archive'
+      link: '#/about/blog'
     },
     {
       url:
         'https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/%E8%8B%8F%E5%A0%A4.jpeg?x-oss-process=image/resize,h_300',
       title: '苏堤春晓',
       width: '33.3%',
-      link: '#/blog/aggregation/tags'
+      link: '#/website/stats'
     },
     {
       url:
