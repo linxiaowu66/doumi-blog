@@ -1,6 +1,6 @@
-import * as React from 'react'
+import * as React from 'react';
 import Container from '@material-ui/core/Container';
-import Typography from './typography'
+import Typography from './typography';
 import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
 import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
 
@@ -49,8 +49,8 @@ const useStyles = makeStyles({
             color: '#119d55',
         ***REMOVED***,
           '& span': {
-              lineHeight: 'inherit',
-              fontWeight: 'normal',
+            lineHeight: 'inherit',
+            fontWeight: 'normal',
         ***REMOVED***,
           '& time': {
             color: '#bbbbbb',
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
     ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-***REMOVED***)
+***REMOVED***
 
 function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] ***REMOVED***) {
   const classes = useStyles();
@@ -82,7 +82,7 @@ function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] ***REMOVED***) 
       </ul>
     </Container>
 
-  )
+  );
 ***REMOVED***
 
 export default HottestArticles;

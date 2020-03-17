@@ -13,8 +13,11 @@ module.exports = {
     "@typescript-eslint",
     "import",
     "no-null",
+    "react-hooks"
   ],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/await-thenable": [
       "warn"
     ],

@@ -50,9 +50,9 @@ export default function IconBreadcrumbs(props: BreadcrumbsProps) {
       </Link>
       <Typography color="textPrimary" className={classes.link***REMOVED***>
         <span className={classes.icon***REMOVED***>
-        {
-          props.icon
-      ***REMOVED***
+          {
+            props.icon
+        ***REMOVED***
         </span>
         {
           props.position

@@ -31,10 +31,10 @@ const useStyles = makeStyles({
     ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-***REMOVED***)
+***REMOVED***
 
 function DouMiDetailItem(props: {title: string, children: React.ReactElement[]***REMOVED***) {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <div className={classes.root***REMOVED***>
       <div className="title">{props.title***REMOVED***</div>
@@ -42,7 +42,7 @@ function DouMiDetailItem(props: {title: string, children: React.ReactElement[]**
         props.children
     ***REMOVED***
     </div>
-  )
+  );
 ***REMOVED***
 
 export default DouMiDetailItem;

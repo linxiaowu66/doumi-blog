@@ -68,7 +68,7 @@ export default function BlogConfig(props: BlogConfigProps) {
   const classes = useStyles();
   const theme = useTheme();
   const [selectedDate, setSelectedDate] = React.useState<Date>(
-     new Date()
+    new Date()
   );
   const [illustration, setIllustration] = React.useState<string>('');
   const [digest, setDigest] = React.useState<string>('');
@@ -78,21 +78,21 @@ export default function BlogConfig(props: BlogConfigProps) {
 
   React.useEffect(() => {
     if (props.initData?.archiveTime !== undefined) {
-      setSelectedDate(props.initData?.archiveTime === '' ? new Date() : new Date(props.initData?.archiveTime))
+      setSelectedDate(props.initData?.archiveTime === '' ? new Date() : new Date(props.initData?.archiveTime));
   ***REMOVED***
     if (props.initData?.illustration !== undefined) {
-      setIllustration(props.initData?.illustration)
+      setIllustration(props.initData?.illustration);
   ***REMOVED***
     if (props.initData?.digest !== undefined) {
-      setDigest(props.initData?.digest)
+      setDigest(props.initData?.digest);
   ***REMOVED***
     if (props.initData?.tags !== undefined) {
-      setTags(props.initData?.tags)
+      setTags(props.initData?.tags);
   ***REMOVED***
     if (props.initData?.cat !== undefined) {
-      setCategory(props.initData?.cat)
+      setCategory(props.initData?.cat);
   ***REMOVED***
-***REMOVED***, [props])
+***REMOVED***, [props]);
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);

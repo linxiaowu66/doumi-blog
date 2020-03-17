@@ -27,7 +27,7 @@ const useStyles = makeStyles({
       boxShadow: '#E7EEF2 0 0 0 6px',
   ***REMOVED***
 ***REMOVED***)
-***REMOVED***)
+***REMOVED***
 
 export function DouMiAvatar(props: AvatarProps) {
   const classes = useStyles(props);
@@ -36,5 +36,5 @@ export function DouMiAvatar(props: AvatarProps) {
     <div className={classes.doumiAvatar***REMOVED***>
       <Avatar alt='豆米的画像' src={douMi***REMOVED*** className='avatar' />
     </div>
-  )
+  );
 ***REMOVED***

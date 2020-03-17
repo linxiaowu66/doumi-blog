@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Prism as SyntaxHighlighter ***REMOVED*** from "react-syntax-highlighter";
-import { atomDark ***REMOVED*** from "react-syntax-highlighter/dist/cjs/styles/prism";
+import * as React from 'react';
+import { Prism as SyntaxHighlighter ***REMOVED*** from 'react-syntax-highlighter';
+import { atomDark ***REMOVED*** from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 interface CodeBlockProps {
   language: string,
