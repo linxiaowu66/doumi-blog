@@ -5,5 +5,5 @@ malagu:
       level: 'info'
     dailyRotateConfig:
       frequency: '24h'
-      filename: 'doum-blog-%DATE%.log'
+      filename: 'doumi-blog-%DATE%.log'
       dirname: './log'

@@ -33,6 +33,7 @@ export class WebsiteService {
     const repo = OrmContext.getRepository(Website);
 
     // 查找数据库中是否存在今天的数据
+    // TODO: 从这里到后面的新建表如何控制并发，目前出现过0点的同时有访问过来，导致多创建了同日期的一行数据
     const website = await repo.findOne({ date: now ***REMOVED***
 
     if (website) {

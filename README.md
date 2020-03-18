@@ -68,7 +68,7 @@ $ npm start
   - [ ] 一篇Malagu框架的使用测评？
   - [ ] 目前的hash history可以转换为browser history吗？
   - [ ] 使用的snackbar组件的设计目前太诡异了，后续找到更好的解决方案？
-  - [ ] 完成网站数据页面
+  - [x] 完成网站数据页面
   - [x] Markdown的Table样式完成
   - [ ] 关于typeorm报”AlreadyHasActiveConnectionError“和"ERR_EXIST_TABLE"错误的问题？
   - [ ] bizCharts的forceFit没能完完全全的fit view？需要继续调整优化。
