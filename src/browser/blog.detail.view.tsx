@@ -25,6 +25,7 @@ interface State {
   open: boolean;
   isOpenSnackbar: boolean,
   snackbarMsg: string,
+  slug: string
 ***REMOVED***
 
 @View('/blog/detail/:slug')
@@ -39,17 +40,24 @@ export default class BlogDetail extends React.Component<Prop, State> {
       open: true,
       isOpenSnackbar: false,
       snackbarMsg: '',
+      slug: ''
     ***REMOVED***
 ***REMOVED***
 
   async componentDidMount() {
+
+    const slug = (this.props as any).match.params.slug;
+
+    this.fetchArticleDetail(slug);
+***REMOVED***
+  async fetchArticleDetail (slug: string) {
   ***REMOVED***
-      const slug = (this.props as any).match.params.slug;
       const response = await this.BlogServer.fetchArticleDetail(slug, true);
 
       this.setState({
         response,
         open: false,
+        slug,
       ***REMOVED***
 
       const gitalk = new Gitalk({
@@ -73,6 +81,21 @@ export default class BlogDetail extends React.Component<Prop, State> {
         snackbarMsg: '获取博文详情失败，请稍后再试',
         open: false,
       ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+  static getDerivedStateFromProps(nextProps: Prop, prevState: State) {
+    const newSlug = (nextProps as any).match.params.slug;
+    if (prevState.response?.slug !== newSlug) {
+      return { slug: newSlug ***REMOVED***
+  ***REMOVED***
+    // eslint-disable-next-line no-null/no-null
+    return null;
+***REMOVED***
+  componentDidUpdate(prevProps: Prop, prevState: State) {
+    const slug = (this.props as any).match.params.slug;
+    const oldSlug = (prevProps as any).match.params.slug;
+    if (slug !== oldSlug) {
+      this.fetchArticleDetail(slug);
   ***REMOVED***
 ***REMOVED***
 
