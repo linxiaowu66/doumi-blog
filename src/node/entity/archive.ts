@@ -8,7 +8,7 @@ export class Archive {
 
   // 归档时间，诸如'2010-01'这样的字符
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 200,
     nullable: false
 ***REMOVED***)
@@ -16,7 +16,7 @@ export class Archive {
   archiveTime: string;
 
   @OneToMany(type => Article, article => article.archiveTime)
-  articles: Article[]
+  articles: Article[];
 
   @CreateDateColumn()
   public readonly createdAt!: Date;

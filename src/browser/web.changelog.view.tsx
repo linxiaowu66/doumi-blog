@@ -51,11 +51,11 @@ export default class AboutWebsite extends React.Component<Prop, State> {
       <BlogContainer isOpenSnackbar={isOpenSnackbar***REMOVED*** snackbarMsg={snackbarMsg***REMOVED***>
         <Timeline
           title='网站更新记录'
-          timeList={changeLog.map(item => {return {
+          timeList={changeLog.map(item => ({
             subTitle: item.title,
             time: `${item.date***REMOVED*** ${item.time***REMOVED***`,
             desc: `${item.desc1***REMOVED***${item.desc2***REMOVED***`
-          ***REMOVED******REMOVED***)***REMOVED***
+        ***REMOVED***))***REMOVED***
         />
         <Divider />
         <Timeline

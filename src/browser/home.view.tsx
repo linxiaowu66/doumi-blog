@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import Container from '@material-ui/core/Container'
+import Container from '@material-ui/core/Container';
 import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
 import DouMiLinks from './components/doumiLinks';
 import HottestArticles from './components/hottestArticles';
-import "./styles/index.less";
+import './styles/index.less';
 import FootPrint from './components/footPrint';
 
 
@@ -18,36 +18,36 @@ interface State {
 @View()
 export class Home extends React.Component<Prop, State> {
 
-    @Autorpc(BlogServer)
-    protected BlogServer!: BlogServer;
+  @Autorpc(BlogServer)
+  protected BlogServer!: BlogServer;
 
-    constructor(prop: Prop) {
-        super(prop);
-        this.state = {
-          response: []
-        ***REMOVED***
-  ***REMOVED***
-
-    async componentDidMount() {
+  constructor(prop: Prop) {
+    super(prop);
+    this.state = {
+      response: []
     ***REMOVED***
-        const response = await this.BlogServer.fetchHottestArticles(5);
-        this.setState({
-          response: response.list
-        ***REMOVED***
-    ***REMOVED*** catch (err) {
-        console.error(err);
-    ***REMOVED***
-  ***REMOVED***
+***REMOVED***
 
-    render() {
-        const { response ***REMOVED*** = this.state
-        return (
-        <Container maxWidth="md" className="home-container">
-          <DouMiIntroduction avatarSize={120***REMOVED*** fontSize={16***REMOVED*** />
-          <DouMiLinks />
-          <HottestArticles list={response***REMOVED*** />
-          <FootPrint />
-        </Container>
-      )
+  async componentDidMount() {
   ***REMOVED***
+      const response = await this.BlogServer.fetchHottestArticles(5);
+      this.setState({
+        response: response.list
+      ***REMOVED***
+  ***REMOVED*** catch (err) {
+      console.error(err);
+  ***REMOVED***
+***REMOVED***
+
+  render() {
+    const { response ***REMOVED*** = this.state;
+    return (
+      <Container maxWidth="md" className="home-container">
+        <DouMiIntroduction avatarSize={120***REMOVED*** fontSize={16***REMOVED*** />
+        <DouMiLinks />
+        <HottestArticles list={response***REMOVED*** />
+        <FootPrint />
+      </Container>
+    );
+***REMOVED***
 ***REMOVED***

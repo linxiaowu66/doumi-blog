@@ -28,7 +28,7 @@ export class User {
   @Index({ unique: true ***REMOVED***)
   email: string;
 
-  @OneToMany(type => {return Article;***REMOVED***, article => {return article.author;***REMOVED***)
+  @OneToMany(type => Article, article => article.author)
   articles: Article[];
 
   @CreateDateColumn()
