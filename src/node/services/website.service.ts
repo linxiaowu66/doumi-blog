@@ -56,10 +56,10 @@ export class WebsiteService {
       newData.todayIps = [reqIp];
       newData.todayPv = 1;
       newData.todayUv = 1;
-      newData.totalPv = +yesResult!.totalPv + 1;
-      newData.yesterdayPv = yesResult!.totalPv;
-      newData.yesterdayUv = yesResult!.totalUv;
-      newData.totalUv = +yesResult!.totalUv + 1;
+      newData.totalPv = +(yesResult ? yesResult.totalPv : 0) + 1;
+      newData.yesterdayPv = +(yesResult ? yesResult.totalPv : 0);
+      newData.yesterdayUv = +(yesResult ? yesResult.totalUv : 0);
+      newData.totalUv = +(yesResult ? yesResult.totalUv : 0) + 1;
       newData.date = now;
       repo.save(newData);
       const beyond7Days = new Date().getTime() - 7 * 24 * 3600 * 1000;
