@@ -20,6 +20,11 @@
       "es6",
       "dom"
     ],
+    "baseUrl": ".",
+    "typeRoots": ["src/types", "node_modules/@types"],
+    "paths": {
+      "progress-catalog": ["types/progress-catalog.d.ts"]
+  ***REMOVED***,
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "lib"

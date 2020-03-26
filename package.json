@@ -33,6 +33,7 @@
     "less-loader": "^5.0.0",
     "lodash.pick": "^4.4.0",
     "malagu-winston": "^0.0.17",
+    "progress-catalog": "^1.0.7",
     "query-string": "^6.10.1",
     "react-hook-form": "^4.4.8",
     "react-infinite-scroller": "^1.2.4",

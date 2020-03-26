@@ -6843,6 +6843,11 @@ process@^0.11.10:
   resolved "https://registry.npm.taobao.org/process/download/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
 
+progress-catalog@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/progress-catalog/-/progress-catalog-1.0.7.tgz#609250adcd50b90ace73ccd6872ceb5a1036277d"
+  integrity sha512-ct4LqlBnbxFjGGc/3vQ0Mfgq4j8mbEf8/VQxZ4ssZZBxWrxm3MsIPTLLUROVtcGxHi9EmKLH/5IP0sXeJ5sXBQ==
+
 progress@^2.0.0, progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.npm.taobao.org/progress/download/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"

@@ -212,7 +212,9 @@ export class BlogService {
     if (!hasTodayItems.length) {
       const beyond7Days = new Date().getTime() - 7 * 24 * 3600 * 1000;
       const results = await readerRepo.find({ date: AwesomeHelp.convertDate(new Date(beyond7Days), 'YYYY-MM-DD') ***REMOVED***
-      await readerRepo.delete(results.map(it => it.id));
+      if (results.length) {
+        await readerRepo.delete(results.map(it => it.id));
+    ***REMOVED***
   ***REMOVED***
 
     const reader = await readerRepo.findOne({

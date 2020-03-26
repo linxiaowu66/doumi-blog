@@ -12,6 +12,10 @@ import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
 import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogContainer from './components/blogContainer';
 import CodeBlock from './components/codeBlock';
+import ABlock from './components/aBlock';
+import Catalog from 'progress-catalog';
+
+import 'progress-catalog/src/progress-catalog.css';
 
 const ReactMarkdown = require('react-markdown/with-html');
 
@@ -48,7 +52,16 @@ export default class BlogDetail extends React.Component<Prop, State> {
 
     const slug = (this.props as any).match.params.slug;
 
-    this.fetchArticleDetail(slug);
+    await this.fetchArticleDetail(slug);
+
+    setTimeout(() => {
+      new Catalog({
+        contentEl: 'blog-detail',
+        catalogEl: 'catalog-content-wrapper',
+        selector: ['h2', 'h3', 'h4', 'h5'],
+        topMargin: 70,
+      ***REMOVED***
+  ***REMOVED***, 1000);
 ***REMOVED***
   async fetchArticleDetail (slug: string) {
   ***REMOVED***
@@ -136,12 +149,14 @@ export default class BlogDetail extends React.Component<Prop, State> {
                   <span>字数统计 {response.content.length***REMOVED***</span>
                 </div>
               </section>
-              <ReactMarkdown
-                source={response ? response.content : ''***REMOVED***
-                renderers={{ code: CodeBlock ***REMOVED******REMOVED***
-                escapeHtml={false***REMOVED***
-                className="blog-detail"
-              />
+              <section id="blog-detail">
+                <ReactMarkdown
+                  source={response ? response.content : ''***REMOVED***
+                  renderers={{ code: CodeBlock, link: ABlock ***REMOVED******REMOVED***
+                  escapeHtml={false***REMOVED***
+                  className="blog-detail"
+                />
+              </section>
               <section className='micro-program'>
                 <h4>小程序关注一波~</h4>
                 <img src='https://blogimages2016.oss-cn-hangzhou.aliyuncs.com/homePage/xiaochengxu.jpeg' />
@@ -151,8 +166,8 @@ export default class BlogDetail extends React.Component<Prop, State> {
                 <p>如果对本文 <a>{response?.title***REMOVED***</a> 的内容有疑问，请在下面的评论系统中留言，谢谢。</p>
               </section>
               <blockquote className='github'>
-                <p>网站源码：<a href="https://github.com/linxiaowu66/doumi-blog">linxiaowu66 · 豆米的博客</a></p>
-                <p>Follow：<a href="https://github.com/linxiaowu66">linxiaowu66 · Github</a></p>
+                <p>网站源码：<a href="https://github.com/linxiaowu66/doumi-blog" target="__blank">linxiaowu66 · 豆米的博客</a></p>
+                <p>Follow：<a href="https://github.com/linxiaowu66" target="__blank">linxiaowu66 · Github</a></p>
               </blockquote>
 
             </React.Fragment>
@@ -161,6 +176,7 @@ export default class BlogDetail extends React.Component<Prop, State> {
           </Backdrop>
       ***REMOVED***
         <div id="gitalk-container" />
+        <div id="catalog-content-wrapper" />
       </BlogContainer>
     );
 ***REMOVED***
