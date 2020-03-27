@@ -4,9 +4,8 @@ malagu:
     winstonConfig:
       level: info
     dailyRotateConfig:
-      frequency: 24h
-      filename: doumi-blog-%DATE%.log
-      dirname: ./log
+      frequency: 1d
+      filename: malagu-%DATE%.log
   session:
     autoCommit: true
     maxAge: 86400000
@@ -77,10 +76,8 @@ buildHooks: []
 deployHooks:
   - src/hooks/deploy
 serveHooks: []
-mode:
-  - local
-  - cdn
 entry: '@malagu/web/lib/node/application/dev-application-entry'
 modules:
   - src/node/module
 assets: []
+mode: []
