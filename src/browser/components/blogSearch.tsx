@@ -58,7 +58,7 @@ export default class BlogSearch extends React.Component<Props, State> {
             <SearchIcon />
           </div>
           <InputBase
-            placeholder="Search…"
+            placeholder="搜索关键词"
             classes={{
               root: 'input-root',
               input: 'input',

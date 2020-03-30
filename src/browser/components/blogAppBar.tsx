@@ -1,32 +1,105 @@
 
 import * as React from 'react';
 import axios from 'axios';
-import AppBar from '@material-ui/core/AppBar';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Link from '@material-ui/core/Link';
 import Tooltip from '@material-ui/core/Tooltip';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme ***REMOVED*** from '@material-ui/core/styles';
 import BlogSearch from './blogSearch';
+import { navigatorListWithLogin, navigatorListWithNotLogin ***REMOVED*** from '../constants/navigators';
+import { DouMiAvatar ***REMOVED*** from './doumiAvatar';
 
-const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appBar: {
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth***REMOVED***px)`,
-        marginLeft: drawerWidth,
+    navHeader: {
+      height: '82px',
+      width: '100%',
+      position: 'fixed',
+      top: '0px',
+      zIndex: 99,
+      background: '#f8f8f8',
+      '& .container': {
+        display: 'flex',
+        justifyContent: 'space-around',
+        width: '100%',
+        margin: '0 auto',
+        // overflow: 'hidden',
+        alignItems: 'center'
     ***REMOVED***,
-  ***REMOVED***,
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
+      '& .logo': {
+        padding: '20px',
+        color: theme.palette.primary.main,
+        fontSize: '1.5rem',
     ***REMOVED***,
-      flexGrow: 1
+      '& .tabs': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        '& a': {
+          padding: '10px 0px',
+          marginRight: '50px',
+          position: 'relative',
+          // fontSize: '12px',
+          '& :not(.with-icon)': {
+            color: theme.palette.primary.main,
+            '&::before, &::after': {
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              width: '100%',
+              height: '1px',
+              background: theme.palette.primary.main,
+              content: "''",
+              opacity: 0.2,
+              transition: 'opacity 0.3s, height 0.3s',
+          ***REMOVED***
+        ***REMOVED***
+      ***REMOVED***,
+
+        '& a::after': {
+          top: '100%',
+          opacity: 0,
+          transition: 'transform 0.3s, opacity 0.3s',
+          transform: 'translateY(-10px)',
+      ***REMOVED***,
+
+        '& a span:first-child': {
+          zIndex: 2,
+          display: 'block',
+          fontWeight: 'bold',
+      ***REMOVED***,
+
+        '& a span:last-child': {
+          zIndex: 1,
+          display: 'block',
+          position: 'absolute',
+          padding: '12px 0 0 0',
+          color: theme.palette.primary.main,
+          textShadow: 'none',
+          textTransform: 'none',
+          fontStyle: 'italic',
+          fontSize: '0.75rem',
+          fontWeight: 'bold',
+          fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+          opacity: 0,
+          transition: 'transform 0.3s, opacity 0.3s',
+          transform: 'translateY(-100%)',
+      ***REMOVED***,
+
+        '& a:hover::before, & a:focus::before, & a.active::before': {
+          height: '6px',
+      ***REMOVED***,
+
+        '& a:hover::before, & a:hover::after, & a:focus::before, & a:focus::after, & a.active::before, & a.active::after': {
+          opacity: 1,
+          transform: 'translateY(0px)'
+      ***REMOVED***,
+
+        '& a:hover span:last-child, & a:focus span:last-child, & a.active span:last-child': {
+          opacity: 1,
+          transform: 'translateY(0%)',
+      ***REMOVED***
+    ***REMOVED***
   ***REMOVED***,
     grow: {
       flexGrow: 1
@@ -35,16 +108,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface AppBarProps {
-  handleDrawerToggle: () => void,
+  // handleDrawerToggle: () => void,
   endpoint?: string,
   isLogin?: boolean
 ***REMOVED***
 
 export default function BlogAppBar(props: AppBarProps) {
-  const { endpoint, isLogin, handleDrawerToggle ***REMOVED*** = props;
-  const handleLogin = () => {
-    location.hash = '#/blog/auth/login';
-  ***REMOVED***
+  const { endpoint, isLogin ***REMOVED*** = props;
 
   const handleLogout = async () => {
     // eslint-disable-next-line no-null/no-null
@@ -55,53 +125,42 @@ export default function BlogAppBar(props: AppBarProps) {
 
   const classes = useStyles();
 
+  const navList: {
+    name: string;
+    subName: string;
+    link: string;
+    icon?: JSX.Element
+***REMOVED***[] = !isLogin ? navigatorListWithNotLogin : navigatorListWithLogin;
+
   return (
-    <AppBar position="fixed" className={classes.appBar***REMOVED***>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle***REMOVED***
-          className={classes.menuButton***REMOVED***
-        >
-          <Menu />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          豆米的博客
-        </Typography>
+    <header key="header" className={classes.navHeader***REMOVED***>
+      <div className="container">
+        <div className="logo">
+          <DouMiAvatar avatarSize={46***REMOVED*** />
+        </div>
+
+        <div className="tabs">
+          {
+            navList.map(item => {
+              const isActive = location.hash.match(item.link) && item.link;
+              return item.icon ? (
+                <Tooltip title={item.name***REMOVED*** enterDelay={500***REMOVED***>
+                  <a href={item.link***REMOVED*** className="with-icon" target="_blank" onClick={item.subName === 'Exit' ? () => handleLogout() : () => {***REMOVED******REMOVED***>
+                    {
+                      item.icon
+                  ***REMOVED***
+                  </a>
+                </Tooltip>)
+                : (
+                  <Link className={isActive ? 'active' : ''***REMOVED*** color="inherit" underline={'none'***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
+                    <span>{item.name***REMOVED***</span>
+                    <span>{item.subName***REMOVED***</span>
+                  </Link>);
+          ***REMOVED***)
+        ***REMOVED***
+        </div>
         <BlogSearch />
-        <div className={classes.grow***REMOVED*** />
-        {
-          isLogin ? (
-            <Tooltip title={'退出登录'***REMOVED*** enterDelay={500***REMOVED***>
-              <IconButton
-                edge="end"
-                aria-label="logout"
-                // aria-controls={menuId***REMOVED***
-                aria-haspopup="true"
-                onClick={handleLogout***REMOVED***
-                color="inherit"
-              >
-                <ExitToApp />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip title={'登录'***REMOVED*** enterDelay={500***REMOVED***>
-              <IconButton
-                edge="end"
-                aria-label="login"
-                // aria-controls={menuId***REMOVED***
-                aria-haspopup="true"
-                onClick={handleLogin***REMOVED***
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </Tooltip>
-          )
-      ***REMOVED***
-      </Toolbar>
-    </AppBar>
+      </div>
+    </header>
   );
 ***REMOVED***

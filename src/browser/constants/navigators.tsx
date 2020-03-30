@@ -1,52 +1,53 @@
 import * as React from 'react';
-import IconList from '@material-ui/icons/List';
-import Home from '@material-ui/icons/Home';
-// import Category from '@material-ui/icons/Category';
-// import Archive from '@material-ui/icons/Archive';
-// import Bookmark from '@material-ui/icons/Bookmark';
 import GitHub from '@material-ui/icons/GitHub';
-import PersonPin from '@material-ui/icons/PersonPin';
-import Web from '@material-ui/icons/Web';
-import Cloud from '@material-ui/icons/Cloud';
-import Create from '@material-ui/icons/Create';
-import List from '@material-ui/icons/List';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
 export const navigatorListWithNotLogin = [{
   name: '首页',
-  icon: <Home />,
+  subName: 'Home',
   link: ''
 ***REMOVED***, {
-  name: '博文列表',
-  icon: <IconList />,
+  name: '博客',
+  subName: 'Blogs',
   link: '#/blog/list'
 ***REMOVED***, {
-  name: '网站数据',
-  icon: <Cloud />,
+  name: '数据',
+  subName: 'Statistics',
   link: '#/website/stats'
 ***REMOVED***, {
-  name: '关于豆米',
-  icon: <PersonPin />,
+  name: '豆米',
+  subName: 'DouMi',
   link: '#/about/doumi'
 ***REMOVED***, {
-  name: '关于本站',
-  icon: <Web />,
+  name: '本站',
+  subName: 'Website',
   link: '#/about/blog'
 ***REMOVED***, {
+  name: '登录',
+  subName: 'Login',
+  link: '#/blog/auth/login'
+***REMOVED***, {
   name: 'Github',
+  subName: 'Github',
   icon: <GitHub />,
   link: 'https://github.com/linxiaowu66/doumi-blog'
 ***REMOVED***];
 
 export const navigatorListWithLogin = [{
-  name: '首页',
-  icon: <Home />,
+  name: '主页',
+  subName: 'Home',
   link: '#/blog/list'
 ***REMOVED***, {
-  name: '新建博文',
-  icon: <Create />,
+  name: '新建',
+  subName: 'New',
   link: '#/blog/admin/editor'
 ***REMOVED***, {
-  name: '博文列表',
-  icon: <List />,
+  name: '博客',
+  subName: 'Blog',
   link: '#/blog/admin/index'
+***REMOVED***, {
+  name: '退出',
+  subName: 'Exit',
+  icon: <ExitToApp />,
+  link: 'javascript:void(0)'
 ***REMOVED***];

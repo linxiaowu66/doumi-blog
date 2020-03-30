@@ -161,4 +161,15 @@ export class WebsiteService {
       ***REMOVED***
     ***REMOVED***
 ***REMOVED***
+  // @Transactional()
+  // async fetchSummaryStats() {
+  //   const repo = OrmContext.getRepository(Website);
+  //   const websiteSince = new Date(2016, 7, 8);
+
+  //   const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+
+  //   const website = await repo.findOne({ date: now ***REMOVED***
+
+
+  // ***REMOVED***
 ***REMOVED***
