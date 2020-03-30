@@ -33,6 +33,7 @@
     "less-loader": "^5.0.0",
     "lodash.pick": "^4.4.0",
     "malagu-winston": "^0.0.17",
+    "node-cache": "^5.1.0",
     "progress-catalog": "^1.0.7",
     "qrcode.react": "^1.0.0",
     "query-string": "^6.10.1",

@@ -89,6 +89,11 @@ export class BlogServerImpl implements BlogServer {
 
     return Promise.resolve(result);
 ***REMOVED***
+  async fetchSummaryStats() {
+    const result = await this.websiteService.fetchSummaryStats();
+
+    return Promise.resolve(result);
+***REMOVED***
 
   async fetchHottestArticleLast7Days() {
     const result = await this.blogService.fetchHottestArticleRecently();

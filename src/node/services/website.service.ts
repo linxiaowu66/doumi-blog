@@ -1,9 +1,11 @@
 import { Context ***REMOVED*** from '@malagu/web/lib/node';
+import { formatDistanceStrict ***REMOVED*** from 'date-fns';
 import { Website ***REMOVED*** from './../entity/website';
 import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
 import { Component, Autowired, Logger ***REMOVED*** from '@malagu/core';
 import { AwesomeHelp ***REMOVED*** from 'awesome-js';
 import { WinstonLogger ***REMOVED*** from 'malagu-winston';
+import { Article ***REMOVED*** from '../entity/article';
 
 const pick = require('lodash.pick');
 
@@ -161,15 +163,39 @@ export class WebsiteService {
       ***REMOVED***
     ***REMOVED***
 ***REMOVED***
-  // @Transactional()
-  // async fetchSummaryStats() {
-  //   const repo = OrmContext.getRepository(Website);
-  //   const websiteSince = new Date(2016, 7, 8);
+  @Transactional()
+  async fetchSummaryStats() {
+    const repo = OrmContext.getRepository(Website);
+    const articleRepo = OrmContext.getRepository(Article);
 
-  //   const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+    const websiteSince = new Date(2016, 7, 8); // 博客开始时期
 
-  //   const website = await repo.findOne({ date: now ***REMOVED***
+    const now = AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
 
+    const website = await repo.findOne({ date: now ***REMOVED***
+    const articles = await articleRepo.find();
 
-  // ***REMOVED***
+    let articlesWordsNum = 0;
+    articles.map(article => articlesWordsNum += article.content.length);
+
+    const operationDays = formatDistanceStrict(websiteSince, new Date(), { unit: 'day'***REMOVED***
+    let totalPv = 0;
+
+    if (website) {
+      totalPv = website.totalPv;
+  ***REMOVED*** else {
+      const yesterday = new Date().getTime() - 24 * 3600 * 1000;
+      const yes = AwesomeHelp.convertDate(new Date(yesterday), 'YYYY-MM-DD');
+      const otherWebsite = await repo.findOne({ date: yes ***REMOVED***
+      totalPv = otherWebsite!.totalPv;
+
+  ***REMOVED***
+    return {
+      operationDays: operationDays.replace(/days/, '天'),
+      totalPv,
+      articleCount: articles.length,
+      articlesWordsNum: `${articlesWordsNum / 10000***REMOVED***万字`,
+      commentsNum: 1
+    ***REMOVED***
+***REMOVED***
 ***REMOVED***

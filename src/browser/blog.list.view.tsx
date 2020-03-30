@@ -43,6 +43,7 @@ export default class BlogList extends React.Component<Prop, State> {
 
   async componentDidMount() {
     await this.fetchBlogList(this.state.currentPage);
+    await this.BlogServer.fetchSummaryStats();
 ***REMOVED***
   bindScroll = (event: any) => {
     // 滚动的高度

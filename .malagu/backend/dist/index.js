@@ -13449,6 +13449,19 @@ var BlogServerImpl = /** @class */ (function () {
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***
+    BlogServerImpl.prototype.fetchSummaryStats = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.websiteService.fetchSummaryStats()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, Promise.resolve(result)];
+              ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***
     BlogServerImpl.prototype.fetchHottestArticleLast7Days = function () {
         return __awaiter(this, void 0, void 0, function () {
             var result;
@@ -15051,11 +15064,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 ***REMOVED***
 Object.defineProperty(exports, "__esModule", { value: true ***REMOVED***
 var node_1 = __webpack_require__(/*! @malagu/web/lib/node */ "./node_modules/@malagu/web/lib/node/index.js");
+var date_fns_1 = __webpack_require__(/*! date-fns */ "date-fns");
 var website_1 = __webpack_require__(/*! ./../entity/website */ "./src/node/entity/website.ts");
 var node_2 = __webpack_require__(/*! @malagu/typeorm/lib/node */ "./node_modules/@malagu/typeorm/lib/node/index.js");
 var core_1 = __webpack_require__(/*! @malagu/core */ "./node_modules/@malagu/core/lib/common/index.js");
 var awesome_js_1 = __webpack_require__(/*! awesome-js */ "awesome-js");
 var malagu_winston_1 = __webpack_require__(/*! malagu-winston */ "./node_modules/malagu-winston/lib/node/index.js");
+var article_1 = __webpack_require__(/*! ../entity/article */ "./src/node/entity/article.ts");
 var pick = __webpack_require__(/*! lodash.pick */ "lodash.pick");
 exports.WebsiteServiceSymbol = Symbol('WebsiteService');
 var WebsiteService = /** @class */ (function () {
@@ -15219,6 +15234,48 @@ var WebsiteService = /** @class */ (function () {
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***
+    WebsiteService.prototype.fetchSummaryStats = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var repo, articleRepo, websiteSince, now, website, articles, articlesWordsNum, operationDays, totalPv, yesterday, yes, otherWebsite;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        repo = node_2.OrmContext.getRepository(website_1.Website);
+                        articleRepo = node_2.OrmContext.getRepository(article_1.Article);
+                        websiteSince = new Date(2016, 7, 8);
+                        now = awesome_js_1.AwesomeHelp.convertDate(new Date(), 'YYYY-MM-DD');
+                        return [4 /*yield*/, repo.findOne({ date: now ***REMOVED***)];
+                    case 1:
+                        website = _a.sent();
+                        return [4 /*yield*/, articleRepo.find()];
+                    case 2:
+                        articles = _a.sent();
+                        articlesWordsNum = 0;
+                        articles.map(function (article) { return articlesWordsNum += article.content.length; ***REMOVED***
+                        operationDays = date_fns_1.formatDistanceStrict(websiteSince, new Date(), { unit: 'day' ***REMOVED***
+                        totalPv = 0;
+                        if (!website) return [3 /*break*/, 3];
+                        totalPv = website.totalPv;
+                        return [3 /*break*/, 5];
+                    case 3:
+                        yesterday = new Date().getTime() - 24 * 3600 * 1000;
+                        yes = awesome_js_1.AwesomeHelp.convertDate(new Date(yesterday), 'YYYY-MM-DD');
+                        return [4 /*yield*/, repo.findOne({ date: yes ***REMOVED***)];
+                    case 4:
+                        otherWebsite = _a.sent();
+                        totalPv = otherWebsite.totalPv;
+                        _a.label = 5;
+                    case 5: return [2 /*return*/, {
+                            operationDays: operationDays.replace(/days/, '天'),
+                            totalPv: totalPv,
+                            articleCount: articles.length,
+                            articlesWordsNum: articlesWordsNum / 10000 + "\u4E07\u5B57",
+                            commentsNum: 1
+                      ***REMOVED***];
+              ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***
     var _a;
     __decorate([
         core_1.Autowired(core_1.Logger),
@@ -15236,6 +15293,12 @@ var WebsiteService = /** @class */ (function () {
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", Promise)
     ], WebsiteService.prototype, "fetchWebsiteStatistics", null);
+    __decorate([
+        node_2.Transactional(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], WebsiteService.prototype, "fetchSummaryStats", null);
     WebsiteService = __decorate([
         core_1.Component(exports.WebsiteServiceSymbol)
     ], WebsiteService);
@@ -15433,6 +15496,17 @@ module.exports = require("crc");
 /***/ (function(module, exports) {
 
 module.exports = require("crypto-js");
+
+/***/ ***REMOVED***),
+
+/***/ "date-fns":
+/*!***************************!*\
+  !*** external "date-fns" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("date-fns");
 
 /***/ ***REMOVED***),
 

@@ -10,11 +10,19 @@ export interface BlogServer {
   fetchArchsList(): Promise<DouMiBlog.ArchiveItem[]>;
   fetchWebsiteChangeLog(): Promise<DouMiBlog.ChangeLog[]>
   fetchWebsiteStatistics(): Promise<DouMiBlog.WebsiteStatsItem[]>;
+  fetchSummaryStats(): Promise<DouMiBlog.SummaryStats>;
   fetchHottestArticleLast7Days(): Promise<DouMiBlog.ArticleStatsItem[]>;
   registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
 ***REMOVED***
 
 export namespace DouMiBlog {
+  export interface SummaryStats{
+    operationDays: string,
+    totalPv: number,
+    articleCount: number,
+    articlesWordsNum: string,
+    commentsNum: number
+***REMOVED***
   export interface ChangeLog {
     title: string,
     desc1: string,
