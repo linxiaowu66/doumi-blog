@@ -74,7 +74,7 @@ export default function BlogItem(props: BlogItemProps) {
   ***REMOVED***
 
   // eslint-disable-next-line max-len
-  const sinaLink = `https://service.weibo.com/share/share.php?title=${props.title***REMOVED*** - ${props.digest***REMOVED***&url=${window.location.origin + `#/blog/detail/${props.slug***REMOVED***`***REMOVED***&pic=${encodeURIComponent(props.mediaUrl)***REMOVED***`;
+  const sinaLink = `https://service.weibo.com/share/share.php?title=${props.title***REMOVED*** - ${props.digest***REMOVED***&url=${window.location.origin + `/blog/${props.slug***REMOVED***`***REMOVED***&pic=${encodeURIComponent(props.mediaUrl)***REMOVED***`;
   const weixinLink = `${window.location.origin + `#/blog/detail/${props.slug***REMOVED***`***REMOVED***`;
   return (
     <Card className={classes.card***REMOVED***>
