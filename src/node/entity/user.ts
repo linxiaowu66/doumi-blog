@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Index***REMOVED*** from 'typeorm';
-import { Article ***REMOVED*** from './article';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Index  } from 'typeorm';
+import { Article } from './article';
 
 @Entity()
 export class User {
@@ -10,22 +10,22 @@ export class User {
     type: 'varchar',
     length: 20,
     nullable: false
-***REMOVED***)
+  })
   username: string;
 
   @Column({
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   password: string;
 
   @Column({
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
-  @Index({ unique: true ***REMOVED***)
+  })
+  @Index({ unique: true })
   email: string;
 
   @OneToMany(type => Article, article => article.author)
@@ -36,4 +36,4 @@ export class User {
 
   @UpdateDateColumn()
   public readonly updatedAt!: Date;
-***REMOVED***
+}

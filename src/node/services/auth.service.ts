@@ -1,8 +1,8 @@
-import { Component, Autowired ***REMOVED*** from '@malagu/core';
-import { PasswordEncoder ***REMOVED*** from '@malagu/security/lib/node';
-import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { User ***REMOVED*** from '../entity';
-import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
+import { Component, Autowired } from '@malagu/core';
+import { PasswordEncoder } from '@malagu/security/lib/node';
+import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
+import { User } from '../entity';
+import { DouMiBlog } from '../../common/blog-protocol';
 
 export const AuthServiceSymbol = Symbol('AuthService');
 
@@ -20,10 +20,10 @@ export class AuthService {
 
     if (users.length >= 1) {
       throw new Error('注册用户数已满，无法注册！');
-  ***REMOVED***
+    }
 
     const pwd = await this.passwordEncoder.encode(param.password);
 
-    await repo.save({ ...param, password: pwd ***REMOVED***
-***REMOVED***
-***REMOVED***
+    await repo.save({ ...param, password: pwd });
+  }
+}

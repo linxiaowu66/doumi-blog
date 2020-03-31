@@ -1,6 +1,6 @@
-import { Component, Value, LOGGER_CONFIG ***REMOVED*** from '@malagu/core';
-import { WinstonConfig ***REMOVED*** from 'malagu-winston';
-import { format, transports ***REMOVED*** from 'winston';
+import { Component, Value, LOGGER_CONFIG } from '@malagu/core';
+import { WinstonConfig } from 'malagu-winston';
+import { format, transports } from 'winston';
 import * as Transport from 'winston-transport';
 
 const DailyRotateFile = require('winston-daily-rotate-file');
@@ -15,30 +15,30 @@ export class WinstonConfigImpl implements WinstonConfig {
     @Value('mode')
     protected readonly mode: string
   ) {
-    const { dailyRotateConfig ***REMOVED*** = this.config;
+    const { dailyRotateConfig } = this.config;
     this.transports = [
       new DailyRotateFile({
         ...dailyRotateConfig,
         format: format.combine(
-          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'***REMOVED***),
+          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'}),
           format.simple(),
           format.printf(msg =>
-            `${msg.timestamp***REMOVED*** - ${msg.level***REMOVED***: ${msg.message***REMOVED***`
+            `${msg.timestamp} - ${msg.level}: ${msg.message}`
           )
         ),
-    ***REMOVED***),
+      }),
     ];
     if (this.mode.includes('local')) {
       this.transports.push(new transports.Console({
         format: format.combine(
           format.colorize(),
-          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'***REMOVED***),
+          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss,SSS'}),
           format.simple(),
           format.printf(msg =>
-            `${msg.timestamp***REMOVED*** - ${msg.level***REMOVED***: ${msg.message***REMOVED***`
+            `${msg.timestamp} - ${msg.level}: ${msg.message}`
           )
         ),
-    ***REMOVED***));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }));
+    };
+  }
+}

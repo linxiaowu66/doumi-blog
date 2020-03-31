@@ -3,10 +3,10 @@ import * as React from 'react';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
 import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles, createStyles, Theme ***REMOVED*** from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import BlogSearch from './blogSearch';
-import { navigatorListWithLogin, navigatorListWithNotLogin ***REMOVED*** from '../constants/navigators';
-import { DouMiAvatar ***REMOVED*** from './doumiAvatar';
+import { navigatorListWithLogin, navigatorListWithNotLogin } from '../constants/navigators';
+import { DouMiAvatar } from './doumiAvatar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: '#fff',
       '@media screen and (max-width: 992px)': {
         height: '100px',
-    ***REMOVED***,
+      },
       '& .container': {
         display: 'flex',
         justifyContent: 'space-around',
@@ -27,15 +27,15 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: '0 auto',
         // overflow: 'hidden',
         alignItems: 'center'
-    ***REMOVED***,
+      },
       '& .logo': {
         padding: '20px',
         color: theme.palette.primary.main,
         fontSize: '1.5rem',
         '@media screen and (max-width: 992px)': {
           display: 'none',
-      ***REMOVED***,
-    ***REMOVED***,
+        },
+      },
       '& .tabs': {
         display: 'flex',
         alignItems: 'center',
@@ -58,22 +58,22 @@ const useStyles = makeStyles((theme: Theme) =>
               content: "''",
               opacity: 0.2,
               transition: 'opacity 0.3s, height 0.3s',
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***,
+            }
+          }
+        },
 
         '& a::after': {
           top: '100%',
           opacity: 0,
           transition: 'transform 0.3s, opacity 0.3s',
           transform: 'translateY(-10px)',
-      ***REMOVED***,
+        },
 
         '& a span:first-child': {
           zIndex: 2,
           display: 'block',
           fontWeight: 'bold',
-      ***REMOVED***,
+        },
 
         '& a span:last-child': {
           zIndex: 1,
@@ -90,44 +90,44 @@ const useStyles = makeStyles((theme: Theme) =>
           opacity: 0,
           transition: 'transform 0.3s, opacity 0.3s',
           transform: 'translateY(-100%)',
-      ***REMOVED***,
+        },
 
         '& a:hover::before, & a:focus::before, & a.active::before': {
           height: '6px',
-      ***REMOVED***,
+        },
 
         '& a:hover::before, & a:hover::after, & a:focus::before, & a:focus::after, & a.active::before, & a.active::after': {
           opacity: 1,
           transform: 'translateY(0px)'
-      ***REMOVED***,
+        },
 
         '& a:hover span:last-child, & a:focus span:last-child, & a.active span:last-child': {
           opacity: 1,
           transform: 'translateY(0%)',
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***,
+        }
+      }
+    },
     grow: {
       flexGrow: 1
-  ***REMOVED***,
-***REMOVED***),
+    },
+  }),
 );
 
 interface AppBarProps {
   // handleDrawerToggle: () => void,
   endpoint?: string,
   isLogin?: boolean
-***REMOVED***
+}
 
 export default function BlogAppBar(props: AppBarProps) {
-  const { endpoint, isLogin ***REMOVED*** = props;
+  const { endpoint, isLogin } = props;
 
   const handleLogout = async () => {
     // eslint-disable-next-line no-null/no-null
-    await axios.post(`${endpoint ? endpoint : ''***REMOVED***/api/logout`, null, {withCredentials: true***REMOVED***
+    await axios.post(`${endpoint ? endpoint : ''}/api/logout`, null, {withCredentials: true});
 
     location.hash = '#/blog/auth/login';
-  ***REMOVED***
+  };
 
   const classes = useStyles();
 
@@ -136,13 +136,13 @@ export default function BlogAppBar(props: AppBarProps) {
     subName: string;
     link: string;
     icon?: JSX.Element
-***REMOVED***[] = !isLogin ? navigatorListWithNotLogin : navigatorListWithLogin;
+  }[] = !isLogin ? navigatorListWithNotLogin : navigatorListWithLogin;
 
   return (
-    <header key="header" className={classes.navHeader***REMOVED***>
+    <header key="header" className={classes.navHeader}>
       <div className="container">
         <div className="logo">
-          <DouMiAvatar avatarSize={46***REMOVED*** />
+          <DouMiAvatar avatarSize={46} />
         </div>
 
         <div className="tabs">
@@ -150,23 +150,23 @@ export default function BlogAppBar(props: AppBarProps) {
             navList.map(item => {
               const isActive = location.hash.match(item.link) && item.link;
               return item.icon ? (
-                <Tooltip title={item.name***REMOVED*** enterDelay={500***REMOVED***>
-                  <a href={item.link***REMOVED*** className="with-icon" target="_blank" onClick={item.subName === 'Exit' ? () => handleLogout() : () => {***REMOVED******REMOVED***>
+                <Tooltip title={item.name} enterDelay={500}>
+                  <a href={item.link} className="with-icon" target="_blank" onClick={item.subName === 'Exit' ? () => handleLogout() : () => {}}>
                     {
                       item.icon
-                  ***REMOVED***
+                    }
                   </a>
                 </Tooltip>)
                 : (
-                  <Link className={isActive ? 'active' : ''***REMOVED*** color="inherit" underline={'none'***REMOVED*** href={item.link***REMOVED*** key={item.name***REMOVED***>
-                    <span>{item.name***REMOVED***</span>
-                    <span>{item.subName***REMOVED***</span>
+                  <Link className={isActive ? 'active' : ''} color="inherit" underline={'none'} href={item.link} key={item.name}>
+                    <span>{item.name}</span>
+                    <span>{item.subName}</span>
                   </Link>);
-          ***REMOVED***)
-        ***REMOVED***
+            })
+          }
         </div>
         <BlogSearch />
       </div>
     </header>
   );
-***REMOVED***
+}

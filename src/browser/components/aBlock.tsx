@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-function ABlock(props: { href: string, children: any[] ***REMOVED***) {
+function ABlock(props: { href: string, children: any[] }) {
   return (
-    <a href={props.href***REMOVED*** target="__blank">{props.children[0].props.value***REMOVED***</a>
+    <a href={props.href} target="__blank">{props.children[0].props.value}</a>
   );
-***REMOVED***
+}
 
 export default ABlock;

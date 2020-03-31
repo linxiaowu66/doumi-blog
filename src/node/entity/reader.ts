@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ***REMOVED*** from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 // 只会统计七天内的数据
 
@@ -11,14 +11,14 @@ export class Reader {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   articleSlug: string;
 
   @Column({
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   date: string; // 存储每一篇文章阅读的时间,精确到日
 
   @Column('simple-array')
@@ -29,4 +29,4 @@ export class Reader {
 
   @UpdateDateColumn()
   public readonly updatedAt!: Date;
-***REMOVED***
+}

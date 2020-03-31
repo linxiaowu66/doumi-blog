@@ -42,7 +42,7 @@
     "react-markdown": "^4.3.0",
     "react-syntax-highlighter": "^12.2.1",
     "winston-daily-rotate-file": "^4.4.2"
-***REMOVED***,
+  },
   "devDependencies": {
     "@malagu/cli": "0.0.13",
     "@types/axios": "^0.14.0",
@@ -61,19 +61,19 @@
     "eslint-plugin-react-hooks": "^2.5.0",
     "ora": "^4.0.3",
     "rimraf": "^2.6.3"
-***REMOVED***,
+  },
   "licenses": [
     {
       "license": "MIT"
-  ***REMOVED***
+    }
   ],
   "repository": {
     "url": "https://github.com/linxiaowu66/doumi-blog"
-***REMOVED***,
+  },
   "scripts": {
     "clean": "rimraf lib .malagu",
     "build": "malagu build -m cdn,prod",
     "start": "malagu serve -m cdn,local",
     "deploy": "malagu deploy"
-***REMOVED***
-***REMOVED***
+  }
+}

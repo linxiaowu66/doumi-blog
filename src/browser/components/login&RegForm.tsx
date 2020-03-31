@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { useForm ***REMOVED*** from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface FormProps {
   type: 'login' | 'register',
   visible: boolean,
   actionSuccess: boolean,
-  registerCb: (param: {email: string, username: string, password: string***REMOVED***) => void
-  loginCb: (param: {email: string, password: string***REMOVED***) => void
-***REMOVED***
+  registerCb: (param: {email: string, username: string, password: string}) => void
+  loginCb: (param: {email: string, password: string}) => void
+}
 
 const useStyles = makeStyles({
-  root: (props: {visible: boolean, success: boolean***REMOVED***) => ({
+  root: (props: {visible: boolean, success: boolean}) => ({
     position: 'relative' as 'relative',
     width: '100%',
     height: '94%',
@@ -28,29 +28,29 @@ const useStyles = makeStyles({
       marginTop: 15,
       marginBottom: 15,
       textAlign: 'center'
-  ***REMOVED***,
+    },
     '& button': {
       marginTop: 20,
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+});
 
 export default function LoginRegForm(props: FormProps) {
-  const { handleSubmit, errors, register ***REMOVED*** = useForm();
-  const { type ***REMOVED*** = props;
+  const { handleSubmit, errors, register } = useForm();
+  const { type } = props;
 
   const onSubmit = (data: any) => {
     if (type === 'register') {
       props.registerCb(data);
-  ***REMOVED*** else {
+    } else {
       props.loginCb(data);
-  ***REMOVED***
-  ***REMOVED***
+    }
+  };
 
-  const classes = useStyles({visible: props.visible, success: props.actionSuccess***REMOVED***
+  const classes = useStyles({visible: props.visible, success: props.actionSuccess});
   return (
     <React.Fragment>
-      <form onSubmit={handleSubmit(onSubmit)***REMOVED*** noValidate className={classes.root***REMOVED***>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className={classes.root}>
         <header>JOIN</header>
         <TextField
           id="outlined-email-input-required"
@@ -61,11 +61,11 @@ export default function LoginRegForm(props: FormProps) {
           margin="normal"
           fullWidth
           variant="outlined"
-          error={!!errors.email***REMOVED***
+          error={!!errors.email}
           inputRef={register({
-            pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3***REMOVED***\.[0-9]{1,3***REMOVED***\.[0-9]{1,3***REMOVED***\.[0-9]{1,3***REMOVED***])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,***REMOVED***))$/
-        ***REMOVED***)***REMOVED***
-          helperText={errors.email && '无效的邮箱地址'***REMOVED***
+            pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          })}
+          helperText={errors.email && '无效的邮箱地址'}
         />
         {
           type === 'register' ? (
@@ -77,13 +77,13 @@ export default function LoginRegForm(props: FormProps) {
               margin="normal"
               fullWidth
               variant="outlined"
-              error={!!errors.username***REMOVED***
-              inputRef={register***REMOVED***
-              helperText={errors.username && '用户名格式不正确'***REMOVED***
+              error={!!errors.username}
+              inputRef={register}
+              helperText={errors.username && '用户名格式不正确'}
             />
           // eslint-disable-next-line no-null/no-null
           ): null
-      ***REMOVED***
+        }
         <TextField
           id="outlined-password-input-required"
           label="密码"
@@ -93,13 +93,13 @@ export default function LoginRegForm(props: FormProps) {
           margin="normal"
           fullWidth
           variant="outlined"
-          inputRef={register***REMOVED***
-          helperText={errors.password && '密码错误'***REMOVED***
+          inputRef={register}
+          helperText={errors.password && '密码错误'}
         />
         <Button type="submit" size="large" color="secondary" variant="contained" fullWidth>
-          {type === 'register' ? '注册' : '登录'***REMOVED***
+          {type === 'register' ? '注册' : '登录'}
         </Button>
       </form>
     </React.Fragment>
   );
-***REMOVED***
+}

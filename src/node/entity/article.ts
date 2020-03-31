@@ -1,14 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, Index, CreateDateColumn, UpdateDateColumn ***REMOVED*** from 'typeorm';
-import { User ***REMOVED*** from './user';
-import { Tag ***REMOVED*** from './tag';
-import { Archive ***REMOVED*** from './archive';
-import { Category ***REMOVED*** from './category';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, Index, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { User } from './user';
+import { Tag } from './tag';
+import { Archive } from './archive';
+import { Category } from './category';
 
 
 export enum ArticleStatus {
   DRAFT = 'draft',
   PUBLISHED = 'published',
-***REMOVED***
+}
 
 @Entity()
 export class Article {
@@ -21,7 +21,7 @@ export class Article {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   title: string;
 
   // 文章阅读量
@@ -34,7 +34,7 @@ export class Article {
 
   // 博文链接
   @Column('varchar')
-  @Index({unique: true***REMOVED***)
+  @Index({unique: true})
   slug: string;
 
   // 博文摘要，这次需要自己填写，不再自动从文章采集字符了，那样实现不准确
@@ -42,7 +42,7 @@ export class Article {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   digest: string;
 
   // 博文状态,默认草稿中
@@ -50,7 +50,7 @@ export class Article {
     type: 'enum',
     enum: ArticleStatus,
     default: ArticleStatus.DRAFT
-***REMOVED***)
+  })
   articleStatus: ArticleStatus;
 
   // 文章首页图片链接
@@ -58,7 +58,7 @@ export class Article {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   illustration: string;
 
   // 文章作者
@@ -75,7 +75,7 @@ export class Article {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   fullArchiveTime: string;
 
   // 文章的归档时间, 月份为单位
@@ -91,4 +91,4 @@ export class Article {
 
   @UpdateDateColumn()
   public readonly updatedAt!: Date;
-***REMOVED***
+}

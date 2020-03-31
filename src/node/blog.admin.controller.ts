@@ -1,10 +1,10 @@
-import { Controller, Post, Put, Body ***REMOVED*** from '@malagu/mvc/lib/node';
-import { Autowired ***REMOVED*** from '@malagu/core';
-import { Transactional ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { DouMiBlog ***REMOVED*** from '../common/blog-protocol';
-import { BlogServiceSymbol, BlogService ***REMOVED*** from './services/blog.service';
-import { Article ***REMOVED*** from './entity/article';
-import { SecurityContext ***REMOVED*** from '@malagu/security/lib/node';
+import { Controller, Post, Put, Body } from '@malagu/mvc/lib/node';
+import { Autowired } from '@malagu/core';
+import { Transactional } from '@malagu/typeorm/lib/node';
+import { DouMiBlog } from '../common/blog-protocol';
+import { BlogServiceSymbol, BlogService } from './services/blog.service';
+import { Article } from './entity/article';
+import { SecurityContext } from '@malagu/security/lib/node';
 
 // 以下api都是需要身份校验
 @Controller('/api')
@@ -20,15 +20,15 @@ export class BlogAdminController {
   @Body() article: DouMiBlog.ArticleDetail,
   ) {
     const userInfo = SecurityContext.getAuthentication().principal;
-    const { username ***REMOVED*** = userInfo;
+    const { username } = userInfo;
 
     const result = await this.blogService.createOrUpdateArticle(article, username);
 
     return { status: 1, data: {
       msg: article.articleStatus === 'draft' ? '保存草稿成功' : '发布成功',
       slug: (result as Article).slug
-  ***REMOVED******REMOVED***
-***REMOVED***
+    }};
+  }
 
   // 更新博客内容
   @Put('/blog')
@@ -37,12 +37,12 @@ export class BlogAdminController {
   @Body() article: DouMiBlog.ArticleDetail,
   ) {
     const userInfo = SecurityContext.getAuthentication().principal;
-    const { username ***REMOVED*** = userInfo;
+    const { username } = userInfo;
 
     await this.blogService.createOrUpdateArticle(article, username, true);
 
     return { status: 1, data: {
       msg: article.articleStatus === 'draft' ? '更新草稿成功' : '更新发布成功'
-  ***REMOVED******REMOVED***
-***REMOVED***
-***REMOVED***
+    }};
+  }
+}

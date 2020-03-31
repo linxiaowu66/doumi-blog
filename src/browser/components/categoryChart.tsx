@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CatItem ***REMOVED*** from '../website.statistics.view';
+import { CatItem } from '../website.statistics.view';
 import {
   Chart,
   Geom,
@@ -7,29 +7,29 @@ import {
   Tooltip,
   Coord,
   Legend
-***REMOVED*** from 'bizcharts';
+} from 'bizcharts';
 
-export default function CategoryChart(props: { list: CatItem[], ***REMOVED***) {
+export default function CategoryChart(props: { list: CatItem[], }) {
   return (
     <React.Fragment>
       <Chart
-        width={600***REMOVED***
-        height={400***REMOVED***
-        data={props.list***REMOVED***
+        width={600}
+        height={400}
+        data={props.list}
         padding="auto"
         forceFit
         onPlotClick={ev => {
           const id = ev.data._origin.id;
 
-          location.hash = `#/blog/list?queryCat=${id***REMOVED***`;
-      ***REMOVED******REMOVED***
+          location.hash = `#/blog/list?queryCat=${id}`;
+        }}
       >
-        <Coord type="theta" radius={0.65***REMOVED*** />
+        <Coord type="theta" radius={0.65} />
         <Axis name="percent" />
-        <Legend position="right" offsetY={-400 / 2 + 120***REMOVED*** offsetX={-100***REMOVED*** />
+        <Legend position="right" offsetY={-400 / 2 + 120} offsetX={-100} />
         <Tooltip
-          showTitle={false***REMOVED***
-          itemTpl='<li><span style="background-color:{color***REMOVED***" class="g2-tooltip-marker"></span>{name***REMOVED***: {value***REMOVED***</li>'
+          showTitle={false}
+          itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
         />
         <Geom
           type="intervalStack"
@@ -38,20 +38,20 @@ export default function CategoryChart(props: { list: CatItem[], ***REMOVED***) {
           tooltip={[
             'name*articlesCount',
             (name, articlesCount) => {
-              articlesCount = `${articlesCount***REMOVED***篇`;
+              articlesCount = `${articlesCount}篇`;
               return {
                 name: name,
                 value: articlesCount,
-              ***REMOVED***
-          ***REMOVED***,
-          ]***REMOVED***
+              };
+            },
+          ]}
           style={{
             lineWidth: 1,
             stroke: '#fff',
-        ***REMOVED******REMOVED***
+          }}
         />
       </Chart>
-      <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'***REMOVED******REMOVED***>豆米博客标签文章数</div>
+      <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'}}>豆米博客标签文章数</div>
     </React.Fragment>
   );
-***REMOVED***
+}

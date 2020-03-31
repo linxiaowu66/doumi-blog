@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
@@ -25,24 +25,24 @@ const useStyles = makeStyles({
         left: 0,
         bottom: 0,
         transition: 'all 0.5s ease',
-    ***REMOVED***,
+      },
       '&:hover:after': {
         width: 120,
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+});
 
-function DouMiDetailItem(props: {title: string, children: React.ReactElement[]***REMOVED***) {
+function DouMiDetailItem(props: {title: string, children: React.ReactElement[]}) {
   const classes = useStyles();
   return (
-    <div className={classes.root***REMOVED***>
-      <div className="title">{props.title***REMOVED***</div>
+    <div className={classes.root}>
+      <div className="title">{props.title}</div>
       {
         props.children
-    ***REMOVED***
+      }
     </div>
   );
-***REMOVED***
+}
 
 export default DouMiDetailItem;

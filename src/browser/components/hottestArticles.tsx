@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from './typography';
-import { makeStyles ***REMOVED*** from '@material-ui/core/styles';
-import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
+import { makeStyles } from '@material-ui/core/styles';
+import { DouMiBlog } from '../../common/blog-protocol';
 
 const useStyles = makeStyles({
   root: {
@@ -25,64 +25,64 @@ const useStyles = makeStyles({
           textAlign: 'center',
           color: '#119d55',
           boxSizing: 'content-box',
-      ***REMOVED***,
+        },
         '&:nth-child(1):before': {
           content: '"1"',
-      ***REMOVED***,
+        },
         '&:nth-child(2):before': {
           content: '"2"',
-      ***REMOVED***,
+        },
         '&:nth-child(3):before': {
           content: '"3"',
-      ***REMOVED***,
+        },
         '&:nth-child(4):before': {
           content: '"4"',
-      ***REMOVED***,
+        },
         '&:nth-child(5):before': {
           content: '"5"',
-      ***REMOVED***,
+        },
         '& a': {
           color: '#39c',
           textDecoration: 'none',
           '&:hover': {
             textDecoration: 'none',
             color: '#119d55',
-        ***REMOVED***,
+          },
           '& span': {
             lineHeight: 'inherit',
             fontWeight: 'normal',
-        ***REMOVED***,
+          },
           '& time': {
             color: '#bbbbbb',
             fontSize: 12,
             fontWeight: 'normal',
             marginLeft: 10,
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+          }
+        }
+      }
+    }
+  }
+});
 
-function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] ***REMOVED***) {
+function HottestArticles(props: { list: DouMiBlog.ArticleBrief[] }) {
   const classes = useStyles();
   return (
-    <Container className={classes.root***REMOVED*** component="section">
+    <Container className={classes.root} component="section">
       <Typography variant="h4" marked="center" align="center" component="h2">
         热门文章
       </Typography>
       <ul>
         {
           props.list.map(item => (
-            <li key={item.slug***REMOVED***>
-              <a href={`#/blog/detail/${item.slug***REMOVED***`***REMOVED***><span>{item.title***REMOVED***</span><time>{item.archiveTime***REMOVED***</time></a>
+            <li key={item.slug}>
+              <a href={`#/blog/detail/${item.slug}`}><span>{item.title}</span><time>{item.archiveTime}</time></a>
             </li>
           ))
-      ***REMOVED***
+        }
       </ul>
     </Container>
 
   );
-***REMOVED***
+}
 
 export default HottestArticles;

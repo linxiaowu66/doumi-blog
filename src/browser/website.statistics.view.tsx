@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View ***REMOVED*** from '@malagu/react/lib/browser';
-import { Autorpc ***REMOVED*** from '@malagu/rpc/lib/common/annotation/detached';
-import { BlogServer, DouMiBlog ***REMOVED*** from '../common/blog-protocol';
+import { View } from '@malagu/react/lib/browser';
+import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
+import { BlogServer, DouMiBlog } from '../common/blog-protocol';
 import BlogContainer from './components/blogContainer';
 import ArchiveChart from './components/archiveChart';
 import CategoryChart from './components/categoryChart';
@@ -13,11 +13,11 @@ import './styles/statistics.less';
 
 interface Props {
 
-***REMOVED***
+}
 
 export interface CatItem extends DouMiBlog.CategoryItem {
   percent: number
-***REMOVED***
+}
 
 interface State {
   archList: DouMiBlog.ArchiveItem[],
@@ -25,7 +25,7 @@ interface State {
   tagList: DouMiBlog.TagsItem[],
   hottestList: DouMiBlog.ArticleStatsItem[],
   websiteList: DouMiBlog.WebsiteStatsItem[]
-***REMOVED***
+}
 
 @View('/website/stats')
 export default class WebsiteStatistics extends React.Component<Props, State> {
@@ -39,8 +39,8 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
       tagList: [],
       hottestList: [],
       websiteList: []
-    ***REMOVED***
-***REMOVED***
+    };
+  }
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
@@ -59,38 +59,38 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
 
     this.setState({
       archList: archList.slice(0, 24),
-      catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)***REMOVED***)),
-      tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)***REMOVED***)),
+      catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
+      tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
       hottestList,
       websiteList
-    ***REMOVED***
-***REMOVED***
+    });
+  }
   render() {
-    const { archList, catList, tagList, websiteList, hottestList ***REMOVED*** = this.state;
+    const { archList, catList, tagList, websiteList, hottestList } = this.state;
 
     return (
       <BlogContainer
         contentClass="statistics-container"
-        isOpenSnackbar={false***REMOVED***
+        isOpenSnackbar={false}
       >
         <div className="first-row">
           <div className="chart-item flex-basis-50">
-            <CategoryChart list={catList***REMOVED*** />
+            <CategoryChart list={catList} />
           </div>
           <div className="chart-item flex-basis-50">
-            <HottestChart list={hottestList***REMOVED*** />
+            <HottestChart list={hottestList} />
           </div>
         </div>
         <div className="chart-item">
-          <VisitorChart list={websiteList***REMOVED*** />
+          <VisitorChart list={websiteList} />
         </div>
         <div className="chart-item">
-          <ArchiveChart list={archList***REMOVED*** />
+          <ArchiveChart list={archList} />
         </div>
         <div className="chart-item">
-          <TagsChart list={tagList***REMOVED*** />
+          <TagsChart list={tagList} />
         </div>
       </BlogContainer>
     );
-***REMOVED***
-***REMOVED***
+  }
+}

@@ -9,5 +9,5 @@ import './blog.admin.view';
 import './blog.editor.view';
 import './website.statistics.view';
 // import './tag.cat.manage.view'; 待完成
-import { autoBind ***REMOVED*** from '@malagu/core';
+import { autoBind } from '@malagu/core';
 export default autoBind();

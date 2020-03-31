@@ -1,6 +1,6 @@
 .mixin(@attr){
-  @{attr***REMOVED***+_: ;
-***REMOVED***
+  @{attr}+_: ;
+}
 
 /*
 这套实现钻研了好久才终于完成，欢迎大家使用，支持多个属性的转换，记得使用的时候，传参必须要使用 ';' !!切记
@@ -10,13 +10,13 @@
     // 计算单个rem值
     @value1: (extract(@value, @i) / @base) * 1rem;
     // 使用less的append属性，将属性值一个个追加起来
-    @{attr***REMOVED***+_: @value1;
+    @{attr}+_: @value1;
 
     .generate(@n, (@i + 1));
-***REMOVED***
+  }
   .mixin(@attr);
   .generate(length(@value))
-***REMOVED***
+}
 
 @base: 37.5px;
 @toRem: unit(@base, rem);

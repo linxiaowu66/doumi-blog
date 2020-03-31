@@ -1,12 +1,12 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles ***REMOVED*** from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import { DouMiBlog ***REMOVED*** from 'src/common/blog-protocol';
+import { DouMiBlog } from 'src/common/blog-protocol';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import CommentIcon from '@material-ui/icons/Comment';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
       left: theme.spacing(10),
       '@media screen and (max-width: 992px)': {
         display: 'none'
-    ***REMOVED***,
+      },
       '& > *': {
         margin: theme.spacing(1),
         padding: theme.spacing(1),
         width: theme.spacing(30),
         height: theme.spacing(32),
-    ***REMOVED***,
-  ***REMOVED***,
+      },
+    },
     title: {
       fontSize: '14px',
       fontWeight: 'bolder',
@@ -38,13 +38,13 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '5px',
       paddingBottom: '5px',
       borderBottom: '1px solid #e5e5e5',
-  ***REMOVED***,
+    },
     small: {
       width: theme.spacing(3),
       height: theme.spacing(3),
       color: theme.palette.primary.light,
       backgroundColor: '#FFF',
-  ***REMOVED***,
+    },
     value: {
       color: theme.palette.primary.dark,
       width: theme.spacing(5),
@@ -55,68 +55,68 @@ const useStyles = makeStyles((theme: Theme) =>
       '& span': {
         fontSize: '12px',
         fontWeight: 'bolder'
-    ***REMOVED***
-  ***REMOVED***,
+      }
+    },
     name: {
       color: theme.palette.primary.main,
       '& span': {
         fontSize: '12px',
         fontWeight: 'bolder'
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***),
+      }
+    }
+  }),
 );
 
-const key2Name: { [key: string]: string***REMOVED*** = {
+const key2Name: { [key: string]: string} = {
   totalPv: '访问次数',
   commentsNum: '评论总数',
   operationDays: '运行天数',
   articleCount: '文章总数',
   articlesWordsNum: '文章字数'
-***REMOVED***
+};
 
-const key2Icon: { [key: string]: JSX.Element***REMOVED*** = {
+const key2Icon: { [key: string]: JSX.Element} = {
   totalPv: <VisibilityIcon />,
   commentsNum: <CommentIcon />,
   operationDays: <AccessTimeIcon />,
   articleCount: <DescriptionIcon />,
   articlesWordsNum: <TrendingUpIcon/>
-***REMOVED***
+};
 
-export default function BlogSummary(props: { data: DouMiBlog.SummaryStats***REMOVED***) {
+export default function BlogSummary(props: { data: DouMiBlog.SummaryStats}) {
   const classes = useStyles();
 
   const transferData = Object.keys(props.data).map(key => ({
     name: key2Name[key],
     value: props.data[key],
     icon: key2Icon[key]
-***REMOVED***));
+  }));
 
   return (
-    <div className={classes.root***REMOVED***>
-      <Paper elevation={3***REMOVED***>
-        <div className={classes.title***REMOVED***>博客信息</div>
+    <div className={classes.root}>
+      <Paper elevation={3}>
+        <div className={classes.title}>博客信息</div>
         <List dense>
           {
             transferData.map(item => (
               <ListItem>
                 <ListItemAvatar>
-                  <Avatar className={classes.small***REMOVED***>
+                  <Avatar className={classes.small}>
                     {
                       item.icon
-                  ***REMOVED***
+                    }
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={item.name***REMOVED***
-                  className={classes.name***REMOVED***
+                  primary={item.name}
+                  className={classes.name}
                 />
-                <ListItemText primary={item.value***REMOVED*** className={classes.value***REMOVED***/>
+                <ListItemText primary={item.value} className={classes.value}/>
               </ListItem>
             ))
-        ***REMOVED***
+          }
         </List>
       </Paper>
     </div>
   );
-***REMOVED***
+}

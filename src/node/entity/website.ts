@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ***REMOVED*** from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 // 只会保存7天内的数据
 
@@ -32,7 +32,7 @@ export class Website {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
+  })
   date: string;
 
   @CreateDateColumn()
@@ -40,4 +40,4 @@ export class Website {
 
   @UpdateDateColumn()
   public readonly updatedAt!: Date;
-***REMOVED***
+}

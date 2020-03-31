@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles ***REMOVED*** from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -19,11 +19,11 @@ const useStyles = makeStyles({
       transform: 'translateY(-3px)',
       borderColor: 'pink',
       background: '#FEFEFE',
-  ***REMOVED***,
+    },
     '& > *': {
       paddingLeft: 15,
       display: 'block'
-  ***REMOVED***,
+    },
     '& h3': {
       fontSize: 18,
       fontWeight: 'bolder',
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
         borderRadius: '100%',
         marginRight: 5,
         marginLeft: -7,
-    ***REMOVED***,
+      },
       '&::after': {
         content: '""',
         display: 'block',
@@ -51,8 +51,8 @@ const useStyles = makeStyles({
         height: 'calc(100% - 2.5em)',
         marginTop: -7,
         background: 'rgba(255, 79, 127, 0.6)',
-    ***REMOVED***
-  ***REMOVED***,
+      }
+    },
     '& p': {
       margin: '1em 0 3px 0',
       fontWeight: 'bolder',
@@ -65,45 +65,45 @@ const useStyles = makeStyles({
         fontWeight: 'bolder',
         lineHeight: '10px',
         marginLeft: '-23px',
-    ***REMOVED***
-  ***REMOVED***,
+      }
+    },
     '& i': {
       margin: '3px 0 6px 0',
       fontStyle: 'unset',
       fontSize: 12,
       color: 'rgba(0, 0, 0, 0.5)',
-  ***REMOVED***,
+    },
     '& span': {
       fontWeight: 'lighter',
       fontSize: 14,
       // fontFamily: '"Hiragino Sans GB", "Hiragino Sans GB W3", "Century Gothic", Arial, Verdana, Tahoma,"\5FAE\8F6F\96C5\9ED1"',
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+});
 
 interface TimeItemProps {
   subTitle: string,
   time: string,
   desc: string
-***REMOVED***
+}
 
-function Timeline(props: { title: string, timeList: TimeItemProps[] ***REMOVED***) {
+function Timeline(props: { title: string, timeList: TimeItemProps[] }) {
   const classes = useStyles();
-  const { title, timeList ***REMOVED*** = props;
+  const { title, timeList } = props;
   return (
-    <div className={classes.root***REMOVED***>
-      <h3>{title***REMOVED***</h3>
+    <div className={classes.root}>
+      <h3>{title}</h3>
       {
         timeList.map((item, index) => (
-          <React.Fragment key={index***REMOVED***>
-            <p>{item.subTitle***REMOVED***</p>
-            <i>{item.time***REMOVED***</i>
-            <span>{item.desc***REMOVED***</span>
+          <React.Fragment key={index}>
+            <p>{item.subTitle}</p>
+            <i>{item.time}</i>
+            <span>{item.desc}</span>
           </React.Fragment>
         ))
-    ***REMOVED***
+      }
     </div>
   );
-***REMOVED***
+}
 
 export default Timeline;

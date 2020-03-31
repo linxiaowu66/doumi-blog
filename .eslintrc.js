@@ -2,13 +2,13 @@ module.exports = {
   "env": {
     "browser": true,
     "node": true
-***REMOVED***,
+  },
   "ignorePatterns": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "tsconfig.json",
     "sourceType": "module"
-***REMOVED***,
+  },
   "plugins": [
     "@typescript-eslint",
     "import",
@@ -68,7 +68,7 @@ module.exports = {
       "single",
       {
         "avoidEscape": true
-    ***REMOVED***
+      }
     ],
     "@typescript-eslint/semi": [
       "error",
@@ -105,7 +105,7 @@ module.exports = {
       "error",
       {
         "code": 180
-    ***REMOVED***
+      }
     ],
     "no-multiple-empty-lines": [
       "error"
@@ -121,7 +121,7 @@ module.exports = {
       {
         "hoist": "all",
         "builtinGlobals": false
-    ***REMOVED***
+      }
     ],
     "no-throw-literal": [
       "error"
@@ -141,7 +141,7 @@ module.exports = {
       {
         "destructuring": "all",
         "ignoreReadBeforeAssign": false
-    ***REMOVED***
+      }
     ],
     "radix": [
       "off"
@@ -153,9 +153,9 @@ module.exports = {
     //     "error",
     //     {
     //         "anonymous": "always"
-    //   ***REMOVED***
+    //     }
     // ]
-***REMOVED***,
+  },
   "settings": {
     "import/core-modules": [
       "@malagu/web/lib/node",
@@ -245,5 +245,5 @@ module.exports = {
       "winston",
       "winston-transport"
     ]
-***REMOVED***
-***REMOVED***
+  }
+};

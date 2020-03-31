@@ -6,16 +6,16 @@ import {
   Label,
   Tooltip,
   G2
-***REMOVED*** from 'bizcharts';
-import { DouMiBlog ***REMOVED*** from '../../common/blog-protocol';
+} from 'bizcharts';
+import { DouMiBlog } from '../../common/blog-protocol';
 
-export default function HottestChart(props: {list: DouMiBlog.ArticleStatsItem[]***REMOVED***) {
+export default function HottestChart(props: {list: DouMiBlog.ArticleStatsItem[]}) {
   let max = 0;
   props.list.forEach(function(obj) {
     if (obj.count > max) {
       max = obj.count;
-  ***REMOVED***
-  ***REMOVED***
+    }
+  });
   (G2.Shape as any).registerShape('interval', 'sliceShape', {
     draw(cfg: any, container: any) {
       const points = cfg.points;
@@ -34,18 +34,18 @@ export default function HottestChart(props: {list: DouMiBlog.ArticleStatsItem[]*
         attrs: {
           fill: cfg.color,
           path: path
-      ***REMOVED***
-      ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      });
+    }
+  });
   return (
     <React.Fragment>
-      <Chart height={400***REMOVED*** data={props.list***REMOVED*** forceFit onPlotClick={ev => {
+      <Chart height={400} data={props.list} forceFit onPlotClick={ev => {
         const slug = ev.data._origin.slug;
 
-        location.hash = `#/blog/detail/${slug***REMOVED***`;
-    ***REMOVED******REMOVED***>
-        <Coord type="theta" radius={0.8***REMOVED*** />
+        location.hash = `#/blog/detail/${slug}`;
+      }}>
+        <Coord type="theta" radius={0.8} />
         <Tooltip />
         <Geom
           type="intervalStack"
@@ -56,7 +56,7 @@ export default function HottestChart(props: {list: DouMiBlog.ArticleStatsItem[]*
           <Label content="name" />
         </Geom>
       </Chart>
-      <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'***REMOVED******REMOVED***>豆米博客近7天热门文章</div>
+      <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bolder'}}>豆米博客近7天热门文章</div>
     </React.Fragment>
   );
-***REMOVED***
+}

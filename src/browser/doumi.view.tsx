@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View ***REMOVED*** from '@malagu/react/lib/browser';
+import { View } from '@malagu/react/lib/browser';
 import Facebook from '@material-ui/icons/Facebook';
 import Email from '@material-ui/icons/Email';
 import BlogContainer from './components/blogContainer';
-import { DouMiIntroduction ***REMOVED*** from './components/doumiIntroduction';
+import { DouMiIntroduction } from './components/doumiIntroduction';
 import DouMiDetailItem from './components/doumiDetailItem';
 
 import 'gitalk/dist/gitalk.css';
@@ -13,11 +13,11 @@ const Gitalk = require('gitalk');
 import './styles/doumi.less';
 import ClickTooltip from './components/clickTooltip';
 
-interface Prop {***REMOVED***
+interface Prop {}
 interface State {
   isOpenSnackbar: boolean,
   snackbarMsg: string,
-***REMOVED***
+}
 
 @View('/about/doumi')
 export default class AboutDouMi extends React.Component<Prop, State> {
@@ -27,8 +27,8 @@ export default class AboutDouMi extends React.Component<Prop, State> {
     this.state = {
       isOpenSnackbar: false,
       snackbarMsg: '',
-    ***REMOVED***
-***REMOVED***
+    };
+  }
   componentDidMount() {
     const gitalk = new Gitalk({
       clientID: '16018f2091e0cd02d37c',
@@ -37,14 +37,14 @@ export default class AboutDouMi extends React.Component<Prop, State> {
       owner: 'linxiaowu66',
       admin: ['linxiaowu66'],
       title: '关于豆米',
-      body: `${location.href***REMOVED*** \n\n 豆米目前生活在“上有天堂，下有苏杭”的杭州，美不胜收的美景之地也收获着甜蜜恩爱的生活。豆米热爱前端，热爱互联网，豆米是洋芋(土豆-豆)和米喳(米)的简称。`,
+      body: `${location.href} \n\n 豆米目前生活在“上有天堂，下有苏杭”的杭州，美不胜收的美景之地也收获着甜蜜恩爱的生活。豆米热爱前端，热爱互联网，豆米是洋芋(土豆-豆)和米喳(米)的简称。`,
       labels: ['关于豆米'],
       id: 'about-doumi-blog',      // Ensure uniqueness and length less than 50
       distractionFreeMode: false  // Facebook-like distraction free mode
-    ***REMOVED***
+    });
 
     gitalk.render('gitalk-container');
-***REMOVED***
+  }
   copyTextToClipboard = (text: string) => {
     const textArea = document.createElement('textarea');
 
@@ -75,26 +75,26 @@ export default class AboutDouMi extends React.Component<Prop, State> {
     textArea.focus();
     textArea.select();
 
-  ***REMOVED***
+    try {
       const successful = document.execCommand('copy');
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: successful ? '复制成功' : '复制失败'
-      ***REMOVED***
-  ***REMOVED*** catch (err) {
+      });
+    } catch (err) {
       this.setState({
         isOpenSnackbar: true,
         snackbarMsg: '浏览器不支持复制！！'
-      ***REMOVED***
-  ***REMOVED***
+      });
+    }
 
     document.body.removeChild(textArea);
-  ***REMOVED***
+  };
   render() {
-    const { isOpenSnackbar, snackbarMsg ***REMOVED*** = this.state;
+    const { isOpenSnackbar, snackbarMsg } = this.state;
     return (
-      <BlogContainer contentClass="doumi-info" isOpenSnackbar={isOpenSnackbar***REMOVED*** snackbarMsg={snackbarMsg***REMOVED***>
-        <DouMiIntroduction avatarSize={120***REMOVED*** fontSize={16***REMOVED*** />
+      <BlogContainer contentClass="doumi-info" isOpenSnackbar={isOpenSnackbar} snackbarMsg={snackbarMsg}>
+        <DouMiIntroduction avatarSize={120} fontSize={16} />
         <DouMiDetailItem title="关于豆米">
           <p className="detail-intro"><span>大洋芋</span>：2012年毕业的豆，从一开始就投入到前端开发的行业中，一去不回头。工作地点曾经在深圳待过两年，之后辗转到杭州，公司也从吉祥腾达科技切换到阿里巴巴，
           目前在家暂时带娃。回望7年工作以往，经历了前端行业剧变的年代，写过JQuery，处理过一大堆的浏览器兼容性。最后在所谓的互联网大厂中继续磨练，深谙React之道，经过鉴定，是个纯正的前端er。希望今年(2020年)可以找到自己热爱的一个新团体和新公司~</p>
@@ -121,10 +121,10 @@ export default class AboutDouMi extends React.Component<Prop, State> {
         <DouMiDetailItem title="联系豆米">
           <p className="contact-me-tip">您可以通过以下方式找到豆米，欢迎交朋友，一起探讨人生、美食、带娃，哦~也可以交流前端知识~我在杭州等你(<em>点击即复制，由于material-ui没有微信图标，懒得再重新引入新的图标库，所以以facebook的图标代表微信</em>)</p>
           <div className="contact-me-channels">
-            <ClickTooltip title="linguang66990@126.com" extraAction={this.copyTextToClipboard***REMOVED***>
+            <ClickTooltip title="linguang66990@126.com" extraAction={this.copyTextToClipboard}>
               <Email />
             </ClickTooltip>
-            <ClickTooltip title="lg997312609" extraAction={this.copyTextToClipboard***REMOVED***>
+            <ClickTooltip title="lg997312609" extraAction={this.copyTextToClipboard}>
               <Facebook />
             </ClickTooltip>
           </div>
@@ -139,5 +139,5 @@ export default class AboutDouMi extends React.Component<Prop, State> {
         <div id="gitalk-container" />
       </BlogContainer>
     );
-***REMOVED***
-***REMOVED***
+  }
+}

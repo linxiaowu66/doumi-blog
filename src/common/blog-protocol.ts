@@ -13,7 +13,7 @@ export interface BlogServer {
   fetchSummaryStats(): Promise<DouMiBlog.SummaryStats>;
   fetchHottestArticleLast7Days(): Promise<DouMiBlog.ArticleStatsItem[]>;
   registerUser(param: DouMiBlog.RegisterParam): Promise<string>;
-***REMOVED***
+}
 
 export namespace DouMiBlog {
   export interface SummaryStats{
@@ -23,14 +23,14 @@ export namespace DouMiBlog {
     articlesWordsNum: string | number,
     commentsNum: number,
     [key: string]: any
-***REMOVED***
+  }
   export interface ChangeLog {
     title: string,
     desc1: string,
     desc2: string,
     date: string,
     time: string
-***REMOVED***
+  }
   export interface WebsiteStatsItem {
     date: string,
     todayUv: number,
@@ -39,18 +39,18 @@ export namespace DouMiBlog {
     totalPv: number,
     pvGrowthRate: number,
     uvGrowthRate: number
-***REMOVED***
+  }
 
   export interface ArticleStatsItem {
     slug: string,
     name: string,
     count: number
-***REMOVED***
+  }
   export interface ArticleList {
     currentPage: number,
     list: ArticleBrief[],
     pageCount: number,
-***REMOVED***
+  }
   export interface ArticleBrief {
     title: string,
     archiveTime: string,
@@ -60,21 +60,21 @@ export namespace DouMiBlog {
     category: string,
     digest: string,
     articleStatus: 'draft' | 'published',
-***REMOVED***
+  }
 
   interface PropertyItem {
     id: number,
     name: string,
     articlesCount: number
-***REMOVED***
+  }
 
-  export interface TagsItem extends PropertyItem {***REMOVED***
+  export interface TagsItem extends PropertyItem {}
 
-  export interface CategoryItem extends PropertyItem {***REMOVED***
+  export interface CategoryItem extends PropertyItem {}
 
   export interface ArchiveItem extends PropertyItem {
     archiveTime: string;
-***REMOVED***
+  }
 
   export interface ArticleDetail {
     id?: number;
@@ -90,22 +90,22 @@ export namespace DouMiBlog {
     archiveTime: string;
     category: string;
     catId: number;
-***REMOVED***
+  }
 
   export interface QueryCondition {
     queryTag?: number,
     queryCat?: number,
     queryArch?: number,
     [key: string]: any
-***REMOVED***
+  }
   export interface RegisterParam {
     email: string,
     username: string,
     password: string
-***REMOVED***
+  }
 
   export interface LoginParam {
     email: string,
     password: string
-***REMOVED***
-***REMOVED***
+  }
+}

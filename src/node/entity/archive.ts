@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Index ***REMOVED*** from 'typeorm';
-import { Article ***REMOVED*** from './article';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
+import { Article } from './article';
 
 @Entity()
 export class Archive {
@@ -11,8 +11,8 @@ export class Archive {
     type: 'varchar',
     length: 200,
     nullable: false
-***REMOVED***)
-  @Index({ unique: true ***REMOVED***)
+  })
+  @Index({ unique: true })
   archiveTime: string;
 
   @OneToMany(type => Article, article => article.archiveTime)
@@ -23,4 +23,4 @@ export class Archive {
 
   @UpdateDateColumn()
   public readonly updatedAt!: Date;
-***REMOVED***
+}

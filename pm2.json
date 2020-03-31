@@ -8,7 +8,7 @@
     "watch": false,
     "env_production": {
       "NODE_ENV": "production"
-  ***REMOVED***,
+    },
     "log_date_format": "DD-MM-YYYY HH:MM:ss"
-***REMOVED***]
-***REMOVED***
+  }]
+}

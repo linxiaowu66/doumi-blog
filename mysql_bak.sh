@@ -18,34 +18,34 @@ backtime=`date +%Y-%m-%d_%H%M%S`
 BACKPATH=$(dirname $(readlink -f $0))
 echo $BACKPATH
 #日志备份路径
-LOGPATH="${BACKPATH***REMOVED***/log"
+LOGPATH="${BACKPATH}/log"
 #数据备份路径
-DBPATH="${BACKPATH***REMOVED***/db"
+DBPATH="${BACKPATH}/db"
 
 #创建备份目录
-[ ! -d "${LOGPATH***REMOVED***" ] && mkdir -p "${LOGPATH***REMOVED***"
-[ ! -d "${DBPATH***REMOVED***" ] && mkdir -p "${DBPATH***REMOVED***"
+[ ! -d "${LOGPATH}" ] && mkdir -p "${LOGPATH}"
+[ ! -d "${DBPATH}" ] && mkdir -p "${DBPATH}"
 
 #日志记录头部
-echo "备份时间为${backtime***REMOVED***,备份数据库表 ${DBNAME***REMOVED*** 开始" >> ${LOGPATH***REMOVED***/mysqlback.log
+echo "备份时间为${backtime},备份数据库表 ${DBNAME} 开始" >> ${LOGPATH}/mysqlback.log
 
 #正式备份数据库
 for table in $DBNAME; do
-source=`mysqldump -u ${DBUSER***REMOVED*** -h${DBHOST***REMOVED*** -p${DBPASSWD***REMOVED*** ${table***REMOVED***> ${LOGPATH***REMOVED***/${backtime***REMOVED***.sql` 2>> ${LOGPATH***REMOVED***/mysqlback.log;
+source=`mysqldump -u ${DBUSER} -h${DBHOST} -p${DBPASSWD} ${table}> ${LOGPATH}/${backtime}.sql` 2>> ${LOGPATH}/mysqlback.log;
 
 #备份成功以下操作 $?获取上一个命令的操作结果，0代表成功
 ret=$?
 if [ $ret -eq 0 ];then
-cd ${LOGPATH***REMOVED***
+cd ${LOGPATH}
 #为节约硬盘空间，将数据库压缩
-tar -czf ${DBPATH***REMOVED***/${table***REMOVED***${backtime***REMOVED***.tar.gz ./${backtime***REMOVED***.sql > /dev/null
+tar -czf ${DBPATH}/${table}${backtime}.tar.gz ./${backtime}.sql > /dev/null
 #删除原始文件，只留压缩后文件
-rm -f ${LOGPATH***REMOVED***/${backtime***REMOVED***.sql
+rm -f ${LOGPATH}/${backtime}.sql
 #删除七天前备份，也就是只保存7天内的备份
-find $DBPATH -name "*.tar.gz" -type f -mtime +7 -exec rm -rf {***REMOVED*** \; > /dev/null 2>&1
-echo "数据库表 ${DBNAME***REMOVED*** 备份成功!!" >> ${LOGPATH***REMOVED***/mysqlback.log
+find $DBPATH -name "*.tar.gz" -type f -mtime +7 -exec rm -rf {} \; > /dev/null 2>&1
+echo "数据库表 ${DBNAME} 备份成功!!" >> ${LOGPATH}/mysqlback.log
 else
 #备份失败则进行以下操作
-echo "数据库表 ${DBNAME***REMOVED*** 备份失败!!" >> ${LOGPATH***REMOVED***/mysqlback.log
+echo "数据库表 ${DBNAME} 备份失败!!" >> ${LOGPATH}/mysqlback.log
 fi
 done

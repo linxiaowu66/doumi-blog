@@ -1,9 +1,9 @@
-import { Component, Value ***REMOVED*** from '@malagu/core';
-import { UserStore, User, UsernameNotFoundError, ElPolicy, PolicyType, AuthorizeType ***REMOVED*** from '@malagu/security/lib/node';
-import { Transactional, OrmContext ***REMOVED*** from '@malagu/typeorm/lib/node';
-import { User as UserModel ***REMOVED*** from './entity/user';
+import { Component, Value } from '@malagu/core';
+import { UserStore, User, UsernameNotFoundError, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
+import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
+import { User as UserModel } from './entity/user';
 
-@Component({ id: UserStore, rebind: true ***REMOVED***)
+@Component({ id: UserStore, rebind: true })
 export class UserStoreImpl implements UserStore {
 
   @Value('malagu.security')
@@ -13,11 +13,11 @@ export class UserStoreImpl implements UserStore {
   async load (username: string): Promise<User> {
     const repo = OrmContext.getRepository(UserModel);
 
-    const user = await repo.findOne({ email: username ***REMOVED***
+    const user = await repo.findOne({ email: username });
 
     if (!user) {
-      throw new UsernameNotFoundError(`${username***REMOVED***不存在`);
-  ***REMOVED***
+      throw new UsernameNotFoundError(`${username}不存在`);
+    }
     return {
       username,
       password: user.password,
@@ -29,7 +29,7 @@ export class UserStoreImpl implements UserStore {
         type: PolicyType.El,
         authorizeType: AuthorizeType.Pre,
         el: 'true'
-    ***REMOVED*** ]
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+      } ]
+    };
+  }
+}

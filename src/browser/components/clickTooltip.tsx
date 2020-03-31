@@ -7,7 +7,7 @@ interface ClickTooltipProps {
   title: string;
   children: React.ReactElement;
   extraAction?: (extra: string) => void;
-***REMOVED***
+}
 
 export default function ClickTooltip(props: ClickTooltipProps) {
   const [open, setOpen] = React.useState(false);
@@ -16,36 +16,36 @@ export default function ClickTooltip(props: ClickTooltipProps) {
     setOpen(false);
     // if (props.extraAction) {
     //   props.extraAction(props.title);
-    // ***REMOVED***
-  ***REMOVED***
+    // }
+  };
 
   const handleTooltipOpen = () => {
     setOpen(true);
     if (props.extraAction) {
       props.extraAction(props.title);
-  ***REMOVED***
-  ***REMOVED***
+    }
+  };
 
-  return (<ClickAwayListener onClickAway={handleTooltipClose***REMOVED***>
+  return (<ClickAwayListener onClickAway={handleTooltipClose}>
     <div>
       <Tooltip
         PopperProps={{
           disablePortal: true,
-      ***REMOVED******REMOVED***
-        onClose={handleTooltipClose***REMOVED***
-        open={open***REMOVED***
+        }}
+        onClose={handleTooltipClose}
+        open={open}
         disableFocusListener
         disableHoverListener
         disableTouchListener
-        title={props.title***REMOVED***
+        title={props.title}
       >
-        <Fab onClick={handleTooltipOpen***REMOVED*** color="secondary">
+        <Fab onClick={handleTooltipOpen} color="secondary">
           {
             props.children
-        ***REMOVED***
+          }
         </Fab>
       </Tooltip>
     </div>
   </ClickAwayListener>
   );
-***REMOVED***
+}
