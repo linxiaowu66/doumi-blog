@@ -267,14 +267,15 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@malagu/cli@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.0.11.tgz#d2033021e74d5d4b1cb9eca3710d7e706e80c346"
-  integrity sha512-Wh8hI5GI0Jo8USwQPkN+q6huK8m6/dJEa8AD8dHxltbH/qQyCEFiii4muTdAtvODcyaOlMCL2Dt7ZEVwAIgBlg==
+"@malagu/cli@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-0.0.13.tgz#db3b08712e40fc3a2a7c9290f7c40524b71a32f8"
+  integrity sha512-F8liaH0EVQrLlC4sArH6jxyFIbVTjtejwNWFKm1dMwagnlDMtxUONt5v8m7IBeU8bGwkzRGCrgjPRididRWC6g==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     axios "^0.19.2"
     chalk "^2.4.2"
+    clean-webpack-plugin "^3.0.0"
     clear-module "^4.0.0"
     commander "^2.20.0"
     copy-webpack-plugin "^5.1.1"
@@ -316,10 +317,10 @@
     webpack-node-externals "^1.7.2"
     worker-loader "^2.0.0"
 
-"@malagu/core@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.0.11.tgz#f1369b504d63f16b099c92c3a659d52f331d5be6"
-  integrity sha512-SAbLYMIA4I+IpohlvYXO2s6WPHhg+k2HRRNTNG3xN71KBOUdlVORGG93jFBOkdWfJf7RvHKdB7aquX3U50Z1og==
+"@malagu/core@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/core/-/core-0.0.13.tgz#833ace07228aa6480a335dc19112850d76b6d448"
+  integrity sha512-fkkMpWRNxbhYK4BrS8mMHn0dRtYS6CfKhIdf3DsHEeAx1wpmkpv3s3TkHk42VQnZZXvRdKU01UeSpJ5HOS4rFA==
   dependencies:
     "@types/express" "^4.16.1"
     "@types/lodash.debounce" "4.0.3"
@@ -339,89 +340,89 @@
     url-join "^4.0.1"
     vscode-ws-jsonrpc "^0.1.1"
 
-"@malagu/express-adapter@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.11.tgz#c55620a11aa2fc182d9a6e871f4ac28d9739a5bc"
-  integrity sha512-AY3Bb9VLBFHsL+hbWpzIdSd9JGqHd/9PwAxZv51IM8bdSQXkD+POnZ5XsJ6UTu4HVX3t0XREnQ4YXG1yAB2ySg==
+"@malagu/express-adapter@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/express-adapter/-/express-adapter-0.0.13.tgz#b0facfe83db147ff55066a9cefb7a6cf8e50208d"
+  integrity sha512-IWtH07I1pWMPZ+jMITJfs0wIr7713EC2eGGn8SMpcc2Yr/14+taf5nlnNyRuEGrJ+DhacljoLgUXVm3g87q4TA==
   dependencies:
-    "@malagu/web" "^0.0.11"
+    "@malagu/web" "^0.0.13"
     express "^4.17.1"
 
-"@malagu/grommet@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.0.11.tgz#ce730f0f73bea6194e5403e3e42ac62de4ec6f02"
-  integrity sha512-k8CT5ktDnb7xq8Ni6ueDXVV8PXNo7HDp7ITXJfAnBEnF8Lt7BnCuMgTSpesp4TJ1gYcEbvewy55txPJdWwHr4w==
+"@malagu/grommet@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/grommet/-/grommet-0.0.13.tgz#4c36e38addbe1be06a2d3565c6c1230629cc54dd"
+  integrity sha512-pvUceGxrH1koYCrThvNw8tnxcQDcokCRW6eGnpX1mmBki6aiPHmvk/Jvwvml4fC6ugdnpeeiMvFeq6b0HpxWFQ==
   dependencies:
-    "@malagu/react" "^0.0.11"
+    "@malagu/react" "^0.0.13"
     grommet "^2.9.0"
     grommet-icons "^4.4.0"
     react "^16.12.0"
     react-dom "^16.12.0"
     styled-components "^4.4.1"
 
-"@malagu/material-ui@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.0.11.tgz#b290e8cf1219a60616c350cf5a550bc1b92ee579"
-  integrity sha512-c86rxQ+J7lgQh5VgS6FuFBq1fGVcvqW6N7TvNlankl6zgkSWRVA1tbAk2KcYMzxG2j0VpqY1QUtW6DuD6pFyrw==
+"@malagu/material-ui@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/material-ui/-/material-ui-0.0.13.tgz#8398d42b1ba2c0e095f2a07dbacc526af2308b38"
+  integrity sha512-FghjD2fhdZwTDnhUY6XuS5GWDTRNR8laX/JQYJoBwrYALTHStLbSbb1IPDaMimMrTgB4yqhnIctH3Ii6mHV3mA==
   dependencies:
-    "@malagu/grommet" "^0.0.11"
+    "@malagu/grommet" "^0.0.13"
     "@material-ui/core" "^4.6.0"
     "@material-ui/icons" "^4.5.1"
     "@material-ui/styles" "^4.5.2"
     react "^16.12.0"
     react-dom "^16.12.0"
 
-"@malagu/mvc@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.0.11.tgz#9082265ec551d728625355be81cc3bee1f962322"
-  integrity sha512-7GOUe3OPJ1HoVjg+O/ag6pieFD9FJMa4/jGozAFsM6ezZXg+AA546uS1EcRStUbiMlP1kzYbpoZ+a2p3XozJqw==
+"@malagu/mvc@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/mvc/-/mvc-0.0.13.tgz#f537d52f9b4af518743c3527a264266078734443"
+  integrity sha512-SAAINkDf4KG9jO8+zeFzx3/QBpjLgLDDbCB03xjnmEF8gcERqy+6eib2p6mRHVPPd5pM3MKhZjH4V3r7DQa2zg==
   dependencies:
-    "@malagu/web" "^0.0.11"
+    "@malagu/web" "^0.0.13"
     mustache "^4.0.0"
 
-"@malagu/react@0.0.11", "@malagu/react@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.0.11.tgz#6a57e925171ae0f2f7d68e318598ead79b73b7a1"
-  integrity sha512-6tXE49kXunt5rJnEYs0bR/NtauK6jACKleNrIgXPKu5wOcI31bHFtLCspfF6T00jVXL0xwrpcu6GT1cvTiodOA==
+"@malagu/react@0.0.13", "@malagu/react@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/react/-/react-0.0.13.tgz#2be7dff277d65a0ea6c92f7d0fc6f39a9582df97"
+  integrity sha512-G5VEk97GYvfI+R3dsNmV8E5vT49N+WubYBH2l5J1JF34Ms0kP9KoMN5ZOsD6b0WaWTWUn0eg92JVot6yAsU6TQ==
   dependencies:
-    "@malagu/core" "^0.0.11"
+    "@malagu/core" "^0.0.13"
     history "^4.10.1"
     react "^16.12.0"
     react-dom "^16.12.0"
     react-router "^5.1.2"
     react-router-dom "^5.1.2"
 
-"@malagu/rpc@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.0.11.tgz#eeb4dfb611bdfa135f211493ae467ddaf16b9ea0"
-  integrity sha512-IukN4CedlICVyjbn+oFggAGKp9+v4xcleN6DW4tTa39uuqUmYVP9+REzzqRXObgv44vlCdJykZBA+6D4ZZnx1Q==
+"@malagu/rpc@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/rpc/-/rpc-0.0.13.tgz#5d932f7dd58eef9bb21c12567678b2588597c951"
+  integrity sha512-/6OwROL7X7g+h6rOf2IC/MU2Ig74Ek5z37M5LvIcEQQF7nH8g5r181CNFxJuJbxkW9YqqhloVe38YwhAUBPwmA==
   dependencies:
-    "@malagu/web" "^0.0.11"
+    "@malagu/web" "^0.0.13"
     reconnecting-websocket "^4.1.10"
 
-"@malagu/security@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.0.11.tgz#81f3f118a4f882a128309d0ffb180cda2053110a"
-  integrity sha512-8k604UvO/mv9SKHotLcIPgLA/8Gep3rZfaBhaDhia0KR4kkE8ZFiWP3dnwaMfIgTFwFvQxu/KRjEMw/6FYuYpg==
+"@malagu/security@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/security/-/security-0.0.13.tgz#25bf2e96c0b0ff94a88cd597a5c3e71826b22adb"
+  integrity sha512-13mSyMR/Efh45GSIzsoODBopyf9DzAMwLVt//ydNSVsGmv3awYGtk6I0YKPv+pBiV4+h8QHHx6D03JthX4DEFQ==
   dependencies:
-    "@malagu/web" "^0.0.11"
+    "@malagu/web" "^0.0.13"
     crypto-js "^3.1.9-1"
 
-"@malagu/typeorm@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.0.11.tgz#66cb2339424fab3cef1afd02d8c6afbfc203d3aa"
-  integrity sha512-K4tJglPCx8Eq0lZ49PdxvkHfrrCHYKirfdEGfPgqVXV3dgKiSSpT2aU8y92x6l+TQ6Zc1yo6qRw+vLFBu4atGA==
+"@malagu/typeorm@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/typeorm/-/typeorm-0.0.13.tgz#887f475b1c985ee1396fad1e486c0f7a3a8c299c"
+  integrity sha512-Z5P9ueKAbe44eLiaD6VfnWZYixtiEmdCCsjeU3NAGzQdv1xIY5VauPznOSdEAJnzCZcK1MxbqOn/kzj4G8AORw==
   dependencies:
-    "@malagu/web" "^0.0.11"
+    "@malagu/web" "^0.0.13"
     mysql "^2.17.1"
     typeorm "^0.2.19"
 
-"@malagu/web@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.0.11.tgz#d97b07d94cf0f3b1f2228ae24593aebcb7e5f350"
-  integrity sha512-Mhl4PGp4gQ7GVxNfUekcPLIED56BUOWA8bMyuJA5UiQ5Wd8kuHhEKKKulLzv+MyF4EML06viCL8p6KWoO2kbPA==
+"@malagu/web@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@malagu/web/-/web-0.0.13.tgz#8cd6167d23a3aa14f56abeea8f54c6d5d7f68cd3"
+  integrity sha512-xXpItlzLCNxc7+arlVoYxgNiS4gyH6uua6YgdbfCp9t+EGLpDMjGayYCt+q6IQfpuNGr/jdOfiIy7lmH4p/wTg==
   dependencies:
-    "@malagu/core" "^0.0.11"
+    "@malagu/core" "^0.0.13"
     "@types/express" "^4.16.1"
     cookies "^0.7.3"
     cors "^2.8.5"
@@ -555,6 +556,11 @@
     "@babel/runtime" "^7.7.6"
     "@testing-library/dom" "^6.11.0"
     "@types/testing-library__react" "^9.1.2"
+
+"@types/anymatch@*":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
+  integrity sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
 
 "@types/axios@^0.14.0":
   version "0.14.0"
@@ -753,12 +759,22 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@types/source-list-map@*":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
+  integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
+
 "@types/styled-jsx@^2.2.8":
   version "2.2.8"
   resolved "https://registry.npm.taobao.org/@types/styled-jsx/download/@types/styled-jsx-2.2.8.tgz#b50d13d8a3c34036282d65194554cf186bab7234"
   integrity sha1-tQ0T2KPDQDYoLWUZRVTPGGurcjQ=
   dependencies:
     "@types/react" "*"
+
+"@types/tapable@*":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.5.tgz#9adbc12950582aa65ead76bffdf39fe0c27a3c02"
+  integrity sha512-/gG2M/Imw7cQFp8PGvz/SwocNrmKFjFsm5Pb8HdbHkZ1K8pmuPzOX4VeVoiEecFCVf4CsN1r3/BRvx+6sNqwtQ==
 
 "@types/testing-library__dom@*", "@types/testing-library__dom@^6.0.0":
   version "6.11.1"
@@ -775,10 +791,38 @@
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
 
+"@types/uglify-js@*":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.0.4.tgz#96beae23df6f561862a830b4288a49e86baac082"
+  integrity sha512-SudIN9TRJ+v8g5pTG8RRCqfqTMNqgWCKKd3vtynhGzkIIjxaicNAMuY5TRadJ6tzDu3Dotf3ngaMILtmOdmWEQ==
+  dependencies:
+    source-map "^0.6.1"
+
 "@types/validator@10.11.3":
   version "10.11.3"
   resolved "https://registry.yarnpkg.com/@types/validator/-/validator-10.11.3.tgz#945799bef24a953c5bc02011ca8ad79331a3ef25"
   integrity sha512-GKF2VnEkMmEeEGvoo03ocrP9ySMuX1ypKazIYMlsjfslfBMhOAtC5dmEWKdJioW4lJN7MZRS88kalTsVClyQ9w==
+
+"@types/webpack-sources@*":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-0.1.7.tgz#0a330a9456113410c74a5d64180af0cbca007141"
+  integrity sha512-XyaHrJILjK1VHVC4aVlKsdNN5KBTwufMb43cQs+flGxtPAf/1Qwl8+Q0tp5BwEGaI8D6XT1L+9bSWXckgkjTLw==
+  dependencies:
+    "@types/node" "*"
+    "@types/source-list-map" "*"
+    source-map "^0.6.1"
+
+"@types/webpack@^4.4.31":
+  version "4.41.10"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.10.tgz#2e1f6b3508a249854efe3dcc7690905ac5ee10be"
+  integrity sha512-vIy0qaq8AjOjZLuFPqpo7nAJzcoVXMdw3mvpNN07Uvdy0p1IpJeLNBe3obdRP7FX2jIusDE7z1pZa0A6qYUgnA==
+  dependencies:
+    "@types/anymatch" "*"
+    "@types/node" "*"
+    "@types/tapable" "*"
+    "@types/uglify-js" "*"
+    "@types/webpack-sources" "*"
+    source-map "^0.6.0"
 
 "@types/yargs-parser@*":
   version "15.0.0"
@@ -1962,6 +2006,14 @@ clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/clean-stack/download/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha1-7oRy27Ep5yezHooQpCfe6d/kAIs=
+
+clean-webpack-plugin@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-3.0.0.tgz#a99d8ec34c1c628a4541567aa7b457446460c62b"
+  integrity sha512-MciirUH5r+cYLGCOL5JX/ZLzOZbVr1ot3Fw+KcvbhUb6PM+yycqd9ZhIlcigQ5gl+XhppNmw3bEFuaaMNyLj3A==
+  dependencies:
+    "@types/webpack" "^4.4.31"
+    del "^4.1.1"
 
 clear-module@^4.0.0:
   version "4.0.0"

@@ -5,8 +5,8 @@ export default (context: HookContext) => {
   const { configurations ***REMOVED*** = context;
   for (const c of configurations) {
     if (c.name === FRONTEND_TARGET) {
-      c.module.rules = c.module.rules || [];
-      c.module.rules.push({
+      c.module!.rules = c.module!.rules || [];
+      c.module!.rules.push({
         test: /\.less$/,
         use: [
           'style-loader',

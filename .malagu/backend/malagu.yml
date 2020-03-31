@@ -78,9 +78,13 @@ deployHooks:
   - src/hooks/deploy
 serveHooks: []
 entry: '@malagu/express-adapter/lib/node/http-application-entry'
+devEntry: '@malagu/web/lib/node/application/dev-application-entry'
 modules:
   - src/node/module
 assets: []
 mode:
   - cdn
   - prod
+targets:
+  - frontend
+  - backend
