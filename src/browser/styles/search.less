@@ -36,8 +36,9 @@
 ***REMOVED***
   .search-result{
     display: none;
-    height: 400px;
-    overflow: scroll;
+    max-height: 880px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding: 10px 0px;
     position: absolute;
     background: #FFF;
@@ -61,8 +62,7 @@
     ul {
       padding-left: 0px;
       margin: 0px;
-      max-height: 880px;
-      overflow: scroll;
+      width: 100%;
       .article-item{
         padding: 10px 10px;
         width: 100%;

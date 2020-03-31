@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      background: '#f7f7f7',
   ***REMOVED***,
     toolbar: {
       minHeight: '82px',
@@ -20,7 +21,12 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       overflow: 'hidden',
-      margin: '0 20%',
+      background: '#FFF',
+      padding: '10px',
+      margin: `0 ${theme.spacing(45)***REMOVED***px`,
+      '@media screen and (max-width: 992px)': {
+        margin: '0 0',
+    ***REMOVED***,
   ***REMOVED***,
     fixedZoom: {
       position: 'fixed',
@@ -98,7 +104,6 @@ export default function BlogContainer(props: ContainerProps) {
           props.isLogin ? null : <FootPrint />
       ***REMOVED***
       </main>
-
       <ScrollTop {...props***REMOVED***>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

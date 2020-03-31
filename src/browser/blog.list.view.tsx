@@ -10,6 +10,7 @@ import { View ***REMOVED*** from '@malagu/react/lib/browser';
 import BlogItem from './components/blogItem';
 
 import './styles/blog.list.less';
+import BlogSummary from './components/blogSummary';
 
 interface Prop {***REMOVED***
 interface State {
@@ -19,6 +20,7 @@ interface State {
   isOpenSnackbar: boolean,
   snackbarMsg: string,
   open: boolean,
+  data: DouMiBlog.SummaryStats
 ***REMOVED***
 
 @View('/blog/list')
@@ -38,12 +40,22 @@ export default class BlogList extends React.Component<Prop, State> {
       isOpenSnackbar: false,
       snackbarMsg: '',
       open: true,
+      data: {
+        totalPv: 0,
+        commentsNum: 0,
+        operationDays: '',
+        articleCount: 0,
+        articlesWordsNum: ''
+    ***REMOVED***
     ***REMOVED***
 ***REMOVED***
 
   async componentDidMount() {
     await this.fetchBlogList(this.state.currentPage);
-    await this.BlogServer.fetchSummaryStats();
+    const result = await this.BlogServer.fetchSummaryStats();
+    this.setState({
+      data: result
+    ***REMOVED***
 ***REMOVED***
   bindScroll = (event: any) => {
     // 滚动的高度
@@ -133,6 +145,7 @@ export default class BlogList extends React.Component<Prop, State> {
             <CircularProgress color="inherit" />
           </Backdrop>
       ***REMOVED***
+        <BlogSummary data={this.state.data***REMOVED*** />
       </BlogContainer>
     );
 ***REMOVED***

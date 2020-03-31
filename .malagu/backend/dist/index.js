@@ -15267,9 +15267,9 @@ var WebsiteService = /** @class */ (function () {
                         _a.label = 5;
                     case 5: return [2 /*return*/, {
                             operationDays: operationDays.replace(/days/, '天'),
-                            totalPv: totalPv,
+                            totalPv: totalPv > 10000 ? (totalPv / 10000).toFixed(1) + "\u4E07" : totalPv,
                             articleCount: articles.length,
-                            articlesWordsNum: articlesWordsNum / 10000 + "\u4E07\u5B57",
+                            articlesWordsNum: articlesWordsNum > 10000 ? (articlesWordsNum / 10000).toFixed(1) + "\u4E07" : articlesWordsNum,
                             commentsNum: 1
                       ***REMOVED***];
               ***REMOVED***

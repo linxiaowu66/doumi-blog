@@ -16,7 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       top: '0px',
       zIndex: 99,
-      background: '#f8f8f8',
+      background: '#fff',
+      '@media screen and (max-width: 992px)': {
+        height: '100px',
+    ***REMOVED***,
       '& .container': {
         display: 'flex',
         justifyContent: 'space-around',
@@ -29,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: '20px',
         color: theme.palette.primary.main,
         fontSize: '1.5rem',
+        '@media screen and (max-width: 992px)': {
+          display: 'none',
+      ***REMOVED***,
     ***REMOVED***,
       '& .tabs': {
         display: 'flex',

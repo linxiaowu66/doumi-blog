@@ -192,9 +192,9 @@ export class WebsiteService {
   ***REMOVED***
     return {
       operationDays: operationDays.replace(/days/, '天'),
-      totalPv,
+      totalPv: totalPv > 10000 ? `${(totalPv / 10000).toFixed(1)***REMOVED***万` : totalPv,
       articleCount: articles.length,
-      articlesWordsNum: `${articlesWordsNum / 10000***REMOVED***万字`,
+      articlesWordsNum: articlesWordsNum > 10000 ? `${(articlesWordsNum / 10000).toFixed(1)***REMOVED***万` : articlesWordsNum,
       commentsNum: 1
     ***REMOVED***
 ***REMOVED***

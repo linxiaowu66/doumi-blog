@@ -18,10 +18,11 @@ export interface BlogServer {
 export namespace DouMiBlog {
   export interface SummaryStats{
     operationDays: string,
-    totalPv: number,
+    totalPv: number | string,
     articleCount: number,
-    articlesWordsNum: string,
-    commentsNum: number
+    articlesWordsNum: string | number,
+    commentsNum: number,
+    [key: string]: any
 ***REMOVED***
   export interface ChangeLog {
     title: string,
