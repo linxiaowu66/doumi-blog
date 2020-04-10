@@ -72,6 +72,9 @@ $ npm start
   - [x] Markdown的Table样式完成
   - [ ] 关于typeorm报”AlreadyHasActiveConnectionError“和"ERR_EXIST_TABLE"错误的问题？
   - [ ] bizCharts的forceFit没能完完全全的fit view？需要继续调整优化。
+  - [ ] https://blog.5udou.cn/#/blog/detail/javascriptYu-Yan-Shu-Zi-Yun-Suan-Que-Xian-19 这篇文章竟然打不开
+  - [ ] 容器中的theme.space改为百分比吧，那个不能响应式
+
 
 ## 开发记录
 * typeorm支持mongoDB太弱了，mongoDB的ref特性从2017年有人提出到现在还没有实现😅
