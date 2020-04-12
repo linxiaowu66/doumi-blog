@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: 'hidden',
       background: '#FFF',
       padding: '10px',
-      margin: `0 ${theme.spacing(45)}px`,
+      margin: '0 18%',
       '@media screen and (max-width: 992px)': {
         margin: '0 0',
       },

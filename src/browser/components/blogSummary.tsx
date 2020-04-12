@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       position: 'fixed',
       top: '20%',
-      left: theme.spacing(10),
+      left: '0%',
       '@media screen and (max-width: 992px)': {
         display: 'none'
       },
       '& > *': {
         margin: theme.spacing(1),
-        padding: theme.spacing(1),
+        padding: `${theme.spacing(1)} 0px`,
         width: theme.spacing(30),
         height: theme.spacing(32),
       },
@@ -35,8 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '14px',
       fontWeight: 'bolder',
       color: theme.palette.primary.main,
-      paddingLeft: '5px',
-      paddingBottom: '5px',
+      padding: '5px 0px 5px 5px',
       borderBottom: '1px solid #e5e5e5',
     },
     small: {
