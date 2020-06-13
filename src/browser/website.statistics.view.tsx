@@ -11,20 +11,18 @@ import TagsChart from './components/tagsChart';
 
 import './styles/statistics.less';
 
-interface Props {
-
-}
+interface Props {}
 
 export interface CatItem extends DouMiBlog.CategoryItem {
-  percent: number
+  percent: number;
 }
 
 interface State {
-  archList: DouMiBlog.ArchiveItem[],
-  catList: CatItem[],
-  tagList: DouMiBlog.TagsItem[],
-  hottestList: DouMiBlog.ArticleStatsItem[],
-  websiteList: DouMiBlog.WebsiteStatsItem[]
+  archList: DouMiBlog.ArchiveItem[];
+  catList: CatItem[];
+  tagList: DouMiBlog.TagsItem[];
+  hottestList: DouMiBlog.ArticleStatsItem[];
+  websiteList: DouMiBlog.WebsiteStatsItem[];
 }
 
 @View('/website/stats')
@@ -38,48 +36,60 @@ export default class WebsiteStatistics extends React.Component<Props, State> {
       catList: [],
       tagList: [],
       hottestList: [],
-      websiteList: []
+      websiteList: [],
     };
   }
   @Autorpc(BlogServer)
   protected BlogServer!: BlogServer;
 
   async componentDidMount() {
-    const [tagList, archList, catList, hottestList, websiteList] = await Promise.all<
-    DouMiBlog.TagsItem[], DouMiBlog.ArchiveItem[], DouMiBlog.CategoryItem[], DouMiBlog.ArticleStatsItem[], DouMiBlog.WebsiteStatsItem[]>([
+    const [
+      tagList,
+      archList,
+      catList,
+      hottestList,
+      websiteList,
+    ] = await Promise.all<
+    DouMiBlog.TagsItem[],
+    DouMiBlog.ArchiveItem[],
+    DouMiBlog.CategoryItem[],
+    DouMiBlog.ArticleStatsItem[],
+    DouMiBlog.WebsiteStatsItem[]
+    >([
       this.BlogServer.fetchTagsList(),
       this.BlogServer.fetchArchsList(),
       this.BlogServer.fetchCatsList(),
       this.BlogServer.fetchHottestArticleLast7Days(),
-      this.BlogServer.fetchWebsiteStatistics()
+      this.BlogServer.fetchWebsiteStatistics(),
     ]);
 
     let totalCount = 0;
-    catList.map(item => totalCount += item.articlesCount);
+    catList.map(item => (totalCount += item.articlesCount));
 
     this.setState({
       archList: archList.slice(0, 24),
-      catList: catList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
-      tagList: tagList.map(it => ({ ...it, percent: (it.articlesCount / totalCount)})),
+      catList: catList.map(it => ({
+        ...it,
+        percent: it.articlesCount / totalCount,
+      })),
+      tagList: tagList.map(it => ({
+        ...it,
+        percent: it.articlesCount / totalCount,
+      })),
       hottestList,
-      websiteList
+      websiteList,
     });
   }
   render() {
     const { archList, catList, tagList, websiteList, hottestList } = this.state;
 
     return (
-      <BlogContainer
-        contentClass="statistics-container"
-        isOpenSnackbar={false}
-      >
-        <div className="first-row">
-          <div className="chart-item flex-basis-50">
-            <CategoryChart list={catList} />
-          </div>
-          <div className="chart-item flex-basis-50">
-            <HottestChart list={hottestList} />
-          </div>
+      <BlogContainer contentClass="statistics-container" isOpenSnackbar={false}>
+        <div className="chart-item flex-basis-50">
+          <CategoryChart list={catList} />
+        </div>
+        <div className="chart-item flex-basis-50">
+          <HottestChart list={hottestList} />
         </div>
         <div className="chart-item">
           <VisitorChart list={websiteList} />
