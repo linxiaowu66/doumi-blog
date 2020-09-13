@@ -1,10 +1,10 @@
 import { Component, Value } from '@malagu/core';
-import { UserStore, User, UsernameNotFoundError, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
+import { UserService, User, UsernameNotFoundError, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
 import { User as UserModel } from './entity/user';
 
-@Component({ id: UserStore, rebind: true })
-export class UserStoreImpl implements UserStore {
+@Component({ id: UserService, rebind: true })
+export class UserServiceImpl implements UserService<string, User> {
 
   @Value('malagu.security')
   protected readonly options: any;

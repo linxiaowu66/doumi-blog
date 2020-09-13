@@ -1,11 +1,14 @@
 malagu:
+  name: Malagu Framework
+  hostDomId: malagu-root
   logger:
     level: info
     winstonConfig:
       level: info
     dailyRotateConfig:
-      frequency: 1d
-      filename: malagu-%DATE%.log
+      frequency: 24h
+      filename: doumi-blog-%DATE%.log
+      dirname: ./log
   session:
     autoCommit: true
     maxAge: 86400000
@@ -14,8 +17,14 @@ malagu:
   server:
     path: /
     port: 3000
+    endpoint: 'http://localhost:3000'
   trace:
     responseField: X-Malagu-Trace-ID
+  web:
+    route:
+      cacheSize: 500
+    cors:
+      origin: 'https://blog.5udou.cn'
   mvc:
     path: /*
     defaultViewName: json
@@ -28,6 +37,16 @@ malagu:
     enabled: true
     usernameKey: email
     passwordKey: password
+    loginPage: /#/blog/auth/login
+    loginUrl: /api/login
+    loginMethod: POST
+    loginSuccessUrl: /#/blog/admin/index
+    logoutUrl: /api/logout
+    logoutMethod: POST
+    logoutSuccessUrl: /#/blog/auth/login
+    alwaysUseDefaultTargetUrl: false
+    useReferer: false
+    base64StringKeyLength: 32
     contextKey: 'malagu:securityContext'
     username: admin
     password: MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk
@@ -36,20 +55,28 @@ malagu:
       encodeHashAsBase64: true
     basic:
       realm: realm
-    loginPage: '/#/blog/auth/login'
-    loginUrl: /api/login
-    loginMethod: POST
-    loginSuccessUrl: '/#/blog/admin/index'
-    logoutUrl: /api/logout
-    logoutMethod: POST
-    logoutSuccessUrl: '/#/blog/auth/login'
-  web:
-    cors:
-      origin: 'https://blog.5udou.cn'
   webpack:
     forkTSCheckerWebpackPlugin:
       eslintOptions:
         fix: true
+    filterWarningsPlugin:
+      typeorm:
+        - typeorm-aurora-data-api-driver
+        - mongodb
+        - mssql
+        - mysql
+        - mysql2
+        - oracledb
+        - pg
+        - pg-native
+        - pg-query-stream
+        - sql.js
+        - redis
+        - sqlite3
+        - react-native-sqlite-storage
+        - cli-highlight
+        - Critical dependency
+        - '@sap/hdbext'
   core:
     validationPipeOptions:
       detailedOutputDisabled: false
@@ -68,19 +95,22 @@ malagu:
         username: dev
         password: '123456'
         database: douMiBlog
+mode:
+  - local
+  - cdn
+modules:
+  - src/node/module
 webpackHooks:
   - src/hooks/webpack
 initHooks: []
+configHooks: []
 buildHooks: []
 deployHooks:
   - src/hooks/deploy
 serveHooks: []
 entry: '@malagu/express-adapter/lib/node/http-application-entry'
 devEntry: '@malagu/web/lib/node/application/dev-application-entry'
-modules:
-  - src/node/module
 assets: []
-mode: []
 targets:
   - frontend
   - backend

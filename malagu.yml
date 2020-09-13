@@ -5,7 +5,7 @@ malagu:
     passwordKey: password
   web:
     cors:
-      origin: 'https://blog.5udou.cn'
+      origin: "https://blog.5udou.cn"
   webpack:
     forkTSCheckerWebpackPlugin:
       eslintOptions:
@@ -14,21 +14,21 @@ frontend:
   malagu:
     webpack:
       htmlWebpackPlugin:
-        title: '豆米的博客'
-        template: 'src/browser/index.html'
+        title: "豆米的博客"
+        template: "src/browser/index.html"
       htmlWebpackTagsPlugin:
-        biz-charts: https://unpkg.com/bizcharts@3/umd/BizCharts.min.js
-        data-set: https://unpkg.com/@antv/data-set@0.11.1/build/data-set.js
+        biz-charts: https://cdn.jsdelivr.net/npm/bizcharts@3.5.9/umd/BizCharts.min.js
+        data-set: https://cdn.jsdelivr.net/npm/@antv/data-set@0.11.5/build/data-set.js
       config:
         externals:
           bizcharts: BizCharts
-          '@antv/data-set': DataSet
+          "@antv/data-set": DataSet
     material-ui:
       themeOptions:
         palette:
           primary:
-            contrastText: '#fff'
-            main: '#119d55'
+            contrastText: "#fff"
+            main: "#119d55"
         typography:
           fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
 backend:
@@ -40,9 +40,9 @@ backend:
           port: 3306
           synchronize: false
           useUnifiedTopology: true
-          charset: 'utf8mb4_unicode_ci'
+          charset: "utf8mb4_unicode_ci"
           username: dev
-          password: '123456'
+          password: "123456"
           database: douMiBlog
     security:
       contextKey: malagu:securityContext
