@@ -22,7 +22,7 @@ module.exports = {
       "warn"
     ],
     "import/no-extraneous-dependencies": [
-      "warn"
+      "off"
     ],
     "no-return-await": [
       "warn"

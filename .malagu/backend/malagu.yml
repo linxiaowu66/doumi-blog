@@ -6,9 +6,8 @@ malagu:
     winstonConfig:
       level: info
     dailyRotateConfig:
-      frequency: 24h
-      filename: doumi-blog-%DATE%.log
-      dirname: ./log
+      frequency: 1d
+      filename: malagu-%DATE%.log
   session:
     autoCommit: true
     maxAge: 86400000
@@ -96,8 +95,8 @@ malagu:
         password: '123456'
         database: douMiBlog
 mode:
-  - local
   - cdn
+  - remote
 modules:
   - src/node/module
 webpackHooks:

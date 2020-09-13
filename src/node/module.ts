@@ -1,9 +1,10 @@
 import './blog-server';
-import './auth.provider';
+import './auth.success.handler';
 import './services';
 import './configs';
-import './user.store';
+import './user.service';
 import './blog.admin.controller';
+import './error';
 // import './schedule';
 import { autoBindEntities } from '@malagu/typeorm';
 import * as entities from './entity';

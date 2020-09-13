@@ -1,3 +1,4 @@
+mode: cdn
 malagu:
   security:
     enabled: true
@@ -12,10 +13,11 @@ malagu:
         fix: true
 frontend:
   malagu:
+    name: 豆米的博客
+    react:
+      history:
+        type: hash
     webpack:
-      htmlWebpackPlugin:
-        title: "豆米的博客"
-        template: "src/browser/index.html"
       htmlWebpackTagsPlugin:
         biz-charts: https://cdn.jsdelivr.net/npm/bizcharts@3.5.9/umd/BizCharts.min.js
         data-set: https://cdn.jsdelivr.net/npm/@antv/data-set@0.11.5/build/data-set.js
@@ -45,12 +47,8 @@ backend:
           password: "123456"
           database: douMiBlog
     security:
-      contextKey: malagu:securityContext
       passwordEncoder:
         secret: doumiblog
-        encodeHashAsBase64: true
-      basic:
-        realm: realm
       loginPage: /#/blog/auth/login
       loginUrl: /api/login
       loginMethod: POST

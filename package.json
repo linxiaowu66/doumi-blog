@@ -72,8 +72,8 @@
   },
   "scripts": {
     "clean": "rimraf lib .malagu",
-    "build": "malagu build -m cdn,prod",
-    "start": "malagu serve -m cdn,local",
+    "build": "malagu build -m prod",
+    "start": "malagu serve -m",
     "deploy": "malagu deploy"
   }
 }
