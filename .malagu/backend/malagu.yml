@@ -6,8 +6,9 @@ malagu:
     winstonConfig:
       level: info
     dailyRotateConfig:
-      frequency: 1d
-      filename: malagu-%DATE%.log
+      frequency: 24h
+      filename: doumi-blog-%DATE%.log
+      dirname: /home/deploy/logs/doumi-blog
   session:
     autoCommit: true
     maxAge: 86400000
@@ -16,7 +17,7 @@ malagu:
   server:
     path: /
     port: 3000
-    endpoint: 'http://localhost:3000'
+    endpoint: 'https://bff.5udou.cn'
   trace:
     responseField: X-Malagu-Trace-ID
   web:
@@ -97,6 +98,7 @@ malagu:
 mode:
   - cdn
   - remote
+  - prod
 modules:
   - src/node/module
 webpackHooks:
