@@ -49,7 +49,7 @@ const useStyles = makeStyles({
         position: 'absolute',
         width: 2,
         height: 'calc(100% - 2.5em)',
-        marginTop: -12,
+        marginTop: -8,
         left: '31.5px',
         background: 'rgba(255, 79, 127, 0.6)',
       }
@@ -66,7 +66,7 @@ const useStyles = makeStyles({
         fontWeight: 'bolder',
         lineHeight: '10px',
         marginLeft: '-27px',
-        maringTop: '6px',
+        marginTop: '6px',
       }
     },
     '& i': {
