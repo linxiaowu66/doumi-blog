@@ -30,7 +30,7 @@ const useStyles = makeStyles({
       paddingLeft: 0,
       color: '#119d55',
       '&::before': {
-        content: '"·"',
+        content: '""',
         fontSize: 18,
         fontWeight: 'bolder',
         lineHeight: '17px',
@@ -66,6 +66,7 @@ const useStyles = makeStyles({
         fontWeight: 'bolder',
         lineHeight: '10px',
         marginLeft: '-27px',
+        maringTop: '6px',
       }
     },
     '& i': {
