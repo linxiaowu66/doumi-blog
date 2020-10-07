@@ -33,7 +33,7 @@ const useStyles = makeStyles({
         content: '"·"',
         fontSize: 18,
         fontWeight: 'bolder',
-        lineHeight: '16px',
+        lineHeight: '17px',
         textAlign: 'center',
         display: 'inline-block',
         width: 17,
@@ -49,7 +49,8 @@ const useStyles = makeStyles({
         position: 'absolute',
         width: 2,
         height: 'calc(100% - 2.5em)',
-        marginTop: -7,
+        marginTop: -12,
+        left: '31.5px',
         background: 'rgba(255, 79, 127, 0.6)',
       }
     },
@@ -64,7 +65,7 @@ const useStyles = makeStyles({
         fontSize: 58,
         fontWeight: 'bolder',
         lineHeight: '10px',
-        marginLeft: '-23px',
+        marginLeft: '-27px',
       }
     },
     '& i': {
