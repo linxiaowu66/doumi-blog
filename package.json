@@ -74,6 +74,6 @@
     "clean": "rimraf lib .malagu",
     "build": "malagu build -m prod",
     "start": "malagu serve -m",
-    "deploy": "malagu deploy"
+    "deploy": "malagu deploy -m prod"
   }
 }
