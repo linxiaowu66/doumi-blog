@@ -18,7 +18,7 @@ function FootPrint() {
   return (
     <footer className={classes.footer}>
       <div>
-        Copyright © <a href='/'>豆米博客</a>. 2020 • All rights reserved. | <a href='http://www.beian.miit.gov.cn'>浙ICP备15041819号-1</a>
+        Copyright © <a href='/'>豆米博客</a>. 2020 • All rights reserved. | <a href='https://beian.miit.gov.cn'>浙ICP备15041819号-1</a>
       </div>
     </footer>
   );
