@@ -23,7 +23,7 @@
     "@malagu/typeorm": "0.0.41",
     "@material-ui/pickers": "^3.2.8",
     "awesome-js": "^1.2.1",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "bizcharts": "^3.5.8",
     "clsx": "^1.0.4",
     "cron": "^1.8.2",
