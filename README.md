@@ -80,3 +80,7 @@ $ npm start
 * typeorm支持mongoDB太弱了，mongoDB的ref特性从2017年有人提出到现在还没有实现😅
   https://github.com/typeorm/typeorm/issues/655
 * 更多开发记录会以博客的形式放在新博客页面上
+
+
+## 部署
+执行 `pm2 start pm2.json`
