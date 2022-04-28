@@ -41,6 +41,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-markdown": "^4.3.0",
     "react-syntax-highlighter": "^12.2.1",
+    "stock-api": "^2.0.5",
     "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {

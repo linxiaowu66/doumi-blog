@@ -4,16 +4,18 @@ import { Anonymous } from '@malagu/security/lib/node';
 import { Autowired, Logger } from '@malagu/core';
 import { BlogServiceSymbol, BlogService } from './services';
 import { AuthServiceSymbol, AuthService } from './services/auth.service';
-import { WebsiteServiceSymbol, WebsiteService } from './services/website.service';
+import {
+  WebsiteServiceSymbol,
+  WebsiteService,
+} from './services/website.service';
 import { WinstonLogger } from 'malagu-winston';
-
+import { stocks } from 'stock-api';
 
 const pick = require('lodash.pick');
 
 @Rpc(BlogServer)
 @Anonymous()
 export class BlogServerImpl implements BlogServer {
-
   @Autowired(AuthServiceSymbol)
   protected readonly authService: AuthService;
 
@@ -29,31 +31,65 @@ export class BlogServerImpl implements BlogServer {
   async fetchHottestArticles(limit: number): Promise<DouMiBlog.ArticleList> {
     this.logger.info(`fetch hottest articles with limit[${limit}]`);
     const result = await this.blogService.fetchArticleList(1, limit, {
-      pv: 'DESC'
+      pv: 'DESC',
     });
 
-    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime']));
+    result.list = result.list.map(item =>
+      pick(item, ['title', 'slug', 'archiveTime'])
+    );
 
     this.logger.info(`hottest articles result: ${JSON.stringify(result)}`);
     return Promise.resolve(result);
   }
 
-  async fetchArticleList(currentPage: number, condition?: DouMiBlog.QueryCondition): Promise<DouMiBlog.ArticleList> {
-    this.logger.info(`fetchArticleList with currentPage[${currentPage}], condition[${JSON.stringify(condition)}]`);
-    const result = await this.blogService.fetchArticleList(currentPage, 20, undefined, condition);
+  async fetchArticleList(
+    currentPage: number,
+    condition?: DouMiBlog.QueryCondition
+  ): Promise<DouMiBlog.ArticleList> {
+    this.logger.info(
+      `fetchArticleList with currentPage[${currentPage}], condition[${JSON.stringify(
+        condition
+      )}]`
+    );
+    const result = await this.blogService.fetchArticleList(
+      currentPage,
+      20,
+      undefined,
+      condition
+    );
 
-    result.list = result.list.map(item => pick(item, ['title', 'slug', 'archiveTime', 'digest', 'illustration', 'author', 'tags', 'category', 'articleStatus']));
+    result.list = result.list.map(item =>
+      pick(item, [
+        'title',
+        'slug',
+        'archiveTime',
+        'digest',
+        'illustration',
+        'author',
+        'tags',
+        'category',
+        'articleStatus',
+      ])
+    );
 
     return Promise.resolve(result);
   }
 
-  async fetchArticleDetail(slug: string, shouldBeUpdateStats = false): Promise<DouMiBlog.ArticleDetail> {
-    const result = await this.blogService.fetchArticleDetail(slug, shouldBeUpdateStats);
+  async fetchArticleDetail(
+    slug: string,
+    shouldBeUpdateStats = false
+  ): Promise<DouMiBlog.ArticleDetail> {
+    const result = await this.blogService.fetchArticleDetail(
+      slug,
+      shouldBeUpdateStats
+    );
 
     return Promise.resolve(result);
   }
 
-  async findArticlesByKeyword(keyword: string): Promise<DouMiBlog.ArticleBrief[]> {
+  async findArticlesByKeyword(
+    keyword: string
+  ): Promise<DouMiBlog.ArticleBrief[]> {
     const result = await this.blogService.searchArticleByKeyword(keyword);
 
     const list = result.map(item => pick(item, ['title', 'slug']));
@@ -104,5 +140,13 @@ export class BlogServerImpl implements BlogServer {
   async registerUser(param: DouMiBlog.RegisterParam): Promise<string> {
     await this.authService.registerUser(param);
     return Promise.resolve('注册成功');
+  }
+
+  async getStocks(
+    source: 'xueqiu' | 'tencent' | 'netease', // 这三个都可以请求到，base和sina都不行
+    stockCodes: string[]
+  ): Promise<any> {
+    this.logger.info(`${source} search stock data: ${stockCodes}`);
+    return stocks[source].getStocks(stockCodes);
   }
 }
