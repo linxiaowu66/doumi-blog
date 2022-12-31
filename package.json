@@ -30,7 +30,7 @@
     "date-fns": "^2.9.0",
     "gitalk": "^1.5.2",
     "less": "^3.10.3",
-    "less-loader": "^5.0.0",
+    "less-loader": "^11.1.0",
     "lodash.pick": "^4.4.0",
     "malagu-winston": "^0.0.17",
     "node-cache": "^5.1.0",
@@ -44,7 +44,7 @@
     "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
-    "@malagu/cli": "0.0.41",
+    "@malagu/cli": "2.40.6",
     "@types/axios": "^0.14.0",
     "@types/lodash.pick": "^4.4.6",
     "@types/qrcode.react": "^1.0.0",
