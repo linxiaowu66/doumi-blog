@@ -88,7 +88,7 @@ export default class BlogAdmin extends React.Component<Prop, State> {
         {...item}
         onClick={() => this.fetchBlogDetail(item.slug)}
         onEdit={slug => {
-          location.hash=`/blog/admin/editor?slug=${slug}`;
+          window.open(`${location.host}/#/blog/admin/editor?slug=${slug}`);
         }}
       />
     ));
